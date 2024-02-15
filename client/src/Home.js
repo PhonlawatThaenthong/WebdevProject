@@ -75,6 +75,7 @@ const HomeForm = () => {
                     <span style={invtext}>HAY YAI JOURNEY WEBSITE EDIT</span>
                     <Input style={searchInput} />
                     <Link to="/login" style={{ marginLeft: '50px', color: 'white', fontSize: '18px' }}>Login</Link>
+                    <Link to="/register" style={{ marginLeft: '55px', color: 'white', fontSize: '18px' }}>Register</Link>
                 </Header>
                 <Content style={contentStyle}>
                     ...
