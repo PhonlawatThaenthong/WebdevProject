@@ -15,29 +15,38 @@ const RegisterForm = () => {
     const [showErrorModal, setShowErrorModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
+    const validateConfirmPassword = ({ getFieldValue }) => ({
+        validator(_, value) {
+            if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+            }
+            return Promise.reject(new Error('The passwords do not match.'));
+        },
+    });
+
     const handleSubmit = async (values) => {
         setSubmitEnabled(false);
 
-        if (true) return
-
         try {
-            const loginResult = await axios.post('http://localhost:1337/api/auth/local', {
-                identifier: values.username,
-                password: values.password
+            const registerResult = await axios.post('http://localhost:1337/api/auth/local/register', {
+                username: values.username,
+                password: values.password,
+                email: values.email,
+                phone_number: values.phone_number
             });
 
-            const jwtToken = loginResult.data.jwt;
+            const jwtToken = registerResult.data.jwt;
             axiosConfig.jwt = jwtToken;
             const userResult = await axios.get('http://localhost:1337/api/users/me?populate=role');
 
-            if (userResult.data.role && userResult.data.role.name === 'Student') {
-                navigate('/student');
+            if (userResult.data.role && userResult.data.role.name === 'Member') {
+                navigate('/member');
             } else {
-                navigate('/staff');
+                navigate('/admin');
             }
         } catch (error) {
             console.error(error);
-            setErrorMessage('Wrong username or password');
+            setErrorMessage('Have already username or email');
             setShowErrorModal(true);
         } finally {
             setSubmitEnabled(true);
@@ -74,9 +83,29 @@ const RegisterForm = () => {
                     <Form.Item
                         label="Confirm Password"
                         name="confirm_password"
-                        rules={[{ required: true, message: 'Please confirm password!' }]}
+                        rules={[
+                            { required: true, message: 'Please confirm password!' },
+                            validateConfirmPassword,
+                        ]}
                     >
                         <Input.Password />
+                    </Form.Item>
+                    <Form.Item
+                        label="Phone Number"
+                        name="phone_number"
+                        rules={[
+                            { required: true, message: 'Please enter your phone number!' },
+                            { len: 10, message: 'Phone number must be 10 digits!' },
+                        ]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        label="Email"
+                        name="email"
+                        rules={[{ required: true, message: 'Please enter your Email!' }]}
+                    >
+                        <Input />
                     </Form.Item>
 
                     <Form.Item>
