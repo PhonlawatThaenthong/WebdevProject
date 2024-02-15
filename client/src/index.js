@@ -10,6 +10,8 @@ import {
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
+import Member from './Member';
+import Admin from './Admin';
 
 const router = createBrowserRouter([
   {
@@ -24,7 +26,14 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register/>,
   },
-
+  {
+    path: "/member",
+    element: <Member/>,
+  },
+  {
+    path: "/admin",
+    element: <Admin/>,
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

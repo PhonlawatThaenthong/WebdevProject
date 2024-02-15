@@ -17,21 +17,22 @@ const LoginForm = () => {
 
     const handleSubmit = async (values) => {
         setSubmitEnabled(false);
+        
 
         try {
             const loginResult = await axios.post('http://localhost:1337/api/auth/local', {
                 identifier: values.username,
                 password: values.password
             });
-
+            
             const jwtToken = loginResult.data.jwt;
             axiosConfig.jwt = jwtToken;
             const userResult = await axios.get('http://localhost:1337/api/users/me?populate=role');
 
-            if (userResult.data.role && userResult.data.role.name === 'Student') {
-                navigate('/student');
+            if (userResult.data.role && userResult.data.role.name === 'Member') {
+                navigate('/member');
             } else {
-                navigate('/staff');
+                navigate('/admin');
             }
         } catch (error) {
             console.error(error);
