@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Modal, Row, Col } from 'antd';
+import { Form, Input, Button, Modal, Row, Col, Card } from 'antd';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import axiosConfig from './axios-interceptor';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
-
 
 const RegisterForm = () => {
     const navigate = useNavigate();
@@ -63,62 +61,64 @@ const RegisterForm = () => {
                 <title>HYJ - Register</title>
             </Helmet>
             <Col span={8}>
-                <Form form={form} onFinish={handleSubmit}>
-                    <Form.Item
-                        label="Username"
-                        name="username"
-                        rules={[{ required: true, message: 'Please enter your username!' }]}
-                    >
-                        <Input />
-                    </Form.Item>
+                <Card title="Register Form" bordered={true} style={{ width: '100%', textAlign: 'center' }}>
+                    <Form form={form} onFinish={handleSubmit}>
+                        <Form.Item
+                            label="Username"
+                            name="username"
+                            rules={[{ required: true, message: 'Please enter your username!' }]}
+                        >
+                            <Input />
+                        </Form.Item>
 
-                    <Form.Item
-                        label="Password"
-                        name="password"
-                        rules={[{ required: true, message: 'Please enter your password!' }]}
-                    >
-                        <Input.Password />
-                    </Form.Item>
+                        <Form.Item
+                            label="Password"
+                            name="password"
+                            rules={[{ required: true, message: 'Please enter your password!' }]}
+                        >
+                            <Input.Password />
+                        </Form.Item>
 
-                    <Form.Item
-                        label="Confirm Password"
-                        name="confirm_password"
-                        rules={[
-                            { required: true, message: 'Please confirm password!' },
-                            validateConfirmPassword,
-                        ]}
-                    >
-                        <Input.Password />
-                    </Form.Item>
-                    <Form.Item
-                        label="Phone Number"
-                        name="phone_number"
-                        rules={[
-                            { required: true, message: 'Please enter your phone number!' },
-                            { len: 10, message: 'Phone number must be 10 digits!' },
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item
-                        label="Email"
-                        name="email"
-                        rules={[{ required: true, message: 'Please enter your Email!' }]}
-                    >
-                        <Input />
-                    </Form.Item>
+                        <Form.Item
+                            label="Confirm Password"
+                            name="confirm_password"
+                            rules={[
+                                { required: true, message: 'Please confirm password!' },
+                                validateConfirmPassword,
+                            ]}
+                        >
+                            <Input.Password />
+                        </Form.Item>
+                        <Form.Item
+                            label="Phone Number"
+                            name="phone_number"
+                            rules={[
+                                { required: true, message: 'Please enter your phone number!' },
+                                { len: 10, message: 'Phone number must be 10 digits!' },
+                            ]}
+                        >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item
+                            label="Email"
+                            name="email"
+                            rules={[{ required: true, message: 'Please enter your Email!' }]}
+                        >
+                            <Input />
+                        </Form.Item>
 
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit" disabled={!submitEnabled}>
-                            Submit
-                        </Button>
-                    </Form.Item>
+                        <Form.Item>
+                            <Button type="primary" htmlType="submit" disabled={!submitEnabled}>
+                                Submit
+                            </Button>
+                        </Form.Item>
 
-                    <Form.Item>
-                        <span style={{ marginRight: '8px' }}>Already have an account?</span>
-                        <Link to="/login">Login now</Link>
-                    </Form.Item>
-                </Form>
+                        <Form.Item>
+                            <span style={{ marginRight: '8px' }}>Already have an account?</span>
+                            <Link to="/login">Login now</Link>
+                        </Form.Item>
+                    </Form>
+                </Card>
             </Col>
 
             {/* Error Modal */}
@@ -131,6 +131,5 @@ const RegisterForm = () => {
         </Row>
     );
 };
-
 
 export default RegisterForm;

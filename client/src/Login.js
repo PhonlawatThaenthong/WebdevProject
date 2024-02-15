@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Modal, Row, Col } from 'antd';
+import { Form, Input, Button, Modal, Row, Col ,Card} from 'antd';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import axiosConfig from './axios-interceptor';
@@ -53,6 +53,7 @@ const LoginForm = () => {
                 <title>HYJ - Login</title>
             </Helmet>
             <Col span={8}>
+            <Card title="Login Form" bordered={true} style={{ width: '100%', textAlign: 'center' }}>
                 <Form form={form} onFinish={handleSubmit}>
                     <Form.Item
                         label="Username"
@@ -81,6 +82,7 @@ const LoginForm = () => {
                         <Link to="/register">Register now</Link>
                     </Form.Item>
                 </Form>
+                </Card>
             </Col>
 
             {/* Error Modal */}
