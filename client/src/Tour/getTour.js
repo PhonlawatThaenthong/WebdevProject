@@ -20,7 +20,13 @@ const Tour = () => {
 
   return (
     <div>
-        hello world
+        {data.map(({ id, attributes }) => (
+            <div key={id}>
+                {attributes.tour_name} 
+                <br />
+                {attributes.description}
+            </div>
+        ))}
     </div>
   )
 };
