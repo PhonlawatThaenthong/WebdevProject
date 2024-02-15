@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Modal, Row, Col, Layout, Flex } from 'antd';
+import { Form, Input, Button, Modal, Row, Col, Layout, Flex, Space } from 'antd';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 const { Header, Footer, Sider, Content } = Layout;
+const { Search } = Input;
 
 const HomeForm = () => {
     const navigate = useNavigate();
@@ -17,7 +18,6 @@ const HomeForm = () => {
         lineHeight: '120x',
         backgroundColor: '#1C3953',
         display: 'flex',
-        justifyContent: 'left',
         alignItems: 'center',
         fontWeight: 'bold',
         fontSize: '45px',
@@ -31,7 +31,7 @@ const HomeForm = () => {
     };
 
     const layoutStyle = {
-        borderRadius: 8,
+        borderRadius: 0,
         overflow: 'hidden',
         backgroundColor: '#EEEEEE',
     };
@@ -40,6 +40,21 @@ const HomeForm = () => {
         color: '#48D3FF',
         fontWeight: 'bold',
         fontSize: '45px',
+    };
+
+    const invtext = {
+        color: '#1C3953',
+        fontWeight: 'bold',
+        fontSize: '45px',
+    };
+
+    const searchInput = {
+        placeholder: "ค้นหาสถานที่ท่องเที่ยว หรือโปรแกรมทัวร์",
+        color: "black",
+        width: "20%",
+        height: "40px",
+        fontWeight: 'bold',
+        justifyContent: 'center',
     };
 
     return (
@@ -52,10 +67,17 @@ const HomeForm = () => {
                 <Header style={headerStyle}>
                     <span style={blueTextStyle}>H</span>
                     AT
+                    <span style={invtext}>.</span>
                     <span style={blueTextStyle}> Y</span>
-                    AI <span style={blueTextStyle}>J</span>ourney
+                    AI
+                    <span style={invtext}>.</span>
+                    <span style={blueTextStyle}>J</span>ourney
+                    <span style={invtext}>HAY YAI JOURNEY WEBSITE EDIT</span>
+                    <Input style={searchInput} />
                 </Header>
-                <Content style={contentStyle}> ...</Content>
+                <Content style={contentStyle}>
+                    ...
+                </Content>
             </Layout>
 
         </Flex>
