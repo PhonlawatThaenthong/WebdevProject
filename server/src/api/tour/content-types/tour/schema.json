@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tours",
+  "info": {
+    "singularName": "tour",
+    "pluralName": "tours",
+    "displayName": "Tour"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tour_name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "tour_date": {
+      "type": "datetime"
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "tour_status": {
+      "type": "integer"
+    }
+  }
+}
