@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
+import { Card } from "antd";
+
+
 const Tour = () => {
   const [data, setData] = useState([]);
 
@@ -19,13 +22,13 @@ const Tour = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ display: "flex" }}>
         {data.map(({ id, attributes }) => (
-            <div key={id}>
-                {attributes.tour_name} 
+            <Card key={id} style={{ width: 300, margin: 20, marginTop: 50 }}>
+                <b>{attributes.tour_name}</b>
                 <br />
                 {attributes.description}
-            </div>
+            </Card>
         ))}
     </div>
   )
