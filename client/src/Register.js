@@ -18,6 +18,8 @@ const RegisterForm = () => {
     const handleSubmit = async (values) => {
         setSubmitEnabled(false);
 
+        if (true) return
+
         try {
             const loginResult = await axios.post('http://localhost:1337/api/auth/local', {
                 identifier: values.username,
@@ -65,6 +67,14 @@ const RegisterForm = () => {
                         label="Password"
                         name="password"
                         rules={[{ required: true, message: 'Please enter your password!' }]}
+                    >
+                        <Input.Password />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Confirm Password"
+                        name="confirm_password"
+                        rules={[{ required: true, message: 'Please confirm password!' }]}
                     >
                         <Input.Password />
                     </Form.Item>
