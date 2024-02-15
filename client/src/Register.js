@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 
 
-const LoginForm = () => {
+const RegisterForm = () => {
     const navigate = useNavigate();
     const [form] = Form.useForm();
     const [submitEnabled, setSubmitEnabled] = useState(true);
@@ -49,7 +49,7 @@ const LoginForm = () => {
     return (
         <Row justify="center" align="middle" style={{ minHeight: '100vh' }}>
             <Helmet>
-                <title>HYJ - Login</title>
+                <title>HYJ - Register</title>
             </Helmet>
             <Col span={8}>
                 <Form form={form} onFinish={handleSubmit}>
@@ -76,8 +76,8 @@ const LoginForm = () => {
                     </Form.Item>
 
                     <Form.Item>
-                        <span style={{ marginRight: '8px' }}>Don't have an account?</span>
-                        <Link to="/register">Register now</Link>
+                        <span style={{ marginRight: '8px' }}>Already have an account?</span>
+                        <Link to="/login">Login now</Link>
                     </Form.Item>
                 </Form>
             </Col>
@@ -94,4 +94,4 @@ const LoginForm = () => {
 };
 
 
-export default LoginForm;
+export default RegisterForm;
