@@ -74,6 +74,7 @@ const HomeForm = () => {
                     <span style={blueTextStyle}>J</span>ourney
                     <span style={invtext}>HAY YAI JOURNEY WEBSITE EDIT</span>
                     <Input style={searchInput} />
+                    <Link to="/login" style={{ marginLeft: '50px', color: 'white', fontSize: '18px' }}>Login</Link>
                 </Header>
                 <Content style={contentStyle}>
                     ...
