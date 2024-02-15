@@ -4,6 +4,8 @@ import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
+import Tour from './Tour/getTour.js'
+
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
 
@@ -62,7 +64,6 @@ const HomeForm = () => {
             <Helmet>
                 <title>HYJ - Home Page</title>
             </Helmet>
-
             <Layout style={layoutStyle}>
                 <Header style={headerStyle}>
                     <span style={blueTextStyle}>H</span>
@@ -77,11 +78,11 @@ const HomeForm = () => {
                     <Link to="/login" style={{ marginLeft: '50px', color: 'white', fontSize: '18px' }}>Login</Link>
                     <Link to="/register" style={{ marginLeft: '55px', color: 'white', fontSize: '18px' }}>Register</Link>
                 </Header>
+                <Tour />
                 <Content style={contentStyle}>
                     ...
                 </Content>
             </Layout>
-
         </Flex>
     );
 };
