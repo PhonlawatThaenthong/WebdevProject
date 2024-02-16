@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  Form,
-  Input,
-  Button,
-  Modal,
-  Row,
-  Col,
-  Layout,
-  Flex,
-  Space,
+    Form,
+    Input,
+    Button,
+    Modal,
+    Row,
+    Col,
+    Layout,
+    Flex,
+    Space,
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import useLocalState from './localStorage.js';
 
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
@@ -22,6 +24,32 @@ const { Search } = Input;
 
 const MemberForm = () => {
     const navigate = useNavigate();
+    const [jwt, setjwt] = useLocalState('', 'jwt');
+
+    const roleChecker = async () => {
+        try {
+            axios.defaults.headers.common = {
+                Authorization: `Bearer ${jwt}`,
+            };
+            const userResult = await axios.get('http://localhost:1337/api/users/me?populate=role');
+
+            if (userResult.data.role && userResult.data.role.name === 'Member') {
+                navigate('/member');
+            } else {
+                if (userResult.data.role && userResult.data.role.name === 'Admin') {
+                    navigate('/admin');
+                } else {
+                    navigate('/');
+                }
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    };
+
+    useEffect(() => {
+        roleChecker();
+    }, []);
 
     const headerStyle = {
         textAlign: 'center',
@@ -95,7 +123,7 @@ const MemberForm = () => {
                     </Link>
 
                 </Header>
-                <Tour />
+
                 <Content style={contentStyle}>
                     ...
                 </Content>

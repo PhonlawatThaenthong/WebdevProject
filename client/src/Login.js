@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Modal, Row, Col ,Card} from 'antd';
+import { Form, Input, Button, Modal, Row, Col, Card } from 'antd';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
-import axiosConfig from './axios-interceptor';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import useLocalState from './localStorage.js';
 
 
 
@@ -14,19 +14,23 @@ const LoginForm = () => {
     const [submitEnabled, setSubmitEnabled] = useState(true);
     const [showErrorModal, setShowErrorModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [jwt, setjwt] = useLocalState('', 'jwt');
 
     const handleSubmit = async (values) => {
         setSubmitEnabled(false);
-        
+
 
         try {
             const loginResult = await axios.post('http://localhost:1337/api/auth/local', {
                 identifier: values.username,
                 password: values.password
             });
-            
+
             const jwtToken = loginResult.data.jwt;
-            axiosConfig.jwt = jwtToken;
+            setjwt(jwtToken)
+            axios.defaults.headers.common = {
+                Authorization: `Bearer ${jwt}`,
+            };
             const userResult = await axios.get('http://localhost:1337/api/users/me?populate=role');
 
             if (userResult.data.role && userResult.data.role.name === 'Member') {
@@ -53,35 +57,35 @@ const LoginForm = () => {
                 <title>HYJ - Login</title>
             </Helmet>
             <Col span={8}>
-            <Card title="Login Form" bordered={true} style={{ width: '100%', textAlign: 'center' }}>
-                <Form form={form} onFinish={handleSubmit}>
-                    <Form.Item
-                        label="Username"
-                        name="username"
-                        rules={[{ required: true, message: 'Please enter your username!' }]}
-                    >
-                        <Input />
-                    </Form.Item>
+                <Card title="Login Form" bordered={true} style={{ width: '100%', textAlign: 'center' }}>
+                    <Form form={form} onFinish={handleSubmit}>
+                        <Form.Item
+                            label="Username"
+                            name="username"
+                            rules={[{ required: true, message: 'Please enter your username!' }]}
+                        >
+                            <Input />
+                        </Form.Item>
 
-                    <Form.Item
-                        label="Password"
-                        name="password"
-                        rules={[{ required: true, message: 'Please enter your password!' }]}
-                    >
-                        <Input.Password />
-                    </Form.Item>
+                        <Form.Item
+                            label="Password"
+                            name="password"
+                            rules={[{ required: true, message: 'Please enter your password!' }]}
+                        >
+                            <Input.Password />
+                        </Form.Item>
 
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit" disabled={!submitEnabled}>
-                            Submit
-                        </Button>
-                    </Form.Item>
+                        <Form.Item>
+                            <Button type="primary" htmlType="submit" disabled={!submitEnabled}>
+                                Submit
+                            </Button>
+                        </Form.Item>
 
-                    <Form.Item>
-                        <span style={{ marginRight: '8px' }}>Don't have an account?</span>
-                        <Link to="/register">Register now</Link>
-                    </Form.Item>
-                </Form>
+                        <Form.Item>
+                            <span style={{ marginRight: '8px' }}>Don't have an account?</span>
+                            <Link to="/register">Register now</Link>
+                        </Form.Item>
+                    </Form>
                 </Card>
             </Col>
 

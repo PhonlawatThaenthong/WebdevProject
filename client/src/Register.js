@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Input, Button, Modal, Row, Col, Card } from 'antd';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
-import axiosConfig from './axios-interceptor';
+import useLocalState from './localStorage.js';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -12,6 +12,7 @@ const RegisterForm = () => {
     const [submitEnabled, setSubmitEnabled] = useState(true);
     const [showErrorModal, setShowErrorModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [jwt, setjwt] = useLocalState('', 'jwt');
 
     const validateConfirmPassword = ({ getFieldValue }) => ({
         validator(_, value) {
@@ -35,7 +36,10 @@ const RegisterForm = () => {
             });
 
             const jwtToken = registerResult.data.jwt;
-            axiosConfig.jwt = jwtToken;
+            setjwt(jwtToken);
+            axios.defaults.headers.common = {
+                Authorization: `Bearer ${jwt}`,
+            };
             const userResult = await axios.get('http://localhost:1337/api/users/me?populate=role');
 
             if (userResult.data.role && userResult.data.role.name === 'Member') {
