@@ -77,6 +77,12 @@ const Payment = () => {
         fontSize: '45px',
     };
 
+    const NormalTextStyle = {
+        color: '#FFFFFF',
+        fontWeight: 'bold',
+        fontSize: '45px',
+    };
+
     const invtext = {
         color: '#1C3953',
         fontWeight: 'bold',
@@ -91,15 +97,16 @@ const Payment = () => {
 
             <Layout style={layoutStyle}>
                 <Header style={headerStyle}>
-                    <div style={{ marginRight: "450px"}}>
+                    <Col span={8}>
                         <span style={blueTextStyle}>H</span>
-                        AT
+                        <span style={NormalTextStyle}>AT</span>
                         <span style={invtext}>.</span>
                         <span style={blueTextStyle}> Y</span>
-                        AI
+                        <span style={NormalTextStyle}>AT</span>
                         <span style={invtext}>.</span>
-                        <span style={blueTextStyle}>J</span>ourney
-                    </div>
+                        <span style={blueTextStyle}>J</span>
+                        <span style={NormalTextStyle}>ourney</span>
+                    </Col>
                     <Step />
                 </Header>
             </Layout>
