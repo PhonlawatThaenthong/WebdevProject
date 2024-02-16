@@ -3,6 +3,8 @@ import {
   Form,
   Input,
   Button,
+  Image,
+  message,
   Modal,
   Row,
   Col,
@@ -24,6 +26,7 @@ const { Search } = Input;
 
 const HomeForm = () => {
   const navigate = useNavigate();
+  const [messageApi, contextHolder] = message.useMessage();
   const [jwt, setjwt] = useLocalState(null, 'jwt');
 
   const roleChecker = async () => {
@@ -87,6 +90,7 @@ const HomeForm = () => {
       <Helmet>
         <title>HYJ - Home Page</title>
       </Helmet>
+      {contextHolder}
       <Layout style={layoutStyle}>
         <Header style={headerStyle}>
           <span style={blueTextStyle}>H</span>

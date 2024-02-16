@@ -1,5 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Form, Input, Button, Modal, Row, Col, Layout, Flex, Space } from 'antd';
+import {
+    Form,
+    Input,
+    Button,
+    Image,
+    message,
+    Modal,
+    Row,
+    Col,
+    Layout,
+    Flex,
+    Space,
+} from "antd";
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -14,6 +26,7 @@ const { Search } = Input;
 
 const MemberForm = () => {
     const navigate = useNavigate();
+    const [messageApi, contextHolder] = message.useMessage();
     const [jwt, setjwt] = useLocalState(null, 'jwt');
     const [username, setUsername] = useState('')
 
@@ -42,7 +55,13 @@ const MemberForm = () => {
 
     const handleLogout = async () => {
         setjwt(null)
-        window.location.href = '/';
+        messageApi.open({
+            type: 'loading',
+            content: 'Please wait...',
+            duration: 2.5,
+        })
+            .then(() => message.success('Completed!', 0.5))
+            .then(() => window.location.href = '/')
     };
 
     useEffect(() => {
@@ -85,7 +104,7 @@ const MemberForm = () => {
             <Helmet>
                 <title>HYJ - Home Page</title>
             </Helmet>
-
+            {contextHolder}
             <Layout style={layoutStyle}>
                 <Header style={headerStyle}>
                     <span style={blueTextStyle}>H</span>
