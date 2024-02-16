@@ -46,7 +46,9 @@ const Tour = () => {
     }}>
       {data.map(({ id, attributes }) => (
         <Card key={id} style={{ width: 300, margin: 20, marginTop: 50 }}>
-          <Image src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"/>
+          <Image src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+          preview={false}
+          />
           <b style={{ fontSize: "18px" }}>{attributes.tour_name}</b>
           <br />
           สถานะ: <span style={{
