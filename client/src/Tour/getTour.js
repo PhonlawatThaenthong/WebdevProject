@@ -22,16 +22,19 @@ const Tour = () => {
   }, []);
 
   return (
-    <div style={{ display: "flex" }}>
-        {data.map(({ id, attributes }) => (
-            <Card key={id} style={{ width: 300, margin: 20, marginTop: 50 }}>
-                <b>{attributes.tour_name}</b>
-                <br />
-                ราคา: {attributes.price} บาท/ท่าน
-                <br />
-                สถานะ: {attributes.status}
-            </Card>
-        ))}
+    <div style={{
+      display: "flex",
+      backgroundColor: "#F5F5F5"
+    }}>
+      {data.map(({ id, attributes }) => (
+        <Card key={id} style={{ width: 300, margin: 20, marginTop: 50 }}>
+          <b>{attributes.tour_name}</b>
+          <br />
+          ราคา: {attributes.price} บาท/ท่าน
+          <br />
+          สถานะ: {attributes.status}
+        </Card>
+      ))}
     </div>
   )
 };
