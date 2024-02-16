@@ -4,7 +4,7 @@ const SearchBar = ({ placeholder, onSearch }) => {
   const searchInput = {
     placeholder: "ค้นหาสถานที่ท่องเที่ยว หรือโปรแกรมทัวร์",
     color: "black",
-    width: "20%",
+    width: "30%",
     height: "40px",
     fontWeight: "bold",
     justifyContent: "center",
