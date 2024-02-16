@@ -26,6 +26,9 @@
     },
     "status": {
       "type": "boolean"
+    },
+    "MaxLimit": {
+      "type": "integer"
     }
   }
 }
