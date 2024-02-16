@@ -132,7 +132,6 @@ const MemberForm = () => {
                 </Header>
                 <Tour />
             </Layout>
-
         </Flex>
     );
 };

@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 import { Card, Form, Input, Image, Button, Modal, Row, Col, Layout, Flex, Space } from "antd";
 
 
 const Tour = () => {
   const [data, setData] = useState([]);
+  const location = useLocation();
+  const currentPage = location.pathname;
 
   const getData = async () => {
     try {
@@ -47,7 +50,7 @@ const Tour = () => {
       {data.map(({ id, attributes }) => (
         <Card key={id} style={{ width: 300, margin: 20, marginTop: 50 }}>
           <Image src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          preview={false}
+            preview={false}
           />
           <b style={{ fontSize: "18px" }}>{attributes.tour_name}</b>
           <br />
@@ -61,8 +64,12 @@ const Tour = () => {
           <br />
           ระยะเวลา:
           <br />
-          <br />
-          <Button type="primary" align="center">ดูเพิ่มเติม</Button>
+          <br></br>
+          {currentPage === "/admin" ? (
+            <Button type="primary" style={{ display: "block", margin: "0 auto", backgroundColor: "#DE3163" }}>แก้ไข</Button>
+          ) : (
+            <Button type="primary" style={{ display: "block", margin: "0 auto" }}>ดูเพิ่มเติม</Button>
+          )}
         </Card>
       ))}
     </div>

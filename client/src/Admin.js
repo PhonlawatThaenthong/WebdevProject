@@ -127,8 +127,6 @@ const MemberForm = () => {
                     >
                         Logout
                     </Link>
-
-
                 </Header>
                 <Tour />
             </Layout>
