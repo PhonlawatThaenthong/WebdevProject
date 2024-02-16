@@ -47,6 +47,11 @@ const MemberForm = () => {
         }
     };
 
+    const handleLogout = async () => {
+        setjwt("")
+        navigate("/")
+    }
+
     useEffect(() => {
         roleChecker();
     }, []);
@@ -116,7 +121,7 @@ const MemberForm = () => {
                     <span style={invtext}>HAY YAI JOURNEY WEBSITE EDIT</span>
                     <Input style={searchInput} />
                     <Link
-                        to="/"
+                        
                         style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
                     >
                         Logout

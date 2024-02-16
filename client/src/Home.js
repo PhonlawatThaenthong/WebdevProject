@@ -28,28 +28,28 @@ const HomeForm = () => {
 
   const roleChecker = async () => {
     try {
-        axios.defaults.headers.common = {
-            Authorization: `Bearer ${jwt}`,
-        };
-        const userResult = await axios.get('http://localhost:1337/api/users/me?populate=role');
+      axios.defaults.headers.common = {
+        Authorization: `Bearer ${jwt}`,
+      };
+      const userResult = await axios.get('http://localhost:1337/api/users/me?populate=role');
 
-        if (userResult.data.role && userResult.data.role.name === 'Member') {
-            navigate('/member');
+      if (userResult.data.role && userResult.data.role.name === 'Member') {
+        navigate('/member');
+      } else {
+        if (userResult.data.role && userResult.data.role.name === 'Admin') {
+          navigate('/admin');
         } else {
-            if (userResult.data.role && userResult.data.role.name === 'Admin') {
-                navigate('/admin');
-            } else {
-                navigate('/');
-            }
+          navigate('/');
         }
+      }
     } catch (error) {
-        console.error(error)
+      console.error(error)
     }
-};
+  };
 
-useEffect(() => {
+  useEffect(() => {
     roleChecker();
-}, []);
+  }, []);
 
   const headerStyle = {
     textAlign: "center",
