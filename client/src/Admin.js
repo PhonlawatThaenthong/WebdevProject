@@ -58,7 +58,7 @@ const MemberForm = () => {
         messageApi.open({
             type: 'loading',
             content: 'Please wait...',
-            duration: 2.5,
+            duration: 1,
         })
             .then(() => message.success('Completed!', 0.5))
             .then(() => window.location.href = '/')
