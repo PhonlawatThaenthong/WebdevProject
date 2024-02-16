@@ -5,6 +5,7 @@ import {
     Button,
     Modal,
     Row,
+    Image,
     Col,
     Layout,
     Flex,
@@ -17,7 +18,6 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import useLocalState from './localStorage.js';
-import SearchBar from "./Navbar/SearchBar";
 import Step from "./Navbar/Step.js";
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -28,8 +28,10 @@ const Payment = () => {
     const [jwt, setjwt] = useLocalState(null, 'jwt');
     const [username, setUsername] = useState('')
     const cardWidth = 1000;
-    const cardHeight = 500;
+    const cardHeight = 700;
     const { Panel } = Collapse;
+    let url = "https://s3-symbol-logo.tradingview.com/the-siam-commercial-bank-public-company--600.png"
+    let url2 = "https://play-lh.googleusercontent.com/eOzvk-ekluYaeLuvDkLb5RJ0KqfFQpodZDnppxPfpEfqEqbNo5erEkmwLBgqP-k-e2kQ"
     const roleChecker = async () => {
         try {
             axios.defaults.headers.common = {
@@ -100,23 +102,50 @@ const Payment = () => {
                     <Step />
                 </Header>
             </Layout>
-            <Card title="ช่องทางการชำระเงิน" bordered={false} style={{ width: cardWidth, height: cardHeight }}>
-                <Collapse defaultActiveKey={['1']}>
-                    <Panel header="ชำระเงินทางธนาคาร" key="1">
-                        <p>Content of Panel 1</p>
-                    </Panel>
-                    <Panel header="ชำระเงินทาง TrueMoney Wallet" key="2">
-                        <p>Content of Panel 2</p>
-                    </Panel>
-                    <Panel header="บัตรเครดิต" key="3">
-                        <p>Content of Panel 3</p>
-                    </Panel>
-                </Collapse>
-                <Button type="primary" block onClick={handleButtonClick}>ยืนยัน</Button>
-            </Card>
+            <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
+                <Card title="ช่องทางการชำระเงิน" bordered={false} style={{ width: cardWidth, height: cardHeight }}>
+                    <Collapse defaultActiveKey={['1']}>
+                        <Panel header="ชำระเงินทางธนาคาร" key="1">
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <p><strong>
+                                    กรุณาโอนเงินไปยัง:{' '}
 
-
-
+                                    ธนาคารไทยพาณิชย์ (SCB){' '}
+                                    <br />
+                                    หมายเลขบัญชี: 983XXXXXXX{' '}
+                                    <br />
+                                    ชื่อบัญชี: บจ. หาดใหญ่ จอว์ลนี่ เซอร์วิสเซส สำนักงานใหญ่ 1 (ประชายินดี 5)
+                                    <br />
+                                    **ก่อนทำการโอนเงิน กรุณาเติมข้อความในหมายเหตุว่า "เที่ยวกับ Hatyai Journey" ทุกครั้ง**
+                                </strong>
+                                </p>
+                                <img src={url} className="Logo1" alt="" style={{ width: 50, marginLeft: 'auto' }} />
+                            </div>
+                        </Panel>
+                        <Panel header="ชำระเงินทาง TrueMoney Wallet" key="2">
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <p><strong>
+                                    กรุณาโอนเงินไปยัง:{' '}
+                                    TrueMoney Wallet{' '}
+                                    <br />
+                                    หมายเลขบัญชี 062-0XX-XXXX{' '}
+                                    <br />
+                                    ชื่อบัญชี: นาย หาดใหญ่ สวยดี / บจ. หาดใหญ่ จอว์ลนี่ เซอร์วิสเซส สำนักงานใหญ่ 1 (ประชายินดี 5)
+                                    <br />
+                                    **ก่อนทำการโอนเงิน กรุณาเติมข้อความในหมายเหตุว่า "เที่ยวกับ Hatyai Journey" ทุกครั้ง**
+                                </strong>
+                                </p>
+                                <img src={url2} className="Logo2" alt="" style={{ width: 50, marginLeft: 'auto' }} />
+                            </div>
+                        </Panel>
+                    </Collapse>
+                    <Card title="ชำระเงินเสร็จเรียบร้อยแล้วใช่หรือไม่?" bordered={false} style={{ width: 950 }}>
+                        <p>เมื่อทำการชำระเงินเรียบร้อยแล้วต้องทำการแจ้งสลิปหลักฐานการโอนเงินพร้อมระบุหมายเหตุทุกครั้ง เมื่อการชาระเงินของคุณได้รับการยืนยันแล้ว </p>
+                        <p>สถานะการชำระในช่องประวัติการซื้อจะเปลี่ยนแปลง</p>
+                        <Button type="primary" block style={{ backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }} onClick={handleButtonClick}>ใช่ ฉันชำระเงินแล้ว</Button>
+                    </Card>
+                </Card>
+            </Space>
         </Flex>
     );
 };
