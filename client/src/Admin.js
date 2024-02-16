@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import useLocalState from './localStorage.js';
 
+import Tour from "./Tour/getTour.js";
+import SearchBar from "./Navbar/SearchBar";
+
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
 
@@ -106,9 +109,8 @@ const MemberForm = () => {
                     <span style={invtext}>.</span>
                     <span style={blueTextStyle}>J</span>ourney
                     <span style={invtext}>HAY YAI JOURNEY WEBSITE EDIT</span>
-                    <Input style={searchInput} />
+                    <SearchBar />
                     <Link
-                        
                         style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
                     >
                         Logout

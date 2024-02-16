@@ -119,12 +119,12 @@ const MemberForm = () => {
                     <span style={invtext}>.</span>
                     <span style={blueTextStyle}>J</span>ourney
                     <span style={invtext}>HAY YAI JOURNEY WEBSITE EDIT</span>
-                    <Input style={searchInput} />
+                    <SearchBar />
                     <Link
-                        
                         style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
                     >
                         Logout
+
                     </Link>
 
                 </Header>
