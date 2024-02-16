@@ -11,6 +11,10 @@ import {
     Layout,
     Flex,
     Space,
+    FloatButton,
+    InputNumber,
+    DatePicker,
+    Upload
 } from "antd";
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
@@ -18,17 +22,26 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import useLocalState from './localStorage.js';
 
+import { UploadOutlined } from '@ant-design/icons';
+
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
+const { RangePicker } = DatePicker;
+const { TextArea } = Input;
 
 const MemberForm = () => {
     const navigate = useNavigate();
     const [messageApi, contextHolder] = message.useMessage();
+    const [isAddMenuOpen, setIsAddMenuOpen] = useState(false);
     const [jwt, setjwt] = useLocalState(null, 'jwt');
     const [username, setUsername] = useState('')
+
+    const [create_name, setcreate_name] = useState('')
+    const [create_desc, setcreate_desc] = useState('')
+    const [create_price, setcreate_price] = useState(0)
 
     const roleChecker = async () => {
         try {
@@ -65,7 +78,7 @@ const MemberForm = () => {
     };
 
     useEffect(() => {
-        if (jwt == null) {navigate("/")} else roleChecker();
+        if (jwt == null) { navigate("/") } else roleChecker();
     }, []);
 
     const headerStyle = {
@@ -99,12 +112,65 @@ const MemberForm = () => {
         fontSize: '45px',
     };
 
+    const showAddMenu = () => {
+        setIsAddMenuOpen(true);
+    };
+
+    const handleOk = () => {
+        setIsAddMenuOpen(false);
+    };
+
+    const handleCancel = () => {
+        setIsAddMenuOpen(false);
+    };
+
+    const props = {
+        action: '//jsonplaceholder.typicode.com/posts/',
+        listType: 'picture',
+        previewFile(file) {
+          console.log('Your upload file:', file);
+          return fetch('https://next.json-generator.com/api/json/get/4ytyBoLK8', {
+            method: 'POST',
+            body: file,
+          })
+            .then((res) => res.json())
+            .then(({ thumbnail }) => thumbnail);
+        },
+      };
+
     return (
         <Flex gap="middle" wrap="wrap" >
             <Helmet>
                 <title>HYJ - Home Page</title>
             </Helmet>
             {contextHolder}
+
+            <Modal title="Add New Tour" open={isAddMenuOpen} onOk={handleOk} onCancel={handleCancel}>
+                <p>Tour Name: </p>
+                <Input
+                        value={create_name}
+                        onChange={(e) => setcreate_name(e.target.value)}
+                    />
+                <p>Description: </p>
+                <TextArea
+                        value={create_desc}
+                        onChange={(e) => setcreate_desc(e.target.value)}
+                        autoSize={{ minRows: 1, maxRows: 10 }}
+                    />
+                <p>Price: </p>
+                <Input
+                        type="number"
+                        value={create_price}
+                        onChange={(e) => setcreate_price(e.target.value)}
+                    />
+                <p>Date: </p>
+                <RangePicker />
+                <p>Image: </p>
+                <Button>
+                        Upload
+                    </Button>
+            </Modal>
+
             <Layout style={layoutStyle}>
                 <Header style={headerStyle}>
                     <span style={blueTextStyle}>H</span>
@@ -129,6 +195,14 @@ const MemberForm = () => {
                     </Link>
                 </Header>
                 <Tour />
+                <FloatButton
+                    tooltip={<div>Add New Tour</div>}
+                    shape="square"
+                    type="primary"
+                    style={{ right: 24 }}
+                    icon="+"
+                    onClick={() => showAddMenu()}
+                />
             </Layout>
 
         </Flex>
