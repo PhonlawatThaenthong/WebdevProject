@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-import { Card } from "antd";
+import { Card, Form, Input, Button, Modal, Row, Col, Layout, Flex, Space } from "antd";
 
 
 const Tour = () => {
@@ -17,6 +17,17 @@ const Tour = () => {
     }
   };
 
+  const getStatusColor = (status) => {
+    switch (status) {
+        case 'ว่าง':
+            return `rgba(0, 255, 0)`
+        case 'เต็ม':
+            return `rgba(255, 0, 0)`
+        default:
+            return 'white'
+    }
+};
+
   useEffect(() => {
     getData();
   }, []);
@@ -28,11 +39,18 @@ const Tour = () => {
     }}>
       {data.map(({ id, attributes }) => (
         <Card key={id} style={{ width: 300, margin: 20, marginTop: 50 }}>
-          <b>{attributes.tour_name}</b>
+          <b style={{fontSize: "18px"}}>{attributes.tour_name}</b>
+          <br style={{color: getStatusColor(attributes.status)}}/>
+          สถานะ: {attributes.status}
           <br />
           ราคา: {attributes.price} บาท/ท่าน
           <br />
-          สถานะ: {attributes.status}
+          คะแนน:
+          <br />
+          ระยะเวลา:
+          <br />
+          <br />
+          <Button type="primary" align="center">ดูเพิ่มเติม</Button>
         </Card>
       ))}
     </div>
