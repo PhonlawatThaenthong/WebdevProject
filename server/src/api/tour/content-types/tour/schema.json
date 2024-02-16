@@ -4,7 +4,8 @@
   "info": {
     "singularName": "tour",
     "pluralName": "tours",
-    "displayName": "Tour"
+    "displayName": "Tour",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -23,8 +24,9 @@
     "price": {
       "type": "decimal"
     },
-    "tour_status": {
-      "type": "integer"
+    "status": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

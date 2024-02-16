@@ -27,7 +27,9 @@ const Tour = () => {
             <Card key={id} style={{ width: 300, margin: 20, marginTop: 50 }}>
                 <b>{attributes.tour_name}</b>
                 <br />
-                {attributes.description}
+                ราคา: {attributes.price} บาท/ท่าน
+                <br />
+                สถานะ: {attributes.status}
             </Card>
         ))}
     </div>
