@@ -412,6 +412,7 @@ export interface ApiTourTour extends Schema.CollectionType {
     singularName: 'tour';
     pluralName: 'tours';
     displayName: 'Tour';
+    description: '';
   };
   options: {
     draftAndPublish: true;
