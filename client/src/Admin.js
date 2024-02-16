@@ -24,7 +24,7 @@ const MemberForm = () => {
             };
             const userResult = await axios.get('http://localhost:1337/api/users/me?populate=role');
 
-            setUsername(userResult.data.Username)
+            setUsername(userResult.data.username)
 
             if (userResult.data.role && userResult.data.role.name === 'Member') {
                 navigate('/member');
@@ -62,13 +62,6 @@ const MemberForm = () => {
         fontSize: '45px',
     };
 
-    const contentStyle = {
-        textAlign: 'center',
-        lineHeight: 'calc(5000%)',
-        color: '#fff',
-        backgroundColor: '#EEEEEE',
-    };
-
     const layoutStyle = {
         borderRadius: 0,
         overflow: 'hidden',
@@ -102,16 +95,16 @@ const MemberForm = () => {
                     AI
                     <span style={invtext}>.</span>
                     <span style={blueTextStyle}>J</span>ourney
-                    <span style={invtext}>HAY YAI JOURNEY WEBSITE EDIT</span>
-                    <SearchBar />
+                    <span style={invtext}>HAY YAI JOURNEY WEBSITE</span>
                     <Link
-                        style={{ marginLeft: "50px", color: "white", fontSize: "18px", width: "150px" }}
+                        style={{ marginLeft: "20px", color: "white", fontSize: "18px", width: "300px" }}
                     >
                         Hello, {username}
                     </Link>
+                    <SearchBar />
                     <Link
                         onClick={handleLogout}
-                        style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
+                        style={{ marginLeft: "20px", color: "white", fontSize: "18px" }}
                     >
                         Logout
                     </Link>
@@ -119,9 +112,6 @@ const MemberForm = () => {
 
                 </Header>
                 <Tour />
-                <Content style={contentStyle}>
-                    ...
-                </Content>
             </Layout>
 
         </Flex>

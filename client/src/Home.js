@@ -64,13 +64,6 @@ const HomeForm = () => {
     fontSize: "45px",
   };
 
-  const contentStyle = {
-    textAlign: "center",
-    lineHeight: "calc(5000%)",
-    color: "#fff",
-    backgroundColor: "#EEEEEE",
-  };
-
   const layoutStyle = {
     borderRadius: 0,
     overflow: "hidden",
@@ -103,23 +96,22 @@ const HomeForm = () => {
           AI
           <span style={invtext}>.</span>
           <span style={blueTextStyle}>J</span>ourney
-          <span style={invtext}>HAY YAI JOURNEY WEBSITE EDIT</span>
+          <span style={invtext}>HAY YAI JOURNEY WEBSITE</span>
           <SearchBar />
           <Link
             to="/login"
-            style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
+            style={{ marginLeft: "20px", color: "white", fontSize: "18px" }}
           >
             Login
           </Link>
           <Link
             to="/register"
-            style={{ marginLeft: "55px", color: "white", fontSize: "18px" }}
+            style={{ marginLeft: "20px", color: "white", fontSize: "18px" }}
           >
             Register
           </Link>
         </Header>
         <Tour />
-        <Content style={contentStyle}>...</Content>
       </Layout>
     </Flex>
   );
