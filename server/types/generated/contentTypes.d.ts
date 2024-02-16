@@ -422,7 +422,7 @@ export interface ApiTourTour extends Schema.CollectionType {
     description: Attribute.Text;
     tour_date: Attribute.DateTime;
     price: Attribute.Decimal;
-    status: Attribute.Boolean & Attribute.DefaultTo<true>;
+    status: Attribute.Boolean;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

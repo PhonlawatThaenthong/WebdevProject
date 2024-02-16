@@ -19,14 +19,21 @@ const Tour = () => {
 
   const getStatusColor = (status) => {
     switch (status) {
-        case 'ว่าง':
-            return `rgba(0, 255, 0)`
-        case 'เต็ม':
-            return `rgba(255, 0, 0)`
-        default:
-            return 'white'
+      case true:
+        return `rgba(0, 255, 0)`
+      case false:
+        return `rgba(255, 0, 0)`
     }
-};
+  };
+
+  const getStatus = (status) => {
+    switch (status) {
+      case true:
+        return `ว่าง`
+      case false:
+        return `เต็ม`
+    }
+  };
 
   useEffect(() => {
     getData();
@@ -39,9 +46,14 @@ const Tour = () => {
     }}>
       {data.map(({ id, attributes }) => (
         <Card key={id} style={{ width: 300, margin: 20, marginTop: 50 }}>
-          <b style={{fontSize: "18px"}}>{attributes.tour_name}</b>
-          <br style={{color: getStatusColor(attributes.status)}}/>
-          สถานะ: {attributes.status}
+          <b style={{ fontSize: "18px" }}>{attributes.tour_name}</b>
+          <br />
+          สถานะ: <span style={{
+            color: getStatusColor(attributes.status),
+            
+          }}>
+            <b>{getStatus(attributes.status)}</b>
+          </span>
           <br />
           ราคา: {attributes.price} บาท/ท่าน
           <br />
