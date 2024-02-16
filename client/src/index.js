@@ -13,6 +13,8 @@ import Register from './Register';
 import Member from './Member';
 import Admin from './Admin';
 import Payment from './Payment';
+import UploadReceipt from './UploadReceipt';
+import AllStepDone from './AllStepDone';
 
 const router = createBrowserRouter([
   {
@@ -42,6 +44,14 @@ const router = createBrowserRouter([
   {
     path: "/payments",
     element: <Payment/>,
+  },
+  {
+    path: "/uploadreceipt",
+    element: <UploadReceipt/>,
+  },
+  {
+    path: "/AllStepDone",
+    element: <AllStepDone/>,
   },
 ]);
 

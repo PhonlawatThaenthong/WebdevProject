@@ -44,7 +44,7 @@ const Payment = () => {
         }
     };
     const handleButtonClick = () => {
-        navigate('/admin');
+        navigate('/AllStepDone');
     };
 
 
