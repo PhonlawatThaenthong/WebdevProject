@@ -93,6 +93,7 @@ const HomeForm = () => {
       {contextHolder}
       <Layout style={layoutStyle}>
         <Header style={headerStyle}>
+          <div style={{marginRight : "450px"}}>
           <span style={blueTextStyle}>H</span>
           AT
           <span style={invtext}>.</span>
@@ -100,11 +101,12 @@ const HomeForm = () => {
           AI
           <span style={invtext}>.</span>
           <span style={blueTextStyle}>J</span>ourney
-          <span style={invtext}>HAY YAI JOURNEY WEBSITE</span>
+          </div>
+          
           <SearchBar />
           <Link
             to="/login"
-            style={{ marginLeft: "20px", color: "white", fontSize: "18px" }}
+            style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
           >
             Login
           </Link>

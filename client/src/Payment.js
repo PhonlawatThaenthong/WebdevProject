@@ -91,14 +91,15 @@ const Payment = () => {
 
             <Layout style={layoutStyle}>
                 <Header style={headerStyle}>
-                    <span style={blueTextStyle}>H</span>
-                    AT
-                    <span style={invtext}>.</span>
-                    <span style={blueTextStyle}> Y</span>
-                    AI
-                    <span style={invtext}>.</span>
-                    <span style={blueTextStyle}>J</span>ourney
-                    <span style={invtext}>HAY YAI JOURNEY WEBSITE</span>
+                    <div style={{ marginRight: "450px"}}>
+                        <span style={blueTextStyle}>H</span>
+                        AT
+                        <span style={invtext}>.</span>
+                        <span style={blueTextStyle}> Y</span>
+                        AI
+                        <span style={invtext}>.</span>
+                        <span style={blueTextStyle}>J</span>ourney
+                    </div>
                     <Step />
                 </Header>
             </Layout>

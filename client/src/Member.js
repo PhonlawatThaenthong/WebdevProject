@@ -105,17 +105,18 @@ const MemberForm = () => {
                 <title>HYJ - Home Page</title>
             </Helmet>
             {contextHolder}
-            
+
             <Layout style={layoutStyle}>
                 <Header style={headerStyle}>
-                    <span style={blueTextStyle}>H</span>
-                    AT
-                    <span style={invtext}>.</span>
-                    <span style={blueTextStyle}> Y</span>
-                    AI
-                    <span style={invtext}>.</span>
-                    <span style={blueTextStyle}>J</span>ourney
-                    <span style={invtext}>HAY YAI JOURNEY WEBSITE</span>
+                    <div style={{ marginRight: "200px"}}>
+                        <span style={blueTextStyle}>H</span>
+                        AT
+                        <span style={invtext}>.</span>
+                        <span style={blueTextStyle}> Y</span>
+                        AI
+                        <span style={invtext}>.</span>
+                        <span style={blueTextStyle}>J</span>ourney
+                    </div>
                     <Link
                         style={{ marginLeft: "20px", color: "white", fontSize: "18px", width: "300px" }}
                     >
@@ -124,7 +125,7 @@ const MemberForm = () => {
                     <SearchBar />
                     <Link
                         onClick={handleLogout}
-                        style={{ marginLeft: "20px", color: "white", fontSize: "18px" }}
+                        style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
                     >
                         Logout
                     </Link>
