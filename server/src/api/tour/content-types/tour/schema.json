@@ -27,8 +27,13 @@
     "status": {
       "type": "boolean"
     },
-    "MaxLimit": {
-      "type": "integer"
+    "user_amount": {
+      "type": "integer",
+      "default": 0
+    },
+    "user_max": {
+      "type": "integer",
+      "default": 50
     }
   }
 }

@@ -105,6 +105,7 @@ const MemberForm = () => {
                 <title>HYJ - Home Page</title>
             </Helmet>
             {contextHolder}
+            
             <Layout style={layoutStyle}>
                 <Header style={headerStyle}>
                     <span style={blueTextStyle}>H</span>

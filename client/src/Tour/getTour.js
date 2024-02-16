@@ -49,7 +49,7 @@ const Tour = () => {
     }}>
       {data.map(({ id, attributes }) => (
         <Card key={id} style={{ width: 300, margin: 20, marginTop: 50 }}>
-          <Image src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+          <Image src="https://semantic-ui.com/images/wireframe/white-image.png"
             preview={false}
           />
           <b style={{ fontSize: "18px" }}>{attributes.tour_name}</b>
@@ -58,11 +58,12 @@ const Tour = () => {
             color: getStatusColor(attributes.status)
           }}>
             <b>{getStatus(attributes.status)}</b>
+            <b> {"("+ attributes.user_amount+"/"+attributes.user_max+")"}</b>
           </span>
           <br />
           ราคา: {attributes.price} บาท / ท่าน
           <br />
-          ระยะเวลา:
+          ระยะเวลา: 
           <br />
           <br></br>
           {currentPage === "/admin" ? (

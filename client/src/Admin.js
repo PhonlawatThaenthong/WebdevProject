@@ -36,6 +36,7 @@ const MemberForm = () => {
     const navigate = useNavigate();
     const [messageApi, contextHolder] = message.useMessage();
     const [isAddMenuOpen, setIsAddMenuOpen] = useState(false);
+    const [isInfoMenuOpen, setIsInfoMenuOpen] = useState(false);
     const [jwt, setjwt] = useLocalState(null, 'jwt');
     const [username, setUsername] = useState('')
 
@@ -131,30 +132,33 @@ const MemberForm = () => {
             </Helmet>
             {contextHolder}
 
-            <Modal title="Add New Tour" open={isAddMenuOpen} onOk={handleOk} onCancel={handleCancel}>
+            <Modal title="Add New Tour"
+                open={isAddMenuOpen}
+                onOk={() => { setIsAddMenuOpen(false) }}
+                onCancel={() => { setIsAddMenuOpen(false) }}>
                 <p>Tour Name: </p>
                 <Input
-                        value={create_name}
-                        onChange={(e) => setcreate_name(e.target.value)}
-                    />
+                    value={create_name}
+                    onChange={(e) => setcreate_name(e.target.value)}
+                />
                 <p>Description: </p>
                 <TextArea
-                        value={create_desc}
-                        onChange={(e) => setcreate_desc(e.target.value)}
-                        autoSize={{ minRows: 1, maxRows: 10 }}
-                    />
+                    value={create_desc}
+                    onChange={(e) => setcreate_desc(e.target.value)}
+                    autoSize={{ minRows: 1, maxRows: 10 }}
+                />
                 <p>Price: </p>
                 <Input
-                        type="number"
-                        value={create_price}
-                        onChange={(e) => setcreate_price(e.target.value)}
-                    />
+                    type="number"
+                    value={create_price}
+                    onChange={(e) => setcreate_price(e.target.value)}
+                />
                 <p>Date: </p>
                 <RangePicker />
                 <p>Image: </p>
-                <Button>
-                        Upload
-                    </Button>
+                <Button type="primary">
+                    Upload
+                </Button>
             </Modal>
 
             <Layout style={layoutStyle}>
