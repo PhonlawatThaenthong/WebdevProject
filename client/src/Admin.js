@@ -15,6 +15,7 @@ const { Search } = Input;
 const MemberForm = () => {
     const navigate = useNavigate();
     const [jwt, setjwt] = useLocalState(null, 'jwt');
+    const [Username, setUsername] = useState('')
 
     const roleChecker = async () => {
         try {
@@ -22,6 +23,9 @@ const MemberForm = () => {
                 Authorization: `Bearer ${jwt}`,
             };
             const userResult = await axios.get('http://localhost:1337/api/users/me?populate=role');
+
+            setUsername(userResult.data.Username)
+            console.log(`Username: ${userResult.data.Username}`)
 
             if (userResult.data.role && userResult.data.role.name === 'Member') {
                 navigate('/member');
@@ -84,15 +88,6 @@ const MemberForm = () => {
         fontSize: '45px',
     };
 
-    const searchInput = {
-        placeholder: "ค้นหาสถานที่ท่องเที่ยว หรือโปรแกรมทัวร์",
-        color: "black",
-        width: "20%",
-        height: "40px",
-        fontWeight: 'bold',
-        justifyContent: 'center',
-    };
-
     return (
         <Flex gap="middle" wrap="wrap" >
             <Helmet>
@@ -110,6 +105,11 @@ const MemberForm = () => {
                     <span style={blueTextStyle}>J</span>ourney
                     <span style={invtext}>HAY YAI JOURNEY WEBSITE EDIT</span>
                     <SearchBar />
+                    <Link
+                        style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
+                    >
+                        Hello, {Username}
+                    </Link>
                     <Link
                         onClick={handleLogout}
                         style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}

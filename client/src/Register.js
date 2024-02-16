@@ -32,7 +32,6 @@ const RegisterForm = () => {
                 password: values.password,
                 email: values.email,
                 phone_number: values.phone_number,
-                role: "Member",
             });
 
             const jwtToken = registerResult.data.jwt;
