@@ -15,7 +15,7 @@ const { Search } = Input;
 const MemberForm = () => {
     const navigate = useNavigate();
     const [jwt, setjwt] = useLocalState(null, 'jwt');
-    const [Username, setUsername] = useState('')
+    const [username, setUsername] = useState('')
 
     const roleChecker = async () => {
         try {
@@ -25,7 +25,6 @@ const MemberForm = () => {
             const userResult = await axios.get('http://localhost:1337/api/users/me?populate=role');
 
             setUsername(userResult.data.Username)
-            console.log(`Username: ${userResult.data.Username}`)
 
             if (userResult.data.role && userResult.data.role.name === 'Member') {
                 navigate('/member');
@@ -106,9 +105,9 @@ const MemberForm = () => {
                     <span style={invtext}>HAY YAI JOURNEY WEBSITE EDIT</span>
                     <SearchBar />
                     <Link
-                        style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
+                        style={{ marginLeft: "50px", color: "white", fontSize: "18px", width: "150px" }}
                     >
-                        Hello, {Username}
+                        Hello, {username}
                     </Link>
                     <Link
                         onClick={handleLogout}
@@ -119,6 +118,7 @@ const MemberForm = () => {
 
 
                 </Header>
+                <Tour />
                 <Content style={contentStyle}>
                     ...
                 </Content>

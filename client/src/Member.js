@@ -128,7 +128,7 @@ const MemberForm = () => {
 
 
                 </Header>
-
+                <Tour />
                 <Content style={contentStyle}>
                     ...
                 </Content>
