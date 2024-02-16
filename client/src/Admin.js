@@ -36,7 +36,6 @@ const MemberForm = () => {
     const navigate = useNavigate();
     const [messageApi, contextHolder] = message.useMessage();
     const [isAddMenuOpen, setIsAddMenuOpen] = useState(false);
-    const [isInfoMenuOpen, setIsInfoMenuOpen] = useState(false);
     const [jwt, setjwt] = useLocalState(null, 'jwt');
     const [username, setUsername] = useState('')
 

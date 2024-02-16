@@ -7,6 +7,8 @@ import { Card, Form, Input, Image, Button, Modal, Row, Col, Layout, Flex, Space 
 
 const Tour = () => {
   const [data, setData] = useState([]);
+  const [focusInfo, setFocusInfo] = useState([]);
+  const [isInfoMenuOpen, setIsInfoMenuOpen] = useState(false);
   const location = useLocation();
   const currentPage = location.pathname;
 
@@ -14,7 +16,6 @@ const Tour = () => {
     try {
       const res = await axios.get("http://localhost:1337/api/tours");
       setData(res.data.data);
-      console.log(res.data.data);
     } catch (error) {
       console.error("error fetching tour data", error);
     }
@@ -38,6 +39,11 @@ const Tour = () => {
     }
   };
 
+  const showTourInfo = (id) => {
+    setFocusInfo(id)
+    setIsInfoMenuOpen(true)
+  };
+
   useEffect(() => {
     getData();
   }, []);
@@ -58,21 +64,37 @@ const Tour = () => {
             color: getStatusColor(attributes.status)
           }}>
             <b>{getStatus(attributes.status)}</b>
-            <b> {"("+ attributes.user_amount+"/"+attributes.user_max+")"}</b>
+            <b> {"(" + attributes.user_amount + "/" + attributes.user_max + ")"}</b>
           </span>
           <br />
           ราคา: {attributes.price} บาท / ท่าน
           <br />
-          ระยะเวลา: 
+          ระยะเวลา:
           <br />
           <br></br>
           {currentPage === "/admin" ? (
-            <Button type="primary" style={{ display: "block", margin: "0 auto", backgroundColor: "#DE3163" }}>แก้ไข</Button>
+            <Button type="primary" onClick={() => { showTourInfo(id) }} style={{ display: "block", margin: "0 auto", backgroundColor: "#DE3163" }}>แก้ไข</Button>
           ) : (
-            <Button type="primary" style={{ display: "block", margin: "0 auto" }}>ดูเพิ่มเติม</Button>
+            <Button type="primary" onClick={() => { showTourInfo(id) }} style={{ display: "block", margin: "0 auto" }}>ดูเพิ่มเติม</Button>
           )}
         </Card>
       ))}
+
+      <Modal title={focusInfo.name}
+        open={isInfoMenuOpen}
+        onOk={() => { setIsInfoMenuOpen(false) }}
+        onCancel={() => { setIsInfoMenuOpen(false) }}
+        footer={[
+          <Button key="back" onClick={() => { setIsInfoMenuOpen(false) }}>
+            Return
+          </Button>,
+          <Button key="submit" type="primary" onClick={() => { setIsInfoMenuOpen(false) }}>
+            Submit
+          </Button>,
+        ]}>
+
+      </Modal>
+
     </div>
   )
 };
