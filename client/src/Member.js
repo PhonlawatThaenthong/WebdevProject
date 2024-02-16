@@ -1,8 +1,21 @@
-import React, { useState } from 'react';
-import { Form, Input, Button, Modal, Row, Col, Layout, Flex, Space } from 'antd';
-import { Helmet } from 'react-helmet';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import {
+  Form,
+  Input,
+  Button,
+  Modal,
+  Row,
+  Col,
+  Layout,
+  Flex,
+  Space,
+} from "antd";
+import { Helmet } from "react-helmet";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+import Tour from "./Tour/getTour.js";
+import SearchBar from "./Navbar/SearchBar";
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -74,8 +87,15 @@ const MemberForm = () => {
                     <span style={blueTextStyle}>J</span>ourney
                     <span style={invtext}>HAY YAI JOURNEY WEBSITE EDIT</span>
                     <Input style={searchInput} />
-                    
+                    <Link
+                        to="/"
+                        style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
+                    >
+                        Logout
+                    </Link>
+
                 </Header>
+                <Tour />
                 <Content style={contentStyle}>
                     ...
                 </Content>

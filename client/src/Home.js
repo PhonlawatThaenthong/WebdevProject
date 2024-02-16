@@ -14,7 +14,7 @@ import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-import Tour from "./Tour/GetTour.js";
+import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
 
 const { Header, Footer, Sider, Content } = Layout;
