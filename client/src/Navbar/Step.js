@@ -1,0 +1,23 @@
+import React from 'react';
+import { Steps } from 'antd';
+import '../App.css';
+
+const Step = () => (
+    <Steps
+        current={0}
+        percent={60}
+        items={[
+            {
+                title: 'ข้อมูลการชำระเงิน',
+            },
+            {
+                title: 'อัพโหลดหลักฐานการชำระเงิน ',
+            },
+            {
+                title: 'สำเร็จ',
+            },
+        ]}
+    />
+);
+
+export default Step;

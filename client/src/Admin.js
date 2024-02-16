@@ -1,20 +1,47 @@
 import React, { useState, useEffect } from "react";
-import { Form, Input, Button, Modal, Row, Col, Layout, Flex, Space } from 'antd';
+import {
+    Form,
+    Input,
+    Button,
+    Image,
+    message,
+    Modal,
+    Row,
+    Col,
+    Layout,
+    Flex,
+    Space,
+    FloatButton,
+    InputNumber,
+    DatePicker,
+    Upload
+} from "antd";
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import useLocalState from './localStorage.js';
 
+import { UploadOutlined } from '@ant-design/icons';
+
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
+const { RangePicker } = DatePicker;
+const { TextArea } = Input;
 
 const MemberForm = () => {
     const navigate = useNavigate();
-    const [jwt, setjwt] = useLocalState('', 'jwt');
+    const [messageApi, contextHolder] = message.useMessage();
+    const [isAddMenuOpen, setIsAddMenuOpen] = useState(false);
+    const [jwt, setjwt] = useLocalState(null, 'jwt');
+    const [username, setUsername] = useState('')
+
+    const [create_name, setcreate_name] = useState('')
+    const [create_desc, setcreate_desc] = useState('')
+    const [create_price, setcreate_price] = useState(0)
 
     const roleChecker = async () => {
         try {
@@ -22,6 +49,8 @@ const MemberForm = () => {
                 Authorization: `Bearer ${jwt}`,
             };
             const userResult = await axios.get('http://localhost:1337/api/users/me?populate=role');
+
+            setUsername(userResult.data.username)
 
             if (userResult.data.role && userResult.data.role.name === 'Member') {
                 navigate('/member');
@@ -38,12 +67,18 @@ const MemberForm = () => {
     };
 
     const handleLogout = async () => {
-        setjwt("")
-        navigate("/")
-    }
+        setjwt(null)
+        messageApi.open({
+            type: 'loading',
+            content: 'Please wait...',
+            duration: 1,
+        })
+            .then(() => message.success('Completed!', 0.5))
+            .then(() => window.location.href = '/')
+    };
 
     useEffect(() => {
-        roleChecker();
+        if (jwt == null) { navigate("/") } else roleChecker();
     }, []);
 
     const headerStyle = {
@@ -57,13 +92,6 @@ const MemberForm = () => {
         alignItems: 'center',
         fontWeight: 'bold',
         fontSize: '45px',
-    };
-
-    const contentStyle = {
-        textAlign: 'center',
-        lineHeight: 'calc(5000%)',
-        color: '#fff',
-        backgroundColor: '#EEEEEE',
     };
 
     const layoutStyle = {
@@ -84,13 +112,16 @@ const MemberForm = () => {
         fontSize: '45px',
     };
 
-    const searchInput = {
-        placeholder: "ค้นหาสถานที่ท่องเที่ยว หรือโปรแกรมทัวร์",
-        color: "black",
-        width: "20%",
-        height: "40px",
-        fontWeight: 'bold',
-        justifyContent: 'center',
+    const showAddMenu = () => {
+        setIsAddMenuOpen(true);
+    };
+
+    const handleOk = () => {
+        setIsAddMenuOpen(false);
+    };
+
+    const handleCancel = () => {
+        setIsAddMenuOpen(false);
     };
 
     return (
@@ -98,6 +129,33 @@ const MemberForm = () => {
             <Helmet>
                 <title>HYJ - Home Page</title>
             </Helmet>
+            {contextHolder}
+
+            <Modal title="Add New Tour" open={isAddMenuOpen} onOk={handleOk} onCancel={handleCancel}>
+                <p>Tour Name: </p>
+                <Input
+                        value={create_name}
+                        onChange={(e) => setcreate_name(e.target.value)}
+                    />
+                <p>Description: </p>
+                <TextArea
+                        value={create_desc}
+                        onChange={(e) => setcreate_desc(e.target.value)}
+                        autoSize={{ minRows: 1, maxRows: 10 }}
+                    />
+                <p>Price: </p>
+                <Input
+                        type="number"
+                        value={create_price}
+                        onChange={(e) => setcreate_price(e.target.value)}
+                    />
+                <p>Date: </p>
+                <RangePicker />
+                <p>Image: </p>
+                <Button>
+                        Upload
+                    </Button>
+            </Modal>
 
             <Layout style={layoutStyle}>
                 <Header style={headerStyle}>
@@ -108,18 +166,29 @@ const MemberForm = () => {
                     AI
                     <span style={invtext}>.</span>
                     <span style={blueTextStyle}>J</span>ourney
-                    <span style={invtext}>HAY YAI JOURNEY WEBSITE EDIT</span>
+                    <span style={invtext}>HAY YAI JOURNEY WEBSITE</span>
+                    <Link
+                        style={{ marginLeft: "20px", color: "white", fontSize: "18px", width: "300px" }}
+                    >
+                        Hello, {username}
+                    </Link>
                     <SearchBar />
                     <Link
-                        style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
+                        onClick={handleLogout}
+                        style={{ marginLeft: "20px", color: "white", fontSize: "18px" }}
                     >
                         Logout
                     </Link>
-
                 </Header>
-                <Content style={contentStyle}>
-                    ...
-                </Content>
+                <Tour />
+                <FloatButton
+                    tooltip={<div>Add New Tour</div>}
+                    shape="square"
+                    type="primary"
+                    style={{ right: 24 }}
+                    icon="+"
+                    onClick={() => showAddMenu()}
+                />
             </Layout>
 
         </Flex>

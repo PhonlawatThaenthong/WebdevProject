@@ -12,7 +12,7 @@ const RegisterForm = () => {
     const [submitEnabled, setSubmitEnabled] = useState(true);
     const [showErrorModal, setShowErrorModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [jwt, setjwt] = useLocalState('', 'jwt');
+    const [jwt, setjwt] = useLocalState(null, 'jwt');
 
     const validateConfirmPassword = ({ getFieldValue }) => ({
         validator(_, value) {
@@ -32,7 +32,6 @@ const RegisterForm = () => {
                 password: values.password,
                 email: values.email,
                 phone_number: values.phone_number,
-                role: "Member",
             });
 
             const jwtToken = registerResult.data.jwt;

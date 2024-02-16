@@ -24,8 +24,8 @@
     "price": {
       "type": "decimal"
     },
-    "tour_status": {
-      "type": "integer"
+    "status": {
+      "type": "boolean"
     }
   }
 }

@@ -3,6 +3,8 @@ import {
   Form,
   Input,
   Button,
+  Image,
+  message,
   Modal,
   Row,
   Col,
@@ -24,7 +26,8 @@ const { Search } = Input;
 
 const HomeForm = () => {
   const navigate = useNavigate();
-  const [jwt, setjwt] = useLocalState('', 'jwt');
+  const [messageApi, contextHolder] = message.useMessage();
+  const [jwt, setjwt] = useLocalState(null, 'jwt');
 
   const roleChecker = async () => {
     try {
@@ -48,7 +51,7 @@ const HomeForm = () => {
   };
 
   useEffect(() => {
-    roleChecker();
+    if (jwt == null) {} else roleChecker();
   }, []);
 
   const headerStyle = {
@@ -62,13 +65,6 @@ const HomeForm = () => {
     alignItems: "center",
     fontWeight: "bold",
     fontSize: "45px",
-  };
-
-  const contentStyle = {
-    textAlign: "center",
-    lineHeight: "calc(5000%)",
-    color: "#fff",
-    backgroundColor: "#EEEEEE",
   };
 
   const layoutStyle = {
@@ -94,6 +90,7 @@ const HomeForm = () => {
       <Helmet>
         <title>HYJ - Home Page</title>
       </Helmet>
+      {contextHolder}
       <Layout style={layoutStyle}>
         <Header style={headerStyle}>
           <span style={blueTextStyle}>H</span>
@@ -103,23 +100,22 @@ const HomeForm = () => {
           AI
           <span style={invtext}>.</span>
           <span style={blueTextStyle}>J</span>ourney
-          <span style={invtext}>HAY YAI JOURNEY WEBSITE EDIT</span>
+          <span style={invtext}>HAY YAI JOURNEY WEBSITE</span>
           <SearchBar />
           <Link
             to="/login"
-            style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
+            style={{ marginLeft: "20px", color: "white", fontSize: "18px" }}
           >
             Login
           </Link>
           <Link
             to="/register"
-            style={{ marginLeft: "55px", color: "white", fontSize: "18px" }}
+            style={{ marginLeft: "20px", color: "white", fontSize: "18px" }}
           >
             Register
           </Link>
         </Header>
         <Tour />
-        <Content style={contentStyle}>...</Content>
       </Layout>
     </Flex>
   );

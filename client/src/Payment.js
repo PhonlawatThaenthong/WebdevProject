@@ -3,13 +3,13 @@ import {
     Form,
     Input,
     Button,
-    Image,
-    message,
     Modal,
     Row,
     Col,
     Layout,
     Flex,
+    Card,
+    Collapse,
     Space,
 } from "antd";
 import { Helmet } from "react-helmet";
@@ -17,52 +17,34 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import useLocalState from './localStorage.js';
-
-import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
+import Step from "./Navbar/Step.js";
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
 
-const MemberForm = () => {
+const Payment = () => {
     const navigate = useNavigate();
-    const [messageApi, contextHolder] = message.useMessage();
     const [jwt, setjwt] = useLocalState(null, 'jwt');
     const [username, setUsername] = useState('')
-
+    const cardWidth = 1000;
+    const cardHeight = 500;
+    const { Panel } = Collapse;
     const roleChecker = async () => {
         try {
             axios.defaults.headers.common = {
                 Authorization: `Bearer ${jwt}`,
             };
             const userResult = await axios.get('http://localhost:1337/api/users/me?populate=role');
-
             setUsername(userResult.data.username)
-
-            if (userResult.data.role && userResult.data.role.name === 'Member') {
-                navigate('/member');
-            } else {
-                if (userResult.data.role && userResult.data.role.name === 'Admin') {
-                    navigate('/admin');
-                } else {
-                    navigate('/');
-                }
-            }
         } catch (error) {
             console.error(error)
         }
     };
-
-    const handleLogout = async () => {
-        setjwt(null)
-        messageApi.open({
-            type: 'loading',
-            content: 'Please wait...',
-            duration: 1,
-        })
-            .then(() => message.success('Completed!', 0.5))
-            .then(() => window.location.href = '/')
+    const handleButtonClick = () => {
+        navigate('/admin');
     };
+
 
     useEffect(() => {
         if (jwt == null) { navigate("/") } else roleChecker();
@@ -104,7 +86,7 @@ const MemberForm = () => {
             <Helmet>
                 <title>HYJ - Home Page</title>
             </Helmet>
-            {contextHolder}
+
             <Layout style={layoutStyle}>
                 <Header style={headerStyle}>
                     <span style={blueTextStyle}>H</span>
@@ -115,26 +97,29 @@ const MemberForm = () => {
                     <span style={invtext}>.</span>
                     <span style={blueTextStyle}>J</span>ourney
                     <span style={invtext}>HAY YAI JOURNEY WEBSITE</span>
-                    <Link
-                        style={{ marginLeft: "20px", color: "white", fontSize: "18px", width: "300px" }}
-                    >
-                        Hello, {username}
-                    </Link>
-                    <SearchBar />
-                    <Link
-                        onClick={handleLogout}
-                        style={{ marginLeft: "20px", color: "white", fontSize: "18px" }}
-                    >
-                        Logout
-                    </Link>
-
-
+                    <Step />
                 </Header>
-                <Tour />
             </Layout>
+            <Card title="ช่องทางการชำระเงิน" bordered={false} style={{ width: cardWidth, height: cardHeight }}>
+                <Collapse defaultActiveKey={['1']}>
+                    <Panel header="ชำระเงินทางธนาคาร" key="1">
+                        <p>Content of Panel 1</p>
+                    </Panel>
+                    <Panel header="ชำระเงินทาง TrueMoney Wallet" key="2">
+                        <p>Content of Panel 2</p>
+                    </Panel>
+                    <Panel header="บัตรเครดิต" key="3">
+                        <p>Content of Panel 3</p>
+                    </Panel>
+                </Collapse>
+                <Button type="primary" block onClick={handleButtonClick}>ยืนยัน</Button>
+            </Card>
+
+
+
         </Flex>
     );
 };
 
 
-export default MemberForm;
+export default Payment;
