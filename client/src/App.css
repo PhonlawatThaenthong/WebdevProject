@@ -36,3 +36,6 @@
     transform: rotate(360deg);
   }
 }
+.ant-steps .ant-steps-item-title {
+  color: white !important;
+}

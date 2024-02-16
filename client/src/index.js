@@ -12,6 +12,7 @@ import Login from './Login';
 import Register from './Register';
 import Member from './Member';
 import Admin from './Admin';
+import Payment from './Payment';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <Admin/>,
+  },
+  {
+    path: "/payments",
+    element: <Payment/>,
   },
 ]);
 
