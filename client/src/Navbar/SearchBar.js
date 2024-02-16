@@ -1,4 +1,4 @@
-import { Input } from "antd";
+import { Button, Input } from "antd";
 
 const SearchBar = ({ placeholder, onSearch }) => {
   const searchInput = {
@@ -17,6 +17,7 @@ const SearchBar = ({ placeholder, onSearch }) => {
       onSearch={onSearch}
     />
   );
+
 };
 
 export default SearchBar;

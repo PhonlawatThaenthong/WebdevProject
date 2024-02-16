@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-import { Card, Form, Input, Button, Modal, Row, Col, Layout, Flex, Space } from "antd";
+import { Card, Form, Input, Image, Button, Modal, Row, Col, Layout, Flex, Space } from "antd";
 
 
 const Tour = () => {
@@ -46,18 +46,16 @@ const Tour = () => {
     }}>
       {data.map(({ id, attributes }) => (
         <Card key={id} style={{ width: 300, margin: 20, marginTop: 50 }}>
+          <Image src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"/>
           <b style={{ fontSize: "18px" }}>{attributes.tour_name}</b>
           <br />
           สถานะ: <span style={{
-            color: getStatusColor(attributes.status),
-            
+            color: getStatusColor(attributes.status)
           }}>
             <b>{getStatus(attributes.status)}</b>
           </span>
           <br />
-          ราคา: {attributes.price} บาท/ท่าน
-          <br />
-          คะแนน:
+          ราคา: {attributes.price} บาท / ท่าน
           <br />
           ระยะเวลา:
           <br />
