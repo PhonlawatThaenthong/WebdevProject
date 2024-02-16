@@ -14,12 +14,10 @@ const LoginForm = () => {
     const [submitEnabled, setSubmitEnabled] = useState(true);
     const [showErrorModal, setShowErrorModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [jwt, setjwt] = useLocalState('', 'jwt');
+    const [jwt, setjwt] = useLocalState(null, 'jwt');
 
     const handleSubmit = async (values) => {
         setSubmitEnabled(false);
-
-
         try {
             const loginResult = await axios.post('http://localhost:1337/api/auth/local', {
                 identifier: values.username,
@@ -28,8 +26,9 @@ const LoginForm = () => {
 
             const jwtToken = loginResult.data.jwt;
             setjwt(jwtToken)
+            console.log(`Using Token: ${jwt}`)
             axios.defaults.headers.common = {
-                Authorization: `Bearer ${jwt}`,
+                Authorization: `Bearer ${loginResult.data.jwt}`,
             };
             const userResult = await axios.get('http://localhost:1337/api/users/me?populate=role');
 

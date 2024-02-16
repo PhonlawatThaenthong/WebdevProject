@@ -24,7 +24,7 @@ const { Search } = Input;
 
 const MemberForm = () => {
     const navigate = useNavigate();
-    const [jwt, setjwt] = useLocalState('', 'jwt');
+    const [jwt, setjwt] = useLocalState(null, 'jwt');
 
     const roleChecker = async () => {
         try {
@@ -48,12 +48,12 @@ const MemberForm = () => {
     };
 
     const handleLogout = async () => {
-        setjwt("")
-        navigate("/")
-    }
+        setjwt(null)
+        window.location.href = '/';
+    };
 
     useEffect(() => {
-        roleChecker();
+        if (jwt == null) {navigate("/")} else roleChecker();
     }, []);
 
     const headerStyle = {
@@ -121,11 +121,12 @@ const MemberForm = () => {
                     <span style={invtext}>HAY YAI JOURNEY WEBSITE EDIT</span>
                     <SearchBar />
                     <Link
+                        onClick={handleLogout}
                         style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
                     >
                         Logout
-
                     </Link>
+
 
                 </Header>
 

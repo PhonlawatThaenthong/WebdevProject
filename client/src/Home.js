@@ -24,7 +24,7 @@ const { Search } = Input;
 
 const HomeForm = () => {
   const navigate = useNavigate();
-  const [jwt, setjwt] = useLocalState('', 'jwt');
+  const [jwt, setjwt] = useLocalState(null, 'jwt');
 
   const roleChecker = async () => {
     try {
@@ -48,7 +48,7 @@ const HomeForm = () => {
   };
 
   useEffect(() => {
-    roleChecker();
+    if (jwt == null) {} else roleChecker();
   }, []);
 
   const headerStyle = {
