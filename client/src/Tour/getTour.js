@@ -66,33 +66,63 @@ const Tour = () => {
     }}>
       {data.map(({ id, attributes }) => (
         <Card key={id} style={{ width: 300, margin: 20, marginTop: 50 }}>
-          <Modal title={attributes.tour_name}
-            open={isModalOpen && selectedTourId === id}
-            onOk={() => { setIsModalOpen(false) }}
-            onCancel={() => { setIsModalOpen(false) }}
-            footer={[
-              <Button key="back" onClick={() => { setIsModalOpen(false) }}>
-                Close
-              </Button>,
-              <Button key="submit" type="primary" onClick={() => { setIsModalOpen(false) }}>
-                Select
-              </Button>,
-            ]}>
-            <Image src={"http://localhost:1337" + attributes.tour_image?.data[0]?.attributes.url}
-              preview={false}
-            />
-            <br />
-            สถานะ: <span style={{ color: getStatusColor(attributes.status) }}>
-              <b>{getStatus(attributes.status)}</b>
-              <b> {"(" + attributes.user_amount + "/" + attributes.user_max + ")"}</b>
-            </span>
-            <br />
-            ราคา: {attributes.price} บาท / ท่าน
-            <br />
-            ระยะเวลา:
-            <br />
-            <br></br>
-          </Modal>
+          {currentPage === "/admin" ? (
+            <Modal title={attributes.tour_name}
+              open={isModalOpen && selectedTourId === id}
+              onOk={() => { setIsModalOpen(false) }}
+              onCancel={() => { setIsModalOpen(false) }}
+              footer={[
+                <Button key="back" onClick={() => { setIsModalOpen(false) }}>
+                  Close
+                </Button>,
+                <Button key="submit" type="primary" onClick={() => { setIsModalOpen(false) }}>
+                  Select
+                </Button>,
+              ]}>
+              <Image src={"http://localhost:1337" + attributes.tour_image?.data[0]?.attributes.url}
+                preview={false}
+              />
+              <br />
+              สถานะ: <span style={{ color: getStatusColor(attributes.status) }}>
+                <b>{getStatus(attributes.status)}</b>
+                <b> {"(" + attributes.user_amount + "/" + attributes.user_max + ")"}</b>
+              </span>
+              <br />
+              ราคา: {attributes.price} บาท / ท่าน
+              <br />
+              ระยะเวลา:
+              <br />
+              <br></br>
+            </Modal>
+          ) : (  // VVVVVVVV THIS IS NON ADMIN MODAL PLEASE EDIT THIS ONLY /////////////////////////////////////////////////////
+            <Modal title={attributes.tour_name}
+              open={isModalOpen && selectedTourId === id}
+              onOk={() => { setIsModalOpen(false) }}
+              onCancel={() => { setIsModalOpen(false) }}
+              footer={[
+                <Button key="back" onClick={() => { setIsModalOpen(false) }}>
+                  Close
+                </Button>,
+                <Button key="submit" type="primary" onClick={() => { setIsModalOpen(false) }}>
+                  Select
+                </Button>,
+              ]}>
+              <Image src={"http://localhost:1337" + attributes.tour_image?.data[0]?.attributes.url}
+                preview={false}
+              />
+              <br />
+              สถานะ: <span style={{ color: getStatusColor(attributes.status) }}>
+                <b>{getStatus(attributes.status)}</b>
+                <b> {"(" + attributes.user_amount + "/" + attributes.user_max + ")"}</b>
+              </span>
+              <br />
+              ราคา: {attributes.price} บาท / ท่าน
+              <br />
+              ระยะเวลา:
+              <br />
+              <br></br>
+            </Modal>
+          )}
           <Image src={"http://localhost:1337" + attributes.tour_image?.data[0]?.attributes.url}
             preview={false}
           />
@@ -110,7 +140,7 @@ const Tour = () => {
           <br></br>
           {currentPage === "/admin" ? (
             <Button type="primary" onClick={() => handleOpenModal(id)} style={{ display: "block", margin: "0 auto", backgroundColor: "#DE3163" }}>Edit</Button>
-          ) : (
+          ) : (  // VVVVVVVV THIS IS NON ADMIN MODAL PLEASE EDIT THIS ONLY /////////////////////////////////////////////////////
             <Button type="primary" onClick={() => handleOpenModal(id)} style={{ display: "block", margin: "0 auto" }}>ดูเพิ่มเติม</Button>
           )}
         </Card>
