@@ -109,21 +109,21 @@ const HomeForm = () => {
             <span style={blueTextStyle}>J</span>
             <span style={NormalTextStyle}>ourney</span>
           </Col>
-          <Col span={20}>
+          <Col span={24}>
             <SearchBar />
+            <Link
+              to="/login"
+              style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
+            >
+              Login
+            </Link>
+            <Link
+              to="/register"
+              style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
+            >
+              Register
+            </Link>
           </Col>
-          <Link
-            to="/login"
-            style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
-          >
-            Login
-          </Link>
-          <Link
-            to="/register"
-            style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
-          >
-            Register
-          </Link>
         </Header>
         <Tour />
       </Layout>
