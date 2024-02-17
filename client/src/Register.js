@@ -65,10 +65,10 @@ const RegisterForm = () => {
                 <title>HYJ - Register</title>
             </Helmet>
             <Col span={8}>
-                <Card title="Register Form" bordered={true} style={{ width: '100%', textAlign: 'center' }}>
+                <Card title="ลงทะเบียน" bordered={true} style={{ width: '100%', textAlign: 'center' }}>
                     <Form form={form} onFinish={handleSubmit}>
                         <Form.Item
-                            label="Username"
+                            label="ชื่อผู้ใช้งาน"
                             name="username"
                             rules={[{ required: true, message: 'Please enter your username!' }]}
                         >
@@ -76,7 +76,7 @@ const RegisterForm = () => {
                         </Form.Item>
 
                         <Form.Item
-                            label="Password"
+                            label="ตั้งค่ารหัสผ่าน"
                             name="password"
                             rules={[{ required: true, message: 'Please enter your password!' }]}
                         >
@@ -84,7 +84,7 @@ const RegisterForm = () => {
                         </Form.Item>
 
                         <Form.Item
-                            label="Confirm Password"
+                            label="ยืนยันรหัสผ่าน"
                             name="confirm_password"
                             rules={[
                                 { required: true, message: 'Please confirm password!' },
@@ -94,7 +94,7 @@ const RegisterForm = () => {
                             <Input.Password />
                         </Form.Item>
                         <Form.Item
-                            label="Phone Number"
+                            label="เบอร์โทรศัพท์"
                             name="phone_number"
                             rules={[
                                 { required: true, message: 'Please enter your phone number!' },
@@ -104,7 +104,7 @@ const RegisterForm = () => {
                             <Input />
                         </Form.Item>
                         <Form.Item
-                            label="Email"
+                            label="อีเมล"
                             name="email"
                             rules={[{ required: true, message: 'Please enter your Email!' }]}
                         >
@@ -113,13 +113,13 @@ const RegisterForm = () => {
 
                         <Form.Item>
                             <Button type="primary" htmlType="submit" disabled={!submitEnabled}>
-                                Submit
+                                ยืนยัน
                             </Button>
                         </Form.Item>
 
                         <Form.Item>
-                            <span style={{ marginRight: '8px' }}>Already have an account?</span>
-                            <Link to="/login">Login now</Link>
+                            <span style={{ marginRight: '8px' }}>มีบัญชีแล้ว?</span>
+                            <Link to="/login">เข้าสู่ระบบ</Link>
                         </Form.Item>
                     </Form>
                 </Card>

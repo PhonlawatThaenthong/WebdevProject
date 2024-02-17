@@ -44,12 +44,12 @@ const MemberForm = () => {
 
     const getData = async () => {
         try {
-          const res = await axios.get("http://localhost:1337/api/tours?populate=*");
-          setAllData(res.data.data);
+            const res = await axios.get("http://localhost:1337/api/tours?populate=*");
+            setAllData(res.data.data);
         } catch (error) {
-          console.error("error fetching tour data", error);
+            console.error("error fetching tour data", error);
         }
-      };
+    };
 
     const roleChecker = async () => {
         try {
@@ -148,7 +148,7 @@ const MemberForm = () => {
                     <Link
                         style={{ marginLeft: "150px", color: "white", fontSize: "18px", width: "300px" }}
                     >
-                        Hello, {username}
+                        สวัสดี คุณ {username}
                     </Link>
                     <SearchBar onSearch={handleSearch} />
                     <Link

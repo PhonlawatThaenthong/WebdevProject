@@ -126,24 +126,24 @@ const HomeForm = () => {
             <span style={NormalTextStyle}>AT</span>
             <span style={invtext}>.</span>
             <span style={blueTextStyle}>Y</span>
-            <span style={NormalTextStyle}>AT</span>
+            <span style={NormalTextStyle}>AI</span>
             <span style={invtext}>.</span>
             <span style={blueTextStyle}>J</span>
             <span style={NormalTextStyle}>ourney</span>
           </Col>
-          <Col span={24}>
+          <Col span={22}>
             <SearchBar onSearch={handleSearch} />
             <Link
               to="/login"
-              style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
+              style={{ marginLeft: "40px", color: "white", fontSize: "18px" }}
             >
-              Login
+              เข้าสู่ระบบ
             </Link>
             <Link
               to="/register"
-              style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
+              style={{ marginLeft: "40px", color: "white", fontSize: "18px" }}
             >
-              Register
+              ลงทะเบียน
             </Link>
           </Col>
         </Header>

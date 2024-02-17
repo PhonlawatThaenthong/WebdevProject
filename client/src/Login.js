@@ -59,13 +59,13 @@ const LoginForm = () => {
       </Helmet>
       <Col span={8}>
         <Card
-          title="Login Form"
+          title="เข้าสู่ระบบ"
           bordered={true}
           style={{ width: "100%", textAlign: "center" }}
         >
           <Form form={form} onFinish={handleSubmit}>
             <Form.Item
-              label="Username"
+              label="ชื่อผู้ใช้"
               name="username"
               rules={[
                 { required: true, message: "Please enter your username!" },
@@ -75,7 +75,7 @@ const LoginForm = () => {
             </Form.Item>
 
             <Form.Item
-              label="Password"
+              label="รหัสผ่าน"
               name="password"
               rules={[
                 { required: true, message: "Please enter your password!" },
@@ -90,13 +90,13 @@ const LoginForm = () => {
                 htmlType="submit"
                 disabled={!submitEnabled}
               >
-                Submit
+                เข้าสู่ระบบ
               </Button>
             </Form.Item>
 
             <Form.Item>
-              <span style={{ marginRight: "8px" }}>Don't have an account?</span>
-              <Link to="/register">Register now</Link>
+              <span style={{ marginRight: "8px" }}>ยังไม่มีบัญชี?</span>
+              <Link to="/register">สมัครสมาชิก</Link>
             </Form.Item>
           </Form>
         </Card>
