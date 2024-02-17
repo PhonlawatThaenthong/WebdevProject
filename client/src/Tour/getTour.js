@@ -85,7 +85,7 @@ const Tour = ({ data, filterData }) => {
                   Save
                 </Button>,
               ]}>
-              <Image src={"http://localhost:1337" + attributes.tour_image?.data?.attributes.url}
+              <Image src={`https://semantic-ui.com/images/wireframe/white-image.png`}
                 preview={false}
               />
               <br />
@@ -113,7 +113,7 @@ const Tour = ({ data, filterData }) => {
                   Select
                 </Button>,
               ]}>
-              <Image src={"http://localhost:1337" + attributes.tour_image?.data?.attributes.url}
+              <Image src={`https://semantic-ui.com/images/wireframe/white-image.png`}
                 preview={false}
               />
               <br />
@@ -129,7 +129,7 @@ const Tour = ({ data, filterData }) => {
               <br></br>
             </Modal>
           )}
-          <Image src={"http://localhost:1337" + attributes.tour_image?.data?.attributes.url}
+          <Image src={`https://semantic-ui.com/images/wireframe/white-image.png`}
             preview={false}
           />
           <b style={{ fontSize: "18px" }}>{attributes.tour_name}</b>
