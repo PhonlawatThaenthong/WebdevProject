@@ -32,7 +32,7 @@ const AllStepDone = () => {
     const cardHeight = 700;
     const { Panel } = Collapse;
     let url = "https://i.pinimg.com/originals/96/09/5b/96095bfa0b64cdbfd12fcbd030ec41d8.gif"
-    const [remainingTime, setRemainingTime] = useState(30000);
+    const [remainingTime, setRemainingTime] = useState(60000);
     const roleChecker = async () => {
         try {
             axios.defaults.headers.common = {

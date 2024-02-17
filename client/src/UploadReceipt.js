@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import useLocalState from './localStorage.js';
 import Step from "./Navbar/Step.js";
+import UploadFile from "./Navbar/UploadIcon.js";
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -77,6 +78,12 @@ const UploadReceipt = () => {
         fontSize: '45px',
     };
 
+    const NormalTextStyle = {
+        color: '#FFFFFF',
+        fontWeight: 'bold',
+        fontSize: '45px',
+    };
+
     const invtext = {
         color: '#1C3953',
         fontWeight: 'bold',
@@ -91,18 +98,29 @@ const UploadReceipt = () => {
 
             <Layout style={layoutStyle}>
                 <Header style={headerStyle}>
-                    <span style={blueTextStyle}>H</span>
-                    AT
-                    <span style={invtext}>.</span>
-                    <span style={blueTextStyle}> Y</span>
-                    AI
-                    <span style={invtext}>.</span>
-                    <span style={blueTextStyle}>J</span>ourney
-                    <span style={invtext}>HAY YAI JOURNEY WEBSITE</span>
-                    <Step current={1} />
+                    <Col>
+                        <span style={blueTextStyle}>H</span>
+                        <span style={NormalTextStyle}>AT</span>
+                        <span style={invtext}>.</span>
+                        <span style={blueTextStyle}> Y</span>
+                        <span style={NormalTextStyle}>AT</span>
+                        <span style={invtext}>.</span>
+                        <span style={blueTextStyle}>J</span>
+                        <span style={NormalTextStyle}>ourney</span>
+                    </Col>
+                    <Col span={12} style={{ marginLeft: "300px" }}>
+                        <Step current={1} />
+                    </Col>
                 </Header>
+                <Card title="อัพโหลดหลักฐานการชำระเงิน" bordered={false} style={{ width: '100%' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <div style={{ marginBottom: '20px' }}>
+                            <UploadFile />
+                        </div>
+                        <Button type="primary" block onClick={handleButtonClick}>ขั้นตอนถัดไป</Button>
+                    </div>
+                </Card>
             </Layout>
-            <Button type="primary" block style={{ backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }} onClick={handleButtonClick}>ใช่ ฉันชำระเงินแล้ว</Button>
         </Flex>
     );
 };
