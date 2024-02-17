@@ -73,25 +73,42 @@ const Tour = () => {
           <br />
           <br></br>
           {currentPage === "/admin" ? (
-            <Button type="primary" onClick={() => { showTourInfo(id) }} style={{ display: "block", margin: "0 auto", backgroundColor: "#DE3163" }}>แก้ไข</Button>
+            <Button type="primary" onClick={() => { showTourInfo(id) }} style={{ display: "block", margin: "0 auto", backgroundColor: "#DE3163" }}>Edit</Button>
           ) : (
             <Button type="primary" onClick={() => { showTourInfo(id) }} style={{ display: "block", margin: "0 auto" }}>ดูเพิ่มเติม</Button>
           )}
         </Card>
       ))}
 
-      <Modal title={focusInfo.name}
+      <Modal title={"PLACEHOLDER_MODAL_TITLE"}
         open={isInfoMenuOpen}
         onOk={() => { setIsInfoMenuOpen(false) }}
         onCancel={() => { setIsInfoMenuOpen(false) }}
         footer={[
           <Button key="back" onClick={() => { setIsInfoMenuOpen(false) }}>
-            Return
+            Close
           </Button>,
           <Button key="submit" type="primary" onClick={() => { setIsInfoMenuOpen(false) }}>
-            Submit
+            Select
           </Button>,
         ]}>
+
+        <Image src={"http://localhost:1337/uploads/empty_ff41750fc7.png"}
+          preview={false}
+        />
+        <br />
+        สถานะ: <span style={{
+          color: "red"
+        }}>
+          <b>{"???"}</b>
+          <b> {"(???/???)"}</b>
+        </span>
+        <br />
+        ราคา: ??? บาท / ท่าน
+        <br />
+        ระยะเวลา:
+        <br />
+        <br></br>
 
       </Modal>
 

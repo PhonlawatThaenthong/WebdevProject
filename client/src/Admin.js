@@ -185,7 +185,7 @@ const MemberForm = () => {
                     </Link>
                     <SearchBar />
                     <Link
-                        onClick={() => {handleLogout()}}
+                        onClick={() => { handleLogout() }}
                         style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
                     >
                         Logout
