@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import useLocalState from '../localStorage.js';
 
-import { Card, Form, Input, Image, Button, Modal, Row, Col, Layout, Flex, Space } from "antd";
+import {
+  Card, Form, Input, Image, Button, Modal, Row, Col, Layout, Flex, Space, Popconfirm, message
+} from "antd";
 
 
 const Tour = () => {
@@ -10,6 +13,7 @@ const Tour = () => {
   const location = useLocation();
   const currentPage = location.pathname;
   const [selectedTourId, setSelectedTourId] = useState(null);
+  const [jwt, setjwt] = useLocalState(null, 'jwt');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = (id) => {
@@ -44,14 +48,20 @@ const Tour = () => {
     }
   };
 
-  const showTourInfo = (id) => {
-    setFocusInfo(id)
-    setIsInfoMenuOpen(true)
-  };
+  const handleTourDelete = async (id) => {
+    try {
+      await axios.delete(
+        `http://localhost:1337/api/tours/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        }
+      );
 
-  class InfoModal {
-    constructor(attributes) {
-      this.menuOpen = false;
+      window.location.href = '/'
+    } catch (error) {
+      console.error('Error deleting tour:', error);
     }
   }
 
@@ -69,16 +79,21 @@ const Tour = () => {
           {currentPage === "/admin" ? (
             <Modal title={attributes.tour_name}
               open={isModalOpen && selectedTourId === id}
-              onOk={() => { setIsModalOpen(false) }}
               onCancel={() => { setIsModalOpen(false) }}
               footer={[
                 <Button key="back" onClick={() => { setIsModalOpen(false) }}>
                   Close
                 </Button>,
-                <Button key="submit" type="primary" onClick={() => { setIsModalOpen(false) }} style={{ backgroundColor: "#DE3163" }}>
-                  Delete
-                </Button>,
-                <Button key="submit" type="primary" onClick={() => { setIsModalOpen(false) }} style={{ backgroundColor: "#58D68D" }}>
+                <Popconfirm
+                  title="Delete the tour"
+                  description="Are you sure to delete this tour?"
+                  onConfirm={() => { setIsModalOpen(false); handleTourDelete(id) }}
+                  okText="Yes"
+                  cancelText="No"
+                >
+                  <Button danger>Delete</Button>
+                </Popconfirm>,
+                <Button key="submit" type="primary" onClick={() => { setIsModalOpen(false) }}>
                   Save
                 </Button>,
               ]}>

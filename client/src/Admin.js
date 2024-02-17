@@ -118,18 +118,6 @@ const MemberForm = () => {
         fontSize: '45px',
     };
 
-    const showAddMenu = () => {
-        setIsAddMenuOpen(true);
-    };
-
-    const handleOk = () => {
-        setIsAddMenuOpen(false);
-    };
-
-    const handleCancel = () => {
-        setIsAddMenuOpen(false);
-    };
-
     return (
         <Flex gap="middle" wrap="wrap" >
             <Helmet>
@@ -139,8 +127,15 @@ const MemberForm = () => {
 
             <Modal title="Add New Tour"
                 open={isAddMenuOpen}
-                onOk={() => { setIsAddMenuOpen(false) }}
-                onCancel={() => { setIsAddMenuOpen(false) }}>
+                onCancel={() => { setIsAddMenuOpen(false) }}
+                footer={[
+                    <Button key="back" onClick={() => { setIsAddMenuOpen(false) }}>
+                        Cancel
+                    </Button>,
+                    <Button key="submit" type="primary" onClick={() => { setIsAddMenuOpen(false) }}>
+                        Add
+                    </Button>,
+                ]}>
                 <p>Tour Name: </p>
                 <Input
                     value={create_name}
@@ -198,7 +193,7 @@ const MemberForm = () => {
                     type="primary"
                     style={{ right: 24 }}
                     icon="+"
-                    onClick={() => showAddMenu()}
+                    onClick={() => setIsAddMenuOpen(true)}
                 />
             </Layout>
 
