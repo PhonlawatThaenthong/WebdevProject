@@ -1,6 +1,13 @@
 import { Button, Input } from "antd";
+import { useState } from "react";
 
-const SearchBar = ({ placeholder, onSearch }) => {
+const SearchBar = ({ onSearch }) => {
+  const [searchText, setSearchText] = useState("");
+
+  const handleSearch = () => {
+    console.log('searching for: ', searchText )
+  }
+
   const searchInput = {
     placeholder: "ค้นหาสถานที่ท่องเที่ยว หรือโปรแกรมทัวร์",
     color: "black",
@@ -11,13 +18,15 @@ const SearchBar = ({ placeholder, onSearch }) => {
   };
 
   return (
-    <Input
-      style={searchInput}
-      placeholder={searchInput.placeholder}
-      onSearch={onSearch}
-    />
+    <>
+      <Input
+        style={searchInput}
+        placeholder={searchInput.placeholder}
+        onChange={(e) => setSearchText(e.target.value)}
+      />
+      <Button onClick={handleSearch}>ค้นหา</Button>
+    </>
   );
-
 };
 
 export default SearchBar;
