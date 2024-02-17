@@ -107,7 +107,9 @@ const Payment = () => {
                         <span style={blueTextStyle}>J</span>
                         <span style={NormalTextStyle}>ourney</span>
                     </Col>
-                    <Step />
+                    <Col span={12} style={{ marginLeft: "300px" }}>
+                        <Step />
+                    </Col>
                 </Header>
             </Layout>
             <Space direction="vertical" size="middle" style={{ display: 'flex' }}>

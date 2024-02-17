@@ -77,6 +77,12 @@ const AllStepDone = () => {
         fontSize: '45px',
     };
 
+    const NormalTextStyle = {
+        color: '#FFFFFF',
+        fontWeight: 'bold',
+        fontSize: '45px',
+    };
+
     const invtext = {
         color: '#1C3953',
         fontWeight: 'bold',
@@ -91,15 +97,19 @@ const AllStepDone = () => {
 
             <Layout style={layoutStyle}>
                 <Header style={headerStyle}>
-                    <span style={blueTextStyle}>H</span>
-                    AT
-                    <span style={invtext}>.</span>
-                    <span style={blueTextStyle}> Y</span>
-                    AI
-                    <span style={invtext}>.</span>
-                    <span style={blueTextStyle}>J</span>ourney
-                    <span style={invtext}>HAY YAI JOURNEY WEBSITE</span>
-                    <Step current={2} />
+                    <Col>
+                        <span style={blueTextStyle}>H</span>
+                        <span style={NormalTextStyle}>AT</span>
+                        <span style={invtext}>.</span>
+                        <span style={blueTextStyle}> Y</span>
+                        <span style={NormalTextStyle}>AT</span>
+                        <span style={invtext}>.</span>
+                        <span style={blueTextStyle}>J</span>
+                        <span style={NormalTextStyle}>ourney</span>
+                    </Col>
+                    <Col span={12} style={{ marginLeft: "300px" }}>
+                        <Step current={3}/>
+                    </Col>
                 </Header>
                 <Button type="primary" block style={{ backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }} onClick={handleButtonClick}>ใช่ ฉันชำระเงินแล้ว</Button>
             </Layout>
