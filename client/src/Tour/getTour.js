@@ -97,7 +97,7 @@ const Tour = () => {
                   Save
                 </Button>,
               ]}>
-              <Image src={"http://localhost:1337" + attributes.tour_image?.data[0]?.attributes.url}
+              <Image src={"http://localhost:1337" + attributes.tour_image?.data?.attributes.url}
                 preview={false}
               />
               <br />
@@ -125,7 +125,7 @@ const Tour = () => {
                   Select
                 </Button>,
               ]}>
-              <Image src={"http://localhost:1337" + attributes.tour_image?.data[0]?.attributes.url}
+              <Image src={"http://localhost:1337" + attributes.tour_image?.data?.attributes.url}
                 preview={false}
               />
               <br />
@@ -141,7 +141,7 @@ const Tour = () => {
               <br></br>
             </Modal>
           )}
-          <Image src={"http://localhost:1337" + attributes.tour_image?.data[0]?.attributes.url}
+          <Image src={"http://localhost:1337" + attributes.tour_image?.data?.attributes.url}
             preview={false}
           />
           <b style={{ fontSize: "18px" }}>{attributes.tour_name}</b>
