@@ -8,8 +8,7 @@ import {
 } from "antd";
 
 
-const Tour = () => {
-  const [data, setData] = useState([]);
+const Tour = ({ data, filterData }) => {
   const location = useLocation();
   const currentPage = location.pathname;
   const [selectedTourId, setSelectedTourId] = useState(null);
@@ -19,15 +18,6 @@ const Tour = () => {
   const handleOpenModal = (id) => {
     setSelectedTourId(id);
     setIsModalOpen(true);
-  };
-
-  const getData = async () => {
-    try {
-      const res = await axios.get("http://localhost:1337/api/tours?populate=*");
-      setData(res.data.data);
-    } catch (error) {
-      console.error("error fetching tour data", error);
-    }
   };
 
   const getStatusColor = (status) => {
@@ -65,16 +55,14 @@ const Tour = () => {
     }
   }
 
-  useEffect(() => {
-    getData();
-  }, []);
+  const toursToDisplay = filterData.length > 0 ? filterData : data;
 
   return (
     <div style={{
       display: "flex",
       backgroundColor: "#F5F5F5"
     }}>
-      {data.map(({ id, attributes }) => (
+      {toursToDisplay.map(({ id, attributes }) => (
         <Card key={id} style={{ width: 300, margin: 20, marginTop: 50 }}>
           {currentPage === "/admin" ? (
             <Modal title={attributes.tour_name}

@@ -43,6 +43,28 @@ const MemberForm = () => {
     const [create_desc, setcreate_desc] = useState('')
     const [create_price, setcreate_price] = useState(0)
 
+    const [filterData, setFilterData] = useState([]);
+    const [allData, setAllData] = useState([]);
+
+    const handleSearch = async (searchText) => {
+        try {
+            const res = await axios.get(`http://localhost:1337/api/tours?filters[tour_name][$containsi]=${searchText}`);
+            setFilterData(res.data.data);
+        }
+        catch (error) {
+            console.error('error filter data', error);
+        }
+    }
+
+    const getData = async () => {
+        try {
+          const res = await axios.get("http://localhost:1337/api/tours?populate=*");
+          setAllData(res.data.data);
+        } catch (error) {
+          console.error("error fetching tour data", error);
+        }
+      };
+
     const roleChecker = async () => {
         try {
             axios.defaults.headers.common = {
@@ -79,6 +101,7 @@ const MemberForm = () => {
 
     useEffect(() => {
         if (jwt == null) { navigate("/") } else roleChecker();
+        getData()
     }, []);
 
     const headerStyle = {
@@ -178,7 +201,7 @@ const MemberForm = () => {
                     >
                         Hello, {username}
                     </Link>
-                    <SearchBar />
+                    <SearchBar onSearch={handleSearch} />
                     <Link
                         onClick={() => { handleLogout() }}
                         style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
@@ -186,7 +209,7 @@ const MemberForm = () => {
                         Logout
                     </Link>
                 </Header>
-                <Tour />
+                <Tour data={allData} filterData={filterData} />
                 <FloatButton
                     tooltip={<div>Add New Tour</div>}
                     shape="square"

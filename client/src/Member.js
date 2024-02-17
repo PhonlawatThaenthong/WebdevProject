@@ -29,6 +29,27 @@ const MemberForm = () => {
     const [messageApi, contextHolder] = message.useMessage();
     const [jwt, setjwt] = useLocalState(null, 'jwt');
     const [username, setUsername] = useState('')
+    const [filterData, setFilterData] = useState([]);
+    const [allData, setAllData] = useState([]);
+
+    const handleSearch = async (searchText) => {
+        try {
+            const res = await axios.get(`http://localhost:1337/api/tours?filters[tour_name][$containsi]=${searchText}`);
+            setFilterData(res.data.data);
+        }
+        catch (error) {
+            console.error('error filter data', error);
+        }
+    }
+
+    const getData = async () => {
+        try {
+          const res = await axios.get("http://localhost:1337/api/tours?populate=*");
+          setAllData(res.data.data);
+        } catch (error) {
+          console.error("error fetching tour data", error);
+        }
+      };
 
     const roleChecker = async () => {
         try {
@@ -66,6 +87,7 @@ const MemberForm = () => {
 
     useEffect(() => {
         if (jwt == null) { navigate("/") } else roleChecker();
+        getData()
     }, []);
 
     const headerStyle = {
@@ -128,7 +150,7 @@ const MemberForm = () => {
                     >
                         Hello, {username}
                     </Link>
-                    <SearchBar />
+                    <SearchBar onSearch={handleSearch} />
                     <Link
                         onClick={() => { handleLogout() }}
                         style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
@@ -138,7 +160,7 @@ const MemberForm = () => {
 
 
                 </Header>
-                <Tour />
+                <Tour data={allData} filterData={filterData} />
             </Layout>
         </Flex>
     );
