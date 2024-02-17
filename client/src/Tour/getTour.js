@@ -7,10 +7,15 @@ import { Card, Form, Input, Image, Button, Modal, Row, Col, Layout, Flex, Space 
 
 const Tour = () => {
   const [data, setData] = useState([]);
-  const [focusInfo, setFocusInfo] = useState([]);
-  const [isInfoMenuOpen, setIsInfoMenuOpen] = useState(false);
   const location = useLocation();
   const currentPage = location.pathname;
+  const [selectedTourId, setSelectedTourId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = (id) => {
+    setSelectedTourId(id);
+    setIsModalOpen(true);
+  };
 
   const getData = async () => {
     try {
@@ -44,6 +49,12 @@ const Tour = () => {
     setIsInfoMenuOpen(true)
   };
 
+  class InfoModal {
+    constructor(attributes) {
+      this.menuOpen = false;
+    }
+  }
+
   useEffect(() => {
     getData();
   }, []);
@@ -55,14 +66,39 @@ const Tour = () => {
     }}>
       {data.map(({ id, attributes }) => (
         <Card key={id} style={{ width: 300, margin: 20, marginTop: 50 }}>
-          <Image src={"http://localhost:1337" + attributes.tour_image.data[0].attributes.url}
+          <Modal title={attributes.tour_name}
+            open={isModalOpen && selectedTourId === id}
+            onOk={() => { setIsModalOpen(false) }}
+            onCancel={() => { setIsModalOpen(false) }}
+            footer={[
+              <Button key="back" onClick={() => { setIsModalOpen(false) }}>
+                Close
+              </Button>,
+              <Button key="submit" type="primary" onClick={() => { setIsModalOpen(false) }}>
+                Select
+              </Button>,
+            ]}>
+            <Image src={"http://localhost:1337" + attributes.tour_image?.data[0]?.attributes.url}
+              preview={false}
+            />
+            <br />
+            สถานะ: <span style={{ color: getStatusColor(attributes.status) }}>
+              <b>{getStatus(attributes.status)}</b>
+              <b> {"(" + attributes.user_amount + "/" + attributes.user_max + ")"}</b>
+            </span>
+            <br />
+            ราคา: {attributes.price} บาท / ท่าน
+            <br />
+            ระยะเวลา:
+            <br />
+            <br></br>
+          </Modal>
+          <Image src={"http://localhost:1337" + attributes.tour_image?.data[0]?.attributes.url}
             preview={false}
           />
           <b style={{ fontSize: "18px" }}>{attributes.tour_name}</b>
           <br />
-          สถานะ: <span style={{
-            color: getStatusColor(attributes.status)
-          }}>
+          สถานะ: <span style={{ color: getStatusColor(attributes.status) }}>
             <b>{getStatus(attributes.status)}</b>
             <b> {"(" + attributes.user_amount + "/" + attributes.user_max + ")"}</b>
           </span>
@@ -73,47 +109,14 @@ const Tour = () => {
           <br />
           <br></br>
           {currentPage === "/admin" ? (
-            <Button type="primary" onClick={() => { showTourInfo(id) }} style={{ display: "block", margin: "0 auto", backgroundColor: "#DE3163" }}>Edit</Button>
+            <Button type="primary" onClick={() => handleOpenModal(id)} style={{ display: "block", margin: "0 auto", backgroundColor: "#DE3163" }}>Edit</Button>
           ) : (
-            <Button type="primary" onClick={() => { showTourInfo(id) }} style={{ display: "block", margin: "0 auto" }}>ดูเพิ่มเติม</Button>
+            <Button type="primary" onClick={() => handleOpenModal(id)} style={{ display: "block", margin: "0 auto" }}>ดูเพิ่มเติม</Button>
           )}
         </Card>
       ))}
-
-      <Modal title={"PLACEHOLDER_MODAL_TITLE"}
-        open={isInfoMenuOpen}
-        onOk={() => { setIsInfoMenuOpen(false) }}
-        onCancel={() => { setIsInfoMenuOpen(false) }}
-        footer={[
-          <Button key="back" onClick={() => { setIsInfoMenuOpen(false) }}>
-            Close
-          </Button>,
-          <Button key="submit" type="primary" onClick={() => { setIsInfoMenuOpen(false) }}>
-            Select
-          </Button>,
-        ]}>
-
-        <Image src={"http://localhost:1337/uploads/empty_ff41750fc7.png"}
-          preview={false}
-        />
-        <br />
-        สถานะ: <span style={{
-          color: "red"
-        }}>
-          <b>{"???"}</b>
-          <b> {"(???/???)"}</b>
-        </span>
-        <br />
-        ราคา: ??? บาท / ท่าน
-        <br />
-        ระยะเวลา:
-        <br />
-        <br></br>
-
-      </Modal>
-
     </div>
-  )
+  );
 };
 
 export default Tour;
