@@ -51,7 +51,7 @@ const HomeForm = () => {
   };
 
   useEffect(() => {
-    if (jwt == null) {} else roleChecker();
+    if (jwt == null) { } else roleChecker();
   }, []);
 
   const headerStyle = {
@@ -79,6 +79,12 @@ const HomeForm = () => {
     fontSize: "45px",
   };
 
+  const NormalTextStyle = {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: '45px',
+  };
+
   const invtext = {
     color: "#1C3953",
     fontWeight: "bold",
@@ -93,17 +99,19 @@ const HomeForm = () => {
       {contextHolder}
       <Layout style={layoutStyle}>
         <Header style={headerStyle}>
-          <div style={{marginRight : "450px"}}>
-          <span style={blueTextStyle}>H</span>
-          AT
-          <span style={invtext}>.</span>
-          <span style={blueTextStyle}> Y</span>
-          AI
-          <span style={invtext}>.</span>
-          <span style={blueTextStyle}>J</span>ourney
-          </div>
-          
-          <SearchBar />
+          <Col>
+            <span style={blueTextStyle}>H</span>
+            <span style={NormalTextStyle}>AT</span>
+            <span style={invtext}>.</span>
+            <span style={blueTextStyle}>Y</span>
+            <span style={NormalTextStyle}>AT</span>
+            <span style={invtext}>.</span>
+            <span style={blueTextStyle}>J</span>
+            <span style={NormalTextStyle}>ourney</span>
+          </Col>
+          <Col span={20}>
+            <SearchBar />
+          </Col>
           <Link
             to="/login"
             style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
@@ -112,7 +120,7 @@ const HomeForm = () => {
           </Link>
           <Link
             to="/register"
-            style={{ marginLeft: "20px", color: "white", fontSize: "18px" }}
+            style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
           >
             Register
           </Link>

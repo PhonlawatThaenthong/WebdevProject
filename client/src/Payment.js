@@ -97,7 +97,7 @@ const Payment = () => {
 
             <Layout style={layoutStyle}>
                 <Header style={headerStyle}>
-                    <Col span={8}>
+                    <Col>
                         <span style={blueTextStyle}>H</span>
                         <span style={NormalTextStyle}>AT</span>
                         <span style={invtext}>.</span>

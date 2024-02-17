@@ -106,6 +106,12 @@ const MemberForm = () => {
         fontSize: '45px',
     };
 
+    const NormalTextStyle = {
+        color: '#FFFFFF',
+        fontWeight: 'bold',
+        fontSize: '45px',
+    };
+
     const invtext = {
         color: '#1C3953',
         fontWeight: 'bold',
@@ -162,23 +168,24 @@ const MemberForm = () => {
 
             <Layout style={layoutStyle}>
                 <Header style={headerStyle}>
-                    <div style={{ marginRight: "200px"}}>
+                    <Col>
                         <span style={blueTextStyle}>H</span>
-                        AT
+                        <span style={NormalTextStyle}>AT</span>
                         <span style={invtext}>.</span>
-                        <span style={blueTextStyle}> Y</span>
-                        AI
+                        <span style={blueTextStyle}>Y</span>
+                        <span style={NormalTextStyle}>AT</span>
                         <span style={invtext}>.</span>
-                        <span style={blueTextStyle}>J</span>ourney
-                    </div>
+                        <span style={blueTextStyle}>J</span>
+                        <span style={NormalTextStyle}>ourney</span>
+                    </Col>
                     <Link
-                        style={{ marginLeft: "20px", color: "white", fontSize: "18px", width: "300px" }}
+                        style={{ marginLeft: "150px", color: "white", fontSize: "18px", width: "300px" }}
                     >
                         Hello, {username}
                     </Link>
                     <SearchBar />
                     <Link
-                        onClick={handleLogout}
+                        onClick={() => {handleLogout()}}
                         style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
                     >
                         Logout

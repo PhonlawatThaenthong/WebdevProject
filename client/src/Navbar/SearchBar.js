@@ -5,7 +5,7 @@ const SearchBar = ({ onSearch }) => {
   const [searchText, setSearchText] = useState("");
 
   const handleSearch = () => {
-    console.log('searching for: ', searchText )
+    console.log('searching for: ', searchText)
   }
 
   const searchInput = {
@@ -24,7 +24,12 @@ const SearchBar = ({ onSearch }) => {
         placeholder={searchInput.placeholder}
         onChange={(e) => setSearchText(e.target.value)}
       />
-      <Button onClick={handleSearch}>ค้นหา</Button>
+      <Button
+        type="primary"
+        style={{ height: "40px"}}
+        onClick={() => { handleSearch() }}
+      >ค้นหา
+      </Button>
     </>
   );
 };

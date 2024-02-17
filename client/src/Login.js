@@ -27,7 +27,6 @@ const LoginForm = () => {
 
       const jwtToken = loginResult.data.jwt;
       setjwt(jwtToken);
-      console.log(`Using Token: ${jwt}`);
       axios.defaults.headers.common = {
         Authorization: `Bearer ${loginResult.data.jwt}`,
       };
