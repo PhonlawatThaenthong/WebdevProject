@@ -75,8 +75,11 @@ const Tour = () => {
                 <Button key="back" onClick={() => { setIsModalOpen(false) }}>
                   Close
                 </Button>,
-                <Button key="submit" type="primary" onClick={() => { setIsModalOpen(false) }}>
-                  Select
+                <Button key="submit" type="primary" onClick={() => { setIsModalOpen(false) }} style={{ backgroundColor: "#DE3163" }}>
+                  Delete
+                </Button>,
+                <Button key="submit" type="primary" onClick={() => { setIsModalOpen(false) }} style={{ backgroundColor: "#58D68D" }}>
+                  Save
                 </Button>,
               ]}>
               <Image src={"http://localhost:1337" + attributes.tour_image?.data[0]?.attributes.url}
