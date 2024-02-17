@@ -31,8 +31,7 @@ const AllStepDone = () => {
     const cardWidth = 1000;
     const cardHeight = 700;
     const { Panel } = Collapse;
-    let url = "https://s3-symbol-logo.tradingview.com/the-siam-commercial-bank-public-company--600.png"
-    let url2 = "https://play-lh.googleusercontent.com/eOzvk-ekluYaeLuvDkLb5RJ0KqfFQpodZDnppxPfpEfqEqbNo5erEkmwLBgqP-k-e2kQ"
+    let url = "https://i.pinimg.com/originals/96/09/5b/96095bfa0b64cdbfd12fcbd030ec41d8.gif"
     const [remainingTime, setRemainingTime] = useState(30000);
     const roleChecker = async () => {
         try {
@@ -125,13 +124,20 @@ const AllStepDone = () => {
                         <span style={NormalTextStyle}>ourney</span>
                     </Col>
                     <Col span={12} style={{ marginLeft: "300px" }}>
-                        <Step current={3}/>
-                    </Col>
+                        <Step current={3} />
+                    </Col>  
                 </Header>
-                <Button type="primary" block style={{ backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }} onClick={handleButtonClick}>ใช่ ฉันชำระเงินแล้ว</Button>
-                <div>
-            <p>Time remaining: {Math.floor(remainingTime / 1000)}</p>
-        </div>
+                <Card title="การชำระเงินเสร็จสิ้น" bordered={false} style={{ width:'100%'}}>
+                    <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <img src={url} className="Logo1" alt="" style={{ width: 500, borderRadius: 500 }} />
+                    </div>
+                    <div>
+                        <p><strong>ดูเหมือนการสั่งซื้อของคุณจะเสร็จสิ้นแล้ว สถานะการจองของคุณจะเปลี่ยนแปลงในไม่ช้านี้! แพ็คกระเป๋าและเตรียมตัวออกผจญภัยกันได้เลย!</strong></p>
+                        <p>คุณกำลังจะถูกนำออกจากหน้านี้ในอีก {Math.floor(remainingTime / 1000)} วินาที</p>
+                    </div>
+                    <Button type="primary"  style={{ backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF'}}
+                        onClick={handleButtonClick}>กลับสู่หน้าหลัก</Button>
+                </Card>
             </Layout>
         </Flex>
     );
