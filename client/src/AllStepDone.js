@@ -20,6 +20,7 @@ import axios from 'axios';
 import useLocalState from './localStorage.js';
 import Step from "./Navbar/Step.js";
 
+
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
 
@@ -32,6 +33,7 @@ const AllStepDone = () => {
     const { Panel } = Collapse;
     let url = "https://s3-symbol-logo.tradingview.com/the-siam-commercial-bank-public-company--600.png"
     let url2 = "https://play-lh.googleusercontent.com/eOzvk-ekluYaeLuvDkLb5RJ0KqfFQpodZDnppxPfpEfqEqbNo5erEkmwLBgqP-k-e2kQ"
+    const [remainingTime, setRemainingTime] = useState(30000);
     const roleChecker = async () => {
         try {
             axios.defaults.headers.common = {
@@ -46,6 +48,21 @@ const AllStepDone = () => {
     const handleButtonClick = () => {
         navigate('/member');
     };
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            navigate('/member');
+        }, remainingTime);
+
+        return () => clearTimeout(timer);
+    }, [remainingTime, navigate]);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setRemainingTime(remainingTime => remainingTime - 1000);
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, []);
 
 
     useEffect(() => {
@@ -112,6 +129,9 @@ const AllStepDone = () => {
                     </Col>
                 </Header>
                 <Button type="primary" block style={{ backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }} onClick={handleButtonClick}>ใช่ ฉันชำระเงินแล้ว</Button>
+                <div>
+            <p>Time remaining: {Math.floor(remainingTime / 1000)}</p>
+        </div>
             </Layout>
         </Flex>
     );

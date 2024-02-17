@@ -44,7 +44,7 @@ const Payment = () => {
         }
     };
     const handleButtonClick = () => {
-        navigate('/AllStepDone');
+        navigate('/UploadReceipt');
     };
 
 
@@ -150,7 +150,7 @@ const Payment = () => {
                         </Panel>
                     </Collapse>
                     <Card title="ชำระเงินเสร็จเรียบร้อยแล้วใช่หรือไม่?" bordered={false} style={{ width: 950 }}>
-                        <p>เมื่อทำการชำระเงินเรียบร้อยแล้วต้องทำการแจ้งสลิปหลักฐานการโอนเงินพร้อมระบุหมายเหตุทุกครั้ง เมื่อการชาระเงินของคุณได้รับการยืนยันแล้ว </p>
+                        <p>เมื่อทำการชำระเงินเรียบร้อยแล้วต้องทำการแจ้งสลิปหลักฐานการโอนเงินพร้อมระบุหมายเหตุทุกครั้ง เมื่อการชำระเงินของคุณได้รับการยืนยันแล้ว </p>
                         <p>สถานะการชำระในช่องประวัติการซื้อจะเปลี่ยนแปลง</p>
                         <Button type="primary" block style={{ backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }} onClick={handleButtonClick}>ใช่ ฉันชำระเงินแล้ว</Button>
                     </Card>
