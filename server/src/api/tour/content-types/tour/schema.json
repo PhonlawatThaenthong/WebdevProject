@@ -34,6 +34,13 @@
     "user_max": {
       "type": "integer",
       "default": 50
+    },
+    "tour_image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true
     }
   }
 }

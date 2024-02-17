@@ -14,7 +14,7 @@ const Tour = () => {
 
   const getData = async () => {
     try {
-      const res = await axios.get("http://localhost:1337/api/tours");
+      const res = await axios.get("http://localhost:1337/api/tours?populate=*");
       setData(res.data.data);
     } catch (error) {
       console.error("error fetching tour data", error);
@@ -55,7 +55,7 @@ const Tour = () => {
     }}>
       {data.map(({ id, attributes }) => (
         <Card key={id} style={{ width: 300, margin: 20, marginTop: 50 }}>
-          <Image src="https://semantic-ui.com/images/wireframe/white-image.png"
+          <Image src={"http://localhost:1337" + attributes.tour_image.data[0].attributes.url}
             preview={false}
           />
           <b style={{ fontSize: "18px" }}>{attributes.tour_name}</b>

@@ -425,6 +425,7 @@ export interface ApiTourTour extends Schema.CollectionType {
     status: Attribute.Boolean;
     user_amount: Attribute.Integer & Attribute.DefaultTo<0>;
     user_max: Attribute.Integer & Attribute.DefaultTo<50>;
+    tour_image: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
