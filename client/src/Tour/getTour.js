@@ -113,7 +113,6 @@ const Tour = ({ data, filterData }) => {
             ) : (  // VVVVVVVV THIS IS NON ADMIN MODAL PLEASE EDIT THIS ONLY /////////////////////////////////////////////////////
               <Modal title={attributes.tour_name}
                 open={isModalOpen && selectedTourId === id}
-                onOk={() => { setIsModalOpen(false) }}
                 onCancel={() => { setIsModalOpen(false) }}
                 footer={[
                   <Button key="back" onClick={() => { setIsModalOpen(false) }}>

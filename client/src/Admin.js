@@ -110,6 +110,7 @@ const MemberForm = () => {
           tour_name: create_name,
           description: create_desc,
           price: create_price,
+          status: true,
         },
       };
 

@@ -33,6 +33,7 @@ const UploadReceipt = () => {
     const { Panel } = Collapse;
     let url = "https://s3-symbol-logo.tradingview.com/the-siam-commercial-bank-public-company--600.png"
     let url2 = "https://play-lh.googleusercontent.com/eOzvk-ekluYaeLuvDkLb5RJ0KqfFQpodZDnppxPfpEfqEqbNo5erEkmwLBgqP-k-e2kQ"
+
     const roleChecker = async () => {
         try {
             axios.defaults.headers.common = {
@@ -44,10 +45,10 @@ const UploadReceipt = () => {
             console.error(error)
         }
     };
+
     const handleButtonClick = () => {
         navigate('/AllStepDone');
     };
-
 
     useEffect(() => {
         if (jwt == null) { navigate("/") } else roleChecker();
