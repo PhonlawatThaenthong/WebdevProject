@@ -113,7 +113,7 @@ const AllStepDone = () => {
 
             <Layout style={layoutStyle}>
                 <Header style={headerStyle}>
-                    <Col>
+                    <Col span={8}>
                         <span style={blueTextStyle}>H</span>
                         <span style={NormalTextStyle}>AT</span>
                         <span style={invtext}>.</span>
@@ -123,11 +123,11 @@ const AllStepDone = () => {
                         <span style={blueTextStyle}>J</span>
                         <span style={NormalTextStyle}>ourney</span>
                     </Col>
-                    <Col span={12} style={{ marginLeft: "300px" }}>
+                    <Col span={12} style={{ marginLeft: "150px" }}>
                         <Step current={3} />
-                    </Col>  
+                    </Col>
                 </Header>
-                <Card title="การชำระเงินเสร็จสิ้น" bordered={false} style={{ width:'100%'}}>
+                <Card title="การชำระเงินเสร็จสิ้น" bordered={false} style={{ width: '100%' }}>
                     <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <img src={url} className="Logo1" alt="" style={{ width: 500, borderRadius: 500 }} />
                     </div>
@@ -135,7 +135,7 @@ const AllStepDone = () => {
                         <p><strong>ดูเหมือนการสั่งซื้อของคุณจะเสร็จสิ้นแล้ว สถานะการจองของคุณจะเปลี่ยนแปลงในไม่ช้านี้! แพ็คกระเป๋าและเตรียมตัวออกผจญภัยกันได้เลย!</strong></p>
                         <p>คุณกำลังจะถูกนำออกจากหน้านี้ในอีก {Math.floor(remainingTime / 1000)} วินาที</p>
                     </div>
-                    <Button type="primary"  style={{ backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF'}}
+                    <Button type="primary" style={{ backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }}
                         onClick={handleButtonClick}>กลับสู่หน้าหลัก</Button>
                 </Card>
             </Layout>

@@ -98,7 +98,7 @@ const UploadReceipt = () => {
 
             <Layout style={layoutStyle}>
                 <Header style={headerStyle}>
-                    <Col>
+                    <Col span={8}>
                         <span style={blueTextStyle}>H</span>
                         <span style={NormalTextStyle}>AT</span>
                         <span style={invtext}>.</span>
@@ -108,7 +108,7 @@ const UploadReceipt = () => {
                         <span style={blueTextStyle}>J</span>
                         <span style={NormalTextStyle}>ourney</span>
                     </Col>
-                    <Col span={12} style={{ marginLeft: "300px" }}>
+                    <Col span={12} style={{ marginLeft: "150px" }}>
                         <Step current={1} />
                     </Col>
                 </Header>
