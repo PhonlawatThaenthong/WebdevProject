@@ -38,6 +38,10 @@ const Tour = ({ data, filterData }) => {
     }
   };
 
+  const handleSelect = () => {
+    console.log('select clicked!')
+  }
+
   const handleTourDelete = async (id) => {
     try {
       await axios.delete(
@@ -118,7 +122,7 @@ const Tour = ({ data, filterData }) => {
                   <Button key="back" onClick={() => { setIsModalOpen(false) }}>
                     Close
                   </Button>,
-                  <Button key="submit" type="primary" onClick={() => { setIsModalOpen(false) }}>
+                  <Button key="submit" type="primary" onClick={handleSelect}>
                     Select
                   </Button>,
                 ]}>
