@@ -132,7 +132,7 @@ const AllStepDone = () => {
                         <img src={url} className="Logo1" alt="" style={{ width: 500, borderRadius: 500 }} />
                     </div>
                     <div>
-                        <p><strong>ดูเหมือนการสั่งซื้อของคุณจะเสร็จสิ้นแล้ว สถานะการจองของคุณจะเปลี่ยนแปลงในไม่ช้านี้! แพ็คกระเป๋าและเตรียมตัวออกผจญภัยกันได้เลย!</strong></p>
+                        <p><strong>การสั่งซื้อของคุณเสร็จสิ้นแล้ว สถานะการจองของคุณจะเปลี่ยนแปลงในไม่ช้านี้! แพ็คกระเป๋าและเตรียมตัวออกผจญภัยกันได้เลย!</strong></p>
                         <p>คุณกำลังจะถูกนำออกจากหน้านี้ในอีก {Math.floor(remainingTime / 1000)} วินาที</p>
                     </div>
                     <Button type="primary" style={{ backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }}
