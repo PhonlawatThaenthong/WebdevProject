@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Modal, Row, Col, Card } from "antd";
+import { Form, Input, Button, Modal, Row, Col, Card, Layout } from "antd";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useLocalState from "./localStorage.js";
+
+const { Header } = Layout;
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -52,69 +54,142 @@ const LoginForm = () => {
     setShowErrorModal(false);
   };
 
+  const headerStyle = {
+    textAlign: 'center',
+    color: '#fff',
+    height: 120,
+    paddingInline: "center",
+    lineHeight: '120x',
+    backgroundColor: '#1C3953',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: 'bold',
+    fontSize: '45px',
+
+  };
+
+  const headerbottom = {
+    textAlign: 'center',
+    color: '#fff',
+    height: 60,
+    paddingInline: "center",
+    lineHeight: '120x',
+    backgroundColor: '#1C3953',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: 'bold',
+    fontSize: '45px',
+
+};
+
+  const blueTextStyle = {
+    color: '#48D3FF',
+    fontWeight: 'bold',
+    fontSize: '45px',
+  };
+
+  const NormalTextStyle = {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: '45px',
+  };
+
+  const invtext = {
+    color: '#1C3953',
+    fontWeight: 'bold',
+    fontSize: '45px',
+  };
+
+  const rowStyle = {
+    minHeight: "74vh",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: "1200px",
+    margin: "0 auto",
+  };
+
   return (
-    <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>
-      <Helmet>
-        <title>HYJ - Login</title>
-      </Helmet>
-      <Col span={8}>
-        <Card
-          title="เข้าสู่ระบบ"
-          bordered={true}
-          style={{ width: "100%", textAlign: "center" }}
-        >
-          <Form form={form} onFinish={handleSubmit}>
-            <Form.Item
-              label="ชื่อผู้ใช้"
-              name="username"
-              rules={[
-                { required: true, message: "Please enter your username!" },
-              ]}
-            >
-              <Input />
-            </Form.Item>
+    <div style={{}}>
+      <Header style={headerStyle}>
+        <Col>
+          <span style={blueTextStyle}>H</span>
+          <span style={NormalTextStyle}>AT</span>
+          <span style={invtext}>.</span>
+          <span style={blueTextStyle}>Y</span>
+          <span style={NormalTextStyle}>AI</span>
+          <span style={invtext}>.</span>
+          <span style={blueTextStyle}>J</span>
+          <span style={NormalTextStyle}>ourney</span>
+        </Col>
+      </Header>
+      <Row justify="center" align="middle" style={rowStyle}>
+        <Helmet>
+          <title>HYJ - Login</title>
+        </Helmet>
 
-            <Form.Item
-              label="รหัสผ่าน"
-              name="password"
-              rules={[
-                { required: true, message: "Please enter your password!" },
-              ]}
-            >
-              <Input.Password />
-            </Form.Item>
-
-            <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                disabled={!submitEnabled}
+        <Col span={8}>
+          <Card
+            title="เข้าสู่ระบบ"
+            bordered={true}
+            style={{ width: "100%", textAlign: "center" }}
+          >
+            <Form form={form} onFinish={handleSubmit}>
+              <Form.Item
+                label="ชื่อผู้ใช้"
+                name="username"
+                rules={[
+                  { required: true, message: "Please enter your username!" },
+                ]}
               >
-                เข้าสู่ระบบ
-              </Button>
-            </Form.Item>
+                <Input />
+              </Form.Item>
 
-            <Form.Item>
-              <span style={{ marginRight: "8px" }}>ยังไม่มีบัญชี?</span>
-              <Link to="/register">สมัครสมาชิก</Link>
-            </Form.Item>
-          </Form>
-        </Card>
-      </Col>
+              <Form.Item
+                label="รหัสผ่าน"
+                name="password"
+                rules={[
+                  { required: true, message: "Please enter your password!" },
+                ]}
+              >
+                <Input.Password />
+              </Form.Item>
 
-      {/* Error Modal */}
-      <Modal
-        title="Warning"
-        visible={showErrorModal}
-        onCancel={handleCloseErrorModal}
-        footer={null}
-      >
-        <p>{errorMessage}</p>
-        <Button type="primary" onClick={handleCloseErrorModal}>
-          Close
-        </Button>
-      </Modal>
-    </Row>
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  disabled={!submitEnabled}
+                >
+                  เข้าสู่ระบบ
+                </Button>
+              </Form.Item>
+
+              <Form.Item>
+                <span style={{ marginRight: "8px" }}>ยังไม่มีบัญชี?</span>
+                <Link to="/register">สมัครสมาชิก</Link>
+              </Form.Item>
+            </Form>
+          </Card>
+        </Col>
+
+        {/* Error Modal */}
+        <Modal
+          title="Warning"
+          visible={showErrorModal}
+          onCancel={handleCloseErrorModal}
+          footer={null}
+        >
+          <p>{errorMessage}</p>
+          <Button type="primary" onClick={handleCloseErrorModal}>
+            Close
+          </Button>
+        </Modal>
+      </Row>
+      <Header style={headerbottom}></Header>
+    </div>
   );
 };
 
