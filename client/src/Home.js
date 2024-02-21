@@ -17,9 +17,12 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import useLocalState from './localStorage.js';
+import { useMediaQuery } from "react-responsive";
 
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
+
+
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -30,6 +33,7 @@ const HomeForm = () => {
   const [jwt, setjwt] = useLocalState(null, 'jwt');
   const [filterData, setFilterData] = useState([]);
   const [allData, setAllData] = useState([]);
+  const isSmallScreen = useMediaQuery({ maxWidth: 768 });
 
   const handleSearch = async (searchText) => {
     try {
@@ -84,64 +88,69 @@ const HomeForm = () => {
     lineHeight: "120x",
     backgroundColor: "#1C3953",
     display: "flex",
+    flexDirection: "row",
     alignItems: "center",
     fontWeight: "bold",
     fontSize: "45px",
+
   };
 
   const layoutStyle = {
     borderRadius: 0,
     overflow: "hidden",
     backgroundColor: "#EEEEEE",
+    width: "100%",
+    minHeight: "100vh",
   };
 
   const blueTextStyle = {
     color: "#48D3FF",
     fontWeight: "bold",
-    fontSize: "45px",
+    fontSize: isSmallScreen ? "24px" : "45px",
   };
 
   const NormalTextStyle = {
     color: '#FFFFFF',
     fontWeight: 'bold',
-    fontSize: '45px',
+    fontSize: isSmallScreen ? "24px" : "45px",
   };
 
   const invtext = {
     color: "#1C3953",
     fontWeight: "bold",
-    fontSize: "45px",
+    fontSize: isSmallScreen ? "24px" : "45px",
   };
 
   return (
     <Flex gap="middle" wrap="wrap">
       <Helmet>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>HYJ - Home Page</title>
       </Helmet>
       {contextHolder}
       <Layout style={layoutStyle}>
-        <Header style={headerStyle}>
+        <Header style={headerStyle} className="headerStyle">
           <Col>
-            <span style={blueTextStyle}>H</span>
-            <span style={NormalTextStyle}>AT</span>
+            <span style={blueTextStyle} className="blueTextStyle">H</span>
+            <span style={NormalTextStyle} className="NormalTextStyle">AT</span>
             <span style={invtext}>.</span>
-            <span style={blueTextStyle}>Y</span>
-            <span style={NormalTextStyle}>AI</span>
+            <span style={blueTextStyle} className="blueTextStyle">Y</span>
+            <span style={NormalTextStyle} className="NormalTextStyle">AI</span>
             <span style={invtext}>.</span>
-            <span style={blueTextStyle}>J</span>
-            <span style={NormalTextStyle}>ourney</span>
+            <span style={blueTextStyle} className="blueTextStyle">J</span>
+            <span style={NormalTextStyle} className="NormalTextStyle">ourney</span>
           </Col>
           <Col span={22}>
-            <SearchBar onSearch={handleSearch} />
+          {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
             <Link
               to="/login"
-              style={{ marginLeft: "40px", color: "white", fontSize: "18px" }}
+              style={{ marginLeft: isSmallScreen ? "0px" : "40px", color: "white", fontSize: isSmallScreen ? "15px" : "18px" }}
             >
               เข้าสู่ระบบ
             </Link>
             <Link
               to="/register"
-              style={{ marginLeft: "40px", color: "white", fontSize: "18px" }}
+              style={{ marginLeft: "40px", color: "white", fontSize: isSmallScreen ? "15px" : "18px" }}
             >
               ลงทะเบียน
             </Link>

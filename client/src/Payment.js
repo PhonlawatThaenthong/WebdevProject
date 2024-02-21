@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import useLocalState from './localStorage.js';
 import Step from "./Navbar/Step.js";
+import { useMediaQuery } from "react-responsive";
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -27,6 +28,7 @@ const Payment = () => {
     const navigate = useNavigate();
     const [jwt, setjwt] = useLocalState(null, 'jwt');
     const [username, setUsername] = useState('')
+    const isSmallScreen = useMediaQuery({ maxWidth: 768 });
     const cardWidth = 1000;
     const cardHeight = 700;
     const { Panel } = Collapse;
@@ -63,6 +65,7 @@ const Payment = () => {
         alignItems: 'center',
         fontWeight: 'bold',
         fontSize: '45px',
+        width: isSmallScreen ? '100%' : 'auto',
     };
 
     const layoutStyle = {
@@ -72,22 +75,22 @@ const Payment = () => {
     };
 
     const blueTextStyle = {
-        color: '#48D3FF',
-        fontWeight: 'bold',
-        fontSize: '45px',
-    };
-
-    const NormalTextStyle = {
+        color: "#48D3FF",
+        fontWeight: "bold",
+        fontSize: isSmallScreen ? "24px" : "45px",
+      };
+    
+      const NormalTextStyle = {
         color: '#FFFFFF',
         fontWeight: 'bold',
-        fontSize: '45px',
-    };
-
-    const invtext = {
-        color: '#1C3953',
-        fontWeight: 'bold',
-        fontSize: '45px',
-    };
+        fontSize: isSmallScreen ? "24px" : "45px",
+      };
+    
+      const invtext = {
+        color: "#1C3953",
+        fontWeight: "bold",
+        fontSize: isSmallScreen ? "24px" : "45px",
+      };
 
     return (
         <Flex gap="middle" wrap="wrap" >

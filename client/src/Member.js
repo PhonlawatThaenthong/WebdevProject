@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import useLocalState from './localStorage.js';
+import { useMediaQuery } from "react-responsive";
 
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
@@ -31,6 +32,7 @@ const MemberForm = () => {
     const [username, setUsername] = useState('')
     const [filterData, setFilterData] = useState([]);
     const [allData, setAllData] = useState([]);
+    const isSmallScreen = useMediaQuery({ maxWidth: 768 });
 
     const handleSearch = async (searchText) => {
         try {
@@ -110,22 +112,22 @@ const MemberForm = () => {
     };
 
     const blueTextStyle = {
-        color: '#48D3FF',
-        fontWeight: 'bold',
-        fontSize: '45px',
-    };
-
-    const NormalTextStyle = {
+        color: "#48D3FF",
+        fontWeight: "bold",
+        fontSize: isSmallScreen ? "24px" : "45px",
+      };
+    
+      const NormalTextStyle = {
         color: '#FFFFFF',
         fontWeight: 'bold',
-        fontSize: '45px',
-    };
-
-    const invtext = {
-        color: '#1C3953',
-        fontWeight: 'bold',
-        fontSize: '45px',
-    };
+        fontSize: isSmallScreen ? "24px" : "45px",
+      };
+    
+      const invtext = {
+        color: "#1C3953",
+        fontWeight: "bold",
+        fontSize: isSmallScreen ? "24px" : "45px",
+      };
 
     return (
         <Flex gap="middle" wrap="wrap" >
@@ -146,11 +148,11 @@ const MemberForm = () => {
                         <span style={NormalTextStyle}>ourney</span>
                     </Col>
                     <Link
-                        style={{ marginLeft: "150px", color: "white", fontSize: "18px", width: "300px" }}
+                        style={{ marginLeft: "50px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
                     >
                         สวัสดี คุณ {username}
                     </Link>
-                    <SearchBar onSearch={handleSearch} />
+                    {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
                     <Link
                         onClick={() => { handleLogout() }}
                         style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
