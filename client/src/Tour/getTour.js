@@ -175,9 +175,17 @@ const Tour = ({ data, filterData }) => {
                   >
                     Close
                   </Button>,
-                  <Button key="submit" type="primary" onClick={handleSelect}>
-                    Select
-                  </Button>,
+                  <Popconfirm
+                  title="กรุณากดยืนยัน เพื่อยืนยันการจองทัวร์"
+                  onConfirm={() => {
+                    handleSelect();
+                    setIsModalOpen(false);
+                  }}
+                  okText="ยืนยัน"
+                  cancelText="Close"
+                >
+                  <Button type="primary">Select</Button>
+                </Popconfirm>,
                 ]}
               >
                 <Image
