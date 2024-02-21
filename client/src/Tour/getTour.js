@@ -50,22 +50,35 @@ const Tour = ({ data, filterData }) => {
     }
   };
 
-  const handleSelect = () => {
+  const handleSelect = async () => {
     if (jwt) {
-      Modal.confirm({
-        title: "ยืนยันการจองทัวร์",
-        content: (
-          <div>
-            <p>กรุณายืนยันการจองทัวร์และดำเนินการชำระเงิน</p>
-          </div>
-        ),
-        okText: "ยืนยัน",
-        cancelText: "ยกเลิก",
-        onOk: () => {
-          navigate("/payments");
-        },
-        onCancel: () => {},
-      });
+      try {
+        const res = await axios.post(
+          `http://localhost:1337/api/tours/${selectedTourId}/complete`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${jwt}`,
+            },
+          }
+        );
+        Modal.confirm({
+          title: "ยืนยันการจองทัวร์",
+          content: (
+            <div>
+              <p>กรุณายืนยันการจองทัวร์และดำเนินการชำระเงิน</p>
+            </div>
+          ),
+          okText: "ยืนยัน",
+          cancelText: "ยกเลิก",
+          onOk: () => {
+            navigate("/payments");
+          },
+          onCancel: () => {},
+        });
+      } catch (error) {
+        console.error("error selecting tour", error);
+      }
     } else {
       Modal.confirm({
         title: "ท่านยังไม่ได้ล็อกอิน",

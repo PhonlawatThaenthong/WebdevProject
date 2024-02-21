@@ -3,7 +3,7 @@
 module.exports = {
   routes: [
     {
-      method: 'GET',
+      method: 'POST',
       path: '/tours/:id/complete',
       handler: 'tour.method_complete'
     }
