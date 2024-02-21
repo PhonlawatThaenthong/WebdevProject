@@ -135,7 +135,7 @@ const RegisterForm = () => {
                 <Helmet>
                     <title>HYJ - Register</title>
                 </Helmet>
-                <Col span={8}>
+                <Col >
                     <Card title="ลงทะเบียน" bordered={true} style={{ width: "100%", textAlign: "center" }}>
                         <Form form={form} onFinish={handleSubmit}>
                             <Form.Item

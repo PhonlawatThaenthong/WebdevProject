@@ -130,7 +130,7 @@ const LoginForm = () => {
           <title>HYJ - Login</title>
         </Helmet>
 
-        <Col span={8}>
+        <Col >
           <Card
             title="เข้าสู่ระบบ"
             bordered={true}
