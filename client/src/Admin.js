@@ -21,7 +21,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import useLocalState from "./localStorage.js";
-
+import { useMediaQuery } from "react-responsive";
 import { UploadOutlined } from "@ant-design/icons";
 
 import Tour from "./Tour/getTour.js";
@@ -38,7 +38,7 @@ const MemberForm = () => {
   const [isAddMenuOpen, setIsAddMenuOpen] = useState(false);
   const [jwt, setjwt] = useLocalState(null, "jwt");
   const [username, setUsername] = useState("");
-
+  const isSmallScreen = useMediaQuery({ maxWidth: 768 });
   const [create_name, setcreate_name] = useState("");
   const [create_desc, setcreate_desc] = useState("");
   const [create_price, setcreate_price] = useState(0);
@@ -160,19 +160,19 @@ const MemberForm = () => {
   const blueTextStyle = {
     color: "#48D3FF",
     fontWeight: "bold",
-    fontSize: "45px",
+    fontSize: isSmallScreen ? "24px" : "45px",
   };
 
   const NormalTextStyle = {
-    color: "#FFFFFF",
-    fontWeight: "bold",
-    fontSize: "45px",
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: isSmallScreen ? "24px" : "45px",
   };
 
   const invtext = {
     color: "#1C3953",
     fontWeight: "bold",
-    fontSize: "45px",
+    fontSize: isSmallScreen ? "24px" : "45px",
   };
 
   return (
@@ -239,15 +239,15 @@ const MemberForm = () => {
           </Col>
           <Link
             style={{
-              marginLeft: "150px",
+              marginLeft: isSmallScreen ? "50px" : "150px",
               color: "white",
-              fontSize: "18px",
+              fontSize: isSmallScreen ? "14px" : "18px",
               width: "300px",
             }}
           >
             Hello, {username}
           </Link>
-          <SearchBar onSearch={handleSearch} />
+          {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
           <Link
             onClick={() => {
               handleLogout();
