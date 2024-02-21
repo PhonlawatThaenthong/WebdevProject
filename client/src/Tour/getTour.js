@@ -52,9 +52,35 @@ const Tour = ({ data, filterData }) => {
 
   const handleSelect = () => {
     if (jwt) {
-      navigate("/payments");
+      Modal.confirm({
+        title: "ยืนยันการจองทัวร์",
+        content: (
+          <div>
+            <p>กรุณายืนยันการจองทัวร์และดำเนินการชำระเงิน</p>
+          </div>
+        ),
+        okText: "ยืนยัน",
+        cancelText: "ยกเลิก",
+        onOk: () => {
+          navigate("/payments");
+        },
+        onCancel: () => {},
+      });
     } else {
-      navigate("/login");
+      Modal.confirm({
+        title: "ท่านยังไม่ได้ล็อกอิน",
+        content: (
+          <div>
+            <p>กรุณาทำการล็อกอินก่อนจองทัวร์</p>
+          </div>
+        ),
+        okText: "ล็อกอิน",
+        cancelText: "ยกเลิก",
+        onOk: () => {
+          navigate("/login");
+        },
+        onCancel: () => {},
+      });
     }
   };
 
@@ -175,17 +201,9 @@ const Tour = ({ data, filterData }) => {
                   >
                     Close
                   </Button>,
-                  <Popconfirm
-                  title="กรุณากดยืนยัน เพื่อยืนยันการจองทัวร์"
-                  onConfirm={() => {
-                    handleSelect();
-                    setIsModalOpen(false);
-                  }}
-                  okText="ยืนยัน"
-                  cancelText="Close"
-                >
-                  <Button type="primary">Select</Button>
-                </Popconfirm>,
+                  <Button key="submit" type="primary" onClick={handleSelect}>
+                    Select
+                  </Button>,
                 ]}
               >
                 <Image
