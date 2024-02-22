@@ -53,15 +53,31 @@ const Tour = ({ data, filterData }) => {
   const handleSelect = async () => {
     if (jwt) {
       try {
-        const res = await axios.post(
-          `http://localhost:1337/api/tours/${selectedTourId}/complete`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${jwt}`,
-            },
+        const handleBook = async () => {
+
+          const res_tour = await axios.get(`http://localhost:1337/api/tours/${selectedTourId}?populate=*`);
+          var tmp_amount = res_tour.data.data.attributes.user_amount
+          var tmp_max = res_tour.data.data.attributes.user_max
+          console.log(`Tour : ${selectedTourId}\nUser: ${tmp_amount}/${tmp_max}`)
+
+          if (tmp_amount >= tmp_max) {
+            Modal.error({
+              title: 'Error',
+              content: 'ขออภัยทัวร์นี้เต็มแล้ว',
+            });
+          } else {
+            const res = await axios.post(
+              `http://localhost:1337/api/tours/${selectedTourId}/complete`,
+              {},
+              {
+                headers: {
+                  Authorization: `Bearer ${jwt}`,
+                },
+              }
+            );
+            navigate("/payments")
           }
-        );
+        }
         Modal.confirm({
           title: "ยืนยันการจองทัวร์",
           content: (
@@ -72,9 +88,9 @@ const Tour = ({ data, filterData }) => {
           okText: "ยืนยัน",
           cancelText: "ยกเลิก",
           onOk: () => {
-            navigate("/payments");
+            handleBook()
           },
-          onCancel: () => {},
+          onCancel: () => { },
         });
       } catch (error) {
         console.error("error selecting tour", error);
@@ -92,7 +108,7 @@ const Tour = ({ data, filterData }) => {
         onOk: () => {
           navigate("/login");
         },
-        onCancel: () => {},
+        onCancel: () => { },
       });
     }
   };
