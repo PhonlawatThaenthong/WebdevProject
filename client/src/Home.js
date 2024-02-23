@@ -141,19 +141,19 @@ const HomeForm = () => {
             <span style={NormalTextStyle} className="NormalTextStyle">ourney</span>
           </Col>
           <Col span={22}>
-          {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
+            {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
             <Link
               to="/login"
-              style={{ marginLeft: isSmallScreen ? "0px" : "40px", color: "white", fontSize: isSmallScreen ? "15px" : "18px" }}
+              style={{ marginLeft: isSmallScreen ? "-100px" : "40px", color: "white", fontSize: isSmallScreen ? "15px" : "18px" }}
             >
               เข้าสู่ระบบ
             </Link>
-            <Link
+            {isSmallScreen ? null : <Link
               to="/register"
               style={{ marginLeft: "40px", color: "white", fontSize: isSmallScreen ? "15px" : "18px" }}
             >
               ลงทะเบียน
-            </Link>
+            </Link>}
           </Col>
         </Header>
         <Tour data={allData} filterData={filterData} />

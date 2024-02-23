@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useLocalState from "./localStorage.js";
+import { useMediaQuery } from "react-responsive";
 
 const { Header } = Layout;
 
@@ -15,6 +16,7 @@ const LoginForm = () => {
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [jwt, setjwt] = useLocalState(null, "jwt");
+  const isSmallScreen = useMediaQuery({ maxWidth: 768 });
 
   const handleSubmit = async (values) => {
     setSubmitEnabled(false);
@@ -82,24 +84,24 @@ const LoginForm = () => {
     fontWeight: 'bold',
     fontSize: '45px',
 
-};
+  };
 
   const blueTextStyle = {
-    color: '#48D3FF',
-    fontWeight: 'bold',
-    fontSize: '45px',
+    color: "#48D3FF",
+    fontWeight: "bold",
+    fontSize: isSmallScreen ? "24px" : "45px",
   };
 
   const NormalTextStyle = {
     color: '#FFFFFF',
     fontWeight: 'bold',
-    fontSize: '45px',
+    fontSize: isSmallScreen ? "24px" : "45px",
   };
 
   const invtext = {
-    color: '#1C3953',
-    fontWeight: 'bold',
-    fontSize: '45px',
+    color: "#1C3953",
+    fontWeight: "bold",
+    fontSize: isSmallScreen ? "24px" : "45px",
   };
 
   const rowStyle = {

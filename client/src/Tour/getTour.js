@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useLocalState from "../localStorage.js";
+import { useMediaQuery } from "react-responsive";
 
 import {
   Card,
@@ -26,6 +27,7 @@ const Tour = ({ data, filterData }) => {
   const [selectedTourId, setSelectedTourId] = useState(null);
   const [jwt, setjwt] = useLocalState(null, "jwt");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isSmallScreen = useMediaQuery({ maxWidth: 767 });
 
   const handleOpenModal = (id) => {
     setSelectedTourId(id);
@@ -132,7 +134,7 @@ const Tour = ({ data, filterData }) => {
   return (
     <div
       style={{
-        display: "flex",
+        display: isSmallScreen ? "grid" : "flex",
         backgroundColor: "#F5F5F5",
       }}
     >
