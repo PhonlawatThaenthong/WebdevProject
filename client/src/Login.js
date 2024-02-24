@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Input, Button, Modal, Row, Col, Card, Layout } from "antd";
 import { Helmet } from "react-helmet";
 import axios from "axios";
@@ -17,6 +17,7 @@ const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [jwt, setjwt] = useLocalState(null, "jwt");
   const isSmallScreen = useMediaQuery({ maxWidth: 768 });
+  const [username, setUsername] = useState('')
 
   const handleSubmit = async (values) => {
     setSubmitEnabled(false);
@@ -51,6 +52,33 @@ const LoginForm = () => {
       setSubmitEnabled(true);
     }
   };
+
+  const roleChecker = async () => {
+    try {
+      axios.defaults.headers.common = {
+        Authorization: `Bearer ${jwt}`,
+      };
+      const userResult = await axios.get('http://localhost:1337/api/users/me?populate=role');
+
+      setUsername(userResult.data.username)
+
+      if (userResult.data.role && userResult.data.role.name === 'Member') {
+        navigate('/member');
+      } else {
+        if (userResult.data.role && userResult.data.role.name === 'Admin') {
+          navigate('/admin');
+        } else {
+          navigate('/login');
+        }
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  };
+
+  useEffect(() => {
+    if (jwt == null) { navigate("/login") } else roleChecker();
+  }, []);
 
   const handleCloseErrorModal = () => {
     setShowErrorModal(false);
