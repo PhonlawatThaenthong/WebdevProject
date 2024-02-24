@@ -19,6 +19,7 @@ import {
   Popconfirm,
   message,
 } from "antd";
+import LoadingIcon from "../Navbar/LoadingIcon.js";
 
 const Tour = ({ data, filterData }) => {
   const location = useLocation();
@@ -147,7 +148,7 @@ const Tour = ({ data, filterData }) => {
             transform: "translate(-50%, -50%)",
           }}
         >
-          Loading Data...
+        <LoadingIcon/>
         </b>
       ) : (
         toursToDisplay.map(({ id, attributes }) => (
