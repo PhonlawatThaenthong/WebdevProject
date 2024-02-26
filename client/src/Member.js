@@ -11,6 +11,7 @@ import {
     Layout,
     Flex,
     Space,
+    Menu, Dropdown, Popover
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +19,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import useLocalState from './localStorage.js';
 import { useMediaQuery } from "react-responsive";
+import { MenuOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons';
 
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
@@ -33,6 +35,8 @@ const MemberForm = () => {
     const [filterData, setFilterData] = useState([]);
     const [allData, setAllData] = useState([]);
     const isSmallScreen = useMediaQuery({ maxWidth: 768 });
+    const [menuVisible, setMenuVisible] = useState(false);
+    const [searchPopoverVisible, setSearchPopoverVisible] = useState(false);
 
     const handleSearch = async (searchText) => {
         try {
@@ -75,6 +79,31 @@ const MemberForm = () => {
             console.error(error)
         }
     };
+
+    const menu = (
+        <Menu >
+            {jwt ? (
+                <>
+                    <Menu.Item onClick={() => { navigate("/history"); }} key="username">
+                        <span style={{ color: '#48D3FF' }}>{username && `Hello, ${username}`}</span>
+                    </Menu.Item>
+                    <Menu.Item key="logout" onClick={() => handleLogout()}>
+                        Logout
+                    </Menu.Item>
+                </>
+            ) : (
+                <>
+
+                </>
+            )}
+        </Menu>
+    );
+
+    const searchPopoverContent = (
+        <div>
+            <SearchBar onSearch={handleSearch} />
+        </div>
+    );
 
     const handleLogout = async () => {
         setjwt(null)
@@ -147,21 +176,41 @@ const MemberForm = () => {
                         <span style={blueTextStyle}>J</span>
                         <span style={NormalTextStyle}>ourney</span>
                     </Col>
-                    <Link onClick={() => {
-                        navigate("/history");
-                    }}
-                        style={{ marginLeft: "50px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
-                    >
-                        สวัสดี คุณ {username}
-                    </Link>
-                    {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
-                    <Link
-                        onClick={() => { handleLogout() }}
-                        style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
-                    >
-                        Logout
-                    </Link>
+                    <Col span={22}>
+                        {isSmallScreen ? (
+                            <>
 
+                                <Dropdown overlay={menu} trigger={['click']} visible={menuVisible} onVisibleChange={setMenuVisible}>
+                                    <Button icon={<UserOutlined />} />
+                                </Dropdown>
+                                <Popover
+                                    content={searchPopoverContent}
+                                    trigger="click"
+                                    visible={searchPopoverVisible}
+                                    onVisibleChange={setSearchPopoverVisible}
+                                >
+                                    <Button icon={<SearchOutlined />} />
+                                </Popover>
+                            </>
+                        ) : (
+                            <>
+                                <Link onClick={() => {
+                                    navigate("/history");
+                                }}
+                                    style={{ marginRight: "50px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
+                                >
+                                    สวัสดี คุณ {username}
+                                </Link>
+                                {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
+                                <Link
+                                    onClick={() => { handleLogout() }}
+                                    style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
+                                >
+                                    Logout
+                                </Link>
+                            </>
+                        )}
+                    </Col>
 
                 </Header>
                 <Tour data={allData} filterData={filterData} />

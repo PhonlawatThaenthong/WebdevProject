@@ -15,6 +15,7 @@ import {
   InputNumber,
   DatePicker,
   Upload,
+  Menu, Dropdown, Popover
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +24,7 @@ import axios from "axios";
 import useLocalState from "./localStorage.js";
 import { useMediaQuery } from "react-responsive";
 import { UploadOutlined } from "@ant-design/icons";
+import { MenuOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons';
 
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
@@ -32,7 +34,7 @@ const { Search } = Input;
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
-const MemberForm = () => {
+const AdminForm = () => {
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
   const [isAddMenuOpen, setIsAddMenuOpen] = useState(false);
@@ -42,6 +44,8 @@ const MemberForm = () => {
   const [create_name, setcreate_name] = useState("");
   const [create_desc, setcreate_desc] = useState("");
   const [create_price, setcreate_price] = useState(0);
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [searchPopoverVisible, setSearchPopoverVisible] = useState(false);
 
   const [filterData, setFilterData] = useState([]);
   const [allData, setAllData] = useState([]);
@@ -137,6 +141,31 @@ const MemberForm = () => {
     } else roleChecker();
     getData();
   }, []);
+
+  const menu = (
+    <Menu >
+      {jwt ? (
+        <>
+          <Menu.Item onClick={() => { navigate("/history"); }} key="username">
+            <span style={{ color: '#48D3FF' }}>{username && `Hello, ${username}`}</span>
+          </Menu.Item>
+          <Menu.Item key="logout" onClick={() => handleLogout()}>
+            Logout
+          </Menu.Item>
+        </>
+      ) : (
+        <>
+
+        </>
+      )}
+    </Menu>
+  );
+
+  const searchPopoverContent = (
+    <div>
+      <SearchBar onSearch={handleSearch} />
+    </div>
+  );
 
   const headerStyle = {
     textAlign: "center",
@@ -237,23 +266,45 @@ const MemberForm = () => {
             <span style={blueTextStyle}>J</span>
             <span style={NormalTextStyle}>ourney</span>
           </Col>
-          <Link
-            onClick={() => {
-              navigate("/history");
-            }}
-            style={{ marginLeft: "50px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
-          >
-            สวัสดี คุณ {username}
-          </Link>
-          {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
-          <Link
-            onClick={() => {
-              handleLogout();
-            }}
-            style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
-          >
-            Logout
-          </Link>
+          <Col span={22}>
+            {isSmallScreen ? (
+              <>
+
+                <Dropdown overlay={menu} trigger={['click']} visible={menuVisible} onVisibleChange={setMenuVisible}>
+                  <Button icon={<UserOutlined />} />
+                </Dropdown>
+                <Popover
+                  content={searchPopoverContent}
+                  trigger="click"
+                  visible={searchPopoverVisible}
+                  onVisibleChange={setSearchPopoverVisible}
+                >
+                  <Button icon={<SearchOutlined />} />
+                </Popover>
+              </>
+            ) : (
+              <>
+                <Link
+                  onClick={() => {
+                    navigate("/history");
+                  }}
+                  style={{ marginLeft: "50px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
+                >
+                  สวัสดี คุณ {username}
+                </Link>
+                {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
+                <Link
+                  onClick={() => {
+                    handleLogout();
+                  }}
+                  style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
+                >
+                  Logout
+                </Link>
+              </>
+            )}
+          </Col>
+
         </Header>
         <Tour data={allData} filterData={filterData} />
         <FloatButton
@@ -269,4 +320,4 @@ const MemberForm = () => {
   );
 };
 
-export default MemberForm;
+export default AdminForm;

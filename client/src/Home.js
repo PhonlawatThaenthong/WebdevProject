@@ -11,7 +11,9 @@ import {
   Layout,
   Flex,
   Space,
+  Menu, Dropdown, Popover
 } from "antd";
+import { MenuOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons';
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -34,6 +36,9 @@ const HomeForm = () => {
   const [filterData, setFilterData] = useState([]);
   const [allData, setAllData] = useState([]);
   const isSmallScreen = useMediaQuery({ maxWidth: 768 });
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [searchPopoverVisible, setSearchPopoverVisible] = useState(false);
+
 
   const handleSearch = async (searchText) => {
     try {
@@ -79,6 +84,31 @@ const HomeForm = () => {
     if (jwt == null) { } else roleChecker();
     getData()
   }, []);
+
+  const menu = (
+    <Menu>
+      {jwt ? (
+        <>
+          <Menu.Item key="username" disabled>
+            <span style={{ color: '#48D3FF' }}>{username && `Hello, ${username}`}</span>
+          </Menu.Item>
+          <Menu.Item key="logout" onClick={() => handleLogout()}>
+            Logout
+          </Menu.Item>
+        </>
+      ) : (
+        <>
+
+        </>
+      )}
+    </Menu>
+  );
+
+  const searchPopoverContent = (
+    <div>
+      <SearchBar onSearch={handleSearch} />
+    </div>
+  );
 
   const headerStyle = {
     textAlign: "center",
@@ -140,25 +170,40 @@ const HomeForm = () => {
             <span style={blueTextStyle} className="blueTextStyle">J</span>
             <span style={NormalTextStyle} className="NormalTextStyle">ourney</span>
           </Col>
+
           <Col span={22}>
-            {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
-            <Link
-              to="/login"
-              style={{ marginLeft: isSmallScreen ? "-100px" : "40px", color: "white", fontSize: isSmallScreen ? "15px" : "18px" }}
-            >
-              เข้าสู่ระบบ
-            </Link>
-            {isSmallScreen ? null : <Link
-              to="/register"
-              style={{ marginLeft: "40px", color: "white", fontSize: isSmallScreen ? "15px" : "18px" }}
-            >
-              ลงทะเบียน
-            </Link>}
+            {isSmallScreen ? (
+              <>
+                <Link to="/login">
+                  <Dropdown overlay={menu} trigger={['click']} visible={menuVisible} onVisibleChange={setMenuVisible}>
+                    <Button icon={<UserOutlined />} />
+                  </Dropdown></Link>
+                <Popover
+                  content={searchPopoverContent}
+                  trigger="click"
+                  visible={searchPopoverVisible}
+                  onVisibleChange={setSearchPopoverVisible}
+                >
+                  <Button icon={<SearchOutlined />} />
+                </Popover>
+              </>
+            ) : (
+              <>
+                <SearchBar onSearch={handleSearch} />
+                <Link to="/login" style={{ marginLeft: "40px", color: "white", fontSize: isSmallScreen ? "15px" : "18px" }}>
+                  เข้าสู่ระบบ
+                </Link>
+                <Link to="/register" style={{ marginLeft: "40px", color: "white", fontSize: isSmallScreen ? "15px" : "18px" }}>
+                  ลงทะเบียน
+                </Link>
+              </>
+            )}
           </Col>
         </Header>
         <Tour data={allData} filterData={filterData} />
       </Layout>
     </Flex>
+
   );
 };
 
