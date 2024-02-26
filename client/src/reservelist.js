@@ -43,18 +43,7 @@ const ReserveForm = () => {
             const userResult = await axios.get(
                 "http://localhost:1337/api/users/me?populate=role"
             );
-
             setUsername(userResult.data.username);
-
-            if (userResult.data.role && userResult.data.role.name === "Member") {
-                navigate("/history");
-            } else {
-                if (userResult.data.role && userResult.data.role.name === "Admin") {
-                    navigate("/history");
-                } else {
-                    navigate("/");
-                }
-            }
         } catch (error) {
             console.error(error);
         }

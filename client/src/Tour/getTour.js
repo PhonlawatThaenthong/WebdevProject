@@ -44,6 +44,11 @@ const Tour = ({ data, filterData }) => {
     }
   };
 
+  const getPrice = (price) => {
+    const newPrice = price.toLocaleString('th-TH', { currency: 'THB', minimumFractionDigits: 2 });
+    return newPrice
+  };
+
   const getStatus = (status) => {
     switch (status) {
       case true:
@@ -148,7 +153,7 @@ const Tour = ({ data, filterData }) => {
             transform: "translate(-50%, -50%)",
           }}
         >
-        <LoadingIcon/>
+          <LoadingIcon />
         </b>
       ) : (
         toursToDisplay.map(({ id, attributes }) => (
@@ -210,7 +215,7 @@ const Tour = ({ data, filterData }) => {
                   </b>
                 </span>
                 <br />
-                ราคา: {attributes.price} บาท / ท่าน
+                ราคา: {getPrice(attributes.price)} บาท / ท่าน
                 <br />
                 ระยะเวลา:
                 <br />
@@ -256,7 +261,7 @@ const Tour = ({ data, filterData }) => {
                   </b>
                 </span>
                 <br />
-                ราคา: {attributes.price} บาท / ท่าน
+                ราคา: {getPrice(attributes.price)} บาท
                 <br />
                 ระยะเวลา:
                 <br />
@@ -278,7 +283,7 @@ const Tour = ({ data, filterData }) => {
               </b>
             </span>
             <br />
-            ราคา: {attributes.price} บาท / ท่าน
+            ราคา: {getPrice(attributes.price)} บาท / ท่าน
             <br />
             ระยะเวลา:
             <br />
