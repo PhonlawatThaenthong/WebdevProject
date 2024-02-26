@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import useLocalState from './localStorage.js';
 import Step from "./Navbar/Step.js";
-import UploadFile from "./Navbar/UploadIcon.js";
+import { useMediaQuery } from "react-responsive";
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -28,8 +28,9 @@ const UploadReceipt = () => {
     const navigate = useNavigate();
     const [jwt, setjwt] = useLocalState(null, 'jwt');
     const [username, setUsername] = useState('')
-    const cardWidth = 1000;
-    const cardHeight = 700;
+    const isSmallScreen = useMediaQuery({ maxWidth: 768 });
+    const cardWidth = isSmallScreen ? '100%' : 1000;
+    const cardHeight = isSmallScreen ? 'auto' : 700;
     const { Panel } = Collapse;
     let url = "https://qr-official.line.me/gs/M_305iwzmm_GW.png?oat_content=qr"
     let url2 = "https://play-lh.googleusercontent.com/eOzvk-ekluYaeLuvDkLb5RJ0KqfFQpodZDnppxPfpEfqEqbNo5erEkmwLBgqP-k-e2kQ"
@@ -65,6 +66,7 @@ const UploadReceipt = () => {
         alignItems: 'center',
         fontWeight: 'bold',
         fontSize: '45px',
+        width: isSmallScreen ? '100%' : 'auto',
     };
 
     const layoutStyle = {
@@ -74,32 +76,32 @@ const UploadReceipt = () => {
     };
 
     const blueTextStyle = {
-        color: '#48D3FF',
-        fontWeight: 'bold',
-        fontSize: '45px',
+        color: "#48D3FF",
+        fontWeight: "bold",
+        fontSize: isSmallScreen ? "24px" : "45px",
     };
 
     const NormalTextStyle = {
         color: '#FFFFFF',
         fontWeight: 'bold',
-        fontSize: '45px',
+        fontSize: isSmallScreen ? "24px" : "45px",
     };
 
     const invtext = {
-        color: '#1C3953',
-        fontWeight: 'bold',
-        fontSize: '45px',
+        color: "#1C3953",
+        fontWeight: "bold",
+        fontSize: isSmallScreen ? "24px" : "45px",
     };
 
     return (
-        <Flex gap="middle" wrap="wrap" >
+        <Flex gap="middle" wrap="wrap">
             <Helmet>
                 <title>HYJ - Home Page</title>
             </Helmet>
 
             <Layout style={layoutStyle}>
-                <Header style={headerStyle}>
-                    <Col >
+                <Header style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
+                    <Col>
                         <span style={blueTextStyle}>H</span>
                         <span style={NormalTextStyle}>AT</span>
                         <span style={invtext}>.</span>
@@ -109,16 +111,20 @@ const UploadReceipt = () => {
                         <span style={blueTextStyle}>J</span>
                         <span style={NormalTextStyle}>ourney</span>
                     </Col>
-                    <Col span={12} style={{ marginLeft: "150px" }}>
-                        <Step current={1} />
-                    </Col>
+                    {!isSmallScreen && (
+                        <Col span={12} style={{ marginLeft: "150px" }}>
+                            <Step current={1} />
+                        </Col>
+                    )}
                 </Header>
-                <Card title="อัพโหลดหลักฐานการชำระเงิน" bordered={false} style={{ width: '100%' }}>
+            </Layout>
+            <Space direction="vertical" size="middle" style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
+                <Card title="อัพโหลดหลักฐานการชำระเงิน" bordered={false} style={{ width: isSmallScreen ? '100%' : 950 }}>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <div style={{ marginBottom: '20px', textAlign: 'center' }}>
-                            <img src={url} className="Logo1" alt="" style={{ width: 'auto' }} />
+                            <img src={url} className="Logo1" alt="" style={{ width: isSmallScreen ? '100%' : "100%", }} />
                         </div>
-                        <Card style={{ width: '75%', backgroundColor: '#F9F9F9' }}> <p><strong>
+                        <Card style={{ width: isSmallScreen ? '100%' : "75%", backgroundColor: '#F9F9F9' }}> <p><strong>
                             ชื่อบัญชี: HAT YAI Journey
                             <br />
                             Lind ID : @305iwzmm
@@ -141,7 +147,7 @@ const UploadReceipt = () => {
                         <Button type="primary" block onClick={handleButtonClick}>ขั้นตอนถัดไป</Button>
                     </div>
                 </Card>
-            </Layout >
+            </Space>
         </Flex >
     );
 };
