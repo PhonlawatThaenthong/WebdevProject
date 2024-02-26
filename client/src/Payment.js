@@ -78,44 +78,44 @@ const Payment = () => {
         color: "#48D3FF",
         fontWeight: "bold",
         fontSize: isSmallScreen ? "24px" : "45px",
-      };
-    
-      const NormalTextStyle = {
+    };
+
+    const NormalTextStyle = {
         color: '#FFFFFF',
         fontWeight: 'bold',
         fontSize: isSmallScreen ? "24px" : "45px",
-      };
-    
-      const invtext = {
+    };
+
+    const invtext = {
         color: "#1C3953",
         fontWeight: "bold",
         fontSize: isSmallScreen ? "24px" : "45px",
-      };
+    };
 
-      return (
+    return (
         <Flex gap="middle" wrap="wrap">
             <Helmet>
                 <title>HYJ - Home Page</title>
             </Helmet>
-    
+
             <Layout style={layoutStyle}>
-            <Header style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
+                <Header style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
                     <Col>
                         <span style={blueTextStyle}>H</span>
                         <span style={NormalTextStyle}>AT</span>
                         <span style={invtext}>.</span>
                         <span style={blueTextStyle}>Y</span>
-                        <span style={NormalTextStyle}>AT</span>
+                        <span style={NormalTextStyle}>AI</span>
                         <span style={invtext}>.</span>
                         <span style={blueTextStyle}>J</span>
                         <span style={NormalTextStyle}>ourney</span>
                     </Col>
                     {!isSmallScreen && (
-                    <Col span={12} style={{ marginLeft: "150px" }}>
-                        <Step />
-                    </Col>
-                )}
-            </Header>
+                        <Col span={12} style={{ marginLeft: "150px" }}>
+                            <Step />
+                        </Col>
+                    )}
+                </Header>
             </Layout>
             <Space direction="vertical" size="middle" style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
                 <Card title="ช่องทางการชำระเงิน" bordered={false} style={{ width: cardWidth, height: cardHeight }}>
@@ -124,7 +124,7 @@ const Payment = () => {
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <p><strong>
                                     กรุณาโอนเงินไปยัง:{' '}
-    
+
                                     ธนาคารไทยพาณิชย์ (SCB){' '}
                                     <br />
                                     หมายเลขบัญชี: 983XXXXXXX{' '}
@@ -134,7 +134,9 @@ const Payment = () => {
                                     **ก่อนทำการโอนเงิน กรุณาเติมข้อความในหมายเหตุว่า "เที่ยวกับ Hatyai Journey" ทุกครั้ง หากลืมบันทึกทางเราขอทำการโอนคืน**
                                 </strong>
                                 </p>
-                                <img src={url} className="Logo1" alt="" style={{ width: 50, marginLeft: 'auto' }} />
+                                {!isSmallScreen && (
+                                    <img src={url} className="Logo1" alt="" style={{ width: 50, marginLeft: 'auto' }} />
+                                )}
                             </div>
                         </Panel>
                         <Panel header="ชำระเงินทาง TrueMoney Wallet" key="2">
@@ -150,7 +152,9 @@ const Payment = () => {
                                     **ก่อนทำการโอนเงิน กรุณาเติมข้อความในหมายเหตุว่า "เที่ยวกับ Hatyai Journey" ทุกครั้ง หากลืมบันทึกทางเราขอทำการโอนคืน**
                                 </strong>
                                 </p>
-                                <img src={url2} className="Logo2" alt="" style={{ width: 50, marginLeft: 'auto' }} />
+                                {!isSmallScreen && (
+                                    <img src={url2} className="Logo2" alt="" style={{ width: 50, marginLeft: 'auto' }} />
+                                )}
                             </div>
                         </Panel>
                     </Collapse>
@@ -163,7 +167,7 @@ const Payment = () => {
             </Space>
         </Flex>
     );
-    
+
 };
 
 
