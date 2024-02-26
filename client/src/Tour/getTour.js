@@ -45,8 +45,11 @@ const Tour = ({ data, filterData }) => {
   };
 
   const getPrice = (price) => {
-    const newPrice = price.toLocaleString('th-TH', { currency: 'THB', minimumFractionDigits: 2 });
-    return newPrice
+    const newPrice = price.toLocaleString("th-TH", {
+      currency: "THB",
+      minimumFractionDigits: 2,
+    });
+    return newPrice;
   };
 
   const getStatus = (status) => {
@@ -62,16 +65,19 @@ const Tour = ({ data, filterData }) => {
     if (jwt) {
       try {
         const handleBook = async () => {
-
-          const res_tour = await axios.get(`http://localhost:1337/api/tours/${selectedTourId}?populate=*`);
-          var tmp_amount = res_tour.data.data.attributes.user_amount
-          var tmp_max = res_tour.data.data.attributes.user_max
-          console.log(`Tour : ${selectedTourId}\nUser: ${tmp_amount}/${tmp_max}`)
+          const res_tour = await axios.get(
+            `http://localhost:1337/api/tours/${selectedTourId}?populate=*`
+          );
+          var tmp_amount = res_tour.data.data.attributes.user_amount;
+          var tmp_max = res_tour.data.data.attributes.user_max;
+          console.log(
+            `Tour : ${selectedTourId}\nUser: ${tmp_amount}/${tmp_max}`
+          );
 
           if (tmp_amount >= tmp_max) {
             Modal.error({
-              title: 'Error',
-              content: 'ขออภัยทัวร์นี้เต็มแล้ว',
+              title: "Error",
+              content: "ขออภัยทัวร์นี้เต็มแล้ว",
             });
           } else {
             const res = await axios.post(
@@ -83,9 +89,9 @@ const Tour = ({ data, filterData }) => {
                 },
               }
             );
-            navigate("/payments")
+            navigate("/payments");
           }
-        }
+        };
         Modal.confirm({
           title: "ยืนยันการจองทัวร์",
           content: (
@@ -96,9 +102,9 @@ const Tour = ({ data, filterData }) => {
           okText: "ยืนยัน",
           cancelText: "ยกเลิก",
           onOk: () => {
-            handleBook()
+            handleBook();
           },
-          onCancel: () => { },
+          onCancel: () => {},
         });
       } catch (error) {
         console.error("error selecting tour", error);
@@ -116,7 +122,7 @@ const Tour = ({ data, filterData }) => {
         onOk: () => {
           navigate("/login");
         },
-        onCancel: () => { },
+        onCancel: () => {},
       });
     }
   };
@@ -197,10 +203,16 @@ const Tour = ({ data, filterData }) => {
                   </Button>,
                 ]}
               >
+                {/* Admin Modal*/}
                 <Image
-                  src={`https://semantic-ui.com/images/wireframe/white-image.png`}
+                  src={
+                    attributes.tour_image && attributes.tour_image.data
+                      ? `http://localhost:1337${attributes.tour_image.data.attributes.formats.thumbnail.url}`
+                      : ""
+                  }
                   preview={false}
                 />
+                {/* Admin Modal*/}
                 <br />
                 สถานะ:{" "}
                 <span style={{ color: getStatusColor(attributes.status) }}>
@@ -243,10 +255,16 @@ const Tour = ({ data, filterData }) => {
                   </Button>,
                 ]}
               >
+                {/* User Modal*/}
                 <Image
-                  src={`https://semantic-ui.com/images/wireframe/white-image.png`}
+                  src={
+                    attributes.tour_image && attributes.tour_image.data
+                      ? `http://localhost:1337${attributes.tour_image.data.attributes.formats.thumbnail.url}`
+                      : ""
+                  }
                   preview={false}
                 />
+                {/* User Modal*/}
                 <br />
                 สถานะ:{" "}
                 <span style={{ color: getStatusColor(attributes.status) }}>
@@ -268,10 +286,16 @@ const Tour = ({ data, filterData }) => {
                 <br></br>
               </Modal>
             )}
+            {/* Card Image */}
             <Image
-              src={`https://semantic-ui.com/images/wireframe/white-image.png`}
-              preview={false}
-            />
+                  src={
+                    attributes.tour_image && attributes.tour_image.data
+                      ? `http://localhost:1337${attributes.tour_image.data.attributes.formats.thumbnail.url}`
+                      : ""
+                  }
+                  preview={false}
+                />
+                {/* Card Image */}
             <b style={{ fontSize: "18px" }}>{attributes.tour_name}</b>
             <br />
             สถานะ:{" "}
