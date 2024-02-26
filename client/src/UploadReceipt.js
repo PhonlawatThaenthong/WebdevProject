@@ -31,7 +31,7 @@ const UploadReceipt = () => {
     const cardWidth = 1000;
     const cardHeight = 700;
     const { Panel } = Collapse;
-    let url = "https://s3-symbol-logo.tradingview.com/the-siam-commercial-bank-public-company--600.png"
+    let url = "https://qr-official.line.me/gs/M_305iwzmm_GW.png?oat_content=qr"
     let url2 = "https://play-lh.googleusercontent.com/eOzvk-ekluYaeLuvDkLb5RJ0KqfFQpodZDnppxPfpEfqEqbNo5erEkmwLBgqP-k-e2kQ"
 
     const roleChecker = async () => {
@@ -115,16 +115,37 @@ const UploadReceipt = () => {
                 </Header>
                 <Card title="อัพโหลดหลักฐานการชำระเงิน" bordered={false} style={{ width: '100%' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <div style={{ marginBottom: '20px' }}>
-                            <UploadFile />
+                        <div style={{ marginBottom: '20px', textAlign: 'center' }}>
+                            <img src={url} className="Logo1" alt="" style={{ width: 'auto' }} />
                         </div>
+                        <Card style={{ width: '75%', backgroundColor: '#F9F9F9' }}> <p><strong>
+                            ชื่อบัญชี: HAT YAI Journey
+                            <br />
+                            Lind ID : @305iwzmm
+                            <br />
+                            กรุณาแจ้งข้อมูลดังนี้
+                            <br />
+                            1.ชื่อบัญชีผู้ทำการจอง
+                            <br />
+                            2.จำนวนเงินที่ทำการจอง
+                            <br />
+                            3.สลิปโอนเงิน พร้อมหมายเหตุ
+                        </strong>
+                            <br />
+                        </p>
+                            ทางแอดมินจะทำการอัพเดตสถานะตามคิว รบกวนไม่ทักแชทซ้ำ หากมีการทักซ้ำเท่ากับต่อคิวใหม่
+                            <br />
+                            **ก่อนทำการโอนเงิน กรุณาเติมข้อความในหมายเหตุว่า "เที่ยวกับ Hatyai Journey" ทุกครั้ง หากลืมบันทึกทางเราขอทำการโอนคืน**
+                        </Card>
+                        <br />
                         <Button type="primary" block onClick={handleButtonClick}>ขั้นตอนถัดไป</Button>
                     </div>
                 </Card>
-            </Layout>
-        </Flex>
+            </Layout >
+        </Flex >
     );
 };
 
 
 export default UploadReceipt;
+
