@@ -46,6 +46,9 @@ const UploadReceipt = () => {
             console.error(error)
         }
     };
+     const handleHeaderClick = () => {
+        navigate('/Member');
+    };
 
     const handleButtonClick = () => {
         navigate('/AllStepDone');
@@ -100,7 +103,7 @@ const UploadReceipt = () => {
             </Helmet>
 
             <Layout style={layoutStyle}>
-                <Header style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
+                <Header  onClick={isSmallScreen ? handleHeaderClick : undefined} style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
                     <Col>
                         <span style={blueTextStyle}>H</span>
                         <span style={NormalTextStyle}>AT</span>

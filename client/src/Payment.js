@@ -48,6 +48,11 @@ const Payment = () => {
     const handleButtonClick = () => {
         navigate('/UploadReceipt');
     };
+    
+    const handleHeaderClick = () => {
+        navigate('/Member');
+    };
+
 
 
     useEffect(() => {
@@ -99,7 +104,7 @@ const Payment = () => {
             </Helmet>
 
             <Layout style={layoutStyle}>
-                <Header style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
+                <Header onClick={isSmallScreen ? handleHeaderClick : undefined} style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
                     <Col>
                         <span style={blueTextStyle}>H</span>
                         <span style={NormalTextStyle}>AT</span>

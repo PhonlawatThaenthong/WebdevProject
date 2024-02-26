@@ -48,6 +48,11 @@ const AllStepDone = () => {
     const handleButtonClick = () => {
         navigate('/member');
     };
+
+    const handleHeaderClick = () => {
+        navigate('/Member');
+    };
+
     useEffect(() => {
         const timer = setTimeout(() => {
             navigate('/member');
@@ -114,7 +119,7 @@ const AllStepDone = () => {
             </Helmet>
 
             <Layout style={layoutStyle}>
-                <Header style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
+                <Header onClick={isSmallScreen ? handleHeaderClick : undefined} style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
                     <Col>
                         <span style={blueTextStyle}>H</span>
                         <span style={NormalTextStyle}>AT</span>
