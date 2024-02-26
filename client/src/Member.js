@@ -115,19 +115,19 @@ const MemberForm = () => {
         color: "#48D3FF",
         fontWeight: "bold",
         fontSize: isSmallScreen ? "24px" : "45px",
-      };
-    
-      const NormalTextStyle = {
+    };
+
+    const NormalTextStyle = {
         color: '#FFFFFF',
         fontWeight: 'bold',
         fontSize: isSmallScreen ? "24px" : "45px",
-      };
-    
-      const invtext = {
+    };
+
+    const invtext = {
         color: "#1C3953",
         fontWeight: "bold",
         fontSize: isSmallScreen ? "24px" : "45px",
-      };
+    };
 
     return (
         <Flex gap="middle" wrap="wrap" >
@@ -147,7 +147,9 @@ const MemberForm = () => {
                         <span style={blueTextStyle}>J</span>
                         <span style={NormalTextStyle}>ourney</span>
                     </Col>
-                    <Link
+                    <Link onClick={() => {
+                        navigate("/history");
+                    }}
                         style={{ marginLeft: "50px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
                     >
                         สวัสดี คุณ {username}

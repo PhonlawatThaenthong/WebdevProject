@@ -238,14 +238,12 @@ const MemberForm = () => {
             <span style={NormalTextStyle}>ourney</span>
           </Col>
           <Link
-            style={{
-              marginLeft: isSmallScreen ? "50px" : "150px",
-              color: "white",
-              fontSize: isSmallScreen ? "14px" : "18px",
-              width: "300px",
+            onClick={() => {
+              navigate("/history");
             }}
+            style={{ marginLeft: "50px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
           >
-            Hello, {username}
+            สวัสดี คุณ {username}
           </Link>
           {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
           <Link

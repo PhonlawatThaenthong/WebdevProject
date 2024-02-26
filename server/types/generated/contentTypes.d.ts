@@ -368,6 +368,7 @@ export interface ApiReserveReserve extends Schema.CollectionType {
     singularName: 'reserve';
     pluralName: 'reserves';
     displayName: 'Reserve';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -387,7 +388,7 @@ export interface ApiReserveReserve extends Schema.CollectionType {
     reserve_amount: Attribute.Integer;
     total_price: Attribute.Decimal;
     payment_method: Attribute.String;
-    payment_status: Attribute.String;
+    payment_status: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
