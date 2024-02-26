@@ -29,8 +29,8 @@ const Payment = () => {
     const [jwt, setjwt] = useLocalState(null, 'jwt');
     const [username, setUsername] = useState('')
     const isSmallScreen = useMediaQuery({ maxWidth: 768 });
-    const cardWidth = 1000;
-    const cardHeight = 700;
+    const cardWidth = isSmallScreen ? '100%' : 1000;
+    const cardHeight = isSmallScreen ? 'auto' : 700;
     const { Panel } = Collapse;
     let url = "https://s3-symbol-logo.tradingview.com/the-siam-commercial-bank-public-company--600.png"
     let url2 = "https://play-lh.googleusercontent.com/eOzvk-ekluYaeLuvDkLb5RJ0KqfFQpodZDnppxPfpEfqEqbNo5erEkmwLBgqP-k-e2kQ"
@@ -92,15 +92,15 @@ const Payment = () => {
         fontSize: isSmallScreen ? "24px" : "45px",
       };
 
-    return (
-        <Flex gap="middle" wrap="wrap" >
+      return (
+        <Flex gap="middle" wrap="wrap">
             <Helmet>
                 <title>HYJ - Home Page</title>
             </Helmet>
-
+    
             <Layout style={layoutStyle}>
-                <Header style={headerStyle}>
-                    <Col >
+            <Header style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
+                    <Col>
                         <span style={blueTextStyle}>H</span>
                         <span style={NormalTextStyle}>AT</span>
                         <span style={invtext}>.</span>
@@ -110,19 +110,21 @@ const Payment = () => {
                         <span style={blueTextStyle}>J</span>
                         <span style={NormalTextStyle}>ourney</span>
                     </Col>
+                    {!isSmallScreen && (
                     <Col span={12} style={{ marginLeft: "150px" }}>
                         <Step />
                     </Col>
-                </Header>
+                )}
+            </Header>
             </Layout>
-            <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
+            <Space direction="vertical" size="middle" style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
                 <Card title="ช่องทางการชำระเงิน" bordered={false} style={{ width: cardWidth, height: cardHeight }}>
                     <Collapse defaultActiveKey={['1']}>
                         <Panel header="ชำระเงินทางธนาคาร" key="1">
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <p><strong>
                                     กรุณาโอนเงินไปยัง:{' '}
-
+    
                                     ธนาคารไทยพาณิชย์ (SCB){' '}
                                     <br />
                                     หมายเลขบัญชี: 983XXXXXXX{' '}
@@ -152,7 +154,7 @@ const Payment = () => {
                             </div>
                         </Panel>
                     </Collapse>
-                    <Card title="ชำระเงินเสร็จเรียบร้อยแล้วใช่หรือไม่?" bordered={false} style={{ width: 950 }}>
+                    <Card title="ชำระเงินเสร็จเรียบร้อยแล้วใช่หรือไม่?" bordered={false} style={{ width: isSmallScreen ? '100%' : 950 }}>
                         <p>เมื่อทำการชำระเงินเรียบร้อยแล้วต้องทำการแจ้งสลิปหลักฐานการโอนเงินพร้อมระบุหมายเหตุทุกครั้ง เมื่อการชำระเงินของคุณได้รับการยืนยันแล้ว </p>
                         <p>สถานะการชำระในช่องประวัติการซื้อจะเปลี่ยนแปลง</p>
                         <Button type="primary" block style={{ backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }} onClick={handleButtonClick}>ใช่ ฉันชำระเงินแล้ว</Button>
@@ -161,6 +163,7 @@ const Payment = () => {
             </Space>
         </Flex>
     );
+    
 };
 
 
