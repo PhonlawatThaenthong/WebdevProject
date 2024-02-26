@@ -288,14 +288,15 @@ const Tour = ({ data, filterData }) => {
             )}
             {/* Card Image */}
             <Image
-                  src={
-                    attributes.tour_image && attributes.tour_image.data
-                      ? `http://localhost:1337${attributes.tour_image.data.attributes.formats.thumbnail.url}`
-                      : ""
-                  }
-                  preview={false}
-                />
-                {/* Card Image */}
+              src={
+                attributes.tour_image && attributes.tour_image.data
+                  ? `http://localhost:1337${attributes.tour_image.data.attributes.formats.thumbnail.url}`
+                  : ""
+              }
+              preview={false}
+            />
+            {/* Card Image */}
+            <br />
             <b style={{ fontSize: "18px" }}>{attributes.tour_name}</b>
             <br />
             สถานะ:{" "}
