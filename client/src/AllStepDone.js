@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import useLocalState from './localStorage.js';
 import Step from "./Navbar/Step.js";
-
+import { useMediaQuery } from "react-responsive";
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -28,8 +28,9 @@ const AllStepDone = () => {
     const navigate = useNavigate();
     const [jwt, setjwt] = useLocalState(null, 'jwt');
     const [username, setUsername] = useState('')
-    const cardWidth = 1000;
-    const cardHeight = 700;
+    const isSmallScreen = useMediaQuery({ maxWidth: 768 });
+    const cardWidth = isSmallScreen ? '100%' : 1000;
+    const cardHeight = isSmallScreen ? 'auto' : 700;
     const { Panel } = Collapse;
     let url = "https://i.pinimg.com/originals/96/09/5b/96095bfa0b64cdbfd12fcbd030ec41d8.gif"
     const [remainingTime, setRemainingTime] = useState(60000);
@@ -79,6 +80,7 @@ const AllStepDone = () => {
         alignItems: 'center',
         fontWeight: 'bold',
         fontSize: '45px',
+        width: isSmallScreen ? '100%' : 'auto',
     };
 
     const layoutStyle = {
@@ -88,48 +90,52 @@ const AllStepDone = () => {
     };
 
     const blueTextStyle = {
-        color: '#48D3FF',
-        fontWeight: 'bold',
-        fontSize: '45px',
+        color: "#48D3FF",
+        fontWeight: "bold",
+        fontSize: isSmallScreen ? "24px" : "45px",
     };
 
     const NormalTextStyle = {
         color: '#FFFFFF',
         fontWeight: 'bold',
-        fontSize: '45px',
+        fontSize: isSmallScreen ? "24px" : "45px",
     };
 
     const invtext = {
-        color: '#1C3953',
-        fontWeight: 'bold',
-        fontSize: '45px',
+        color: "#1C3953",
+        fontWeight: "bold",
+        fontSize: isSmallScreen ? "24px" : "45px",
     };
 
     return (
-        <Flex gap="middle" wrap="wrap" >
+        <Flex gap="middle" wrap="wrap">
             <Helmet>
                 <title>HYJ - Home Page</title>
             </Helmet>
 
             <Layout style={layoutStyle}>
-                <Header style={headerStyle}>
+                <Header style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
                     <Col>
                         <span style={blueTextStyle}>H</span>
                         <span style={NormalTextStyle}>AT</span>
                         <span style={invtext}>.</span>
                         <span style={blueTextStyle}>Y</span>
-                        <span style={NormalTextStyle}>AT</span>
+                        <span style={NormalTextStyle}>AI</span>
                         <span style={invtext}>.</span>
                         <span style={blueTextStyle}>J</span>
                         <span style={NormalTextStyle}>ourney</span>
                     </Col>
-                    <Col span={12} style={{ marginLeft: "150px" }}>
-                        <Step current={3} />
-                    </Col>
+                    {!isSmallScreen && (
+                        <Col span={12} style={{ marginLeft: "150px" }}>
+                            <Step current={2} />
+                        </Col>
+                    )}  
                 </Header>
-                <Card title="การชำระเงินเสร็จสิ้น" bordered={false} style={{ width: '100%' }}>
-                    <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <img src={url} className="Logo1" alt="" style={{ width: 500, borderRadius: 500 }} />
+                </Layout>
+                <Space direction="vertical" size="middle" style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
+                <Card title="การชำระเงินเสร็จสิ้น" bordered={false} style={{  width: isSmallScreen ? '100%' : 950}}>
+                    <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center',width: isSmallScreen ? '100%' : "100%" }}>
+                        <img src={url} className="Logo1" alt="" style={{ width: isSmallScreen ? '100%' : 500 , borderRadius: 500 }} />
                     </div>
                     <div>
                         <p><strong>การสั่งซื้อของคุณเสร็จสิ้นแล้ว สถานะการจองของคุณจะเปลี่ยนแปลงในไม่ช้านี้! แพ็คกระเป๋าและเตรียมตัวออกผจญภัยกันได้เลย!</strong></p>
@@ -138,7 +144,7 @@ const AllStepDone = () => {
                     <Button type="primary" style={{ backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }}
                         onClick={handleButtonClick}>กลับสู่หน้าหลัก</Button>
                 </Card>
-            </Layout>
+                </Space>
         </Flex>
     );
 };
