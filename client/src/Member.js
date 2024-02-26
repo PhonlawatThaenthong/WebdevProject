@@ -84,7 +84,7 @@ const MemberForm = () => {
         <Menu >
             {jwt ? (
                 <>
-                    <Menu.Item key="username" disabled>
+                    <Menu.Item onClick={() => { navigate("/history"); }} key="username">
                         <span style={{ color: '#48D3FF' }}>{username && `Hello, ${username}`}</span>
                     </Menu.Item>
                     <Menu.Item key="logout" onClick={() => handleLogout()}>
@@ -93,7 +93,7 @@ const MemberForm = () => {
                 </>
             ) : (
                 <>
-                    
+
                 </>
             )}
         </Menu>
@@ -179,6 +179,7 @@ const MemberForm = () => {
                     <Col span={22}>
                         {isSmallScreen ? (
                             <>
+
                                 <Dropdown overlay={menu} trigger={['click']} visible={menuVisible} onVisibleChange={setMenuVisible}>
                                     <Button icon={<UserOutlined />} />
                                 </Dropdown>
@@ -193,7 +194,9 @@ const MemberForm = () => {
                             </>
                         ) : (
                             <>
-                                <Link
+                                <Link onClick={() => {
+                                    navigate("/history");
+                                }}
                                     style={{ marginRight: "50px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
                                 >
                                     สวัสดี คุณ {username}
@@ -208,6 +211,7 @@ const MemberForm = () => {
                             </>
                         )}
                     </Col>
+
                 </Header>
                 <Tour data={allData} filterData={filterData} />
             </Layout>

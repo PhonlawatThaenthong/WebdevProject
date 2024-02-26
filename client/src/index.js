@@ -55,7 +55,7 @@ const router = createBrowserRouter([
     element: <AllStepDone/>,
   },
   {
-    path: "/reserve_list",
+    path: "/history",
     element: <ReserveForm/>,
   },
 ]);

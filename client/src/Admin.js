@@ -146,7 +146,7 @@ const AdminForm = () => {
     <Menu >
       {jwt ? (
         <>
-          <Menu.Item key="username" disabled>
+          <Menu.Item onClick={() => { navigate("/history"); }} key="username">
             <span style={{ color: '#48D3FF' }}>{username && `Hello, ${username}`}</span>
           </Menu.Item>
           <Menu.Item key="logout" onClick={() => handleLogout()}>
@@ -155,7 +155,7 @@ const AdminForm = () => {
         </>
       ) : (
         <>
-          
+
         </>
       )}
     </Menu>
@@ -269,6 +269,7 @@ const AdminForm = () => {
           <Col span={22}>
             {isSmallScreen ? (
               <>
+
                 <Dropdown overlay={menu} trigger={['click']} visible={menuVisible} onVisibleChange={setMenuVisible}>
                   <Button icon={<UserOutlined />} />
                 </Dropdown>
@@ -284,13 +285,18 @@ const AdminForm = () => {
             ) : (
               <>
                 <Link
-                  style={{ marginRight: "50px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
+                  onClick={() => {
+                    navigate("/history");
+                  }}
+                  style={{ marginLeft: "50px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
                 >
                   สวัสดี คุณ {username}
                 </Link>
                 {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
                 <Link
-                  onClick={() => { handleLogout() }}
+                  onClick={() => {
+                    handleLogout();
+                  }}
                   style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
                 >
                   Logout
@@ -298,6 +304,7 @@ const AdminForm = () => {
               </>
             )}
           </Col>
+
         </Header>
         <Tour data={allData} filterData={filterData} />
         <FloatButton

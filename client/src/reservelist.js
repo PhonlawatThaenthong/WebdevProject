@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import useLocalState from './localStorage.js';
+import CardHistory from "./Tour/getHistory.js";
 import { useMediaQuery } from "react-responsive";
 
 
@@ -32,23 +33,31 @@ const ReserveForm = () => {
     const [messageApi, contextHolder] = message.useMessage();
     const [jwt, setjwt] = useLocalState(null, 'jwt');
     const [username, setUsername] = useState('')
-    const [filterData, setFilterData] = useState([]);
-    const [allData, setAllData] = useState([]);
     const isSmallScreen = useMediaQuery({ maxWidth: 768 });
-    const [data, setData] = useState([]);
-    
 
+    const roleChecker = async () => {
+        try {
+            axios.defaults.headers.common = {
+                Authorization: `Bearer ${jwt}`,
+            };
+            const userResult = await axios.get(
+                "http://localhost:1337/api/users/me?populate=role"
+            );
 
-    const ListData = async () => {
-        const response = await axios.get('http://localhost:1337/api/reserves?populate=*', {
-            headers: {
-              Authorization: `Bearer ${jwt}`,
-            },
-          });
-        return response.data.data.map((d) => ({
-            tour_id: d.attributes.tour_id.data.attributes.tour_name,
-            status: d.attributes.payment_status,
-        }));
+            setUsername(userResult.data.username);
+
+            if (userResult.data.role && userResult.data.role.name === "Member") {
+                navigate("/history");
+            } else {
+                if (userResult.data.role && userResult.data.role.name === "Admin") {
+                    navigate("/history");
+                } else {
+                    navigate("/");
+                }
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     const handleLogout = async () => {
@@ -63,11 +72,9 @@ const ReserveForm = () => {
     };
 
     useEffect(() => {
-        const fetchItems = async () => {
-            const newData = await ListData();
-            setData(newData);
-        };
-        fetchItems();
+        if (jwt == null) {
+            navigate("/");
+        } else roleChecker();
     }, []);
 
 
@@ -111,7 +118,7 @@ const ReserveForm = () => {
     return (
         <Flex gap="middle" wrap="wrap" >
             <Helmet>
-                <title>HYJ - reserve Page</title>
+                <title>HYJ - History Page</title>
             </Helmet>
             {contextHolder}
             <Layout style={layoutStyle}>
@@ -127,6 +134,9 @@ const ReserveForm = () => {
                         <span style={NormalTextStyle}>ourney</span>
                     </Col>
                     <Link
+                        onClick={() => {
+                            navigate("/history");
+                        }}
                         style={{ marginLeft: "50px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
                     >
                         สวัสดี คุณ {username}
@@ -141,36 +151,9 @@ const ReserveForm = () => {
 
 
                 </Header>
-                <div>
-                <List
-                    grid={{
-                        gutter: 16,
-                        xs: 1,
-                        sm: 2,
-                        md: 4,
-                        lg: 4,
-                        xl: 6,
-                        xxl: 3,
-                    }}
-                    dataSource={data}
-                    renderItem={(item) => (
-                        <List.Item>
-
-                            <Card title={item.tour_id} >
-                                
-                                <p>Status : {item.status}</p>
-                                
-
-
-                            </Card>
-
-                        </List.Item>
-                    )}
-                />
-
-            </div>
+                <CardHistory />
             </Layout>
-            
+
         </Flex>
 
     );

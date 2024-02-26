@@ -4,7 +4,8 @@
   "info": {
     "singularName": "reserve",
     "pluralName": "reserves",
-    "displayName": "Reserve"
+    "displayName": "Reserve",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -35,7 +36,8 @@
       "type": "string"
     },
     "payment_status": {
-      "type": "string"
+      "type": "boolean",
+      "default": false
     }
   }
 }

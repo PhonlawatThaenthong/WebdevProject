@@ -89,6 +89,9 @@ const HomeForm = () => {
     <Menu>
       {jwt ? (
         <>
+          <Menu.Item key="username" disabled>
+            <span style={{ color: '#48D3FF' }}>{username && `Hello, ${username}`}</span>
+          </Menu.Item>
           <Menu.Item key="logout" onClick={() => handleLogout()}>
             Logout
           </Menu.Item>
