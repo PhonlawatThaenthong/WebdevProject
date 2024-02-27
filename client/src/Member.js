@@ -98,6 +98,10 @@ const MemberForm = () => {
             )}
         </Menu>
     );
+    const handleHeaderClick = () => {
+        navigate('/Member');
+    };
+
 
     const searchPopoverContent = (
         <div>
@@ -132,6 +136,7 @@ const MemberForm = () => {
         alignItems: 'center',
         fontWeight: 'bold',
         fontSize: '45px',
+        width: isSmallScreen ? '100%' : 'auto',
     };
 
     const layoutStyle = {
@@ -165,7 +170,7 @@ const MemberForm = () => {
             </Helmet>
             {contextHolder}
             <Layout style={layoutStyle}>
-                <Header style={headerStyle}>
+                <Header onClick={isSmallScreen ? handleHeaderClick : undefined} style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
                     <Col>
                         <span style={blueTextStyle}>H</span>
                         <span style={NormalTextStyle}>AT</span>
@@ -176,12 +181,11 @@ const MemberForm = () => {
                         <span style={blueTextStyle}>J</span>
                         <span style={NormalTextStyle}>ourney</span>
                     </Col>
-                    <Col span={22}>
-                        {isSmallScreen ? (
-                            <>
-
+                    <Col span={isSmallScreen ? 12 : 22}>
+                    {isSmallScreen ? (
+                           <div style={{ textAlign: isSmallScreen ? 'right' : 'left' }}>
                                 <Dropdown overlay={menu} trigger={['click']} visible={menuVisible} onVisibleChange={setMenuVisible}>
-                                    <Button icon={<UserOutlined />} />
+                                <UserOutlined style={{ fontSize: '25px' , marginRight: '8px' }} />
                                 </Dropdown>
                                 <Popover
                                     content={searchPopoverContent}
@@ -189,9 +193,9 @@ const MemberForm = () => {
                                     visible={searchPopoverVisible}
                                     onVisibleChange={setSearchPopoverVisible}
                                 >
-                                    <Button icon={<SearchOutlined />} />
+                                    <SearchOutlined style={{ fontSize: '25px', marginLeft: '8px' }} />
                                 </Popover>
-                            </>
+                                </div>
                         ) : (
                             <>
                                 <Link onClick={() => {
