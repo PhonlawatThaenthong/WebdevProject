@@ -104,7 +104,7 @@ const Tour = ({ data, filterData }) => {
           onOk: () => {
             handleBook();
           },
-          onCancel: () => {},
+          onCancel: () => { },
         });
       } catch (error) {
         console.error("error selecting tour", error);
@@ -122,7 +122,7 @@ const Tour = ({ data, filterData }) => {
         onOk: () => {
           navigate("/login");
         },
-        onCancel: () => {},
+        onCancel: () => { },
       });
     }
   };
@@ -248,10 +248,10 @@ const Tour = ({ data, filterData }) => {
                       setIsModalOpen(false);
                     }}
                   >
-                    Close
+                    ปิด
                   </Button>,
                   <Button key="submit" type="primary" onClick={handleSelect}>
-                    Select
+                    จองทัวร์
                   </Button>,
                 ]}
               >
@@ -283,7 +283,11 @@ const Tour = ({ data, filterData }) => {
                 <br />
                 ระยะเวลา:
                 <br />
+                รายละเอียด:
+                <br />
+                {attributes.description}
                 <br></br>
+
               </Modal>
             )}
             {/* Card Image */}
