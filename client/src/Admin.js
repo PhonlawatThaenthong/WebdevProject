@@ -287,15 +287,13 @@ const AdminForm = () => {
                   onClick={() => {
                     navigate("/history");
                   }}
-                  style={{ marginLeft: "50px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
+                  style={{ marginRight: "50px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
                 >
                   สวัสดี คุณ {username}
                 </Link>
                 {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
                 <Link
-                  onClick={() => {
-                    handleLogout();
-                  }}
+                  onClick={() => { handleLogout() }}
                   style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
                 >
                   Logout
