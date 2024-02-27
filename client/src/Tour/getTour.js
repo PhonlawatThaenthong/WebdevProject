@@ -178,7 +178,7 @@ const Tour = ({ data, filterData }) => {
                       setIsModalOpen(false);
                     }}
                   >
-                    Close
+                    ปิด
                   </Button>,
                   <Popconfirm
                     title="Delete the tour"
@@ -190,7 +190,7 @@ const Tour = ({ data, filterData }) => {
                     okText="Yes"
                     cancelText="No"
                   >
-                    <Button danger>Delete</Button>
+                    <Button danger>ลบ</Button>
                   </Popconfirm>,
                   <Button
                     key="submit"
@@ -199,7 +199,7 @@ const Tour = ({ data, filterData }) => {
                       setIsModalOpen(false);
                     }}
                   >
-                    Save
+                    บันทึก
                   </Button>,
                 ]}
               >

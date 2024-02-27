@@ -44,7 +44,7 @@ const MemberForm = () => {
             setFilterData(res.data.data);
         }
         catch (error) {
-            console.error('error filter data', error);
+            console.error('การค้นหาผิดพลาด', error);
         }
     }
 
@@ -53,7 +53,7 @@ const MemberForm = () => {
             const res = await axios.get("http://localhost:1337/api/tours?populate=*");
             setAllData(res.data.data);
         } catch (error) {
-            console.error("error fetching tour data", error);
+            console.error("การแสดงข้อมูลทัวร์ผิดพลาด", error);
         }
     };
 
@@ -85,10 +85,10 @@ const MemberForm = () => {
             {jwt ? (
                 <>
                     <Menu.Item onClick={() => { navigate("/history"); }} key="username">
-                        <span style={{ color: '#48D3FF' }}>{username && `Hello, ${username}`}</span>
+                        <span style={{ color: '#48D3FF' }}>{username && `สวัสดีคุณ, ${username}`}</span>
                     </Menu.Item>
                     <Menu.Item key="logout" onClick={() => handleLogout()}>
-                        Logout
+                        ออกจากระบบ
                     </Menu.Item>
                 </>
             ) : (
@@ -109,10 +109,10 @@ const MemberForm = () => {
         setjwt(null)
         messageApi.open({
             type: 'loading',
-            content: 'Please wait...',
+            content: 'กรุณารอสักครู่...',
             duration: 1,
         })
-            .then(() => message.success('Completed!', 0.5))
+            .then(() => message.success('เสร็จสิ้น!', 0.5))
             .then(() => window.location.href = '/')
     };
 
@@ -199,14 +199,14 @@ const MemberForm = () => {
                                 }}
                                     style={{ marginRight: "50px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
                                 >
-                                    สวัสดี คุณ {username}
+                                    สวัสดีคุณ {username}
                                 </Link>
                                 {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
                                 <Link
                                     onClick={() => { handleLogout() }}
                                     style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
                                 >
-                                    Logout
+                                    ออกจากระบบ
                                 </Link>
                             </>
                         )}

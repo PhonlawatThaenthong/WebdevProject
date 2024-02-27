@@ -100,10 +100,10 @@ const AdminForm = () => {
     messageApi
       .open({
         type: "loading",
-        content: "Please wait...",
+        content: "กรุณารอสักครู่...",
         duration: 1,
       })
-      .then(() => message.success("Completed!", 0.5))
+      .then(() => message.success("เสร็จสิ้น!", 0.5))
       .then(() => (window.location.href = "/"));
   };
 
@@ -131,7 +131,7 @@ const AdminForm = () => {
       setIsAddMenuOpen(false);
       getData();
     } catch (error) {
-      console.error("error adding tour", error.response.data.error);
+      console.error("การเพิ่มทัวร์ขัดข้อง", error.response.data.error);
     }
   };
 
@@ -147,10 +147,10 @@ const AdminForm = () => {
       {jwt ? (
         <>
           <Menu.Item onClick={() => { navigate("/history"); }} key="username">
-            <span style={{ color: '#48D3FF' }}>{username && `Hello, ${username}`}</span>
+            <span style={{ color: '#48D3FF' }}>{username && `สวัสดีคุณ, ${username}`}</span>
           </Menu.Item>
           <Menu.Item key="logout" onClick={() => handleLogout()}>
-            Logout
+            ออกจากระบบ
           </Menu.Item>
         </>
       ) : (
@@ -224,34 +224,34 @@ const AdminForm = () => {
               setIsAddMenuOpen(false);
             }}
           >
-            Cancel
+            ยกเลิก
           </Button>,
           <Button key="submit" type="primary" onClick={handleAddTour}>
-            Add
+            เพิ่ม
           </Button>,
         ]}
       >
-        <p>Tour Name: </p>
+        <p>ชื่อทัวร์: </p>
         <Input
           value={create_name}
           onChange={(e) => setcreate_name(e.target.value)}
         />
-        <p>Description: </p>
+        <p>รายละเอียด: </p>
         <TextArea
           value={create_desc}
           onChange={(e) => setcreate_desc(e.target.value)}
           autoSize={{ minRows: 1, maxRows: 10 }}
         />
-        <p>Price: </p>
+        <p>ราคา: </p>
         <Input
           type="number"
           value={create_price}
           onChange={(e) => setcreate_price(e.target.value)}
         />
-        <p>Date: </p>
+        <p>วันที่: </p>
         <RangePicker />
-        <p>Image: </p>
-        <Button type="primary">Upload</Button>
+        <p>รูปภาพ: </p>
+        <Button type="primary">เพิ่มรูปภาพ</Button>
       </Modal>
 
       <Layout style={layoutStyle}>
@@ -289,14 +289,14 @@ const AdminForm = () => {
                   }}
                   style={{ marginRight: "50px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
                 >
-                  สวัสดี คุณ {username}
+                  สวัสดีคุณ {username}
                 </Link>
                 {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
                 <Link
                   onClick={() => { handleLogout() }}
                   style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
                 >
-                  Logout
+                  ออกจากระบบ
                 </Link>
               </>
             )}
@@ -305,7 +305,7 @@ const AdminForm = () => {
         </Header>
         <Tour data={allData} filterData={filterData} />
         <FloatButton
-          tooltip={<div>Add New Tour</div>}
+          tooltip={<div>เพิ่มทัวร์ใหม่</div>}
           shape="square"
           type="primary"
           style={{ right: 24 }}

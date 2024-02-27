@@ -48,7 +48,7 @@ const ReserveForm = () => {
             );
             setUsername(userResult.data.username);
         } catch (error) {
-            console.error(error);
+            console.error("Error get username", error);
         }
     };
 
@@ -77,10 +77,10 @@ const ReserveForm = () => {
                         <span style={{ color: '#48D3FF' }}>{username && `Hello, ${username}`}</span>
                     </Menu.Item>
                     <Menu.Item key="logout" onClick={() => handleLogout()}>
-                        Logout
+                        ออกจากระบบ
                     </Menu.Item>
                     <Menu.Item key="back" onClick={() => { navigate("/member"); }}>
-                        Back
+                        กลับ
                     </Menu.Item>
                 </>
             ) : (
@@ -164,14 +164,14 @@ const ReserveForm = () => {
                                     }}
                                     style={{ marginLeft: "50px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
                                 >
-                                    สวัสดี คุณ {username}
+                                    สวัสดีคุณ {username}
                                 </Link>
 
                                 <Link
                                     onClick={() => { handleLogout() }}
                                     style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
                                 >
-                                    Logout
+                                    ออกจากระบบ
                                 </Link>
                             </>
                         )}
@@ -180,7 +180,7 @@ const ReserveForm = () => {
 
 
                 </Header>
-                <CardHistory />
+                {/* <CardHistory /> */}
             </Layout>
 
         </Flex>

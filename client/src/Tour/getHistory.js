@@ -41,6 +41,7 @@ const CardHistory = ({ data, filterData }) => {
         "http://localhost:1337/api/users/me?populate=role"
       );
       setUsername(userResult.data.username);
+      setUserId(userResult.data.user_id);
     } catch (error) {
       console.error(error);
     }
@@ -89,6 +90,7 @@ const CardHistory = ({ data, filterData }) => {
   const getData = async () => {
     try {
       const res = await axios.get("http://localhost:1337/api/reserves?populate=*");
+      console.log("History: ", res.data.data)
       setAllData(res.data.data);
     } catch (error) {
       console.error("error fetching tour data", error);
