@@ -141,6 +141,11 @@ const LoginForm = () => {
     margin: "0 auto",
   };
 
+  const WarningStyle = {
+    color: "red",
+    fontWeight: "bold",
+  };
+
   return (
     <div style={{}}>
       <Header style={headerStyle}>
@@ -207,7 +212,7 @@ const LoginForm = () => {
 
         {/* Error Modal */}
         <Modal
-          title="Warning"
+          title={<span style={WarningStyle}>Warning</span>}
           visible={showErrorModal}
           onCancel={handleCloseErrorModal}
           footer={null}
