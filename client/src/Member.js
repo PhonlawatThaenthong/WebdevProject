@@ -182,10 +182,10 @@ const MemberForm = () => {
                         <span style={NormalTextStyle}>ourney</span>
                     </Col>
                     <Col span={isSmallScreen ? 12 : 22}>
-                    {isSmallScreen ? (
-                           <div style={{ textAlign: isSmallScreen ? 'right' : 'left' }}>
+                        {isSmallScreen ? (
+                            <div style={{ textAlign: isSmallScreen ? 'right' : 'left' }}>
                                 <Dropdown overlay={menu} trigger={['click']} visible={menuVisible} onVisibleChange={setMenuVisible}>
-                                <UserOutlined style={{ fontSize: '25px' , marginRight: '8px' }} />
+                                    <UserOutlined style={{ fontSize: '25px', marginRight: '8px' }} />
                                 </Dropdown>
                                 <Popover
                                     content={searchPopoverContent}
@@ -195,7 +195,7 @@ const MemberForm = () => {
                                 >
                                     <SearchOutlined style={{ fontSize: '25px', marginLeft: '8px' }} />
                                 </Popover>
-                                </div>
+                            </div>
                         ) : (
                             <>
                                 <Link onClick={() => {

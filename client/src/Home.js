@@ -109,28 +109,29 @@ const HomeForm = () => {
       <SearchBar onSearch={handleSearch} />
     </div>
   );
+  const handleHeaderClick = () => {
+    navigate('/login');
+  };
+
 
   const headerStyle = {
-    textAlign: "center",
-    color: "#fff",
+    textAlign: 'center',
+    color: '#fff',
     height: 120,
     paddingInline: "center",
-    lineHeight: "120x",
-    backgroundColor: "#1C3953",
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    fontWeight: "bold",
-    fontSize: "45px",
-
+    lineHeight: '120x',
+    backgroundColor: '#1C3953',
+    display: 'flex',
+    alignItems: 'center',
+    fontWeight: 'bold',
+    fontSize: '45px',
+    width: isSmallScreen ? '100%' : 'auto',
   };
 
   const layoutStyle = {
     borderRadius: 0,
-    overflow: "hidden",
-    backgroundColor: "#EEEEEE",
-    width: "100%",
-    minHeight: "100vh",
+    overflow: 'hidden',
+    backgroundColor: '#EEEEEE',
   };
 
   const blueTextStyle = {
@@ -159,7 +160,7 @@ const HomeForm = () => {
       </Helmet>
       {contextHolder}
       <Layout style={layoutStyle}>
-        <Header style={headerStyle} className="headerStyle">
+        <Header style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }} className="headerStyle" >
           <Col>
             <span style={blueTextStyle} className="blueTextStyle">H</span>
             <span style={NormalTextStyle} className="NormalTextStyle">AT</span>
@@ -171,22 +172,21 @@ const HomeForm = () => {
             <span style={NormalTextStyle} className="NormalTextStyle">ourney</span>
           </Col>
 
-          <Col span={22}>
+          <Col span={isSmallScreen ? 12 : 22}>
             {isSmallScreen ? (
-              <>
-                <Link to="/login">
-                  <Dropdown overlay={menu} trigger={['click']} visible={menuVisible} onVisibleChange={setMenuVisible}>
-                    <Button icon={<UserOutlined />} />
-                  </Dropdown></Link>
+              <div style={{ textAlign: isSmallScreen ? 'right' : 'left' }}>
+                <Dropdown overlay={menu} trigger={['click']} visible={menuVisible} onVisibleChange={setMenuVisible}>
+                  <UserOutlined onClick={isSmallScreen ? handleHeaderClick : undefined} style={{ fontSize: '25px', marginRight: '8px' }} />
+                </Dropdown>
                 <Popover
                   content={searchPopoverContent}
                   trigger="click"
                   visible={searchPopoverVisible}
                   onVisibleChange={setSearchPopoverVisible}
                 >
-                  <Button icon={<SearchOutlined />} />
+                  <SearchOutlined style={{ fontSize: '25px', marginLeft: '8px' }} />
                 </Popover>
-              </>
+              </div>
             ) : (
               <>
                 <SearchBar onSearch={handleSearch} />

@@ -255,7 +255,7 @@ const AdminForm = () => {
       </Modal>
 
       <Layout style={layoutStyle}>
-        <Header style={headerStyle}>
+        <Header style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }} className="headerStyle" >
           <Col>
             <span style={blueTextStyle}>H</span>
             <span style={NormalTextStyle}>AT</span>
@@ -266,12 +266,11 @@ const AdminForm = () => {
             <span style={blueTextStyle}>J</span>
             <span style={NormalTextStyle}>ourney</span>
           </Col>
-          <Col span={22}>
+          <Col span={isSmallScreen ? 12 : 22}>
             {isSmallScreen ? (
-              <>
-
+              <div style={{ textAlign: isSmallScreen ? 'right' : 'left' }}>
                 <Dropdown overlay={menu} trigger={['click']} visible={menuVisible} onVisibleChange={setMenuVisible}>
-                  <Button icon={<UserOutlined />} />
+                  <UserOutlined style={{ fontSize: '25px', marginRight: '8px' }} />
                 </Dropdown>
                 <Popover
                   content={searchPopoverContent}
@@ -279,9 +278,9 @@ const AdminForm = () => {
                   visible={searchPopoverVisible}
                   onVisibleChange={setSearchPopoverVisible}
                 >
-                  <Button icon={<SearchOutlined />} />
+                  <SearchOutlined style={{ fontSize: '25px', marginLeft: '8px' }} />
                 </Popover>
-              </>
+              </div>
             ) : (
               <>
                 <Link
