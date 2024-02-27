@@ -12,7 +12,7 @@ import {
     Flex,
     Space,
     List,
-    Card,
+    Card, Menu, Dropdown, Popover
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +21,8 @@ import axios from 'axios';
 import useLocalState from './localStorage.js';
 import CardHistory from "./Tour/getHistory.js";
 import { useMediaQuery } from "react-responsive";
+import { MenuOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons';
+
 
 
 import SearchBar from "./Navbar/SearchBar";
@@ -34,6 +36,7 @@ const ReserveForm = () => {
     const [jwt, setjwt] = useLocalState(null, 'jwt');
     const [username, setUsername] = useState('')
     const isSmallScreen = useMediaQuery({ maxWidth: 768 });
+    const [menuVisible, setMenuVisible] = useState(false);
 
     const roleChecker = async () => {
         try {
@@ -65,6 +68,29 @@ const ReserveForm = () => {
             navigate("/");
         } else roleChecker();
     }, []);
+
+    const menu = (
+        <Menu >
+            {jwt ? (
+                <>
+                    <Menu.Item onClick={() => { navigate("/history"); }} key="username">
+                        <span style={{ color: '#48D3FF' }}>{username && `Hello, ${username}`}</span>
+                    </Menu.Item>
+                    <Menu.Item key="logout" onClick={() => handleLogout()}>
+                        Logout
+                    </Menu.Item>
+                    <Menu.Item key="back" onClick={() => { navigate("/member"); }}>
+                        Back
+                    </Menu.Item>
+                </>
+            ) : (
+                <>
+
+                </>
+            )}
+        </Menu>
+    );
+
 
 
     const headerStyle = {
@@ -122,21 +148,35 @@ const ReserveForm = () => {
                         <span style={blueTextStyle}>J</span>
                         <span style={NormalTextStyle}>ourney</span>
                     </Col>
-                    <Link
-                        onClick={() => {
-                            navigate("/history");
-                        }}
-                        style={{ marginLeft: "50px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
-                    >
-                        สวัสดี คุณ {username}
-                    </Link>
+                    <Col span={isSmallScreen ? 12 : 22}>
+                        {isSmallScreen ? (
+                            <div style={{ textAlign: isSmallScreen ? 'right' : 'left' }}>
+                                <Dropdown overlay={menu} trigger={['click']} visible={menuVisible} onVisibleChange={setMenuVisible}>
+                                    <UserOutlined style={{ fontSize: '25px', marginRight: '8px' }} />
+                                </Dropdown>
 
-                    <Link
-                        onClick={() => { handleLogout() }}
-                        style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
-                    >
-                        Logout
-                    </Link>
+                            </div>
+                        ) : (
+                            <>
+                                <Link
+                                    onClick={() => {
+                                        navigate("/history");
+                                    }}
+                                    style={{ marginLeft: "50px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
+                                >
+                                    สวัสดี คุณ {username}
+                                </Link>
+
+                                <Link
+                                    onClick={() => { handleLogout() }}
+                                    style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
+                                >
+                                    Logout
+                                </Link>
+                            </>
+                        )}
+                    </Col>
+
 
 
                 </Header>

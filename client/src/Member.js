@@ -98,10 +98,6 @@ const MemberForm = () => {
             )}
         </Menu>
     );
-    const handleHeaderClick = () => {
-        navigate('/Member');
-    };
-
 
     const searchPopoverContent = (
         <div>
@@ -170,7 +166,7 @@ const MemberForm = () => {
             </Helmet>
             {contextHolder}
             <Layout style={layoutStyle}>
-                <Header onClick={isSmallScreen ? handleHeaderClick : undefined} style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
+                <Header style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
                     <Col>
                         <span style={blueTextStyle}>H</span>
                         <span style={NormalTextStyle}>AT</span>
