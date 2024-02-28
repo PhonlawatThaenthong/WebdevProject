@@ -29,6 +29,8 @@ import { MenuOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons';
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
 import PromotionalSlider from './PromotionalSlider';
+import picture from './Image/Hat_Yai_Journey.png';
+import picture2 from './Image/test.jpg';
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -52,8 +54,8 @@ const AdminForm = () => {
   const [allData, setAllData] = useState([]);
 
   const promotionImages = [
-    'https://i0.wp.com/www.trafalgar.com/real-word/wp-content/uploads/sites/3/2019/12/mountain-views.jpeg?fit=750%2C500&ssl=1',
-    'https://drifttravel.com/wp-content/uploads/2023/03/image-from-rawpixel-id-428743-jpeg-1-640x427.jpg',
+    picture,
+    picture2,
     'https://www.travelandleisure.com/thmb/iKSVprPgcIoY8G-xSpXdMuAS3Ns=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-great-barrier-reef-islands-australia-WBFAQ1023-4754187baade440197c4b03c6cb3366f.jpg',
   ];
 
