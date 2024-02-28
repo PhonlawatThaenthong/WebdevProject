@@ -25,6 +25,7 @@ code {
   max-width: 600px;
   margin: 0 auto;
   min-height: 63vh;
+  margin-top: 50px;
 }
 
 .slider-item {

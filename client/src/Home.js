@@ -24,6 +24,7 @@ import { useMediaQuery } from "react-responsive";
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
 import PromotionalSlider from './PromotionalSlider';
+import picture from './Image/Hat_Yai_Journey.png';
 
 
 
@@ -41,7 +42,7 @@ const HomeForm = () => {
   const [searchPopoverVisible, setSearchPopoverVisible] = useState(false);
 
   const promotionImages = [
-    'https://i0.wp.com/www.trafalgar.com/real-word/wp-content/uploads/sites/3/2019/12/mountain-views.jpeg?fit=750%2C500&ssl=1',
+    picture,
     'https://drifttravel.com/wp-content/uploads/2023/03/image-from-rawpixel-id-428743-jpeg-1-640x427.jpg',
     'https://www.travelandleisure.com/thmb/iKSVprPgcIoY8G-xSpXdMuAS3Ns=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-great-barrier-reef-islands-australia-WBFAQ1023-4754187baade440197c4b03c6cb3366f.jpg',
   ];
@@ -158,6 +159,10 @@ const HomeForm = () => {
     fontSize: isSmallScreen ? "24px" : "45px",
   };
 
+  const promotionalSliderStyle = {
+    marginTop: isSmallScreen ? '150px' : '50px',
+  };
+
   return (
     <Flex gap="middle" wrap="wrap">
       <Helmet>
@@ -206,7 +211,7 @@ const HomeForm = () => {
             )}
           </Col>
         </Header>
-        <PromotionalSlider images={promotionImages} />
+        <PromotionalSlider images={promotionImages}/>
         <h2 style={{textAlign: 'center',fontWeight: 'bold',fontSize: '45px',}}>
           Tour
           </h2>
