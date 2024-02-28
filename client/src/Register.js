@@ -6,6 +6,8 @@ import useLocalState from './localStorage.js';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from "react-responsive";
+import Logo from './Image/logo.png'
+
 
 const { Header } = Layout;
 
@@ -234,7 +236,9 @@ const RegisterForm = () => {
                     </Button>
                 </Modal>
             </Row>
-            <Header style={headerbottom}></Header>
+            <Header style={headerbottom}>
+            <img src={Logo} alt="Logo" style={{ width: 'auto', height: '30px', }} />
+            </Header>
         </div>
     );
 };

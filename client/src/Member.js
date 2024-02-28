@@ -26,6 +26,7 @@ import SearchBar from "./Navbar/SearchBar";
 import PromotionalSlider from './PromotionalSlider';
 import picture from './Image/Hat_Yai_Journey.png';
 import picture2 from './Image/test.jpg';
+import Logo from './Image/logo.png'
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -45,7 +46,7 @@ const MemberForm = () => {
         picture,
         picture2,
         'https://www.travelandleisure.com/thmb/iKSVprPgcIoY8G-xSpXdMuAS3Ns=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-great-barrier-reef-islands-australia-WBFAQ1023-4754187baade440197c4b03c6cb3366f.jpg',
-      ];
+    ];
 
     const handleSearch = async (searchText) => {
         try {
@@ -144,6 +145,22 @@ const MemberForm = () => {
         width: isSmallScreen ? '100%' : 'auto',
     };
 
+    const headerbottom = {
+        textAlign: 'center',
+        color: '#fff',
+        height: 60,
+        paddingInline: "center",
+        lineHeight: '120x',
+        backgroundColor: '#1C3953',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontWeight: 'bold',
+        fontSize: '45px',
+        width: '100%',
+
+    };
+
     const layoutStyle = {
         borderRadius: 0,
         overflow: 'hidden',
@@ -228,6 +245,9 @@ const MemberForm = () => {
                 </h2>
                 <Tour data={allData} filterData={filterData} />
             </Layout>
+            <Header style={headerbottom}>
+                <img src={Logo} alt="Logo" style={{ width: 'auto', height: '50px', }} />
+            </Header>
         </Flex>
     );
 };
