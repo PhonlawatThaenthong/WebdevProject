@@ -144,7 +144,7 @@ const Tour = ({ data, filterData }) => {
   const toursToDisplay = filterData.length > 0 ? filterData : data;
 
   return (
-    
+
     <div
       style={{
         display: isSmallScreen ? "grid" : "flex",
@@ -164,69 +164,158 @@ const Tour = ({ data, filterData }) => {
         </b>
       ) : (
         <Row gutter={[16, 16]}>
-        {toursToDisplay.map(({ id, attributes }) => (
-          <Col key={id} xs={24} sm={12} md={8} lg={8}>
-          <Card key={id} style={{ width: 300, margin: 20, marginTop: 50 }}>
-            {currentPage === "/admin" ? (
-              <Modal
-                title={attributes.tour_name}
-                open={isModalOpen && selectedTourId === id}
-                onCancel={() => {
-                  setIsModalOpen(false);
-                }}
-                footer={[
-                  <Button
-                    key="back"
-                    onClick={() => {
+          {toursToDisplay.map(({ id, attributes }) => (
+            <Col key={id} xs={24} sm={12} md={8} lg={8}>
+              <Card key={id} style={{ width: 450, margin: 20, marginTop: 50 }}>
+                {currentPage === "/admin" ? (
+                  <Modal
+                    title={attributes.tour_name}
+                    open={isModalOpen && selectedTourId === id}
+                    onCancel={() => {
                       setIsModalOpen(false);
                     }}
+                    footer={[
+                      <Button
+                        key="back"
+                        onClick={() => {
+                          setIsModalOpen(false);
+                        }}
+                      >
+                        ปิด
+                      </Button>,
+                      <Popconfirm
+                        title="Delete the tour"
+                        description="Are you sure to delete this tour?"
+                        onConfirm={() => {
+                          setIsModalOpen(false);
+                          handleTourDelete(id);
+                        }}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Button danger>ลบ</Button>
+                      </Popconfirm>,
+                      <Button
+                        key="submit"
+                        type="primary"
+                        onClick={() => {
+                          setIsModalOpen(false);
+                        }}
+                      >
+                        บันทึก
+                      </Button>,
+                    ]}
                   >
-                    ปิด
-                  </Button>,
-                  <Popconfirm
-                    title="Delete the tour"
-                    description="Are you sure to delete this tour?"
-                    onConfirm={() => {
+                    {/* Admin Modal*/}
+                    <div style={{ textAlign: "center" }}>
+                      <Image
+                        src={
+                          attributes.tour_image && attributes.tour_image.data
+                            ? `http://localhost:1337${attributes.tour_image.data.attributes.formats.thumbnail.url}`
+                            : ""
+                        }
+                        preview={false}
+                      />
+                    </div>
+                    {/* Admin Modal*/}
+                    <br />
+                    สถานะ:{" "}
+                    <span style={{ color: getStatusColor(attributes.status) }}>
+                      <b>{getStatus(attributes.status)}</b>
+                      <b>
+                        {" "}
+                        {"(" +
+                          attributes.user_amount +
+                          "/" +
+                          attributes.user_max +
+                          ")"}
+                      </b>
+                    </span>
+                    <br />
+                    ราคา: {getPrice(attributes.price)} บาท / ท่าน
+                    <br />
+                    ระยะเวลา:
+                    <br />
+                    <br></br>
+                  </Modal>
+                ) : (
+                  // VVVVVVVV THIS IS NON ADMIN MODAL PLEASE EDIT THIS ONLY /////////////////////////////////////////////////////
+                  <Modal
+                    title={attributes.tour_name}
+                    open={isModalOpen && selectedTourId === id}
+                    onCancel={() => {
                       setIsModalOpen(false);
-                      handleTourDelete(id);
                     }}
-                    okText="Yes"
-                    cancelText="No"
+                    footer={[
+                      <Button
+                        key="back"
+                        onClick={() => {
+                          setIsModalOpen(false);
+                        }}
+                      >
+                        ปิด
+                      </Button>,
+                      <Button key="submit" type="primary" onClick={handleSelect}>
+                        จองทัวร์
+                      </Button>,
+                    ]}
                   >
-                    <Button danger>ลบ</Button>
-                  </Popconfirm>,
-                  <Button
-                    key="submit"
-                    type="primary"
-                    onClick={() => {
-                      setIsModalOpen(false);
-                    }}
-                  >
-                    บันทึก
-                  </Button>,
-                ]}
-              >
-                {/* Admin Modal*/}
-                <Image
-                  src={
-                    attributes.tour_image && attributes.tour_image.data
-                      ? `http://localhost:1337${attributes.tour_image.data.attributes.formats.thumbnail.url}`
-                      : ""
-                  }
-                  preview={false}
-                />
-                {/* Admin Modal*/}
+                    {/* User Modal*/}
+                    <div style={{ textAlign: "center" }}>
+                      <Image
+                        src={
+                          attributes.tour_image && attributes.tour_image.data
+                            ? `http://localhost:1337${attributes.tour_image.data.attributes.formats.thumbnail.url}`
+                            : ""
+                        }
+                        preview={false}
+                      />
+                    </div>
+                    {/* User Modal*/}
+                    <br />
+                    สถานะ:{" "}
+                    <span style={{ color: getStatusColor(attributes.status) }}>
+                      <b>{getStatus(attributes.status)}</b>
+                      <b>
+                        {" "}
+                        {"(" +
+                          attributes.user_amount +
+                          "/" +
+                          attributes.user_max +
+                          ")"}
+                      </b>
+                    </span>
+                    <br />
+                    ราคา: {getPrice(attributes.price)} บาท
+                    <br />
+                    ระยะเวลา:
+                    <br />
+                    รายละเอียด:
+                    <br />
+                    {attributes.description}
+                    <br></br>
+
+                  </Modal>
+                )}
+                <div style={{ textAlign: "center" }}>
+                  <Image
+                    src={
+                      attributes.tour_image && attributes.tour_image.data
+                        ? `http://localhost:1337${attributes.tour_image.data.attributes.formats.thumbnail.url}`
+                        : ""
+                    }
+                    preview={false}
+                  />
+                </div>
+                <br />
+                <b style={{ fontSize: "18px" }}>{attributes.tour_name}</b>
                 <br />
                 สถานะ:{" "}
                 <span style={{ color: getStatusColor(attributes.status) }}>
                   <b>{getStatus(attributes.status)}</b>
                   <b>
                     {" "}
-                    {"(" +
-                      attributes.user_amount +
-                      "/" +
-                      attributes.user_max +
-                      ")"}
+                    {"(" + attributes.user_amount + "/" + attributes.user_max + ")"}
                   </b>
                 </span>
                 <br />
@@ -235,120 +324,35 @@ const Tour = ({ data, filterData }) => {
                 ระยะเวลา:
                 <br />
                 <br></br>
-              </Modal>
-            ) : (
-              // VVVVVVVV THIS IS NON ADMIN MODAL PLEASE EDIT THIS ONLY /////////////////////////////////////////////////////
-              <Modal
-                title={attributes.tour_name}
-                open={isModalOpen && selectedTourId === id}
-                onCancel={() => {
-                  setIsModalOpen(false);
-                }}
-                footer={[
+                {currentPage === "/admin" ? (
                   <Button
-                    key="back"
-                    onClick={() => {
-                      setIsModalOpen(false);
+                    type="primary"
+                    onClick={() => handleOpenModal(id)}
+                    style={{
+                      display: "block",
+                      margin: "0 auto",
+                      backgroundColor: "#DE3163",
                     }}
                   >
-                    ปิด
-                  </Button>,
-                  <Button key="submit" type="primary" onClick={handleSelect}>
-                    จองทัวร์
-                  </Button>,
-                ]}
-              >
-                {/* User Modal*/}
-                <Image
-                  src={
-                    attributes.tour_image && attributes.tour_image.data
-                      ? `http://localhost:1337${attributes.tour_image.data.attributes.formats.thumbnail.url}`
-                      : ""
-                  }
-                  preview={false}
-                />
-                {/* User Modal*/}
-                <br />
-                สถานะ:{" "}
-                <span style={{ color: getStatusColor(attributes.status) }}>
-                  <b>{getStatus(attributes.status)}</b>
-                  <b>
-                    {" "}
-                    {"(" +
-                      attributes.user_amount +
-                      "/" +
-                      attributes.user_max +
-                      ")"}
-                  </b>
-                </span>
-                <br />
-                ราคา: {getPrice(attributes.price)} บาท
-                <br />
-                ระยะเวลา:
-                <br />
-                รายละเอียด:
-                <br />
-                {attributes.description}
-                <br></br>
-
-              </Modal>
-            )}
-            {/* Card Image */}
-            <Image
-              src={
-                attributes.tour_image && attributes.tour_image.data
-                  ? `http://localhost:1337${attributes.tour_image.data.attributes.formats.thumbnail.url}`
-                  : ""
-              }
-              preview={false}
-            />
-            {/* Card Image */}
-            <br />
-            <b style={{ fontSize: "18px" }}>{attributes.tour_name}</b>
-            <br />
-            สถานะ:{" "}
-            <span style={{ color: getStatusColor(attributes.status) }}>
-              <b>{getStatus(attributes.status)}</b>
-              <b>
-                {" "}
-                {"(" + attributes.user_amount + "/" + attributes.user_max + ")"}
-              </b>
-            </span>
-            <br />
-            ราคา: {getPrice(attributes.price)} บาท / ท่าน
-            <br />
-            ระยะเวลา:
-            <br />
-            <br></br>
-            {currentPage === "/admin" ? (
-              <Button
-                type="primary"
-                onClick={() => handleOpenModal(id)}
-                style={{
-                  display: "block",
-                  margin: "0 auto",
-                  backgroundColor: "#DE3163",
-                }}
-              >
-                Edit
-              </Button>
-            ) : (
-              // VVVVVVVV THIS IS NON ADMIN MODAL PLEASE EDIT THIS ONLY /////////////////////////////////////////////////////
-              <Button
-                type="primary"
-                onClick={() => handleOpenModal(id)}
-                style={{ display: "block", margin: "0 auto" }}
-              >
-                ดูเพิ่มเติม
-              </Button>
-            )}
-          </Card>
-          </Col>
-        ))}
+                    Edit
+                  </Button>
+                ) : (
+                  // VVVVVVVV THIS IS NON ADMIN MODAL PLEASE EDIT THIS ONLY /////////////////////////////////////////////////////
+                  <Button
+                    type="primary"
+                    onClick={() => handleOpenModal(id)}
+                    style={{ display: "block", margin: "0 auto" }}
+                  >
+                    ดูเพิ่มเติม
+                  </Button>
+                )}
+              </Card>
+            </Col>
+          ))}
         </Row>
       )}
     </div>
-    
+
   );
 };
 

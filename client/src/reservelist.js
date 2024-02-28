@@ -91,8 +91,6 @@ const ReserveForm = () => {
         </Menu>
     );
 
-
-
     const headerStyle = {
         textAlign: 'center',
         color: '#fff',
