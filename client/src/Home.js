@@ -207,6 +207,9 @@ const HomeForm = () => {
           </Col>
         </Header>
         <PromotionalSlider images={promotionImages} />
+        <h2 style={{textAlign: 'center',fontWeight: 'bold',fontSize: '45px',}}>
+          Tour
+          </h2>
         <Tour data={allData} filterData={filterData} />
       </Layout>
     </Flex>

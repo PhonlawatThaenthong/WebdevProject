@@ -24,6 +24,7 @@ code {
   overflow: hidden;
   max-width: 600px;
   margin: 0 auto;
+  min-height: 63vh;
 }
 
 .slider-item {
