@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Modal, Row, Col, Card, Layout } from 'antd';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
@@ -140,7 +140,7 @@ const RegisterForm = () => {
     };
 
     const rowStyle = {
-        minHeight: "82vh",
+        minHeight: isSmallScreen ? "82vh" : "84vh",
         alignItems: 'center',
         justifyContent: 'center',
         maxWidth: "1200px",

@@ -133,7 +133,7 @@ const LoginForm = () => {
   };
 
   const rowStyle = {
-    minHeight: "74vh",
+    minHeight: isSmallScreen ? "74vh" : "77vh",
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
