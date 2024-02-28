@@ -144,6 +144,7 @@ const Tour = ({ data, filterData }) => {
   const toursToDisplay = filterData.length > 0 ? filterData : data;
 
   return (
+    
     <div
       style={{
         display: isSmallScreen ? "grid" : "flex",
@@ -162,7 +163,9 @@ const Tour = ({ data, filterData }) => {
           <LoadingIcon />
         </b>
       ) : (
-        toursToDisplay.map(({ id, attributes }) => (
+        <Row gutter={[16, 16]}>
+        {toursToDisplay.map(({ id, attributes }) => (
+          <Col key={id} xs={24} sm={12} md={8} lg={8}>
           <Card key={id} style={{ width: 300, margin: 20, marginTop: 50 }}>
             {currentPage === "/admin" ? (
               <Modal
@@ -340,9 +343,12 @@ const Tour = ({ data, filterData }) => {
               </Button>
             )}
           </Card>
-        ))
+          </Col>
+        ))}
+        </Row>
       )}
     </div>
+    
   );
 };
 
