@@ -17,3 +17,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.promotional-slider-wrapper {
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.slider-item {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider-item img {
+  max-width: 100%;
+  height: auto;
+}
