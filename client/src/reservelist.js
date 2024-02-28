@@ -180,7 +180,7 @@ const ReserveForm = () => {
 
 
                 </Header>
-                {/* <CardHistory /> */}
+                <CardHistory />
             </Layout>
 
         </Flex>
