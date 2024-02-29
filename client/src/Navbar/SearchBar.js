@@ -8,15 +8,22 @@ const SearchBar = ({ onSearch }) => {
 
   const handleSearch = () => {
     onSearch(searchText);
-  }
+  };
 
   const searchInput = {
     placeholder: "ค้นหาสถานที่ท่องเที่ยว หรือโปรแกรมทัวร์",
     color: "black",
-    width: isSmallScreen? "75%":"30%",
+    width: isSmallScreen ? "75%" : "30%",
     height: "40px",
     fontWeight: "bold",
     justifyContent: "center",
+  };
+
+  const searchButtonStyle = {
+    height: "40px",
+    marginLeft: "5px",
+    paddingLeft: "20px",
+    paddingRight: "20px",
   };
 
   return (
@@ -29,9 +36,10 @@ const SearchBar = ({ onSearch }) => {
       />
       <Button
         type="primary"
-        style={{ height: "40px" }}
+        style={searchButtonStyle}
         onClick={() => handleSearch()}
-      >ค้นหา
+      >
+        ค้นหา
       </Button>
     </>
   );
