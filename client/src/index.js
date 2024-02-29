@@ -16,6 +16,7 @@ import Payment from './Payment';
 import UploadReceipt from './UploadReceipt';
 import AllStepDone from './AllStepDone';
 import ReserveForm from './reservelist';
+import AllTour from './pages/AllTour';
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
   {
     path: "/history",
     element: <ReserveForm/>,
+  },
+  {
+    path: "/alltour",
+    element: <AllTour/>,
   },
 ]);
 
