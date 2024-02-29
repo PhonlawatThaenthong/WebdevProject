@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useLocalState from "./localStorage.js";
 import { useMediaQuery } from "react-responsive";
+import Logo from './Image/logo.png'
 
 const { Header } = Layout;
 
@@ -223,7 +224,9 @@ const LoginForm = () => {
           </Button>
         </Modal>
       </Row>
-      <Header style={headerbottom}></Header>
+      <Header style={headerbottom}> 
+      <img src={Logo} alt="Logo" style={{ width: 'auto', height: '50px', }} />
+      </Header>
     </div>
   );
 };

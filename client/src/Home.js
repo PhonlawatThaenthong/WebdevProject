@@ -24,6 +24,9 @@ import { useMediaQuery } from "react-responsive";
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
 import PromotionalSlider from './PromotionalSlider';
+import picture from './Image/Hat_Yai_Journey.png';
+import picture2 from './Image/test.jpg';
+import Logo from './Image/logo.png'
 
 
 
@@ -41,8 +44,8 @@ const HomeForm = () => {
   const [searchPopoverVisible, setSearchPopoverVisible] = useState(false);
 
   const promotionImages = [
-    'https://i0.wp.com/www.trafalgar.com/real-word/wp-content/uploads/sites/3/2019/12/mountain-views.jpeg?fit=750%2C500&ssl=1',
-    'https://drifttravel.com/wp-content/uploads/2023/03/image-from-rawpixel-id-428743-jpeg-1-640x427.jpg',
+    picture,
+    picture2,
     'https://www.travelandleisure.com/thmb/iKSVprPgcIoY8G-xSpXdMuAS3Ns=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-great-barrier-reef-islands-australia-WBFAQ1023-4754187baade440197c4b03c6cb3366f.jpg',
   ];
 
@@ -134,6 +137,22 @@ const HomeForm = () => {
     width: isSmallScreen ? '100%' : 'auto',
   };
 
+  const headerbottom = {
+    textAlign: 'center',
+    color: '#fff',
+    height: 60,
+    paddingInline: "center",
+    lineHeight: '120x',
+    backgroundColor: '#1C3953',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: 'bold',
+    fontSize: '45px',
+    width: '100%',
+
+  };
+
   const layoutStyle = {
     borderRadius: 0,
     overflow: 'hidden',
@@ -156,6 +175,10 @@ const HomeForm = () => {
     color: "#1C3953",
     fontWeight: "bold",
     fontSize: isSmallScreen ? "24px" : "45px",
+  };
+
+  const promotionalSliderStyle = {
+    marginTop: isSmallScreen ? '150px' : '50px',
   };
 
   return (
@@ -207,11 +230,14 @@ const HomeForm = () => {
           </Col>
         </Header>
         <PromotionalSlider images={promotionImages} />
-        <h2 style={{textAlign: 'center',fontWeight: 'bold',fontSize: '45px',}}>
+        <h2 style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '45px', }}>
           Tour
-          </h2>
+        </h2>
         <Tour data={allData} filterData={filterData} />
       </Layout>
+      <Header style={headerbottom}>
+        <img src={Logo} alt="Logo" style={{ width: 'auto', height: '50px', }} />
+      </Header>
     </Flex>
 
   );
