@@ -15,7 +15,9 @@ import {
   InputNumber,
   DatePicker,
   Upload,
-  Menu, Dropdown, Popover
+  Menu,
+  Dropdown,
+  Popover,
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -24,14 +26,14 @@ import axios from "axios";
 import useLocalState from "./localStorage.js";
 import { useMediaQuery } from "react-responsive";
 import { UploadOutlined } from "@ant-design/icons";
-import { MenuOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons';
+import { MenuOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
 
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
-import PromotionalSlider from './PromotionalSlider';
-import picture from './Image/Hat_Yai_Journey.png';
-import picture2 from './Image/test.jpg';
-import Logo from './Image/logo.png'
+import PromotionalSlider from "./PromotionalSlider";
+import picture from "./Image/Hat_Yai_Journey.png";
+import picture2 from "./Image/test.jpg";
+import Logo from "./Image/logo.png";
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -57,7 +59,7 @@ const AdminForm = () => {
   const promotionImages = [
     picture,
     picture2,
-    'https://www.travelandleisure.com/thmb/iKSVprPgcIoY8G-xSpXdMuAS3Ns=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-great-barrier-reef-islands-australia-WBFAQ1023-4754187baade440197c4b03c6cb3366f.jpg',
+    "https://www.travelandleisure.com/thmb/iKSVprPgcIoY8G-xSpXdMuAS3Ns=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-great-barrier-reef-islands-australia-WBFAQ1023-4754187baade440197c4b03c6cb3366f.jpg",
   ];
 
   const handleSearch = async (searchText) => {
@@ -153,20 +155,25 @@ const AdminForm = () => {
   }, []);
 
   const menu = (
-    <Menu >
+    <Menu>
       {jwt ? (
         <>
-          <Menu.Item onClick={() => { navigate("/history"); }} key="username">
-            <span style={{ color: '#48D3FF' }}>{username && `สวัสดีคุณ, ${username}`}</span>
+          <Menu.Item
+            onClick={() => {
+              navigate("/history");
+            }}
+            key="username"
+          >
+            <span style={{ color: "#48D3FF" }}>
+              {username && `สวัสดีคุณ, ${username}`}
+            </span>
           </Menu.Item>
           <Menu.Item key="logout" onClick={() => handleLogout()}>
             ออกจากระบบ
           </Menu.Item>
         </>
       ) : (
-        <>
-
-        </>
+        <></>
       )}
     </Menu>
   );
@@ -191,19 +198,18 @@ const AdminForm = () => {
   };
 
   const headerbottom = {
-    textAlign: 'center',
-    color: '#fff',
+    textAlign: "center",
+    color: "#fff",
     height: 60,
     paddingInline: "center",
-    lineHeight: '120x',
-    backgroundColor: '#1C3953',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontWeight: 'bold',
-    fontSize: '45px',
-    width: '100%',
-
+    lineHeight: "120x",
+    backgroundColor: "#1C3953",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontWeight: "bold",
+    fontSize: "45px",
+    width: "100%",
   };
 
   const layoutStyle = {
@@ -219,8 +225,8 @@ const AdminForm = () => {
   };
 
   const NormalTextStyle = {
-    color: '#FFFFFF',
-    fontWeight: 'bold',
+    color: "#FFFFFF",
+    fontWeight: "bold",
     fontSize: isSmallScreen ? "24px" : "45px",
   };
 
@@ -281,7 +287,13 @@ const AdminForm = () => {
       </Modal>
 
       <Layout style={layoutStyle}>
-        <Header style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }} className="headerStyle" >
+        <Header
+          style={{
+            ...headerStyle,
+            justifyContent: isSmallScreen ? "center" : "flex-start",
+          }}
+          className="headerStyle"
+        >
           <Col>
             <span style={blueTextStyle}>H</span>
             <span style={NormalTextStyle}>AT</span>
@@ -294,9 +306,16 @@ const AdminForm = () => {
           </Col>
           <Col span={isSmallScreen ? 12 : 22}>
             {isSmallScreen ? (
-              <div style={{ textAlign: isSmallScreen ? 'right' : 'left' }}>
-                <Dropdown overlay={menu} trigger={['click']} visible={menuVisible} onVisibleChange={setMenuVisible}>
-                  <UserOutlined style={{ fontSize: '25px', marginRight: '8px' }} />
+              <div style={{ textAlign: isSmallScreen ? "right" : "left" }}>
+                <Dropdown
+                  overlay={menu}
+                  trigger={["click"]}
+                  visible={menuVisible}
+                  onVisibleChange={setMenuVisible}
+                >
+                  <UserOutlined
+                    style={{ fontSize: "25px", marginRight: "8px" }}
+                  />
                 </Dropdown>
                 <Popover
                   content={searchPopoverContent}
@@ -304,7 +323,9 @@ const AdminForm = () => {
                   visible={searchPopoverVisible}
                   onVisibleChange={setSearchPopoverVisible}
                 >
-                  <SearchOutlined style={{ fontSize: '25px', marginLeft: '8px' }} />
+                  <SearchOutlined
+                    style={{ fontSize: "25px", marginLeft: "8px" }}
+                  />
                 </Popover>
               </div>
             ) : (
@@ -313,24 +334,36 @@ const AdminForm = () => {
                   onClick={() => {
                     navigate("/history");
                   }}
-                  style={{ marginRight: "50px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
+                  style={{
+                    marginRight: "50px",
+                    color: "white",
+                    fontSize: isSmallScreen ? "14px" : "18px",
+                    width: "300px",
+                  }}
                 >
                   สวัสดีคุณ {username}
                 </Link>
                 {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
                 <Link
-                  onClick={() => { handleLogout() }}
-                  style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
+                  onClick={() => {
+                    handleLogout();
+                  }}
+                  style={{
+                    marginLeft: "50px",
+                    color: "white",
+                    fontSize: "18px",
+                  }}
                 >
                   ออกจากระบบ
                 </Link>
               </>
             )}
           </Col>
-
         </Header>
         <PromotionalSlider images={promotionImages} />
-        <h2 style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '45px', }}>
+        <h2
+          style={{ textAlign: "center", fontWeight: "bold", fontSize: "45px" }}
+        >
           Tour
         </h2>
         <Tour data={allData} filterData={filterData} />
@@ -343,8 +376,18 @@ const AdminForm = () => {
           onClick={() => setIsAddMenuOpen(true)}
         />
       </Layout>
+      <Button
+        type="primary"
+        onClick={() => navigate("/alltour")}
+        style={{
+          backgroundColor: "#1C3953",
+          borderColor: "#1C3953",
+        }}
+      >
+        ดูโปรแกรมทั้งหมด
+      </Button>
       <Header style={headerbottom}>
-        <img src={Logo} alt="Logo" style={{ width: 'auto', height: '50px', }} />
+        <img src={Logo} alt="Logo" style={{ width: "auto", height: "50px" }} />
       </Header>
     </Flex>
   );
