@@ -277,7 +277,7 @@ const HomeForm = () => {
         <h2
           style={{ textAlign: "center", fontWeight: "bold", fontSize: "45px" }}
         >
-          All Tours
+          โปรแกรมทัวร์แนะนำ
         </h2>
         <Tour data={allData} filterData={filterData} />
       </Layout>

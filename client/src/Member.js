@@ -280,7 +280,7 @@ const MemberForm = () => {
         <h2
           style={{ textAlign: "center", fontWeight: "bold", fontSize: "45px" }}
         >
-          Tour
+          โปรแกรมทัวร์แนะนำ
         </h2>
         <Tour data={allData} filterData={filterData} />
       </Layout>
