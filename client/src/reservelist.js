@@ -158,9 +158,9 @@ const ReserveForm = () => {
                             <>
                                 <Link
                                     onClick={() => {
-                                        navigate("/history");
+                                        navigate("/");
                                     }}
-                                    style={{ marginLeft: "50px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
+                                    style={{ marginLeft: "500px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
                                 >
                                     สวัสดีคุณ {username}
                                 </Link>
