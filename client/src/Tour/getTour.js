@@ -20,6 +20,7 @@ import {
   message,
 } from "antd";
 import LoadingIcon from "../Navbar/LoadingIcon.js";
+import WebFont from 'webfontloader';
 
 const Tour = ({ data, filterData }) => {
   const location = useLocation();
@@ -100,7 +101,7 @@ const Tour = ({ data, filterData }) => {
           title: "ยืนยันการจองทัวร์",
           content: (
             <div>
-              <p>กรุณายืนยันการจองทัวร์และดำเนินการชำระเงิน</p>
+            <p style={{fontFamily:'Kanit'}}>กรุณายืนยันการจองทัวร์และดำเนินการชำระเงิน</p>
             </div>
           ),
           okText: "ยืนยัน",
@@ -118,7 +119,7 @@ const Tour = ({ data, filterData }) => {
         title: "ท่านยังไม่ได้ล็อกอิน",
         content: (
           <div>
-            <p>กรุณาทำการล็อกอินก่อนจองทัวร์</p>
+            <p style={{fontFamily:'Kanit'}}>กรุณาทำการล็อกอินก่อนจองทัวร์</p>
           </div>
         ),
         okText: "ล็อกอิน",
@@ -147,6 +148,14 @@ const Tour = ({ data, filterData }) => {
 
   const toursToDisplay = filterData.length > 0 ? filterData : data;
 
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ['Sriracha', 'Kanit']
+      }
+    });
+   }, []);
+
   return (
 
     <div
@@ -170,7 +179,7 @@ const Tour = ({ data, filterData }) => {
         <Row gutter={[16, 16]}>
           {toursToDisplay.map(({ id, attributes }) => (
             <Col key={id} xs={24} sm={12} md={8} lg={8}>
-              <Card key={id} style={{ width: 450, margin: 20, marginTop: 50 }}>
+              <Card key={id} style={{ fontFamily:'Kanit',width: 450, margin: 20, marginTop: 50 }}>
                 {currentPage === "/admin" ? (
                   <Modal
                     title={attributes.tour_name}
@@ -234,7 +243,7 @@ const Tour = ({ data, filterData }) => {
                           attributes.user_max +
                           ")"}
                       </b>
-                    </span>
+                    </span >
                     <br />
                     ราคา: {getPrice(attributes.price)} บาท / ท่าน
                     <br />
@@ -245,6 +254,7 @@ const Tour = ({ data, filterData }) => {
                 ) : (
                   // VVVVVVVV THIS IS NON ADMIN MODAL PLEASE EDIT THIS ONLY /////////////////////////////////////////////////////
                   <Modal
+                    style={{fontFamily:'Kanit'}}
                     title={attributes.tour_name}
                     open={isModalOpen && selectedTourId === id}
                     onCancel={() => {
@@ -341,6 +351,7 @@ const Tour = ({ data, filterData }) => {
                     type="primary"
                     onClick={() => handleOpenModal(id)}
                     style={{
+                      fontFamily:'Kanit',
                       display: "block",
                       margin: "0 auto",
                       backgroundColor: "#DE3163",
@@ -353,7 +364,7 @@ const Tour = ({ data, filterData }) => {
                   <Button
                     type="primary"
                     onClick={() => handleOpenModal(id)}
-                    style={{ display: "block", margin: "0 auto" }}
+                    style={{ fontFamily:'Kanit',display: "block", margin: "0 auto" }}
                   >
                     ดูเพิ่มเติม
                   </Button>

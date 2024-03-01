@@ -22,6 +22,7 @@ import useLocalState from './localStorage.js';
 import CardHistory from "./Tour/getHistory.js";
 import { useMediaQuery } from "react-responsive";
 import { MenuOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons';
+import WebFont from 'webfontloader';
 
 
 
@@ -69,12 +70,20 @@ const ReserveForm = () => {
         } else roleChecker();
     }, []);
 
+    useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ['Sriracha', 'Kanit']
+      }
+    });
+   }, []);
+
     const menu = (
         <Menu >
             {jwt ? (
                 <>
                     <Menu.Item onClick={() => { navigate("/history"); }} key="username">
-                        <span style={{ color: '#48D3FF' }}>{username && `Hello, ${username}`}</span>
+                        <span style={{ fontFamily:'Kanit',color: '#48D3FF' }}>{username && `Hello, ${username}`}</span>
                     </Menu.Item>
                     <Menu.Item key="logout" onClick={() => handleLogout()}>
                         ออกจากระบบ
@@ -160,14 +169,14 @@ const ReserveForm = () => {
                                     onClick={() => {
                                         navigate("/");
                                     }}
-                                    style={{ marginLeft: "500px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
+                                    style={{ fontFamily:'Kanit',marginLeft: "500px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
                                 >
                                     สวัสดีคุณ {username}
                                 </Link>
 
                                 <Link
                                     onClick={() => { handleLogout() }}
-                                    style={{ marginLeft: "50px", color: "white", fontSize: "18px" }}
+                                    style={{ fontFamily:'Kanit',marginLeft: "50px", color: "white", fontSize: "18px" }}
                                 >
                                     ออกจากระบบ
                                 </Link>

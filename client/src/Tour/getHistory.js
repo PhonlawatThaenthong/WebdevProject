@@ -20,6 +20,7 @@ import {
   message,
 } from "antd";
 import LoadingIcon from "../Navbar/LoadingIcon.js";
+import WebFont from 'webfontloader';
 
 const CardHistory = ({ data, filterData }) => {
   const location = useLocation();
@@ -102,6 +103,14 @@ const CardHistory = ({ data, filterData }) => {
     getData()
   }, []);
 
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ['Sriracha', 'Kanit']
+      }
+    });
+   }, []);
+
   const userReserves = allData.filter(reserve => reserve.attributes.user_id.data.attributes.username === username);
 
   return (
@@ -129,7 +138,7 @@ const CardHistory = ({ data, filterData }) => {
               src={`https://semantic-ui.com/images/wireframe/white-image.png`}
               preview={false}
             />
-            <b style={{ fontSize: "18px" }}>{attributes.tour_id.data.attributes.tour_name}</b>
+            <b style={{ fontSize: "18px" ,fontFamily:'Kanit'}}>{attributes.tour_id.data.attributes.tour_name}</b>
             <br />
             ราคา: {getPrice(attributes.total_price)} บาท
             <br />

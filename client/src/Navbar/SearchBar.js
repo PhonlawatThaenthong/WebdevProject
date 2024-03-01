@@ -1,6 +1,9 @@
 import { Button, Input } from "antd";
 import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
+import WebFont from 'webfontloader';
+import React, {  useEffect } from "react";
+
 
 const SearchBar = ({ onSearch }) => {
   const [searchText, setSearchText] = useState("");
@@ -17,6 +20,7 @@ const SearchBar = ({ onSearch }) => {
     height: "40px",
     fontWeight: "bold",
     justifyContent: "center",
+    fontFamily:'Kanit'
   };
 
   const searchButtonStyle = {
@@ -24,7 +28,16 @@ const SearchBar = ({ onSearch }) => {
     marginLeft: "5px",
     paddingLeft: "20px",
     paddingRight: "20px",
+    fontFamily:'Kanit'
   };
+
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ['Sriracha', 'Kanit']
+      }
+    });
+   }, []);
 
   return (
     <>
@@ -38,6 +51,7 @@ const SearchBar = ({ onSearch }) => {
         type="primary"
         style={searchButtonStyle}
         onClick={() => handleSearch()}
+
       >
         ค้นหา
       </Button>

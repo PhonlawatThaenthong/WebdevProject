@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import useLocalState from "./localStorage.js";
 import { useMediaQuery } from "react-responsive";
 import Logo from './Image/logo.png'
+import WebFont from 'webfontloader';
 
 const { Header } = Layout;
 
@@ -80,6 +81,14 @@ const LoginForm = () => {
   useEffect(() => {
     if (jwt == null) { navigate("/login") } else roleChecker();
   }, []);
+
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ['Sriracha', 'Kanit']
+      }
+    });
+   }, []);
 
   const handleCloseErrorModal = () => {
     setShowErrorModal(false);
@@ -170,10 +179,11 @@ const LoginForm = () => {
           <Card
             title="เข้าสู่ระบบ"
             bordered={true}
-            style={{ width: "100%", textAlign: "center" }}
+            style={{ fontFamily:'Kanit',width: "100%", textAlign: "center" }}
           >
-            <Form form={form} onFinish={handleSubmit}>
+            <Form form={form} onFinish={handleSubmit} >
               <Form.Item
+              
                 label="ชื่อผู้ใช้"
                 name="username"
                 rules={[
@@ -198,14 +208,15 @@ const LoginForm = () => {
                   type="primary"
                   htmlType="submit"
                   disabled={!submitEnabled}
+                  style = {{fontFamily:'Kanit'}}
                 >
                   เข้าสู่ระบบ
                 </Button>
               </Form.Item>
 
               <Form.Item>
-                <span style={{ marginRight: "8px" }}>ยังไม่มีบัญชี?</span>
-                <Link to="/register">สมัครสมาชิก</Link>
+                <span style={{ fontFamily:'Kanit',marginRight: "8px" }}>ยังไม่มีบัญชี?</span>
+                <Link to="/register"style = {{fontFamily:'Kanit'}}>สมัครสมาชิก</Link>
               </Form.Item>
             </Form>
           </Card>

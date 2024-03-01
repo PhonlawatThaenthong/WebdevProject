@@ -20,6 +20,7 @@ import axios from 'axios';
 import useLocalState from './localStorage.js';
 import Step from "./Navbar/Step.js";
 import { useMediaQuery } from "react-responsive";
+import WebFont from 'webfontloader';
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -73,6 +74,14 @@ const AllStepDone = () => {
     useEffect(() => {
         if (jwt == null) { navigate("/") } else roleChecker();
     }, []);
+
+    useEffect(() => {
+        WebFont.load({
+          google: {
+            families: ['Sriracha', 'Kanit']
+          }
+        });
+       }, []);
 
     const headerStyle = {
         textAlign: 'center',
@@ -138,15 +147,15 @@ const AllStepDone = () => {
                 </Header>
                 </Layout>
                 <Space direction="vertical" size="middle" style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
-                <Card title="การชำระเงินเสร็จสิ้น" bordered={false} style={{  width: isSmallScreen ? '100%' : 950}}>
+                <Card title="การชำระเงินเสร็จสิ้น" bordered={false} style={{  fontFamily:'Kanit',width: isSmallScreen ? '100%' : 950}}>
                     <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center',width: isSmallScreen ? '100%' : "100%" }}>
                         <img src={url} className="Logo1" alt="" style={{ width: isSmallScreen ? '100%' : 500 , borderRadius: 500 }} />
                     </div>
-                    <div>
+                    <div style={{fontFamily:'Kanit'}}>
                         <p><strong>การสั่งซื้อของคุณเสร็จสิ้นแล้ว สถานะการจองของคุณจะเปลี่ยนแปลงในไม่ช้านี้! แพ็คกระเป๋าและเตรียมตัวออกผจญภัยกันได้เลย!</strong></p>
                         <p>คุณกำลังจะถูกนำออกจากหน้านี้ในอีก {Math.floor(remainingTime / 1000)} วินาที</p>
                     </div>
-                    <Button type="primary" style={{ backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }}
+                    <Button type="primary" style={{ fontFamily:'Kanit',backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }}
                         onClick={handleButtonClick}>กลับสู่หน้าหลัก</Button>
                 </Card>
                 </Space>

@@ -202,7 +202,7 @@ const uploadImage = async (image) => {
             }}
             key="username"
           >
-            <span style={{ color: "#48D3FF" }}>
+            <span style={{ fontFamily:'Kanit',color: "#48D3FF" }}>
               {username && `สวัสดีคุณ, ${username}`}
             </span>
           </Menu.Item>
@@ -288,19 +288,21 @@ const uploadImage = async (image) => {
       <Modal
         title="Add New Tour"
         open={isAddMenuOpen}
+        style={{fontFamily:'Kanit'}}
         onCancel={() => {
           setIsAddMenuOpen(false);
         }}
         footer={[
           <Button
             key="back"
+            style={{fontFamily:'Kanit'}}
             onClick={() => {
               setIsAddMenuOpen(false);
             }}
           >
             ยกเลิก
           </Button>,
-          <Button key="submit" type="primary" onClick={handleAddTour} >
+          <Button style={{fontFamily:'Kanit'}}key="submit" type="primary" onClick={handleAddTour} >
             เพิ่ม
           </Button>,
         ]}
@@ -341,7 +343,7 @@ const uploadImage = async (image) => {
           ) : (
             <div>
               <UploadOutlined />
-              <div style={{ marginTop: 8 }}>Upload</div>
+              <div style={{ fontFamily:'Kanit',marginTop: 8 }}>Upload</div>
             </div>
           )}
         </Upload>
@@ -400,6 +402,7 @@ const uploadImage = async (image) => {
                     color: "white",
                     fontSize: isSmallScreen ? "14px" : "18px",
                     width: "300px",
+                    fontFamily:'Kanit'
                   }}
                 >
                   สวัสดีคุณ {username}
@@ -413,6 +416,7 @@ const uploadImage = async (image) => {
                     marginLeft: "50px",
                     color: "white",
                     fontSize: "18px",
+                    fontFamily:'Kanit'
                   }}
                 >
                   ออกจากระบบ
@@ -427,7 +431,7 @@ const uploadImage = async (image) => {
           <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
         )}
         <h2
-          style={{ fontFamily:'Sriracha',textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px"}}
+          style={{ fontFamily:'Kanit',textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px"}}
         >
           โปรแกรมทัวร์แนะนำ
         </h2>
@@ -436,7 +440,7 @@ const uploadImage = async (image) => {
           tooltip={<div>เพิ่มทัวร์ใหม่</div>}
           shape="square"
           type="primary"
-          style={{ right: 24 }}
+          style={{ fontFamily:'Kanit',right: 24 }}
           icon="+"
           onClick={() => setIsAddMenuOpen(true)}
         />

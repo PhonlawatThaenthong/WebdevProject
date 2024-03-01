@@ -105,7 +105,7 @@ const HomeForm = () => {
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ['Sriracha', 'Chilanka']
+        families: ['Sriracha', 'Kanit']
       }
     });
    }, []);
@@ -115,7 +115,7 @@ const HomeForm = () => {
       {jwt ? (
         <>
           <Menu.Item key="username" disabled>
-            <span style={{ color: "#48D3FF" }}>
+            <span style={{ fontFamily:'Kanit',color: "#48D3FF" }}>
               {username && `สวัสดีคุณ, ${username}`}
             </span>
           </Menu.Item>
@@ -177,6 +177,7 @@ const HomeForm = () => {
     color: "#48D3FF",
     fontWeight: "bold",
     fontSize: isSmallScreen ? "24px" : "45px",
+    
   };
 
   const NormalTextStyle = {
@@ -267,6 +268,7 @@ const HomeForm = () => {
                     marginLeft: "40px",
                     color: "white",
                     fontSize: isSmallScreen ? "15px" : "18px",
+                    fontFamily:'Kanit'
                   }}
                 >
                   เข้าสู่ระบบ
@@ -277,6 +279,7 @@ const HomeForm = () => {
                     marginLeft: "40px",
                     color: "white",
                     fontSize: isSmallScreen ? "15px" : "18px",
+                    fontFamily:'Kanit'
                   }}
                 >
                   ลงทะเบียน
@@ -291,7 +294,7 @@ const HomeForm = () => {
           <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
         )}
         <span
-          style={{fontFamily:'Sriracha',textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px" }}
+          style={{fontFamily:'Kanit',textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px" }}
           
         >
           โปรแกรมทัวร์แนะนำ
@@ -304,7 +307,8 @@ const HomeForm = () => {
         style={{
           backgroundColor: "#1C3953",
           borderColor: "#1C3953",
-          margin: "0 auto"
+          margin: "0 auto",
+          fontFamily: 'Kanit'
         }}
       >
         ดูโปรแกรมทั้งหมด

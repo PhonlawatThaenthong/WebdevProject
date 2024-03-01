@@ -108,7 +108,7 @@ const MemberForm = () => {
             }}
             key="username"
           >
-            <span style={{ color: "#48D3FF" }}>
+            <span style={{ fontFamily:'Kanit',color: "#48D3FF" }}>
               {username && `สวัสดีคุณ, ${username}`}
             </span>
           </Menu.Item>
@@ -270,6 +270,7 @@ const MemberForm = () => {
                     color: "white",
                     fontSize: isSmallScreen ? "14px" : "18px",
                     width: "300px",
+                    fontFamily:'Kanit'
                   }}
                 >
                   สวัสดีคุณ {username}
@@ -283,6 +284,7 @@ const MemberForm = () => {
                     marginLeft: "50px",
                     color: "white",
                     fontSize: "18px",
+                    fontFamily:'Kanit'
                   }}
                 >
                   ออกจากระบบ
@@ -297,13 +299,13 @@ const MemberForm = () => {
           <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
         )}
         <h2
-          style={{ fontFamily:'Sriracha',textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px" }}
+          style={{ fontFamily:'Kanit',textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px" }}
         >
           โปรแกรมทัวร์แนะนำ
         </h2>
         <RecommendTour />
         <h2
-          style={{ textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px" }}
+          style={{ fontFamily:'Kanit',textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px" }}
         >
           โปรแกรมทัวร์ทั้งหมด (รอทำปุ่ม view all tour)
         </h2>

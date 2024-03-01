@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from "react-responsive";
 import Logo from './Image/logo.png'
+import WebFont from 'webfontloader';
 
 
 const { Header } = Layout;
@@ -93,6 +94,14 @@ const RegisterForm = () => {
         if (jwt == null) { navigate("/register") } else roleChecker();
     }, []);
 
+    useEffect(() => {
+        WebFont.load({
+          google: {
+            families: ['Sriracha', 'Kanit']
+          }
+        });
+       }, []);
+
     const headerStyle = {
         textAlign: 'center',
         color: '#fff',
@@ -168,8 +177,8 @@ const RegisterForm = () => {
                     <title>HYJ - Register</title>
                 </Helmet>
                 <Col >
-                    <Card title="ลงทะเบียน" bordered={true} style={{ width: "100%", textAlign: "center" }}>
-                        <Form form={form} onFinish={handleSubmit}>
+                    <Card title="ลงทะเบียน" bordered={true} style={{ fontFamily:'Kanit',width: "100%", textAlign: "center" }}>
+                        <Form form={form} onFinish={handleSubmit} >
                             <Form.Item
                                 label="ชื่อผู้ใช้งาน"
                                 name="username"
@@ -215,14 +224,14 @@ const RegisterForm = () => {
                             </Form.Item>
 
                             <Form.Item>
-                                <Button type="primary" htmlType="submit" disabled={!submitEnabled}>
+                                <Button style = {{fontFamily:'Kanit'}}type="primary" htmlType="submit" disabled={!submitEnabled}>
                                     ยืนยัน
                                 </Button>
                             </Form.Item>
 
                             <Form.Item>
-                                <span style={{ marginRight: '8px' }}>มีบัญชีแล้ว?</span>
-                                <Link to="/login">เข้าสู่ระบบ</Link>
+                                <span style={{ fontFamily:'Kanit',marginRight: '8px' }}>มีบัญชีแล้ว?</span>
+                                <Link to="/login"style={{fontFamily:'Kanit'}}>เข้าสู่ระบบ</Link>
                             </Form.Item>
                         </Form>
                     </Card>
@@ -231,7 +240,7 @@ const RegisterForm = () => {
                 {/* Error Modal */}
                 <Modal title="Warning" visible={showErrorModal} onCancel={handleCloseErrorModal} footer={null}>
                     <p>{errorMessage}</p>
-                    <Button type="primary" onClick={handleCloseErrorModal}>
+                    <Button style={{fontFamily:'Kanit'}}type="primary" onClick={handleCloseErrorModal}>
                         Close
                     </Button>
                 </Modal>
