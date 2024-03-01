@@ -16,10 +16,13 @@ module.exports = createCoreController('api::reserve.reserve', ({ strapi }) => ({
                 populate: '*',
             });
 
+            let current_time = new Date()
+
             if (ctx.state.user.role.name != "admin") {
                 item = await strapi.entityService.update("api::reserve.reserve", entityId, {
                     data: {
-                        payment_status: true
+                        payment_status: true,
+                        confirm_date: current_time
                     }
                 })
                 ctx.body = {
@@ -54,7 +57,8 @@ module.exports = createCoreController('api::reserve.reserve', ({ strapi }) => ({
             if (ctx.state.user.role.name != "admin") {
                 item = await strapi.entityService.update("api::reserve.reserve", entityId, {
                     data: {
-                        payment_status: false
+                        payment_status: false,
+                        confirm_date: null
                     }
                 })
                 ctx.body = {

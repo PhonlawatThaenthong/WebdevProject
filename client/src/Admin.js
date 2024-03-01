@@ -138,44 +138,44 @@ const AdminForm = () => {
         description: create_desc,
         price: create_price,
         status: true,
-        tour_image: uploadedImages.map(image => ({ id: image.id })) 
+        tour_image: uploadedImages.map(image => ({ id: image.id }))
       };
-      
+
       const formData = new FormData();
       formData.append('data', JSON.stringify(addNewTour));
 
       const response = await axios.post('http://localhost:1337/api/tours', formData, {
-          headers: {
-              'Content-Type': 'multipart/form-data'
-          }
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       });
 
       console.log('Upload response:', response.data);
       message.success('Tour added successfully');
       setIsAddMenuOpen(false);
       window.location.reload();
-  } catch (error) {
+    } catch (error) {
       console.error('Error uploading data:', error);
       message.error('Failed to add tour');
-  }
-};
+    }
+  };
 
-const uploadImage = async (image) => {
-  try {
+  const uploadImage = async (image) => {
+    try {
       const formData = new FormData();
       formData.append('files', image);
       const response = await axios.post('http://localhost:1337/api/upload', formData, {
-          headers: {
-              'Content-Type': 'multipart/form-data'
-          }
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       });
 
       return response.data[0];
-  } catch (error) {
+    } catch (error) {
       console.error('Error uploading image:', error);
       throw error;
-  }
-};
+    }
+  };
 
   useEffect(() => {
     if (jwt == null) {
@@ -190,7 +190,7 @@ const uploadImage = async (image) => {
         families: ['Sriracha', 'Chilanka']
       }
     });
-   }, []);
+  }, []);
 
   const menu = (
     <Menu>
@@ -202,7 +202,7 @@ const uploadImage = async (image) => {
             }}
             key="username"
           >
-            <span style={{ fontFamily:'Kanit',color: "#48D3FF" }}>
+            <span style={{ fontFamily: 'Kanit', color: "#48D3FF" }}>
               {username && `สวัสดีคุณ, ${username}`}
             </span>
           </Menu.Item>
@@ -288,21 +288,21 @@ const uploadImage = async (image) => {
       <Modal
         title="Add New Tour"
         open={isAddMenuOpen}
-        style={{fontFamily:'Kanit'}}
+        style={{ fontFamily: 'Kanit' }}
         onCancel={() => {
           setIsAddMenuOpen(false);
         }}
         footer={[
           <Button
             key="back"
-            style={{fontFamily:'Kanit'}}
+            style={{ fontFamily: 'Kanit' }}
             onClick={() => {
               setIsAddMenuOpen(false);
             }}
           >
             ยกเลิก
           </Button>,
-          <Button style={{fontFamily:'Kanit'}}key="submit" type="primary" onClick={handleAddTour} >
+          <Button style={{ fontFamily: 'Kanit' }} key="submit" type="primary" onClick={handleAddTour} >
             เพิ่ม
           </Button>,
         ]}
@@ -343,7 +343,7 @@ const uploadImage = async (image) => {
           ) : (
             <div>
               <UploadOutlined />
-              <div style={{ fontFamily:'Kanit',marginTop: 8 }}>Upload</div>
+              <div style={{ fontFamily: 'Kanit', marginTop: 8 }}>Upload</div>
             </div>
           )}
         </Upload>
@@ -402,7 +402,7 @@ const uploadImage = async (image) => {
                     color: "white",
                     fontSize: isSmallScreen ? "14px" : "18px",
                     width: "300px",
-                    fontFamily:'Kanit'
+                    fontFamily: 'Kanit'
                   }}
                 >
                   สวัสดีคุณ {username}
@@ -416,7 +416,7 @@ const uploadImage = async (image) => {
                     marginLeft: "50px",
                     color: "white",
                     fontSize: "18px",
-                    fontFamily:'Kanit'
+                    fontFamily: 'Kanit'
                   }}
                 >
                   ออกจากระบบ
@@ -431,7 +431,7 @@ const uploadImage = async (image) => {
           <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
         )}
         <h2
-          style={{ fontFamily:'Kanit',textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px"}}
+          style={{ fontFamily: 'Kanit', textAlign: "center", fontWeight: "bold", fontSize: isSmallScreen ? "25px" : "45px" }}
         >
           โปรแกรมทัวร์แนะนำ
         </h2>
@@ -440,7 +440,7 @@ const uploadImage = async (image) => {
           tooltip={<div>เพิ่มทัวร์ใหม่</div>}
           shape="square"
           type="primary"
-          style={{ fontFamily:'Kanit',right: 24 }}
+          style={{ fontFamily: 'Kanit', right: 24 }}
           icon="+"
           onClick={() => setIsAddMenuOpen(true)}
         />

@@ -38,6 +38,9 @@
     "payment_status": {
       "type": "boolean",
       "default": false
+    },
+    "confirm_date": {
+      "type": "datetime"
     }
   }
 }

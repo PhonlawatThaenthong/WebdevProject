@@ -389,6 +389,7 @@ export interface ApiReserveReserve extends Schema.CollectionType {
     total_price: Attribute.Decimal;
     payment_method: Attribute.String;
     payment_status: Attribute.Boolean & Attribute.DefaultTo<false>;
+    confirm_date: Attribute.DateTime;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

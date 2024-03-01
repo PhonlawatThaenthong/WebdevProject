@@ -70,11 +70,11 @@ const Confirm = ({ data, filterData }) => {
         try {
             const res = await axios.post(
                 `http://localhost:1337/api/reserve/${reserveId}/method_confirm`);
-            message.success("Reservation confirmed successfully");
+            message.success("Confirmed Reservation!");
             getData();
         } catch (error) {
             console.error("error updating status", error);
-            message.error("Failed to confirm reservation");
+            message.error("Action Failed!");
         }
     };
 
@@ -82,11 +82,11 @@ const Confirm = ({ data, filterData }) => {
         try {
             const res = await axios.post(
                 `http://localhost:1337/api/reserve/${reserveId}/method_cancel`);
-            message.success("Reservation confirmed successfully");
+            message.success("Cancelled Reservation!");
             getData();
         } catch (error) {
             console.error("error updating status", error);
-            message.error("Failed to confirm reservation");
+            message.error("Action Failed!");
         }
     };
 
@@ -102,14 +102,14 @@ const Confirm = ({ data, filterData }) => {
     const handleLogout = async () => {
         setjwt(null);
         messageApi
-          .open({
-            type: "loading",
-            content: "กรุณารอสักครู่...",
-            duration: 1,
-          })
-          .then(() => message.success("เสร็จสิ้น!", 0.5))
-          .then(() => (window.location.href = "/"));
-      };
+            .open({
+                type: "loading",
+                content: "กรุณารอสักครู่...",
+                duration: 1,
+            })
+            .then(() => message.success("เสร็จสิ้น!", 0.5))
+            .then(() => (window.location.href = "/"));
+    };
 
     const getDate = (time) => {
         const dateObj = new Date(time);
@@ -125,6 +125,9 @@ const Confirm = ({ data, filterData }) => {
         const minutes = String(dateObj.getMinutes()).padStart(2, "0");
         const seconds = String(dateObj.getSeconds()).padStart(2, "0");
 
+        if ((`${date} ${month} ${year} ${hours}:${minutes}:${seconds}`) == "1 January 1970 07:00:00") {
+            return '-'
+        }
         return `${date} ${month} ${year} ${hours}:${minutes}:${seconds}`;
     };
 
@@ -321,6 +324,8 @@ const Confirm = ({ data, filterData }) => {
                                 จำนวน: {attributes.reserve_amount} ท่าน
                                 <br />
                                 วันที่จอง: {getDate(attributes.reserve_date)}
+                                <br />
+                                วันที่ยืนยัน: {getDate(attributes.confirm_date)}
                                 <br />
                                 {attributes.payment_status === false && (
                                     <Button
