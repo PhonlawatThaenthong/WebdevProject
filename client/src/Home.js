@@ -31,6 +31,7 @@ import picture from "./Image/Hat_Yai_Journey.png";
 import picture2 from "./Image/test.jpg";
 import Logo from "./Image/logo.png";
 import './index.css';
+import RecommendTour from "./Tour/recommendTour.js";
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -295,7 +296,7 @@ const HomeForm = () => {
         >
           โปรแกรมทัวร์แนะนำ
         </span>
-        <Tour data={allData} filterData={filterData} />
+        <RecommendTour />
       </Layout>
       <Button
         type="primary"
