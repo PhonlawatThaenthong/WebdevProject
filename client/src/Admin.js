@@ -429,7 +429,7 @@ const uploadImage = async (image) => {
         <h2
           style={{ fontFamily:'Sriracha',textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px"}}
         >
-          Tour
+          โปรแกรมทัวร์แนะนำ
         </h2>
         <Tour data={allData} filterData={filterData} />
         <FloatButton

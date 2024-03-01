@@ -30,6 +30,8 @@ import PromotionalSlider from "./PromotionalSlider";
 import picture from "./Image/Hat_Yai_Journey.png";
 import picture2 from "./Image/test.jpg";
 import Logo from "./Image/logo.png";
+import RecommendTour from "./Tour/recommendTour.js";
+
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -298,6 +300,12 @@ const MemberForm = () => {
           style={{ fontFamily:'Sriracha',textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px" }}
         >
           โปรแกรมทัวร์แนะนำ
+        </h2>
+        <RecommendTour />
+        <h2
+          style={{ textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px" }}
+        >
+          โปรแกรมทัวร์ทั้งหมด (รอทำปุ่ม view all tour)
         </h2>
         <Tour data={allData} filterData={filterData} />
       </Layout>
