@@ -37,6 +37,7 @@ const AllTour = () => {
   const [filterData, setFilterData] = useState([]);
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
+  const [username, setUsername] = useState("");
 
   const getAllData = async () => {
     try {
@@ -233,9 +234,9 @@ const AllTour = () => {
             )}
           </Col>
         </Header>
-  <h2 style={{ textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px" }}>All Tour</h2>
+        <h2 style={{ textAlign: "center", fontWeight: "bold", fontSize: isSmallScreen ? "25px" : "45px" }}>All Tour</h2>
 
-      <Tour data={allData} filterData={[]} />
+        <Tour data={allData} filterData={[]} />
       </Layout>
       <Button
         type="primary"
@@ -251,8 +252,9 @@ const AllTour = () => {
       <Header style={headerbottom}>
         <img src={Logo} alt="Logo" style={{ width: "auto", height: "50px" }} />
       </Header>
-      </Flex>
-      
+    </Flex>
+
   );
 };
+
 export default AllTour;

@@ -153,7 +153,7 @@ const MemberForm = () => {
         families: ['Sriracha', 'Chilanka']
       }
     });
-   }, []);
+  }, []);
 
   const headerStyle = {
     textAlign: "center",
@@ -297,19 +297,23 @@ const MemberForm = () => {
           <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
         )}
         <h2
-          style={{ fontFamily:'Sriracha',textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px" }}
+          style={{ fontFamily: 'Sriracha', textAlign: "center", fontWeight: "bold", fontSize: isSmallScreen ? "25px" : "45px" }}
         >
           โปรแกรมทัวร์แนะนำ
         </h2>
         <RecommendTour />
-        <h2
-          style={{ textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px" }}
+        <Button
+          type="primary"
+          onClick={() => navigate("/alltour")}
+          style={{
+            backgroundColor: "#1C3953",
+            borderColor: "#1C3953",
+            margin: "0 auto"
+          }}
         >
-          โปรแกรมทัวร์ทั้งหมด (รอทำปุ่ม view all tour)
-        </h2>
-        <Tour data={allData} filterData={filterData} />
+          ดูโปรแกรมทั้งหมด
+        </Button>
       </Layout>
-      
       <Header style={headerbottom}>
         <img src={Logo} alt="Logo" style={{ width: "auto", height: "50px" }} />
       </Header>
