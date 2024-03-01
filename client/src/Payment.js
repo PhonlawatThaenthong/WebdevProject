@@ -37,13 +37,22 @@ const Payment = () => {
     const cardHeight = isSmallScreen ? 'auto' : 700;
     const { Panel } = Collapse;
     const [open, setOpen] = useState(false);
-    const showDrawer = () => {
-        setOpen(true);
-    };
+    const [drawerVisible, setDrawerVisible] = useState(false);
 
+    const showDrawer = () => {
+        if (!drawerVisible) {
+            setOpen(true);
+            setDrawerVisible(true);
+        } else {
+            setOpen(false);
+            setDrawerVisible(false);
+        }
+    };
     const onClose = () => {
         setOpen(false);
+        setDrawerVisible(false);
     };
+
     let url = "https://s3-symbol-logo.tradingview.com/the-siam-commercial-bank-public-company--600.png"
     let url2 = "https://play-lh.googleusercontent.com/eOzvk-ekluYaeLuvDkLb5RJ0KqfFQpodZDnppxPfpEfqEqbNo5erEkmwLBgqP-k-e2kQ"
     let url3 = "https://cdn.discordapp.com/attachments/1070568112459632682/1213149402600972349/IMG_0249.png?ex=65f46c6c&is=65e1f76c&hm=e3ec34b2ed73a84befba06e8012e280ef8ae5355abb49277ac2c7189d0d234f9&"
@@ -67,13 +76,14 @@ const Payment = () => {
         navigate('/Member');
     };
 
+
     useEffect(() => {
         WebFont.load({
-          google: {
-            families: ['Sriracha', 'Kanit']
-          }
+            google: {
+                families: ['Sriracha', 'Kanit']
+            }
         });
-       }, []);
+    }, []);
 
 
     useEffect(() => {
@@ -144,10 +154,10 @@ const Payment = () => {
                 </Header>
             </Layout>
             <Space direction={isSmallScreen ? "vertical" : "horizontal"} size="middle" style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
-            <Card title="ช่องทางการชำระเงิน" bordered={false} style={{ fontFamily:'Kanit',width: cardWidth, height: cardHeight }}>
+                <Card title="ช่องทางการชำระเงิน" bordered={false} style={{ fontFamily: 'Kanit', width: cardWidth, height: cardHeight }}>
                     <Collapse defaultActiveKey={['1']}>
-                    <Panel style = {{fontFamily:'Kanit'}} header="ชำระเงินทางธนาคาร" key="1">
-                            <div style={{ fontFamily:'Kanit',display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <Panel style={{ fontFamily: 'Kanit' }} header="ชำระเงินทางธนาคาร" key="1">
+                            <div style={{ fontFamily: 'Kanit', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 
                                 <p><strong>
                                     กรุณาโอนเงินไปยัง:{' '}
@@ -166,8 +176,8 @@ const Payment = () => {
                                 )}
                             </div>
                         </Panel>
-                        <Panel style = {{fontFamily:'Kanit'}} header="ชำระเงินทาง TrueMoney Wallet" key="2">
-                            <div style={{ fontFamily:'Kanit',display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <Panel style={{ fontFamily: 'Kanit' }} header="ชำระเงินทาง TrueMoney Wallet" key="2">
+                            <div style={{ fontFamily: 'Kanit', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 
                                 <p><strong>
                                     กรุณาโอนเงินไปยัง:{' '}
@@ -186,10 +196,10 @@ const Payment = () => {
                             </div>
                         </Panel>
                     </Collapse>
-                    <Card title="ชำระเงินเสร็จเรียบร้อยแล้วใช่หรือไม่?" bordered={false} style={{ fontFamily:'Kanit',width: isSmallScreen ? '100%' : 950 }}>
+                    <Card title="ชำระเงินเสร็จเรียบร้อยแล้วใช่หรือไม่?" bordered={false} style={{ fontFamily: 'Kanit', width: isSmallScreen ? '100%' : 950 }}>
                         <p>เมื่อทำการชำระเงินเรียบร้อยแล้วต้องทำการแจ้งสลิปหลักฐานการโอนเงินพร้อมระบุหมายเหตุทุกครั้ง เมื่อการชำระเงินของคุณได้รับการยืนยันแล้ว </p>
                         <p>สถานะการชำระในช่องประวัติการซื้อจะเปลี่ยนแปลง</p>
-                        <Button type="primary" block style={{ fontFamily:'Kanit',backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }} onClick={handleButtonClick}>ใช่ ฉันชำระเงินแล้ว</Button>
+                        <Button type="primary" block style={{ fontFamily: 'Kanit', backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }} onClick={handleButtonClick}>ใช่ ฉันชำระเงินแล้ว</Button>
                     </Card>
                 </Card>
 
@@ -201,11 +211,11 @@ const Payment = () => {
                 style={{
                     position: 'fixed',
                     bottom: 20,
-                    right: 20, 
-                    zIndex: 9999,   
+                    right: 20,
+                    zIndex: 9999,
                 }}
             />
-            <Drawer title="ตัวอย่างสลิปการโอนเงิน" onClose={onClose} open={open} style={{ fontFamily:'Kanit',display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
+            <Drawer title="ตัวอย่างสลิปการโอนเงิน" onClose={onClose} open={open} style={{ fontFamily: 'Kanit', display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
                 <p><strong>ตัวอย่างสลิปการโอนเงินธนาคาร</strong></p>
                 <br />
                 <img src={url3} className="Logo3" alt="" style={{ width: isSmallScreen ? '100%' : '100%', marginLeft: 'auto' }} />

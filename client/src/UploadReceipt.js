@@ -12,6 +12,8 @@ import {
     Card,
     Collapse,
     Space,
+    Drawer,
+    FloatButton
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +22,8 @@ import axios from 'axios';
 import useLocalState from './localStorage.js';
 import Step from "./Navbar/Step.js";
 import { useMediaQuery } from "react-responsive";
+import { QuestionCircleOutlined } from '@ant-design/icons'
+import WebFont from 'webfontloader';
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -34,7 +38,9 @@ const UploadReceipt = () => {
     const { Panel } = Collapse;
     let url = "https://qr-official.line.me/gs/M_305iwzmm_GW.png?oat_content=qr"
     let url2 = "https://play-lh.googleusercontent.com/eOzvk-ekluYaeLuvDkLb5RJ0KqfFQpodZDnppxPfpEfqEqbNo5erEkmwLBgqP-k-e2kQ"
-
+    let url3 = "https://cdn.discordapp.com/attachments/1070568112459632682/1213170138891812894/IMG_0254.png?ex=65f47fbc&is=65e20abc&hm=514a7a19f83f6438a0d8566fe45a167d11f779246e2294310fc6eed702d4d0fd&"
+    const [open, setOpen] = useState(false);
+    const [drawerVisible, setDrawerVisible] = useState(false);
     const roleChecker = async () => {
         try {
             axios.defaults.headers.common = {
@@ -57,6 +63,19 @@ const UploadReceipt = () => {
     useEffect(() => {
         if (jwt == null) { navigate("/") } else roleChecker();
     }, []);
+    const showDrawer = () => {
+        if (!drawerVisible) {
+            setOpen(true);
+            setDrawerVisible(true);
+        } else {
+            setOpen(false);
+            setDrawerVisible(false);
+        }
+    };
+    const onClose = () => {
+        setOpen(false);
+        setDrawerVisible(false);
+    };
 
     const headerStyle = {
         textAlign: 'center',
@@ -122,12 +141,12 @@ const UploadReceipt = () => {
                 </Header>
             </Layout>
             <Space direction="vertical" size="middle" style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
-                <Card title="อัพโหลดหลักฐานการชำระเงิน" bordered={false} style={{ width: isSmallScreen ? '100%' : 950 }}>
+                <Card title="อัพโหลดหลักฐานการชำระเงิน" bordered={false} style={{ fontFamily: 'Kanit',width: isSmallScreen ? '100%' : 950 }}>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <div style={{ marginBottom: '20px', textAlign: 'center' }}>
                             <img src={url} className="Logo1" alt="" style={{ width: isSmallScreen ? '100%' : "100%", }} />
                         </div>
-                        <Card style={{ width: isSmallScreen ? '100%' : "75%", backgroundColor: '#F9F9F9' }}> <p><strong>
+                        <Card style={{fontFamily: 'Kanit', width: isSmallScreen ? '100%' : "75%", backgroundColor: '#F9F9F9' }}> <p><strong>
                             ชื่อบัญชี: HAT YAI Journey
                             <br />
                             Lind ID : @305iwzmm
@@ -136,9 +155,11 @@ const UploadReceipt = () => {
                             <br />
                             1.ชื่อบัญชีผู้ทำการจอง
                             <br />
-                            2.จำนวนเงินที่ทำการจอง
+                            2.ชื่อรายการที่ทำการจอง
                             <br />
-                            3.สลิปโอนเงิน พร้อมหมายเหตุ
+                            3.จำนวนการเข้าจอง 
+                            <br />
+                            4.สลิปโอนเงิน พร้อมหมายเหตุ
                         </strong>
                             <br />
                         </p>
@@ -147,10 +168,29 @@ const UploadReceipt = () => {
                             **ก่อนทำการโอนเงิน กรุณาเติมข้อความในหมายเหตุว่า "เที่ยวกับ Hatyai Journey" ทุกครั้ง หากลืมบันทึกทางเราขอทำการโอนคืน**
                         </Card>
                         <br />
-                        <Button type="primary" block onClick={handleButtonClick}>ขั้นตอนถัดไป</Button>
+                        <Button type="primary" block onClick={handleButtonClick}style={{ fontFamily: 'Kanit' }}>ขั้นตอนถัดไป</Button>
                     </div>
                 </Card>
             </Space>
+            <FloatButton
+                icon={<QuestionCircleOutlined />}
+                onClick={showDrawer}
+                type="default"
+                style={{
+                    position: 'fixed',
+                    bottom: 20,
+                    right: 20,
+                    zIndex: 9999,
+                }}
+            />
+            <Drawer title="ตัวอย่างการอัพโหลดหลักฐานการโอนเงิน" onClose={onClose} open={open} style={{ fontFamily: 'Kanit', display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
+                <p><strong>ตัวอย่างการอัพโหลดหลักฐานการโอนเงินผ่านทาง Line</strong></p>
+                <br />
+                <img src={url3} className="Logo3" alt="" style={{ width: isSmallScreen ? '100%' : '100%', marginLeft: 'auto' }} />
+                <br />
+                <p><strong>กรุณาเติมข้อความในหมายเหตุว่าครั้ง</strong></p>
+               <p><strong>หากลืมบันทึกหมายเหตุทางเราขอทำการโอนคืน</strong></p>
+            </Drawer>
         </Flex >
     );
 };
