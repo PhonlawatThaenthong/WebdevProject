@@ -19,7 +19,7 @@ module.exports = createCoreController('api::reserve.reserve', ({ strapi }) => ({
             if (ctx.state.user.role.name != "admin") {
                 item = await strapi.entityService.update("api::reserve.reserve", entityId, {
                     data: {
-                        payment_status: 'True'
+                        payment_status: true
                         
                     }
                 })
