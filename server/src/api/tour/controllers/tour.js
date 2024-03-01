@@ -29,11 +29,14 @@ module.exports = createCoreController('api::tour.tour', ({ strapi }) => ({
             }
 
             ctx.body = {
-                status: "YES",
+                status: "OK",
                 message: "Action Completed!"
             };
         } catch (err) {
-            ctx.body = err;
+            ctx.body = {
+                status: "Failed",
+                message: err
+            };
         }
     },
 

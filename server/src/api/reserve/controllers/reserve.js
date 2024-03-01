@@ -7,8 +7,8 @@
 const { createCoreController } = require('@strapi/strapi').factories;
 
 module.exports = createCoreController('api::reserve.reserve', ({ strapi }) => ({
-    
-    async confirm(ctx) {
+
+    async method_confirm(ctx) {
         const entityId = ctx.params.id;
         try {
 
@@ -20,19 +20,26 @@ module.exports = createCoreController('api::reserve.reserve', ({ strapi }) => ({
                 item = await strapi.entityService.update("api::reserve.reserve", entityId, {
                     data: {
                         payment_status: true
-                        
                     }
                 })
-                ctx.body = { Stats: "Update" }
+                ctx.body = {
+                    status: "OK",
+                    message: "Action Completed!"
+                };
 
-            } 
-            else {
-                ctx.body = { Stats: "Error Confirm Payment", seenDatetime: "cannot be update" }
             }
-
+            else {
+                ctx.body = {
+                    status: "Denied",
+                    message: "No Permission."
+                };
+            };
 
         } catch (err) {
-            ctx.body = "error"
+            ctx.body = {
+                status: "Failed",
+                message: err
+            };
         }
 
     },

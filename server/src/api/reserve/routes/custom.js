@@ -5,8 +5,8 @@ module.exports = {
 
         {
             method: 'POST',
-            path: '/reserve/:id/confirm',
-            handler: 'reserve.confirm'
+            path: '/reserve/:id/method_confirm',
+            handler: 'reserve.method_confirm'
         },
 
 
