@@ -29,6 +29,7 @@ const Tour = ({ data, filterData }) => {
   const [jwt, setjwt] = useLocalState(null, "jwt");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isSmallScreen = useMediaQuery({ maxWidth: 767 });
+  const [numberOfPeople, setNumberOfPeople] = useState(1);
 
   const handleOpenModal = (id) => {
     setSelectedTourId(id);
@@ -80,9 +81,12 @@ const Tour = ({ data, filterData }) => {
               content: "ขออภัยทัวร์นี้เต็มแล้ว",
             });
           } else {
+            console.log(numberOfPeople)
             const res = await axios.post(
               `http://localhost:1337/api/tours/${selectedTourId}/complete`,
-              {},
+              {
+                numberOfPeople : numberOfPeople,
+              },
               {
                 headers: {
                   Authorization: `Bearer ${jwt}`,
@@ -294,7 +298,15 @@ const Tour = ({ data, filterData }) => {
                     <br />
                     {attributes.description}
                     <br></br>
-
+                    <br />
+                    จำนวนคน:{" "}
+                    <Input
+                      type="number"
+                      min={1}
+                      value={numberOfPeople}
+                      onChange={(e) => setNumberOfPeople(parseInt(e.target.value, 10))}
+                    />
+                    
                   </Modal>
                 )}
                 <div style={{ textAlign: "center" }}>
