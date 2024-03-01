@@ -13,7 +13,8 @@ import {
     Collapse,
     Space,
     Drawer,
-    FloatButton
+    FloatButton,
+    Popover
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -63,6 +64,15 @@ const UploadReceipt = () => {
     useEffect(() => {
         if (jwt == null) { navigate("/") } else roleChecker();
     }, []);
+
+    useEffect(() => {
+        WebFont.load({
+            google: {
+                families: ['Sriracha', 'Kanit']
+            }
+        });
+    }, []);
+    
     const showDrawer = () => {
         if (!drawerVisible) {
             setOpen(true);
@@ -142,8 +152,8 @@ const UploadReceipt = () => {
             </Layout>
             <Space direction="vertical" size="middle" style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
                 <Card title="อัพโหลดหลักฐานการชำระเงิน" bordered={false} style={{ fontFamily: 'Kanit',width: isSmallScreen ? '100%' : 950 }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <div style={{ marginBottom: '20px', textAlign: 'center' }}>
+                    <div style={{ fontFamily: 'Kanit',display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <div style={{ fontFamily: 'Kanit',marginBottom: '20px', textAlign: 'center' }}>
                             <img src={url} className="Logo1" alt="" style={{ width: isSmallScreen ? '100%' : "100%", }} />
                         </div>
                         <Card style={{fontFamily: 'Kanit', width: isSmallScreen ? '100%' : "75%", backgroundColor: '#F9F9F9' }}> <p><strong>
@@ -172,6 +182,9 @@ const UploadReceipt = () => {
                     </div>
                 </Card>
             </Space>
+            <Popover 
+              title={<div style={{ textAlign: 'center' ,fontFamily: 'Kanit' }}>แสดงตัวอย่าง</div>}
+             >
             <FloatButton
                 icon={<QuestionCircleOutlined />}
                 onClick={showDrawer}
@@ -183,6 +196,7 @@ const UploadReceipt = () => {
                     zIndex: 9999,
                 }}
             />
+           </Popover>
             <Drawer title="ตัวอย่างการอัพโหลดหลักฐานการโอนเงิน" onClose={onClose} open={open} style={{ fontFamily: 'Kanit', display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
                 <p><strong>ตัวอย่างการอัพโหลดหลักฐานการโอนเงินผ่านทาง Line</strong></p>
                 <br />
