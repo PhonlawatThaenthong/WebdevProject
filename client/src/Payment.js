@@ -23,7 +23,6 @@ import useLocalState from './localStorage.js';
 import Step from "./Navbar/Step.js";
 import { useMediaQuery } from "react-responsive";
 import { QuestionCircleOutlined } from '@ant-design/icons';
-import WebFont from 'webfontloader';
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -48,7 +47,7 @@ const Payment = () => {
     let url = "https://s3-symbol-logo.tradingview.com/the-siam-commercial-bank-public-company--600.png"
     let url2 = "https://play-lh.googleusercontent.com/eOzvk-ekluYaeLuvDkLb5RJ0KqfFQpodZDnppxPfpEfqEqbNo5erEkmwLBgqP-k-e2kQ"
     let url3 = "https://cdn.discordapp.com/attachments/1070568112459632682/1213149402600972349/IMG_0249.png?ex=65f46c6c&is=65e1f76c&hm=e3ec34b2ed73a84befba06e8012e280ef8ae5355abb49277ac2c7189d0d234f9&"
-    let url4 = "https://cdn.discordapp.com/attachments/1070568112459632682/1213150614264217640/IMG_0251.png?ex=65f46d8d&is=65e1f88d&hm=d691fc54956b560297ecbb710fd907e9853c1113bc973b29c9b1571b78b65189&"
+    let url4 = "https://cdn.discordapp.com/attachments/1070568112459632682/1213151058814042132/IMG_0253.png?ex=65f46df7&is=65e1f8f7&hm=7a34b633c11ce7abe5681e5160867598dd8e088d58177ee4adc83d7b66df005d&"
     const roleChecker = async () => {
         try {
             axios.defaults.headers.common = {
@@ -73,14 +72,6 @@ const Payment = () => {
     useEffect(() => {
         if (jwt == null) { navigate("/") } else roleChecker();
     }, []);
-
-    useEffect(() => {
-        WebFont.load({
-          google: {
-            families: ['Sriracha', 'Kanit']
-          }
-        });
-       }, []);
 
     const headerStyle = {
         textAlign: 'center',
@@ -146,10 +137,10 @@ const Payment = () => {
                 </Header>
             </Layout>
             <Space direction={isSmallScreen ? "vertical" : "horizontal"} size="middle" style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
-                <Card title="ช่องทางการชำระเงิน" bordered={false} style={{ fontFamily:'Kanit',width: cardWidth, height: cardHeight }}>
+                <Card title="ช่องทางการชำระเงิน" bordered={false} style={{ width: cardWidth, height: cardHeight }}>
                     <Collapse defaultActiveKey={['1']}>
-                        <Panel style = {{fontFamily:'Kanit'}} header="ชำระเงินทางธนาคาร" key="1">
-                            <div style={{ fontFamily:'Kanit',display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <Panel header="ชำระเงินทางธนาคาร" key="1">
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <p><strong>
                                     กรุณาโอนเงินไปยัง:{' '}
 
@@ -167,8 +158,8 @@ const Payment = () => {
                                 )}
                             </div>
                         </Panel>
-                        <Panel style = {{fontFamily:'Kanit'}} header="ชำระเงินทาง TrueMoney Wallet" key="2">
-                            <div style={{ fontFamily:'Kanit',display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <Panel header="ชำระเงินทาง TrueMoney Wallet" key="2">
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <p><strong>
                                     กรุณาโอนเงินไปยัง:{' '}
                                     TrueMoney Wallet{' '}
@@ -186,10 +177,10 @@ const Payment = () => {
                             </div>
                         </Panel>
                     </Collapse>
-                    <Card title="ชำระเงินเสร็จเรียบร้อยแล้วใช่หรือไม่?" bordered={false} style={{ fontFamily:'Kanit',width: isSmallScreen ? '100%' : 950 }}>
+                    <Card title="ชำระเงินเสร็จเรียบร้อยแล้วใช่หรือไม่?" bordered={false} style={{ width: isSmallScreen ? '100%' : 950 }}>
                         <p>เมื่อทำการชำระเงินเรียบร้อยแล้วต้องทำการแจ้งสลิปหลักฐานการโอนเงินพร้อมระบุหมายเหตุทุกครั้ง เมื่อการชำระเงินของคุณได้รับการยืนยันแล้ว </p>
                         <p>สถานะการชำระในช่องประวัติการซื้อจะเปลี่ยนแปลง</p>
-                        <Button type="primary" block style={{ fontFamily:'Kanit',backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }} onClick={handleButtonClick}>ใช่ ฉันชำระเงินแล้ว</Button>
+                        <Button type="primary" block style={{ backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }} onClick={handleButtonClick}>ใช่ ฉันชำระเงินแล้ว</Button>
                     </Card>
                 </Card>
 
