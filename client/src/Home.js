@@ -42,6 +42,7 @@ const HomeForm = () => {
   const isSmallScreen = useMediaQuery({ maxWidth: 768 });
   const [menuVisible, setMenuVisible] = useState(false);
   const [searchPopoverVisible, setSearchPopoverVisible] = useState(false);
+  const [username, setUsername] = useState("");
 
   const promotionImages = [
     picture,

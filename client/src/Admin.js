@@ -152,6 +152,7 @@ const AdminForm = () => {
       console.log('Upload response:', response.data);
       message.success('Tour added successfully');
       setIsAddMenuOpen(false);
+      window.location.reload();
   } catch (error) {
       console.error('Error uploading data:', error);
       message.error('Failed to add tour');
