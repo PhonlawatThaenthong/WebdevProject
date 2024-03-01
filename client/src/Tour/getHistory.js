@@ -70,6 +70,9 @@ const CardHistory = ({ data, filterData }) => {
     const minutes = String(dateObj.getMinutes()).padStart(2, "0");
     const seconds = String(dateObj.getSeconds()).padStart(2, "0");
 
+    if ((`${date} ${month} ${year} ${hours}:${minutes}:${seconds}`) == "1 January 1970 07:00:00") {
+      return '-'
+    }
     return `${date} ${month} ${year} ${hours}:${minutes}:${seconds}`;
   };
 
@@ -159,6 +162,7 @@ const CardHistory = ({ data, filterData }) => {
             <br />
             วันที่จอง: {getDate(attributes.reserve_date)}
             <br />
+            วันที่ยืนยัน: {getDate(attributes.confirm_date)}
             <br></br>
           </Card>
         ))
