@@ -43,28 +43,28 @@ const Confirm = ({ data, filterData }) => {
 
     const roleChecker = async () => {
         try {
-          axios.defaults.headers.common = {
-            Authorization: `Bearer ${jwt}`,
-          };
-          const userResult = await axios.get(
-            "http://localhost:1337/api/users/me?populate=role"
-          );
-    
-          setUsername(userResult.data.username);
-    
-          if (userResult.data.role && userResult.data.role.name === "Member") {
-            navigate("/history");
-          } else {
-            if (userResult.data.role && userResult.data.role.name === "Admin") {
-              navigate("/confirm");
+            axios.defaults.headers.common = {
+                Authorization: `Bearer ${jwt}`,
+            };
+            const userResult = await axios.get(
+                "http://localhost:1337/api/users/me?populate=role"
+            );
+
+            setUsername(userResult.data.username);
+
+            if (userResult.data.role && userResult.data.role.name === "Member") {
+                navigate("/history");
             } else {
-              navigate("/");
+                if (userResult.data.role && userResult.data.role.name === "Admin") {
+                    navigate("/confirm");
+                } else {
+                    navigate("/");
+                }
             }
-          }
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
-      };
+    };
 
     const updateStatus = async (reserveId) => {
         try {
@@ -285,10 +285,16 @@ const Confirm = ({ data, filterData }) => {
                     ) : (
                         allData.map(({ id, attributes }) => (
                             <Card key={id} style={{ fontFamily: 'Kanit', width: 300, margin: 20, marginTop: 50 }}>
-                                <Image
-                                    src={`https://semantic-ui.com/images/wireframe/white-image.png`}
-                                    preview={false}
-                                />
+                                {attributes.payment_status === false && (
+                                    <Image
+                                        src={`https://cdn-icons-png.freepik.com/512/6475/6475938.png`}
+                                        preview={false}
+                                    />)}
+                                {attributes.payment_status === true && (
+                                    <Image
+                                        src={`https://thumb.ac-illust.com/98/98f98abb339a27ca448a784926b8329d_t.jpeg`}
+                                        preview={false}
+                                    />)}
                                 <b style={{ fontSize: "18px", fontFamily: 'Kanit' }}>{attributes.tour_id.data.attributes.tour_name}</b>
                                 <br />
                                 ราคา: {getPrice(attributes.total_price)} บาท
@@ -306,7 +312,7 @@ const Confirm = ({ data, filterData }) => {
                                 <br />
                                 {attributes.payment_status === false && (
                                     <Button
-                                        
+
                                         type="primary"
                                         onClick={() => updateStatus(id)}
                                         style={{
