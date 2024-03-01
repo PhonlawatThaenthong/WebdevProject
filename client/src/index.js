@@ -17,6 +17,7 @@ import UploadReceipt from './UploadReceipt';
 import AllStepDone from './AllStepDone';
 import ReserveForm from './reservelist';
 import AllTour from './pages/AllTour';
+import Confirm from './Confirm';
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
   {
     path: "/alltour",
     element: <AllTour/>,
+  },
+  {
+    path: "/confirm",
+    element: <Confirm/>,
   },
 ]);
 

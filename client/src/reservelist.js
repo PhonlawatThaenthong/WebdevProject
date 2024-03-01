@@ -41,17 +41,28 @@ const ReserveForm = () => {
 
     const roleChecker = async () => {
         try {
-            axios.defaults.headers.common = {
-                Authorization: `Bearer ${jwt}`,
-            };
-            const userResult = await axios.get(
-                "http://localhost:1337/api/users/me?populate=role"
-            );
-            setUsername(userResult.data.username);
+          axios.defaults.headers.common = {
+            Authorization: `Bearer ${jwt}`,
+          };
+          const userResult = await axios.get(
+            "http://localhost:1337/api/users/me?populate=role"
+          );
+    
+          setUsername(userResult.data.username);
+    
+          if (userResult.data.role && userResult.data.role.name === "Member") {
+            navigate("/history");
+          } else {
+            if (userResult.data.role && userResult.data.role.name === "Admin") {
+              navigate("/confirm");
+            } else {
+              navigate("/");
+            }
+          }
         } catch (error) {
-            console.error("Error get username", error);
+          console.error(error);
         }
-    };
+      };
 
     const handleLogout = async () => {
         setjwt(null)
@@ -187,6 +198,7 @@ const ReserveForm = () => {
 
 
                 </Header>
+                <span style={{fontFamily:'Kanit',textAlign:'center',fontSize:"50px"}}>Reserve</span>
                 <CardHistory />
             </Layout>
 

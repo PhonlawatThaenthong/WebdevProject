@@ -133,7 +133,7 @@ const CardHistory = ({ data, filterData }) => {
         </b>
       ) : (
         userReserves.map(({ id, attributes }) => (
-          <Card key={id} style={{ width: 300, margin: 20, marginTop: 50 }}>
+          <Card key={id} style={{ fontFamily:'Kanit',width: 300, margin: 20, marginTop: 50 }}>
             <Image
               src={`https://semantic-ui.com/images/wireframe/white-image.png`}
               preview={false}
