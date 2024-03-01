@@ -12,7 +12,8 @@ import {
     Card,
     Collapse,
     Space,
-    Drawer
+    Drawer,
+    FloatButton
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +22,7 @@ import axios from 'axios';
 import useLocalState from './localStorage.js';
 import Step from "./Navbar/Step.js";
 import { useMediaQuery } from "react-responsive";
+import { QuestionCircleOutlined } from '@ant-design/icons';
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -37,11 +39,11 @@ const Payment = () => {
     const [open, setOpen] = useState(false);
     const showDrawer = () => {
         setOpen(true);
-      };
-    
-      const onClose = () => {
+    };
+
+    const onClose = () => {
         setOpen(false);
-      };
+    };
     let url = "https://s3-symbol-logo.tradingview.com/the-siam-commercial-bank-public-company--600.png"
     let url2 = "https://play-lh.googleusercontent.com/eOzvk-ekluYaeLuvDkLb5RJ0KqfFQpodZDnppxPfpEfqEqbNo5erEkmwLBgqP-k-e2kQ"
     let url3 = "https://cdn.discordapp.com/attachments/1070568112459632682/1213149402600972349/IMG_0249.png?ex=65f46c6c&is=65e1f76c&hm=e3ec34b2ed73a84befba06e8012e280ef8ae5355abb49277ac2c7189d0d234f9&"
@@ -183,13 +185,23 @@ const Payment = () => {
                 </Card>
 
             </Space>
-            <Button type="primary" onClick={showDrawer} style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
-                Open
-            </Button>
+            <FloatButton
+                icon={<QuestionCircleOutlined />}
+                onClick={showDrawer}
+                type="default"
+                style={{
+                    position: 'fixed',
+                    bottom: 20,
+                    right: 20, 
+                    zIndex: 9999,   
+                }}
+            />
             <Drawer title="ตัวอย่างสลิปการโอนเงิน" onClose={onClose} open={open} style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
                 <p><strong>ตัวอย่างสลิปการโอนเงินธนาคาร</strong></p>
+                <br />
                 <img src={url3} className="Logo3" alt="" style={{ width: isSmallScreen ? '100%' : '100%', marginLeft: 'auto' }} />
                 <p><strong>ตัวอย่างสลิปการโอนเงินผ่าน TrueMoney Wallet</strong></p>
+                <br />
                 <img src={url4} className="Logo4" alt="" style={{ width: isSmallScreen ? '100%' : '100%', marginLeft: 'auto' }} />
             </Drawer>
         </Flex>
