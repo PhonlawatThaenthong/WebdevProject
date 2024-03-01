@@ -197,6 +197,10 @@ const MemberForm = () => {
     fontSize: isSmallScreen ? "24px" : "45px",
   };
 
+  const promotionalSliderStyle = {
+    marginTop: isSmallScreen ? "150px" : "50px",
+  };
+
   return (
     <Flex gap="middle" wrap="wrap">
       <Helmet>
@@ -276,9 +280,13 @@ const MemberForm = () => {
             )}
           </Col>
         </Header>
-        <PromotionalSlider images={promotionImages} />
+        {isSmallScreen ? (
+          <></>
+        ) : (
+          <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
+        )}
         <h2
-          style={{ textAlign: "center", fontWeight: "bold", fontSize: "45px" }}
+          style={{ textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px" }}
         >
           โปรแกรมทัวร์แนะนำ
         </h2>

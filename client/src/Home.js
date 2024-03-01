@@ -274,7 +274,11 @@ const HomeForm = () => {
             )}
           </Col>
         </Header>
-        <PromotionalSlider images={promotionImages} />
+        {isSmallScreen ? (
+          <></>
+        ) : (
+          <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
+        )}
         <h2
           style={{ textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px" }}
         >
