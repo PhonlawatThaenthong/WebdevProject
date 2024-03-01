@@ -52,6 +52,7 @@ const AdminForm = () => {
   const [create_price, setcreate_price] = useState(0);
   const [menuVisible, setMenuVisible] = useState(false);
   const [searchPopoverVisible, setSearchPopoverVisible] = useState(false);
+  const [imageFile, setImageFile] = useState(null);
 
   const [filterData, setFilterData] = useState([]);
   const [allData, setAllData] = useState([]);
@@ -107,6 +108,14 @@ const AdminForm = () => {
     }
   };
 
+  const handleImageUpload = (info) => {
+    if (info.file.status === "done") {
+      message.success(`${info.file.name} file uploaded successfully`);
+    } else if (info.file.status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  };
+
   const handleLogout = async () => {
     setjwt(null);
     messageApi
@@ -119,33 +128,52 @@ const AdminForm = () => {
       .then(() => (window.location.href = "/"));
   };
 
-  const handleAddTour = async () => {
+  const handleAddTour = async (e) => {
     try {
+      const imageFiles = Array.isArray(imageFile) ? imageFile : [imageFile];
+      const uploadedImages = await Promise.all(imageFiles.map(uploadImage));
       const addNewTour = {
-        data: {
-          tour_name: create_name,
-          description: create_desc,
-          price: create_price,
-          status: true,
-        },
+        tour_name: create_name,
+        description: create_desc,
+        price: create_price,
+        status: true,
+        tour_image: uploadedImages.map(image => ({ id: image.id })) 
       };
+      
+      const formData = new FormData();
+      formData.append('data', JSON.stringify(addNewTour));
 
-      const res = await axios.post(
-        "http://localhost:1337/api/tours",
-        addNewTour,
-        {
+      const response = await axios.post('http://localhost:1337/api/tours', formData, {
           headers: {
-            Authorization: `Bearer ${jwt}`,
-          },
-        }
-      );
+              'Content-Type': 'multipart/form-data'
+          }
+      });
 
+      console.log('Upload response:', response.data);
+      message.success('Tour added successfully');
       setIsAddMenuOpen(false);
-      getData();
-    } catch (error) {
-      console.error("การเพิ่มทัวร์ขัดข้อง", error.response.data.error);
-    }
-  };
+  } catch (error) {
+      console.error('Error uploading data:', error);
+      message.error('Failed to add tour');
+  }
+};
+
+const uploadImage = async (image) => {
+  try {
+      const formData = new FormData();
+      formData.append('files', image);
+      const response = await axios.post('http://localhost:1337/api/upload', formData, {
+          headers: {
+              'Content-Type': 'multipart/form-data'
+          }
+      });
+
+      return response.data[0];
+  } catch (error) {
+      console.error('Error uploading image:', error);
+      throw error;
+  }
+};
 
   useEffect(() => {
     if (jwt == null) {
@@ -258,7 +286,7 @@ const AdminForm = () => {
           >
             ยกเลิก
           </Button>,
-          <Button key="submit" type="primary" onClick={handleAddTour}>
+          <Button key="submit" type="primary" onClick={handleAddTour} >
             เพิ่ม
           </Button>,
         ]}
@@ -283,7 +311,26 @@ const AdminForm = () => {
         <p>วันที่: </p>
         <RangePicker />
         <p>รูปภาพ: </p>
-        <Button type="primary">เพิ่มรูปภาพ</Button>
+        <Upload
+          name="image"
+          listType="picture-card"
+          showUploadList={false}
+          action="http://localhost:1337/api/upload"
+          beforeUpload={(file) => {
+            setImageFile(file);
+            return false;
+          }}
+          onChange={handleImageUpload}
+        >
+          {imageFile ? (
+            <img src={URL.createObjectURL(imageFile)} alt="Tour" style={{ width: "100%" }} />
+          ) : (
+            <div>
+              <UploadOutlined />
+              <div style={{ marginTop: 8 }}>Upload</div>
+            </div>
+          )}
+        </Upload>
       </Modal>
 
       <Layout style={layoutStyle}>
@@ -376,7 +423,7 @@ const AdminForm = () => {
           onClick={() => setIsAddMenuOpen(true)}
         />
       </Layout>
-      
+
       <Header style={headerbottom}>
         <img src={Logo} alt="Logo" style={{ width: "auto", height: "50px" }} />
       </Header>
