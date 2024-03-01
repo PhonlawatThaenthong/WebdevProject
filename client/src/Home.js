@@ -275,7 +275,7 @@ const HomeForm = () => {
         </Header>
         <PromotionalSlider images={promotionImages} />
         <h2
-          style={{ textAlign: "center", fontWeight: "bold", fontSize: "45px" }}
+          style={{ textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px" }}
         >
           โปรแกรมทัวร์แนะนำ
         </h2>
@@ -287,6 +287,7 @@ const HomeForm = () => {
         style={{
           backgroundColor: "#1C3953",
           borderColor: "#1C3953",
+          margin: "0 auto"
         }}
       >
         ดูโปรแกรมทั้งหมด
