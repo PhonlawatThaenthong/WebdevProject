@@ -414,7 +414,7 @@ const uploadImage = async (image) => {
           <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
         )}
         <h2
-          style={{ textAlign: "center", fontWeight: "bold", fontSize: "45px" }}
+          style={{ textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px"}}
         >
           Tour
         </h2>
