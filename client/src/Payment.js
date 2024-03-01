@@ -23,7 +23,7 @@ import useLocalState from './localStorage.js';
 import Step from "./Navbar/Step.js";
 import { useMediaQuery } from "react-responsive";
 import { QuestionCircleOutlined } from '@ant-design/icons';
-
+import WebFont from 'webfontloader';
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
 
@@ -67,6 +67,13 @@ const Payment = () => {
         navigate('/Member');
     };
 
+    useEffect(() => {
+        WebFont.load({
+          google: {
+            families: ['Sriracha', 'Kanit']
+          }
+        });
+       }, []);
 
 
     useEffect(() => {
@@ -137,10 +144,11 @@ const Payment = () => {
                 </Header>
             </Layout>
             <Space direction={isSmallScreen ? "vertical" : "horizontal"} size="middle" style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
-                <Card title="ช่องทางการชำระเงิน" bordered={false} style={{ width: cardWidth, height: cardHeight }}>
+            <Card title="ช่องทางการชำระเงิน" bordered={false} style={{ fontFamily:'Kanit',width: cardWidth, height: cardHeight }}>
                     <Collapse defaultActiveKey={['1']}>
-                        <Panel header="ชำระเงินทางธนาคาร" key="1">
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Panel style = {{fontFamily:'Kanit'}} header="ชำระเงินทางธนาคาร" key="1">
+                            <div style={{ fontFamily:'Kanit',display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+
                                 <p><strong>
                                     กรุณาโอนเงินไปยัง:{' '}
 
@@ -158,8 +166,9 @@ const Payment = () => {
                                 )}
                             </div>
                         </Panel>
-                        <Panel header="ชำระเงินทาง TrueMoney Wallet" key="2">
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <Panel style = {{fontFamily:'Kanit'}} header="ชำระเงินทาง TrueMoney Wallet" key="2">
+                            <div style={{ fontFamily:'Kanit',display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+
                                 <p><strong>
                                     กรุณาโอนเงินไปยัง:{' '}
                                     TrueMoney Wallet{' '}
@@ -177,10 +186,10 @@ const Payment = () => {
                             </div>
                         </Panel>
                     </Collapse>
-                    <Card title="ชำระเงินเสร็จเรียบร้อยแล้วใช่หรือไม่?" bordered={false} style={{ width: isSmallScreen ? '100%' : 950 }}>
+                    <Card title="ชำระเงินเสร็จเรียบร้อยแล้วใช่หรือไม่?" bordered={false} style={{ fontFamily:'Kanit',width: isSmallScreen ? '100%' : 950 }}>
                         <p>เมื่อทำการชำระเงินเรียบร้อยแล้วต้องทำการแจ้งสลิปหลักฐานการโอนเงินพร้อมระบุหมายเหตุทุกครั้ง เมื่อการชำระเงินของคุณได้รับการยืนยันแล้ว </p>
                         <p>สถานะการชำระในช่องประวัติการซื้อจะเปลี่ยนแปลง</p>
-                        <Button type="primary" block style={{ backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }} onClick={handleButtonClick}>ใช่ ฉันชำระเงินแล้ว</Button>
+                        <Button type="primary" block style={{ fontFamily:'Kanit',backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }} onClick={handleButtonClick}>ใช่ ฉันชำระเงินแล้ว</Button>
                     </Card>
                 </Card>
 
@@ -196,7 +205,7 @@ const Payment = () => {
                     zIndex: 9999,   
                 }}
             />
-            <Drawer title="ตัวอย่างสลิปการโอนเงิน" onClose={onClose} open={open} style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
+            <Drawer title="ตัวอย่างสลิปการโอนเงิน" onClose={onClose} open={open} style={{ fontFamily:'Kanit',display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
                 <p><strong>ตัวอย่างสลิปการโอนเงินธนาคาร</strong></p>
                 <br />
                 <img src={url3} className="Logo3" alt="" style={{ width: isSmallScreen ? '100%' : '100%', marginLeft: 'auto' }} />
