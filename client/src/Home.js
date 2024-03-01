@@ -29,6 +29,7 @@ import PromotionalSlider from "./PromotionalSlider";
 import picture from "./Image/Hat_Yai_Journey.png";
 import picture2 from "./Image/test.jpg";
 import Logo from "./Image/logo.png";
+import RecommendTour from "./Tour/recommendTour.js";
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -284,7 +285,7 @@ const HomeForm = () => {
         >
           โปรแกรมทัวร์แนะนำ
         </h2>
-        <Tour data={allData} filterData={filterData} />
+        <RecommendTour />
       </Layout>
       <Button
         type="primary"
