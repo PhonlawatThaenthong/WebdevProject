@@ -31,6 +31,7 @@ const Tour = ({ data, filterData }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isSmallScreen = useMediaQuery({ maxWidth: 767 });
   const [numberOfPeople, setNumberOfPeople] = useState(1);
+  const [userId, setUserId] = useState("")
 
   const handleOpenModal = (id) => {
     setSelectedTourId(id);
@@ -72,21 +73,20 @@ const Tour = ({ data, filterData }) => {
           );
           var tmp_amount = res_tour.data.data.attributes.user_amount;
           var tmp_max = res_tour.data.data.attributes.user_max;
-          console.log(
-            `Tour : ${selectedTourId}\nUser: ${tmp_amount}/${tmp_max}`
-          );
 
           if (tmp_amount >= tmp_max) {
+
             Modal.error({
               title: "Error",
               content: "ขออภัยทัวร์นี้เต็มแล้ว",
             });
+
           } else {
-            console.log(numberOfPeople)
+
             const res = await axios.post(
               `http://localhost:1337/api/tours/${selectedTourId}/complete`,
               {
-                numberOfPeople : numberOfPeople,
+                numberOfPeople: numberOfPeople,
               },
               {
                 headers: {
@@ -94,14 +94,62 @@ const Tour = ({ data, filterData }) => {
                 },
               }
             );
-            navigate('/payments')          
+
+            //
+
+            let temp_userID = ""
+            let temp_selectedTour = []
+            let temp_date = new Date()
+
+            try {
+              axios.defaults.headers.common = {
+                Authorization: `Bearer ${jwt}`,
+              };
+              const userResult = await axios.get(
+                "http://localhost:1337/api/users/me?populate=role"
+              );
+
+              temp_userID = userResult.data.id;
+
+              const tourResult = await axios.get(
+                `http://localhost:1337/api/tours/${selectedTourId}?populate=*`
+              );
+
+              temp_selectedTour = tourResult.data.data;
+              console.log(temp_selectedTour)
+
+            } catch (error) {
+              console.error(error);
+            }
+
+            const addNewTour = {
+              tour_id: selectedTourId,
+              user_id: temp_userID,
+              reserve_amount: numberOfPeople,
+              total_price: temp_selectedTour.attributes.price,
+              reserve_date: temp_date,
+            };
+
+            const formData = new FormData();
+            formData.append('data', JSON.stringify(addNewTour));
+
+            const response = await axios.post('http://localhost:1337/api/reserves', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            });
+
+            //
+
+            navigate('/payments')
+
           }
         };
         Modal.confirm({
           title: "ยืนยันการจองทัวร์",
           content: (
             <div>
-            <p style={{fontFamily:'Kanit'}}>กรุณายืนยันการจองทัวร์และดำเนินการชำระเงิน</p>
+              <p style={{ fontFamily: 'Kanit' }}>กรุณายืนยันการจองทัวร์และดำเนินการชำระเงิน</p>
             </div>
           ),
           okText: "ยืนยัน",
@@ -119,7 +167,7 @@ const Tour = ({ data, filterData }) => {
         title: "ท่านยังไม่ได้ล็อกอิน",
         content: (
           <div>
-            <p style={{fontFamily:'Kanit'}}>กรุณาทำการล็อกอินก่อนจองทัวร์</p>
+            <p style={{ fontFamily: 'Kanit' }}>กรุณาทำการล็อกอินก่อนจองทัวร์</p>
           </div>
         ),
         okText: "ล็อกอิน",
@@ -154,7 +202,7 @@ const Tour = ({ data, filterData }) => {
         families: ['Sriracha', 'Kanit']
       }
     });
-   }, []);
+  }, []);
 
   return (
 
@@ -179,7 +227,7 @@ const Tour = ({ data, filterData }) => {
         <Row gutter={[16, 16]}>
           {toursToDisplay.map(({ id, attributes }) => (
             <Col key={id} xs={24} sm={12} md={8} lg={8}>
-              <Card key={id} style={{ fontFamily:'Kanit',width: 450, margin: 20, marginTop: 50 }}>
+              <Card key={id} style={{ fontFamily: 'Kanit', width: 450, margin: 20, marginTop: 50 }}>
                 {currentPage === "/admin" ? (
                   <Modal
                     title={attributes.tour_name}
@@ -254,7 +302,7 @@ const Tour = ({ data, filterData }) => {
                 ) : (
                   // VVVVVVVV THIS IS NON ADMIN MODAL PLEASE EDIT THIS ONLY /////////////////////////////////////////////////////
                   <Modal
-                    style={{fontFamily:'Kanit'}}
+                    style={{ fontFamily: 'Kanit' }}
                     title={attributes.tour_name}
                     open={isModalOpen && selectedTourId === id}
                     onCancel={() => {
@@ -316,7 +364,7 @@ const Tour = ({ data, filterData }) => {
                       value={numberOfPeople}
                       onChange={(e) => setNumberOfPeople(parseInt(e.target.value, 10))}
                     />
-                    
+
                   </Modal>
                 )}
                 <div style={{ textAlign: "center" }}>
@@ -351,7 +399,7 @@ const Tour = ({ data, filterData }) => {
                     type="primary"
                     onClick={() => handleOpenModal(id)}
                     style={{
-                      fontFamily:'Kanit',
+                      fontFamily: 'Kanit',
                       display: "block",
                       margin: "0 auto",
                       backgroundColor: "#DE3163",
@@ -364,7 +412,7 @@ const Tour = ({ data, filterData }) => {
                   <Button
                     type="primary"
                     onClick={() => handleOpenModal(id)}
-                    style={{ fontFamily:'Kanit',display: "block", margin: "0 auto" }}
+                    style={{ fontFamily: 'Kanit', display: "block", margin: "0 auto" }}
                   >
                     ดูเพิ่มเติม
                   </Button>
