@@ -265,6 +265,10 @@ const uploadImage = async (image) => {
     fontSize: isSmallScreen ? "24px" : "45px",
   };
 
+  const promotionalSliderStyle = {
+    marginTop: isSmallScreen ? "150px" : "50px",
+  };
+
   return (
     <Flex gap="middle" wrap="wrap">
       <Helmet>
