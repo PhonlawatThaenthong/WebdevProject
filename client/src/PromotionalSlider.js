@@ -42,7 +42,7 @@ const PromotionalSlider = ({ images }) => {
         <Slider {...settings}>
           {images.map((image, index) => (
             <div key={index} className="slider-item">
-              <img src={image} alt={`Promotion ${index + 1}`} />
+              <img src={image} alt={`Promotion ${(index + 1) % index}`} />
             </div>
           ))}
         </Slider>
