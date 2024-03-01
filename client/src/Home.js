@@ -22,6 +22,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import useLocalState from "./localStorage.js";
 import { useMediaQuery } from "react-responsive";
+import WebFont from 'webfontloader';
 
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
@@ -29,6 +30,7 @@ import PromotionalSlider from "./PromotionalSlider";
 import picture from "./Image/Hat_Yai_Journey.png";
 import picture2 from "./Image/test.jpg";
 import Logo from "./Image/logo.png";
+import './index.css';
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -98,6 +100,14 @@ const HomeForm = () => {
     } else roleChecker();
     getData();
   }, []);
+
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ['Sriracha', 'Chilanka']
+      }
+    });
+   }, []);
 
   const menu = (
     <Menu>
@@ -279,11 +289,12 @@ const HomeForm = () => {
         ) : (
           <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
         )}
-        <h2
-          style={{ textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px" }}
+        <span
+          style={{fontFamily:'Sriracha',textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px" }}
+          
         >
           โปรแกรมทัวร์แนะนำ
-        </h2>
+        </span>
         <Tour data={allData} filterData={filterData} />
       </Layout>
       <Button

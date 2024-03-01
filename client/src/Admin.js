@@ -27,6 +27,7 @@ import useLocalState from "./localStorage.js";
 import { useMediaQuery } from "react-responsive";
 import { UploadOutlined } from "@ant-design/icons";
 import { MenuOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
+import WebFont from 'webfontloader';
 
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
@@ -182,6 +183,14 @@ const uploadImage = async (image) => {
     } else roleChecker();
     getData();
   }, []);
+
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ['Sriracha', 'Chilanka']
+      }
+    });
+   }, []);
 
   const menu = (
     <Menu>
@@ -418,7 +427,7 @@ const uploadImage = async (image) => {
           <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
         )}
         <h2
-          style={{ textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px"}}
+          style={{ fontFamily:'Sriracha',textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px"}}
         >
           Tour
         </h2>

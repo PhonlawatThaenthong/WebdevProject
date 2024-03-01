@@ -93,7 +93,7 @@ const Tour = ({ data, filterData }) => {
                 },
               }
             );
-            navigate("/payments");
+            navigate('/payments')          
           }
         };
         Modal.confirm({

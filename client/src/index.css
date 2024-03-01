@@ -39,3 +39,9 @@ code {
   max-width: 100%;
   height: auto;
 }
+
+.sriracha-regular {
+  font-family: "Sriracha", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
