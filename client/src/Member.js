@@ -290,6 +290,7 @@ const MemberForm = () => {
         style={{
           backgroundColor: "#1C3953",
           borderColor: "#1C3953",
+          margin: "0 auto",
         }}
       >
         ดูโปรแกรมทั้งหมด
