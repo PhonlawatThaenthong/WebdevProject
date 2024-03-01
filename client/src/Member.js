@@ -302,7 +302,8 @@ const MemberForm = () => {
           โปรแกรมทัวร์แนะนำ
         </h2>
         <RecommendTour />
-        <Button
+      </Layout>
+      <Button
           type="primary"
           onClick={() => navigate("/alltour")}
           style={{
@@ -313,7 +314,6 @@ const MemberForm = () => {
         >
           ดูโปรแกรมทั้งหมด
         </Button>
-      </Layout>
       <Header style={headerbottom}>
         <img src={Logo} alt="Logo" style={{ width: "auto", height: "50px" }} />
       </Header>
