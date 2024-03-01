@@ -12,6 +12,7 @@ import {
     Card,
     Collapse,
     Space,
+    Drawer
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -25,6 +26,7 @@ import WebFont from 'webfontloader';
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
 
+
 const Payment = () => {
     const navigate = useNavigate();
     const [jwt, setjwt] = useLocalState(null, 'jwt');
@@ -33,8 +35,18 @@ const Payment = () => {
     const cardWidth = isSmallScreen ? '100%' : 1000;
     const cardHeight = isSmallScreen ? 'auto' : 700;
     const { Panel } = Collapse;
+    const [open, setOpen] = useState(false);
+    const showDrawer = () => {
+        setOpen(true);
+      };
+    
+      const onClose = () => {
+        setOpen(false);
+      };
     let url = "https://s3-symbol-logo.tradingview.com/the-siam-commercial-bank-public-company--600.png"
     let url2 = "https://play-lh.googleusercontent.com/eOzvk-ekluYaeLuvDkLb5RJ0KqfFQpodZDnppxPfpEfqEqbNo5erEkmwLBgqP-k-e2kQ"
+    let url3 = "https://cdn.discordapp.com/attachments/1070568112459632682/1213149402600972349/IMG_0249.png?ex=65f46c6c&is=65e1f76c&hm=e3ec34b2ed73a84befba06e8012e280ef8ae5355abb49277ac2c7189d0d234f9&"
+    let url4 = "https://cdn.discordapp.com/attachments/1070568112459632682/1213150614264217640/IMG_0251.png?ex=65f46d8d&is=65e1f88d&hm=d691fc54956b560297ecbb710fd907e9853c1113bc973b29c9b1571b78b65189&"
     const roleChecker = async () => {
         try {
             axios.defaults.headers.common = {
@@ -49,7 +61,7 @@ const Payment = () => {
     const handleButtonClick = () => {
         navigate('/UploadReceipt');
     };
-    
+
     const handleHeaderClick = () => {
         navigate('/Member');
     };
@@ -131,7 +143,7 @@ const Payment = () => {
                     )}
                 </Header>
             </Layout>
-            <Space direction="vertical" size="middle" style={{ fontFamily:'Kanit',display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
+            <Space direction={isSmallScreen ? "vertical" : "horizontal"} size="middle" style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
                 <Card title="ช่องทางการชำระเงิน" bordered={false} style={{ fontFamily:'Kanit',width: cardWidth, height: cardHeight }}>
                     <Collapse defaultActiveKey={['1']}>
                         <Panel style = {{fontFamily:'Kanit'}} header="ชำระเงินทางธนาคาร" key="1">
@@ -178,8 +190,19 @@ const Payment = () => {
                         <Button type="primary" block style={{ fontFamily:'Kanit',backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }} onClick={handleButtonClick}>ใช่ ฉันชำระเงินแล้ว</Button>
                     </Card>
                 </Card>
+
             </Space>
+            <Button type="primary" onClick={showDrawer} style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
+                Open
+            </Button>
+            <Drawer title="ตัวอย่างสลิปการโอนเงิน" onClose={onClose} open={open} style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
+                <p><strong>ตัวอย่างสลิปการโอนเงินธนาคาร</strong></p>
+                <img src={url3} className="Logo3" alt="" style={{ width: isSmallScreen ? '100%' : '100%', marginLeft: 'auto' }} />
+                <p><strong>ตัวอย่างสลิปการโอนเงินผ่าน TrueMoney Wallet</strong></p>
+                <img src={url4} className="Logo4" alt="" style={{ width: isSmallScreen ? '100%' : '100%', marginLeft: 'auto' }} />
+            </Drawer>
         </Flex>
+
     );
 
 };

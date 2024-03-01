@@ -153,7 +153,7 @@ const MemberForm = () => {
         families: ['Sriracha', 'Chilanka']
       }
     });
-   }, []);
+  }, []);
 
   const headerStyle = {
     textAlign: "center",
@@ -311,7 +311,18 @@ const MemberForm = () => {
         </h2>
         <Tour data={allData} filterData={filterData} />
       </Layout>
-      
+      <Button
+          type="primary"
+          onClick={() => navigate("/alltour")}
+          style={{
+            backgroundColor: "#1C3953",
+            borderColor: "#1C3953",
+            margin: "0 auto",
+            fontFamily:'Kanit'
+          }}
+        >
+          ดูโปรแกรมทั้งหมด
+        </Button>
       <Header style={headerbottom}>
         <img src={Logo} alt="Logo" style={{ width: "auto", height: "50px" }} />
       </Header>

@@ -11,7 +11,6 @@ module.exports = createCoreController('api::tour.tour', ({ strapi }) => ({
     async method_complete(ctx) {
         const entityId = ctx.params.id;
         const { numberOfPeople } = ctx.request.body;
-        console.log(numberOfPeople);
         try {
             let target_Tour = await strapi.entityService.findOne('api::tour.tour', entityId)
 
