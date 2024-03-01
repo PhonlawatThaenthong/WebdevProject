@@ -109,7 +109,7 @@ const CardHistory = ({ data, filterData }) => {
         families: ['Sriracha', 'Kanit']
       }
     });
-   }, []);
+  }, []);
 
   const userReserves = allData.filter(reserve => reserve.attributes.user_id.data.attributes.username === username);
 
@@ -133,12 +133,18 @@ const CardHistory = ({ data, filterData }) => {
         </b>
       ) : (
         userReserves.map(({ id, attributes }) => (
-          <Card key={id} style={{ fontFamily:'Kanit',width: 300, margin: 20, marginTop: 50 }}>
-            <Image
-              src={`https://semantic-ui.com/images/wireframe/white-image.png`}
-              preview={false}
-            />
-            <b style={{ fontSize: "18px" ,fontFamily:'Kanit'}}>{attributes.tour_id.data.attributes.tour_name}</b>
+          <Card key={id} style={{ fontFamily: 'Kanit', width: 300, margin: 20, marginTop: 50 }}>
+            {attributes.payment_status === false && (
+              <Image
+                src={`https://cdn-icons-png.freepik.com/512/6475/6475938.png`}
+                preview={false}
+              />)}
+            {attributes.payment_status === true && (
+              <Image
+                src={`https://thumb.ac-illust.com/98/98f98abb339a27ca448a784926b8329d_t.jpeg`}
+                preview={false}
+              />)}
+            <b style={{ fontSize: "18px", fontFamily: 'Kanit' }}>{attributes.tour_id.data.attributes.tour_name}</b>
             <br />
             ราคา: {getPrice(attributes.total_price)} บาท
             <br />
