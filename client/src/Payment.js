@@ -13,7 +13,8 @@ import {
     Collapse,
     Space,
     Drawer,
-    FloatButton
+    FloatButton,
+    Popover
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -204,6 +205,10 @@ const Payment = () => {
                 </Card>
 
             </Space>
+            <Popover 
+              title={<div style={{ textAlign: 'center' ,fontFamily: 'Kanit' }}>แสดงตัวอย่าง</div>}
+              
+             >
             <FloatButton
                 icon={<QuestionCircleOutlined />}
                 onClick={showDrawer}
@@ -215,6 +220,7 @@ const Payment = () => {
                     zIndex: 9999,
                 }}
             />
+            </Popover>
             <Drawer title="ตัวอย่างสลิปการโอนเงิน" onClose={onClose} open={open} style={{ fontFamily: 'Kanit', display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
                 <p><strong>ตัวอย่างสลิปการโอนเงินธนาคาร</strong></p>
                 <br />
