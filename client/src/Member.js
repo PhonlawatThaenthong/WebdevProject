@@ -276,7 +276,11 @@ const MemberForm = () => {
             )}
           </Col>
         </Header>
-        <PromotionalSlider images={promotionImages} />
+        {isSmallScreen ? (
+          <></>
+        ) : (
+          <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
+        )}
         <h2
           style={{ textAlign: "center", fontWeight: "bold", fontSize: "45px" }}
         >
