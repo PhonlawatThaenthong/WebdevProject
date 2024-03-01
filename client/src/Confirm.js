@@ -99,6 +99,18 @@ const Confirm = ({ data, filterData }) => {
         }
     };
 
+    const handleLogout = async () => {
+        setjwt(null);
+        messageApi
+          .open({
+            type: "loading",
+            content: "กรุณารอสักครู่...",
+            duration: 1,
+          })
+          .then(() => message.success("เสร็จสิ้น!", 0.5))
+          .then(() => (window.location.href = "/"));
+      };
+
     const getDate = (time) => {
         const dateObj = new Date(time);
         const months = [
