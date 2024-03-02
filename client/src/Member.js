@@ -304,12 +304,6 @@ const MemberForm = () => {
           โปรแกรมทัวร์แนะนำ
         </h2>
         <RecommendTour />
-        <h2
-          style={{ fontFamily:'Kanit',textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px" }}
-        >
-          โปรแกรมทัวร์ทั้งหมด (รอทำปุ่ม view all tour)
-        </h2>
-        <Tour data={allData} filterData={filterData} />
       </Layout>
       <Button
           type="primary"
