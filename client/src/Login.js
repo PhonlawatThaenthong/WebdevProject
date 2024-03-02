@@ -88,10 +88,14 @@ const LoginForm = () => {
         families: ['Sriracha', 'Kanit']
       }
     });
-   }, []);
+  }, []);
 
   const handleCloseErrorModal = () => {
     setShowErrorModal(false);
+  };
+
+  const handleHeaderClick = () => {
+    navigate('/');
   };
 
   const headerStyle = {
@@ -158,7 +162,7 @@ const LoginForm = () => {
 
   return (
     <div style={{}}>
-      <Header style={headerStyle}>
+      <Header style={headerStyle} onClick={handleHeaderClick}>
         <Col>
           <span style={blueTextStyle}>H</span>
           <span style={NormalTextStyle}>AT</span>
@@ -179,11 +183,11 @@ const LoginForm = () => {
           <Card
             title="เข้าสู่ระบบ"
             bordered={true}
-            style={{ fontFamily:'Kanit',width: "100%", textAlign: "center" }}
+            style={{ fontFamily: 'Kanit', width: "100%", textAlign: "center" }}
           >
             <Form form={form} onFinish={handleSubmit} >
               <Form.Item
-              
+
                 label="ชื่อผู้ใช้"
                 name="username"
                 rules={[
@@ -208,15 +212,15 @@ const LoginForm = () => {
                   type="primary"
                   htmlType="submit"
                   disabled={!submitEnabled}
-                  style = {{fontFamily:'Kanit'}}
+                  style={{ fontFamily: 'Kanit' }}
                 >
                   เข้าสู่ระบบ
                 </Button>
               </Form.Item>
 
               <Form.Item>
-                <span style={{ fontFamily:'Kanit',marginRight: "8px" }}>ยังไม่มีบัญชี?</span>
-                <Link to="/register"style = {{fontFamily:'Kanit'}}>สมัครสมาชิก</Link>
+                <span style={{ fontFamily: 'Kanit', marginRight: "8px" }}>ยังไม่มีบัญชี?</span>
+                <Link to="/register" style={{ fontFamily: 'Kanit' }}>สมัครสมาชิก</Link>
               </Form.Item>
             </Form>
           </Card>
@@ -235,8 +239,8 @@ const LoginForm = () => {
           </Button>
         </Modal>
       </Row>
-      <Header style={headerbottom}> 
-      <img src={Logo} alt="Logo" style={{ width: 'auto', height: '50px', }} />
+      <Header style={headerbottom}>
+        <img src={Logo} alt="Logo" style={{ width: 'auto', height: '50px', }} />
       </Header>
     </div>
   );
