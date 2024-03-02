@@ -32,7 +32,7 @@ const Tour = ({ data, filterData }) => {
   const isSmallScreen = useMediaQuery({ maxWidth: 767 });
   const [numberOfPeople, setNumberOfPeople] = useState(1);
   const [userId, setUserId] = useState("")
-
+  
   const handleOpenModal = (id) => {
     setSelectedTourId(id);
     setIsModalOpen(true);
@@ -229,7 +229,7 @@ const Tour = ({ data, filterData }) => {
       ) : (
         <Row gutter={[16, 16]}>
           {toursToDisplay.map(({ id, attributes }) => (
-            <Col key={id} xs={24} sm={12} md={8} lg={8}>
+            <Col key={id} xs={24} sm={12} md={8} lg={8} style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
               <Card key={id} style={{ fontFamily: 'Kanit', width: 450, margin: 20, marginTop: 50 }}>
                 {currentPage === "/admin" ? (
                   <Modal
