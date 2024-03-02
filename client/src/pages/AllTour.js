@@ -60,6 +60,18 @@ const AllTour = () => {
     navigate("/login");
   };
 
+  const handleLogout = async () => {
+    setjwt(null);
+    messageApi
+      .open({
+        type: "loading",
+        content: "กรุณารอสักครู่...",
+        duration: 1,
+      })
+      .then(() => message.success("เสร็จสิ้น!", 0.5))
+      .then(() => (window.location.href = "/"));
+  };
+
   const roleChecker = async () => {
     try {
       axios.defaults.headers.common = {

@@ -422,7 +422,6 @@ const Tour = ({ data, filterData }) => {
         </Row>
       )}
     </div>
-
   );
 };
 
