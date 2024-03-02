@@ -202,7 +202,7 @@ const UploadReceipt = () => {
                 <br />
                 <img src={url3} className="Logo3" alt="" style={{ width: isSmallScreen ? '100%' : '100%', marginLeft: 'auto' }} />
                 <br />
-                <p><strong>กรุณาเติมข้อความในหมายเหตุว่าครั้ง</strong></p>
+                <p><strong>กรุณาเติมข้อความในหมายเหตุทุกครั้ง</strong></p>
                <p><strong>หากลืมบันทึกหมายเหตุทางเราขอทำการโอนคืน</strong></p>
             </Drawer>
         </Flex >
