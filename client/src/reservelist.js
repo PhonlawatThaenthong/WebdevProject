@@ -112,6 +112,12 @@ const ReserveForm = () => {
                         }}
                         key="History"
                     >History</Menu.Item>
+                    <Menu.Item
+                        onClick={() => {
+                            navigate("/");
+                        }}
+                        key="back"
+                    >กลับ</Menu.Item>
                 </>
             ) : (
                 <></>

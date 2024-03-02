@@ -112,7 +112,13 @@ const ProfileForm = () => {
                             navigate("/history");
                         }}
                         key="History"
-                    >History</Menu.Item>
+                    >ประวัติ</Menu.Item>
+                    <Menu.Item
+                        onClick={() => {
+                            navigate("/");
+                        }}
+                        key="back"
+                    >กลับ</Menu.Item>
                 </>
             ) : (
                 <></>
@@ -272,7 +278,7 @@ const ProfileForm = () => {
                             <>
                                 <Link
                                     onClick={() => {
-                                        navigate("/profile");
+                                        navigate("/member");
                                     }}
                                     style={{
                                         marginRight: "50px",

@@ -258,6 +258,12 @@ const Confirm = ({ data, filterData }) => {
                         }}
                         key="History"
                     >History</Menu.Item>
+                    <Menu.Item
+                        onClick={() => {
+                            navigate("/");
+                        }}
+                        key="back"
+                    >กลับ</Menu.Item>
                 </>
             ) : (
                 <></>
