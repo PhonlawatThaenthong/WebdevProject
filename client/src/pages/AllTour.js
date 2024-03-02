@@ -50,6 +50,7 @@ const AllTour = () => {
       console.error("error fetching all data", error);
     }
   };
+
   useEffect(() => {
     getAllData();
     roleChecker();
@@ -165,7 +166,7 @@ const AllTour = () => {
   };
 
   return (
-    <Flex gap="middle" wrap="wrap">
+    <Flex gap="middle" wrap="wrap" style={{ backgroundColor: "#F5F5F5" }}>
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>HYJ - Home Page</title>
@@ -341,7 +342,6 @@ const AllTour = () => {
         </div>
         <Tour data={allData} filterData={filterData} />
       </Layout>
-      <b></b>
       <Button
         type="primary"
         onClick={() => navigate("/")}

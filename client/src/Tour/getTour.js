@@ -205,7 +205,6 @@ const Tour = ({ data, filterData }) => {
   }, []);
 
   return (
-
     <div
       style={{
         display: isSmallScreen ? "grid" : "flex",
