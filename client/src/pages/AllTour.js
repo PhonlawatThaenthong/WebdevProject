@@ -52,10 +52,27 @@ const AllTour = () => {
   };
   useEffect(() => {
     getAllData();
+    roleChecker();
   }, []);
 
   const handleHeaderClick = () => {
     navigate("/login");
+  };
+
+  const roleChecker = async () => {
+    try {
+      axios.defaults.headers.common = {
+        Authorization: `Bearer ${jwt}`,
+      };
+      const userResult = await axios.get(
+        "http://localhost:1337/api/users/me?populate=role"
+      );
+
+      setUsername(userResult.data.username);
+
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleSearch = async (searchText) => {
@@ -64,7 +81,6 @@ const AllTour = () => {
         `http://localhost:1337/api/tours?filters[tour_name][$containsi]=${searchText}&populate=*`
       );
       setFilterData(res.data.data);
-      console.log(res.data.data)
     } catch (error) {
       console.error("error filter data", error);
     }
@@ -156,90 +172,167 @@ const AllTour = () => {
       </Helmet>
       {contextHolder}
       <Layout style={layoutStyle}>
-        <Header
-          style={{
-            ...headerStyle,
-            justifyContent: isSmallScreen ? "center" : "flex-start",
-          }}
-          className="headerStyle"
-        >
-          <Col>
-            <span style={blueTextStyle} className="blueTextStyle">
-              H
-            </span>
-            <span style={NormalTextStyle} className="NormalTextStyle">
-              AT
-            </span>
-            <span style={invtext}>.</span>
-            <span style={blueTextStyle} className="blueTextStyle">
-              Y
-            </span>
-            <span style={NormalTextStyle} className="NormalTextStyle">
-              AI
-            </span>
-            <span style={invtext}>.</span>
-            <span style={blueTextStyle} className="blueTextStyle">
-              J
-            </span>
-            <span style={NormalTextStyle} className="NormalTextStyle">
-              ourney
-            </span>
-          </Col>
+        {jwt === null ?
+          (<Header
+            style={{
+              ...headerStyle,
+              justifyContent: isSmallScreen ? "center" : "flex-start",
+            }}
+            className="headerStyle"
+          >
+            <Col>
+              <span style={blueTextStyle} className="blueTextStyle">
+                H
+              </span>
+              <span style={NormalTextStyle} className="NormalTextStyle">
+                AT
+              </span>
+              <span style={invtext}>.</span>
+              <span style={blueTextStyle} className="blueTextStyle">
+                Y
+              </span>
+              <span style={NormalTextStyle} className="NormalTextStyle">
+                AI
+              </span>
+              <span style={invtext}>.</span>
+              <span style={blueTextStyle} className="blueTextStyle">
+                J
+              </span>
+              <span style={NormalTextStyle} className="NormalTextStyle">
+                ourney
+              </span>
+            </Col>
 
-          <Col span={isSmallScreen ? 12 : 22}>
-            {isSmallScreen ? (
-              <div style={{ textAlign: isSmallScreen ? "right" : "left" }}>
-                <Dropdown
-                  overlay={menu}
-                  trigger={["click"]}
-                  visible={menuVisible}
-                  onVisibleChange={setMenuVisible}
-                >
-                  <UserOutlined
-                    onClick={isSmallScreen ? handleHeaderClick : undefined}
-                    style={{ fontSize: "25px", marginRight: "8px" }}
-                  />
-                </Dropdown>
-                <Popover
-                  content={searchPopoverContent}
-                  trigger="click"
-                  visible={searchPopoverVisible}
-                  onVisibleChange={setSearchPopoverVisible}
-                >
-                  <SearchOutlined
-                    style={{ fontSize: "25px", marginLeft: "8px" }}
-                  />
-                </Popover>
-              </div>
-            ) : (
-              <>
-                <SearchBar onSearch={handleSearch} />
-                <Link
-                  to="/login"
-                  style={{
-                    marginLeft: "40px",
-                    color: "white",
-                    fontSize: isSmallScreen ? "15px" : "18px",
-                  }}
-                >
-                  เข้าสู่ระบบ
-                </Link>
-                <Link
-                  to="/register"
-                  style={{
-                    marginLeft: "40px",
-                    color: "white",
-                    fontSize: isSmallScreen ? "15px" : "18px",
-                  }}
-                >
-                  ลงทะเบียน
-                </Link>
-              </>
-            )}
-          </Col>
-        </Header>
+            <Col span={isSmallScreen ? 12 : 22}>
+              {isSmallScreen ? (
+                <div style={{ textAlign: isSmallScreen ? "right" : "left" }}>
+                  <Dropdown
+                    overlay={menu}
+                    trigger={["click"]}
+                    visible={menuVisible}
+                    onVisibleChange={setMenuVisible}
+                  >
+                    <UserOutlined
+                      onClick={isSmallScreen ? handleHeaderClick : undefined}
+                      style={{ fontSize: "25px", marginRight: "8px" }}
+                    />
+                  </Dropdown>
+                  <Popover
+                    content={searchPopoverContent}
+                    trigger="click"
+                    visible={searchPopoverVisible}
+                    onVisibleChange={setSearchPopoverVisible}
+                  >
+                    <SearchOutlined
+                      style={{ fontSize: "25px", marginLeft: "8px" }}
+                    />
+                  </Popover>
+                </div>
+              ) : (
+                <>
+                  <SearchBar onSearch={handleSearch} />
+                  <Link
+                    to="/login"
+                    style={{
+                      marginLeft: "40px",
+                      color: "white",
+                      fontSize: isSmallScreen ? "15px" : "18px",
+                    }}
+                  >
+                    เข้าสู่ระบบ
+                  </Link>
+                  <Link
+                    to="/register"
+                    style={{
+                      marginLeft: "40px",
+                      color: "white",
+                      fontSize: isSmallScreen ? "15px" : "18px",
+                    }}
+                  >
+                    ลงทะเบียน
+                  </Link>
+                </>
+              )}
+            </Col>
+          </Header>
+          ) : (
+            <Header
+              style={{
+                ...headerStyle,
+                justifyContent: isSmallScreen ? "center" : "flex-start",
+              }}
+            >
+              <Col>
+                <span style={blueTextStyle}>H</span>
+                <span style={NormalTextStyle}>AT</span>
+                <span style={invtext}>.</span>
+                <span style={blueTextStyle}>Y</span>
+                <span style={NormalTextStyle}>AI</span>
+                <span style={invtext}>.</span>
+                <span style={blueTextStyle}>J</span>
+                <span style={NormalTextStyle}>ourney</span>
+              </Col>
+              <Col span={isSmallScreen ? 12 : 22}>
+                {isSmallScreen ? (
+                  <div style={{ textAlign: isSmallScreen ? "right" : "left" }}>
+                    <Dropdown
+                      overlay={menu}
+                      trigger={["click"]}
+                      visible={menuVisible}
+                      onVisibleChange={setMenuVisible}
+                    >
+                      <UserOutlined
+                        style={{ fontSize: "25px", marginRight: "8px" }}
+                      />
+                    </Dropdown>
+                    <Popover
+                      content={searchPopoverContent}
+                      trigger="click"
+                      visible={searchPopoverVisible}
+                      onVisibleChange={setSearchPopoverVisible}
+                    >
+                      <SearchOutlined
+                        style={{ fontSize: "25px", marginLeft: "8px" }}
+                      />
+                    </Popover>
+                  </div>
+                ) : (
+                  <>
+                    <Link
+                      onClick={() => {
+                        navigate("/profile");
+                      }}
+                      style={{
+                        marginRight: "50px",
+                        color: "white",
+                        fontSize: isSmallScreen ? "14px" : "18px",
+                        width: "300px",
+                        fontFamily: 'Kanit'
+                      }}
+                    >
+                      สวัสดีคุณ {username}
+                    </Link>
+                    {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
+                    <Link
+                      onClick={() => {
+                        handleLogout();
+                      }}
+                      style={{
+                        marginLeft: "50px",
+                        color: "white",
+                        fontSize: "18px",
+                        fontFamily: 'Kanit'
+                      }}
+                    >
+                      ออกจากระบบ
+                    </Link>
+                  </>
+                )}
+              </Col>
+            </Header>
+          )}
         <h2 style={{ textAlign: "center", fontWeight: "bold", fontSize: isSmallScreen ? "25px" : "45px" }}>โปรแกรมทัวร์ทั้งหมด</h2>
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px',marginBottom: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px', marginBottom: '20px' }}>
           <Calendar
             onChange={setSelectedDate}
             value={selectedDate}
@@ -248,6 +341,7 @@ const AllTour = () => {
         </div>
         <Tour data={allData} filterData={filterData} />
       </Layout>
+      <b></b>
       <Button
         type="primary"
         onClick={() => navigate("/")}
