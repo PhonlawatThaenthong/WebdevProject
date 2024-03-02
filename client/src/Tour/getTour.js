@@ -126,7 +126,7 @@ const Tour = ({ data, filterData }) => {
               tour_id: selectedTourId,
               user_id: temp_userID,
               reserve_amount: numberOfPeople,
-              total_price: temp_selectedTour.attributes.price,
+              total_price: (temp_selectedTour.attributes.price * numberOfPeople),
               reserve_date: temp_date,
             };
 
