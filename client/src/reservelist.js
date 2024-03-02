@@ -41,28 +41,28 @@ const ReserveForm = () => {
 
     const roleChecker = async () => {
         try {
-          axios.defaults.headers.common = {
-            Authorization: `Bearer ${jwt}`,
-          };
-          const userResult = await axios.get(
-            "http://localhost:1337/api/users/me?populate=role"
-          );
-    
-          setUsername(userResult.data.username);
-    
-          if (userResult.data.role && userResult.data.role.name === "Member") {
-            navigate("/history");
-          } else {
-            if (userResult.data.role && userResult.data.role.name === "Admin") {
-              navigate("/confirm");
+            axios.defaults.headers.common = {
+                Authorization: `Bearer ${jwt}`,
+            };
+            const userResult = await axios.get(
+                "http://localhost:1337/api/users/me?populate=role"
+            );
+
+            setUsername(userResult.data.username);
+
+            if (userResult.data.role && userResult.data.role.name === "Member") {
+                navigate("/history");
             } else {
-              navigate("/");
+                if (userResult.data.role && userResult.data.role.name === "Admin") {
+                    navigate("/confirm");
+                } else {
+                    navigate("/");
+                }
             }
-          }
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
-      };
+    };
 
     const handleLogout = async () => {
         setjwt(null)
@@ -82,31 +82,39 @@ const ReserveForm = () => {
     }, []);
 
     useEffect(() => {
-    WebFont.load({
-      google: {
-        families: ['Sriracha', 'Kanit']
-      }
-    });
-   }, []);
+        WebFont.load({
+            google: {
+                families: ['Sriracha', 'Kanit']
+            }
+        });
+    }, []);
 
     const menu = (
-        <Menu >
+        <Menu>
             {jwt ? (
                 <>
-                    <Menu.Item onClick={() => { navigate("/history"); }} key="username">
-                        <span style={{ fontFamily:'Kanit',color: '#48D3FF' }}>{username && `Hello, ${username}`}</span>
+                    <Menu.Item
+                        onClick={() => {
+                            navigate("/profile");
+                        }}
+                        key="username"
+                    >
+                        <span style={{ fontFamily: 'Kanit', color: "#48D3FF" }}>
+                            {username && `สวัสดีคุณ, ${username}`}
+                        </span>
                     </Menu.Item>
                     <Menu.Item key="logout" onClick={() => handleLogout()}>
                         ออกจากระบบ
                     </Menu.Item>
-                    <Menu.Item key="back" onClick={() => { navigate("/member"); }}>
-                        กลับ
-                    </Menu.Item>
+                    <Menu.Item
+                        onClick={() => {
+                            navigate("/history");
+                        }}
+                        key="History"
+                    >History</Menu.Item>
                 </>
             ) : (
-                <>
-
-                </>
+                <></>
             )}
         </Menu>
     );
@@ -180,14 +188,14 @@ const ReserveForm = () => {
                                     onClick={() => {
                                         navigate("/");
                                     }}
-                                    style={{ fontFamily:'Kanit',marginLeft: "500px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
+                                    style={{ fontFamily: 'Kanit', marginLeft: "500px", color: "white", fontSize: isSmallScreen ? "14px" : "18px", width: "300px" }}
                                 >
                                     สวัสดีคุณ {username}
                                 </Link>
 
                                 <Link
                                     onClick={() => { handleLogout() }}
-                                    style={{ fontFamily:'Kanit',marginLeft: "50px", color: "white", fontSize: "18px" }}
+                                    style={{ fontFamily: 'Kanit', marginLeft: "50px", color: "white", fontSize: "18px" }}
                                 >
                                     ออกจากระบบ
                                 </Link>
@@ -198,7 +206,7 @@ const ReserveForm = () => {
 
 
                 </Header>
-                <span style={{fontFamily:'Kanit',textAlign:'center',fontSize:"50px"}}>Reserve</span>
+                <span style={{ fontFamily: 'Kanit', textAlign: 'center', fontSize: "50px" }}>Reserve</span>
                 <CardHistory />
             </Layout>
 

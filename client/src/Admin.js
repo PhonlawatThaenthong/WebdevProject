@@ -198,7 +198,7 @@ const AdminForm = () => {
         <>
           <Menu.Item
             onClick={() => {
-              navigate("/history");
+              navigate("/profile");
             }}
             key="username"
           >
@@ -209,6 +209,12 @@ const AdminForm = () => {
           <Menu.Item key="logout" onClick={() => handleLogout()}>
             ออกจากระบบ
           </Menu.Item>
+          <Menu.Item
+            onClick={() => {
+              navigate("/history");
+            }}
+            key="History"
+          >History</Menu.Item>
         </>
       ) : (
         <></>
@@ -395,7 +401,7 @@ const AdminForm = () => {
               <>
                 <Link
                   onClick={() => {
-                    navigate("/history");
+                    navigate("/profile");
                   }}
                   style={{
                     marginRight: "50px",

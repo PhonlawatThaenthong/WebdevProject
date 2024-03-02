@@ -236,23 +236,31 @@ const Confirm = ({ data, filterData }) => {
     };
 
     const menu = (
-        <Menu >
+        <Menu>
             {jwt ? (
                 <>
-                    <Menu.Item onClick={() => { navigate("/history"); }} key="username">
-                        <span style={{ fontFamily: 'Kanit', color: '#48D3FF' }}>{username && `Hello, ${username}`}</span>
+                    <Menu.Item
+                        onClick={() => {
+                            navigate("/profile");
+                        }}
+                        key="username"
+                    >
+                        <span style={{ fontFamily: 'Kanit', color: "#48D3FF" }}>
+                            {username && `สวัสดีคุณ, ${username}`}
+                        </span>
                     </Menu.Item>
                     <Menu.Item key="logout" onClick={() => handleLogout()}>
                         ออกจากระบบ
                     </Menu.Item>
-                    <Menu.Item key="back" onClick={() => { navigate("/member"); }}>
-                        กลับ
-                    </Menu.Item>
+                    <Menu.Item
+                        onClick={() => {
+                            navigate("/history");
+                        }}
+                        key="History"
+                    >History</Menu.Item>
                 </>
             ) : (
-                <>
-
-                </>
+                <></>
             )}
         </Menu>
     );
@@ -421,7 +429,7 @@ const Confirm = ({ data, filterData }) => {
                                     </Button>
                                 )}
                                 {attributes.payment_status === true && (
-                                    <Button 
+                                    <Button
                                         type="primary"
                                         onClick={() => show_modal_delete(id)}
                                         style={{ fontFamily: 'Kanit', textAlign: 'center', marginTop: 10, }}
