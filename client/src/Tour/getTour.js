@@ -204,6 +204,10 @@ const Tour = ({ data, filterData }) => {
     });
   }, []);
 
+  const DisplayTours = () => {
+
+  };
+
   return (
     <div
       style={{
