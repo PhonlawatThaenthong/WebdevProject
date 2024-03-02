@@ -100,6 +100,23 @@ const Confirm = ({ data, filterData }) => {
         });
     }
 
+    const show_modal_delete = (id) => {
+        Modal.confirm({
+            title: "ดำเนินการเสร็จสิ้น",
+            content: (
+                <div>
+                    <p style={{ fontFamily: 'Kanit' }}>ดำเนินการเสร็จสิ้นแล้วใช่หรือไม่</p>
+                </div>
+            ),
+            okText: "ยืนยัน",
+            cancelText: "ยกเลิก",
+            onOk: () => {
+                DeleteStatus(id)
+            },
+            onCancel: () => { },
+        });
+    }
+
     const updateStatus = async (reserveId) => {
         try {
             const res = await axios.post(
@@ -120,6 +137,18 @@ const Confirm = ({ data, filterData }) => {
             getData();
         } catch (error) {
             console.error("error updating status", error);
+            message.error("Action Failed!");
+        }
+    };
+
+    const DeleteStatus = async (reserveId) => {
+        try {
+            const res = await axios.delete(
+                `http://localhost:1337/api/reserves/${reserveId}`);
+            message.success("Cancelled Reservation!");
+            getData();
+        } catch (error) {
+            console.error("error delete status", error);
             message.error("Action Failed!");
         }
     };
@@ -389,6 +418,15 @@ const Confirm = ({ data, filterData }) => {
                                         style={{ fontFamily: 'Kanit', textAlign: 'center', marginTop: 10 }}
                                     >
                                         Cancel Reservation
+                                    </Button>
+                                )}
+                                {attributes.payment_status === true && (
+                                    <Button 
+                                        type="primary"
+                                        onClick={() => show_modal_delete(id)}
+                                        style={{ fontFamily: 'Kanit', textAlign: 'center', marginTop: 10, }}
+                                    >
+                                        Delete Reservation
                                     </Button>
                                 )}
                                 <br></br>
