@@ -24,6 +24,8 @@ import { MenuOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
 import Logo from "../Image/logo.png";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 import Tour from "../Tour/getTour";
 
@@ -38,6 +40,7 @@ const AllTour = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const getAllData = async () => {
     try {
@@ -235,7 +238,13 @@ const AllTour = () => {
           </Col>
         </Header>
         <h2 style={{ textAlign: "center", fontWeight: "bold", fontSize: isSmallScreen ? "25px" : "45px" }}>โปรแกรมทัวร์ทั้งหมด</h2>
-
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px',marginBottom: '20px' }}>
+          <Calendar
+            onChange={setSelectedDate}
+            value={selectedDate}
+            style={{ maxWidth: '300px' }}
+          />
+        </div>
         <Tour data={allData} filterData={[]} />
       </Layout>
       <Button

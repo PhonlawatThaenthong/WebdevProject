@@ -108,7 +108,7 @@ const MemberForm = () => {
             }}
             key="username"
           >
-            <span style={{ fontFamily:'Kanit',color: "#48D3FF" }}>
+            <span style={{ fontFamily: 'Kanit', color: "#48D3FF" }}>
               {username && `สวัสดีคุณ, ${username}`}
             </span>
           </Menu.Item>
@@ -213,7 +213,7 @@ const MemberForm = () => {
   };
 
   return (
-    <Flex gap="middle" wrap="wrap">
+    <Flex gap="middle" wrap="wrap" >
       <Helmet>
         <title>HYJ - Home Page</title>
       </Helmet>
@@ -270,7 +270,7 @@ const MemberForm = () => {
                     color: "white",
                     fontSize: isSmallScreen ? "14px" : "18px",
                     width: "300px",
-                    fontFamily:'Kanit'
+                    fontFamily: 'Kanit'
                   }}
                 >
                   สวัสดีคุณ {username}
@@ -284,7 +284,7 @@ const MemberForm = () => {
                     marginLeft: "50px",
                     color: "white",
                     fontSize: "18px",
-                    fontFamily:'Kanit'
+                    fontFamily: 'Kanit'
                   }}
                 >
                   ออกจากระบบ
@@ -299,24 +299,24 @@ const MemberForm = () => {
           <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
         )}
         <h2
-          style={{ fontFamily:'Kanit',textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px" }}
+          style={{ fontFamily: 'Kanit', textAlign: "center", fontWeight: "bold", fontSize: isSmallScreen ? "25px" : "45px" }}
         >
           โปรแกรมทัวร์แนะนำ
         </h2>
         <RecommendTour />
       </Layout>
       <Button
-          type="primary"
-          onClick={() => navigate("/alltour")}
-          style={{
-            backgroundColor: "#1C3953",
-            borderColor: "#1C3953",
-            margin: "0 auto",
-            fontFamily:'Kanit'
-          }}
-        >
-          ดูโปรแกรมทั้งหมด
-        </Button>
+        type="primary"
+        onClick={() => navigate("/alltour")}
+        style={{
+          backgroundColor: "#1C3953",
+          borderColor: "#1C3953",
+          margin: "0 auto",
+          fontFamily: 'Kanit'
+        }}
+      >
+        ดูโปรแกรมทั้งหมด
+      </Button>
       <Header style={headerbottom}>
         <img src={Logo} alt="Logo" style={{ width: "auto", height: "50px" }} />
       </Header>
