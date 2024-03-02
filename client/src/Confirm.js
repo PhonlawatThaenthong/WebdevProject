@@ -202,6 +202,9 @@ const Confirm = ({ data, filterData }) => {
             }
         });
     }, []);
+    const handleHeaderClick = () => {
+        navigate('/Admin');
+    };
 
     const menu = (
         <Menu >
@@ -270,7 +273,7 @@ const Confirm = ({ data, filterData }) => {
             {contextHolder}
             <Layout style={layoutStyle}>
                 <Header style={headerStyle}>
-                    <Col>
+                    <Col onClick={isSmallScreen ? handleHeaderClick : undefined} style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }} >
                         <span style={blueTextStyle}>H</span>
                         <span style={NormalTextStyle}>AT</span>
                         <span style={invtext}>.</span>
