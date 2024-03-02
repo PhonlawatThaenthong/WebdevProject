@@ -38,6 +38,11 @@ const Tour = ({ data, filterData }) => {
     setIsModalOpen(true);
   };
 
+  const closeModal = () => {
+    setSelectedTourId(null);
+    setIsModalOpen(false);
+  };
+
   const getStatusColor = (status) => {
     switch (status) {
       case true:
@@ -54,12 +59,7 @@ const Tour = ({ data, filterData }) => {
     });
     return newPrice;
   };
-
-  const closeModal = () => {
-    setSelectedTourId(9999999999999999999999999999999);
-    setIsModalOpen(false);
-  };
-
+  
   const getStatus = (status) => {
     switch (status) {
       case true:
@@ -258,9 +258,7 @@ const Tour = ({ data, filterData }) => {
                     footer={[
                       <Button
                         key="back"
-                        onClick={() => {
-                          closeModal()
-                        }}
+                        onClick={closeModal}
                       >
                         ปิด
                       </Button>,
@@ -324,16 +322,12 @@ const Tour = ({ data, filterData }) => {
                   <Modal
                     style={{ fontFamily: 'Kanit' }}
                     title={attributes.tour_name}
-                    open={isModalOpen && (selectedTourId === id)}
-                    onCancel={() => {
-                      closeModal()
-                    }}
+                    open={(isModalOpen && (selectedTourId === id))}
+                    onCancel={closeModal}
                     footer={[
                       <Button
                         key="back"
-                        onClick={() => {
-                          closeModal()
-                        }}
+                        onClick={closeModal}
                       >
                         ปิด
                       </Button>,
