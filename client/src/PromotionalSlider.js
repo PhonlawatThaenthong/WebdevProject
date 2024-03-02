@@ -43,6 +43,7 @@ const PromotionalSlider = ({ images }) => {
           {...settings}
           style={{
             marginTop: "50px",
+            marginBottom: "50px",
           }}
         >
           {images.map((image, index) => (
