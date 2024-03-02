@@ -234,7 +234,7 @@ const AllTour = () => {
             )}
           </Col>
         </Header>
-        <h2 style={{ textAlign: "center", fontWeight: "bold", fontSize: isSmallScreen ? "25px" : "45px" }}>All Tour</h2>
+        <h2 style={{ textAlign: "center", fontWeight: "bold", fontSize: isSmallScreen ? "25px" : "45px" }}>โปรแกรมทัวร์ทั้งหมด</h2>
 
         <Tour data={allData} filterData={[]} />
       </Layout>

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import './index.css';
+import React, { useState, useEffect } from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "./index.css";
 
 const PromotionalSlider = ({ images }) => {
   const [imagesLoad, setImagesLoad] = useState(false);
@@ -20,7 +20,7 @@ const PromotionalSlider = ({ images }) => {
 
       Promise.all(imagePromise)
         .then(() => setImagesLoad(true))
-        .catch((error) => console.error('error preloading images:', error));
+        .catch((error) => console.error("Error preloading images:", error));
     };
 
     preloadImages();
@@ -37,17 +37,41 @@ const PromotionalSlider = ({ images }) => {
   };
 
   return (
-    <div className={`promotional-slider-wrapper ${imagesLoad ? 'show' : 'loading'}`}>
+    <>
       {imagesLoad && (
-        <Slider {...settings}>
+        <Slider
+          {...settings}
+          style={{
+            marginTop: "50px",
+          }}
+        >
           {images.map((image, index) => (
             <div key={index} className="slider-item">
-              <img src={image} alt={`Promotion ${(index + 1) % index}`} />
+              <div
+                className="image-box"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: "100%",
+                }}
+              >
+                <img
+                  src={image}
+                  alt={`Promotion ${(index + 1) % index}`}
+                  style={{
+                    maxWidth: "50%",
+                    maxHeight: "50%",
+                    borderRadius: "15px",
+                    boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)", // Add boxShadow
+                  }}
+                />
+              </div>
             </div>
           ))}
         </Slider>
       )}
-    </div>
+    </>
   );
 };
 
