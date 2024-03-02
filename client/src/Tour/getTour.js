@@ -223,7 +223,9 @@ const Tour = ({ data, filterData }) => {
         families: ['Sriracha', 'Kanit']
       }
     });
-    roleChecker()
+    if (jwt == null) {
+      setUserRole("Public")
+    } else roleChecker();
   }, []);
 
   return (
