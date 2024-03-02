@@ -66,6 +66,40 @@ const Confirm = ({ data, filterData }) => {
         }
     };
 
+    const show_modal_confirm = (id) => {
+        Modal.confirm({
+            title: "ยืนยันการชำระเงิน",
+            content: (
+                <div>
+                    <p style={{ fontFamily: 'Kanit' }}>ต้องการยืนยันการชำระเงินนี้หรือไม่</p>
+                </div>
+            ),
+            okText: "ยืนยัน",
+            cancelText: "ยกเลิก",
+            onOk: () => {
+                updateStatus(id)
+            },
+            onCancel: () => { },
+        });
+    }
+
+    const show_modal_cancel = (id) => {
+        Modal.confirm({
+            title: "ยกเลิกการชำระเงิน",
+            content: (
+                <div>
+                    <p style={{ fontFamily: 'Kanit' }}>ต้องการยกเลิกยืนยันการชำระเงินนี้หรือไม่</p>
+                </div>
+            ),
+            okText: "ยืนยัน",
+            cancelText: "ยกเลิก",
+            onOk: () => {
+                CancelStatus(id)
+            },
+            onCancel: () => { },
+        });
+    }
+
     const updateStatus = async (reserveId) => {
         try {
             const res = await axios.post(
@@ -333,7 +367,7 @@ const Confirm = ({ data, filterData }) => {
                                     <Button
 
                                         type="primary"
-                                        onClick={() => updateStatus(id)}
+                                        onClick={() => show_modal_confirm(id)}
                                         style={{
                                             fontFamily: 'Kanit',
                                             textAlign: 'center',
@@ -348,7 +382,7 @@ const Confirm = ({ data, filterData }) => {
                                 {attributes.payment_status === true && (
                                     <Button danger
                                         type="primary"
-                                        onClick={() => CancelStatus(id)}
+                                        onClick={() => show_modal_cancel(id)}
                                         style={{ fontFamily: 'Kanit', textAlign: 'center', marginTop: 10 }}
                                     >
                                         Cancel Reservation
