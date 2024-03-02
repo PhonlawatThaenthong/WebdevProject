@@ -312,8 +312,6 @@ const Confirm = ({ data, filterData }) => {
                                     />)}
                                 <b style={{ fontSize: "18px", fontFamily: 'Kanit' }}>{attributes.tour_id.data.attributes.tour_name}</b>
                                 <br />
-                                ราคา: {getPrice(attributes.total_price)} บาท
-                                <br />
                                 สถานะ:{" "}
                                 <span style={{ color: getStatusColor(attributes.payment_status) }}>
                                     <b>{getStatus(attributes.payment_status)}</b>
@@ -322,6 +320,10 @@ const Confirm = ({ data, filterData }) => {
                                 ประเภทการชำระเงิน: {attributes.payment_method}
                                 <br />
                                 จำนวน: {attributes.reserve_amount} ท่าน
+                                <br />
+                                ราคา: {getPrice((attributes.total_price / attributes.reserve_amount))} บาท / ท่าน
+                                <br />
+                                ราคารวม: {getPrice(attributes.total_price)} บาท
                                 <br />
                                 วันที่จอง: {getDate(attributes.reserve_date)}
                                 <br />
