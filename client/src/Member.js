@@ -56,7 +56,7 @@ const MemberForm = () => {
   const handleSearch = async (searchText) => {
     try {
       const res = await axios.get(
-        `http://localhost:1337/api/tours?filters[tour_name][$containsi]=${searchText}`
+        `http://localhost:1337/api/tours?filters[tour_name][$containsi]=${searchText}&populate=*`
       );
       setFilterData(res.data.data);
     } catch (error) {

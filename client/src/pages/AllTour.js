@@ -61,9 +61,10 @@ const AllTour = () => {
   const handleSearch = async (searchText) => {
     try {
       const res = await axios.get(
-        `http://localhost:1337/api/tours?filters[tour_name][$containsi]=${searchText}`
+        `http://localhost:1337/api/tours?filters[tour_name][$containsi]=${searchText}&populate=*`
       );
       setFilterData(res.data.data);
+      console.log(res.data.data)
     } catch (error) {
       console.error("error filter data", error);
     }
@@ -245,7 +246,7 @@ const AllTour = () => {
             style={{ maxWidth: '300px' }}
           />
         </div>
-        <Tour data={allData} filterData={[]} />
+        <Tour data={allData} filterData={filterData} />
       </Layout>
       <Button
         type="primary"
