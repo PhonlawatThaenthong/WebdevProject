@@ -22,6 +22,9 @@ const LoginForm = () => {
   const [username, setUsername] = useState('')
 
   const handleSubmit = async (values) => {
+    axios.defaults.headers.common = {
+      Authorization: ``,
+    };
     setSubmitEnabled(false);
     try {
       const loginResult = await axios.post(
