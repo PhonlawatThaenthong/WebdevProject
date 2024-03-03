@@ -174,34 +174,34 @@ const ProfileForm = () => {
     );
     const menu3 = (
         <Menu>
-        {jwt ? (
-          <>
-            <Menu.Item
-              onClick={() => {
-                navigate("/profile");
-              }}
-              key="username"
-            >
-              
-            </Menu.Item>
-            <Menu.Item key="profile" onClick={() => navigate("/profile")}>
-            {username && `โปรไฟล์ของ, ${username}`}
-            </Menu.Item>
-            <Menu.Item
-              onClick={() => {
-                navigate("/confirm");
-              }}
-              key="History"
-            >สถานะการจองของลูกค้า</Menu.Item>
-            <Menu.Item key="logout" onClick={() => handleLogout()}>
-              ออกจากระบบ
-            </Menu.Item> 
-          </>
-        ) : (
-          <></>
-        )}
-      </Menu>
-    );      
+            {jwt ? (
+                <>
+                    <Menu.Item
+                        onClick={() => {
+                            navigate("/profile");
+                        }}
+                        key="username"
+                    >
+
+                    </Menu.Item>
+                    <Menu.Item key="profile" onClick={() => navigate("/profile")}>
+                        {username && `โปรไฟล์ของ, ${username}`}
+                    </Menu.Item>
+                    <Menu.Item
+                        onClick={() => {
+                            navigate("/confirm");
+                        }}
+                        key="History"
+                    >สถานะการจองของลูกค้า</Menu.Item>
+                    <Menu.Item key="logout" onClick={() => handleLogout()}>
+                        ออกจากระบบ
+                    </Menu.Item>
+                </>
+            ) : (
+                <></>
+            )}
+        </Menu>
+    );
 
     const roleChecker = async () => {
         try {
@@ -324,67 +324,69 @@ const ProfileForm = () => {
                         justifyContent: isSmallScreen ? "center" : "flex-start",
                     }}
                 >
-                    <Col onClick={isSmallScreen ? handleHeaderClick : undefined} style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
-                        <span style={blueTextStyle}>H</span>
-                        <span style={NormalTextStyle}>AT</span>
-                        <span style={invtext}>.</span>
-                        <span style={blueTextStyle}>Y</span>
-                        <span style={NormalTextStyle}>AI</span>
-                        <span style={invtext}>.</span>
-                        <span style={blueTextStyle}>J</span>
-                        <span style={NormalTextStyle}>ourney</span>
-                    </Col>
-                    <Col span={isSmallScreen ? 12 : 22}>
-                        {isSmallScreen ? (
-                            <div style={{ textAlign: isSmallScreen ? "right" : "left" }}>
-                                <Dropdown
-                                    overlay={menu}
-                                    trigger={["click"]}
-                                    visible={menuVisible}
-                                    onVisibleChange={setMenuVisible}
-                                >
-                                    <UserOutlined
-                                        style={{ fontSize: "25px", marginRight: "8px" }}
-                                    />
-                                </Dropdown>
-                            </div>
-                        ) : (
-                            <>
-                                <Link
-                                    onClick={() => {
-                                        navigate("/member");
-                                    }}
-                                    style={{
-                                        marginRight: "50px",
-                                        color: "white",
-                                        fontSize: isSmallScreen ? "14px" : "18px",
-                                        width: "300px",
-                                        fontFamily: 'Kanit'
-                                    }}
-                                >
-                                    สวัสดีคุณ {username}
-                                </Link>
-                                <Dropdown
-                                    placement="bottomLeft"
-                                    trigger={["click"]}
-                                    overlay={rolename === "Member" ? menu2 : menu3}
-                                    
-                                >
-                                    <Avatar
-                                        style={{
-                                            marginLeft: "120px",
-                                            color: "white",
-                                            fontSize: "50px",
-                                            fontFamily: 'Kanit',
-                                            marginBottom: "10px"
+                    <Col span={isSmallScreen ? 12 : 22} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <div style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
+                            <span style={blueTextStyle}>H</span>
+                            <span style={NormalTextStyle}>AT</span>
+                            <span style={invtext}>.</span>
+                            <span style={blueTextStyle}>Y</span>
+                            <span style={NormalTextStyle}>AI</span>
+                            <span style={invtext}>.</span>
+                            <span style={blueTextStyle}>J</span>
+                            <span style={NormalTextStyle}>ourney</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', marginLeft: 'auto' }}>
+                            {isSmallScreen ? (
+                                <div style={{ textAlign: isSmallScreen ? "right" : "left" }}>
+                                    <Dropdown
+                                        overlay={menu}
+                                        trigger={["click"]}
+                                        visible={menuVisible}
+                                        onVisibleChange={setMenuVisible}
+                                    >
+                                        <UserOutlined
+                                            style={{ fontSize: "25px", marginRight: "8px" }}
+                                        />
+                                    </Dropdown>
+                                </div>
+                            ) : (
+                                <>
+                                    <Link
+                                        onClick={() => {
+                                            navigate("/member");
                                         }}
-                                        size={52}
-                                        src={`http://localhost:1337${userimage.profile_image?.url}`}
-                                    />
-                                </Dropdown>
-                            </>
-                        )}
+                                        style={{
+                                            marginRight: "50px",
+                                            color: "white",
+                                            fontSize: isSmallScreen ? "14px" : "18px",
+                                            width: "300px",
+                                            fontFamily: 'Kanit'
+                                        }}
+                                    >
+                                        สวัสดีคุณ {username}
+                                    </Link>
+                                    <Dropdown
+                                        placement="bottomLeft"
+                                        trigger={["click"]}
+                                        overlay={rolename === "Member" ? menu2 : menu3}
+                                    >
+                                        <Avatar
+                                            style={{
+                                                color: "white",
+                                                fontSize: "50px",
+                                                fontFamily: 'Kanit',
+                                                marginBottom: "10px",
+                                                marginRight: "-70px"
+                                            }}
+                                            size={52}
+                                            src={`http://localhost:1337${userimage.profile_image?.url}`}
+                                        />
+                                    </Dropdown>
+                                </>
+                            )}
+                        </div>
                     </Col>
+
                 </Header>
                 <Layout>
                     <Content style={{ fontFamily: 'Kanit', padding: "24px", minHeight: 500 }}>
