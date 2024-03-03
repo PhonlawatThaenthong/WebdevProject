@@ -309,7 +309,7 @@ const Confirm = ({ data, filterData }) => {
     };
 
     return (
-        <Flex gap="middle" wrap="wrap" >
+        <Flex gap="middle" wrap="wrap" style={{ backgroundColor: "#F5F5F5" }}>
             <Helmet>
                 <title>HYJ - History Page</title>
             </Helmet>
@@ -379,7 +379,15 @@ const Confirm = ({ data, filterData }) => {
                         </b>
                     ) : (
                         allData.map(({ id, attributes }) => (
-                            <Card key={id} style={{ fontFamily: 'Kanit', width: 300, margin: 20, marginTop: 50 }}>
+                            <Card
+                            key={id}
+                            style={{
+                                fontFamily: 'Kanit',
+                                width: 300,
+                                margin: isSmallScreen ? '10px auto' : '20px',
+                                marginTop: isSmallScreen ? '25px' : '50px'
+                            }}
+                        >
                                 {attributes.payment_status === false && (
                                     <Image
                                         src={`https://cdn-icons-png.freepik.com/512/6475/6475938.png`}

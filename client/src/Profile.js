@@ -66,6 +66,10 @@ const ProfileForm = () => {
         setEditingPhoneNumber(true);
     };
 
+    const handleHeaderClick = () => {
+        navigate('/Member');
+    };
+
     const handleSaveChanges = async () => {
         const hide = message.loading("Saving changes...", 0);
 
@@ -238,7 +242,7 @@ const ProfileForm = () => {
 
 
     return (
-        <Flex gap="middle" wrap="wrap" >
+        <Flex gap="middle" wrap="wrap" style={{ backgroundColor: "#F5F5F5" }}>
             <Helmet>
                 <title>HYJ - Home Page</title>
             </Helmet>
@@ -250,7 +254,7 @@ const ProfileForm = () => {
                         justifyContent: isSmallScreen ? "center" : "flex-start",
                     }}
                 >
-                    <Col>
+                    <Col onClick={isSmallScreen ? handleHeaderClick : undefined} style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
                         <span style={blueTextStyle}>H</span>
                         <span style={NormalTextStyle}>AT</span>
                         <span style={invtext}>.</span>

@@ -31,11 +31,18 @@ const Tour = ({ data, filterData }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isSmallScreen = useMediaQuery({ maxWidth: 767 });
   const [numberOfPeople, setNumberOfPeople] = useState(1);
-  const [userId, setUserId] = useState("")
+  const [userRole, setUserRole] = useState("")
 
   const handleOpenModal = (id) => {
     setSelectedTourId(id);
     setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedTourId(null);
+    setIsModalOpen(false);
+    console.log(isModalOpen);
+
   };
 
   const getStatusColor = (status) => {
@@ -61,6 +68,22 @@ const Tour = ({ data, filterData }) => {
         return `ว่าง`;
       case false:
         return `เต็ม`;
+    }
+  };
+
+  const roleChecker = async () => {
+    try {
+      axios.defaults.headers.common = {
+        Authorization: `Bearer ${jwt}`,
+      };
+      const userResult = await axios.get(
+        "http://localhost:1337/api/users/me?populate=role"
+      );
+
+      setUserRole(userResult.data.role.name)
+
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -202,10 +225,12 @@ const Tour = ({ data, filterData }) => {
         families: ['Sriracha', 'Kanit']
       }
     });
+    if (jwt == null) {
+      setUserRole("Public")
+    } else roleChecker();
   }, []);
 
   return (
-
     <div
       style={{
         display: isSmallScreen ? "grid" : "flex",
@@ -226,21 +251,16 @@ const Tour = ({ data, filterData }) => {
       ) : (
         <Row gutter={[16, 16]}>
           {toursToDisplay.map(({ id, attributes }) => (
-            <Col key={id} xs={24} sm={12} md={8} lg={8}>
-              <Card key={id} style={{ fontFamily: 'Kanit', width: 450, margin: 20, marginTop: 50 }}>
+            <Col key={id} xs={24} sm={12} md={8} lg={8} style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
+              <Card hoverable onClick={() => { handleOpenModal(id) }} key={id} style={{ fontFamily: 'Kanit', width: 450, margin: 20, marginTop: 50 }}>
                 {currentPage === "/admin" ? (
                   <Modal
                     title={attributes.tour_name}
                     open={isModalOpen && selectedTourId === id}
-                    onCancel={() => {
-                      setIsModalOpen(false);
-                    }}
                     footer={[
                       <Button
                         key="back"
-                        onClick={() => {
-                          setIsModalOpen(false);
-                        }}
+                        onClick={() => {setIsModalOpen(false)}}
                       >
                         ปิด
                       </Button>,
@@ -248,7 +268,7 @@ const Tour = ({ data, filterData }) => {
                         title="Delete the tour"
                         description="Are you sure to delete this tour?"
                         onConfirm={() => {
-                          setIsModalOpen(false);
+                          () => {setIsModalOpen(false)}
                           handleTourDelete(id);
                         }}
                         okText="Yes"
@@ -260,7 +280,7 @@ const Tour = ({ data, filterData }) => {
                         key="submit"
                         type="primary"
                         onClick={() => {
-                          setIsModalOpen(false);
+                          () => {setIsModalOpen(false)}
                         }}
                       >
                         บันทึก
@@ -304,16 +324,12 @@ const Tour = ({ data, filterData }) => {
                   <Modal
                     style={{ fontFamily: 'Kanit' }}
                     title={attributes.tour_name}
-                    open={isModalOpen && selectedTourId === id}
-                    onCancel={() => {
-                      setIsModalOpen(false);
-                    }}
+                    open={(isModalOpen && selectedTourId === id)}
+                    onCancel={() => {setIsModalOpen(false)}}
                     footer={[
                       <Button
                         key="back"
-                        onClick={() => {
-                          setIsModalOpen(false);
-                        }}
+                        onClick={() => {setIsModalOpen(false)}}
                       >
                         ปิด
                       </Button>,
@@ -394,7 +410,7 @@ const Tour = ({ data, filterData }) => {
                 ระยะเวลา:
                 <br />
                 <br></br>
-                {currentPage === "/admin" ? (
+                {userRole === "Admin" ? (
                   <Button
                     type="primary"
                     onClick={() => handleOpenModal(id)}
@@ -423,8 +439,8 @@ const Tour = ({ data, filterData }) => {
         </Row>
       )}
     </div>
-
   );
+
 };
 
 export default Tour;

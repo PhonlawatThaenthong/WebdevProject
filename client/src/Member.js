@@ -56,7 +56,7 @@ const MemberForm = () => {
   const handleSearch = async (searchText) => {
     try {
       const res = await axios.get(
-        `http://localhost:1337/api/tours?filters[tour_name][$containsi]=${searchText}`
+        `http://localhost:1337/api/tours?filters[tour_name][$containsi]=${searchText}&populate=*`
       );
       setFilterData(res.data.data);
     } catch (error) {
@@ -219,7 +219,7 @@ const MemberForm = () => {
   };
 
   return (
-    <Flex gap="middle" wrap="wrap" >
+    <Flex gap="middle" wrap="wrap" style={{ backgroundColor: "#F5F5F5" }}>
       <Helmet>
         <title>HYJ - Home Page</title>
       </Helmet>

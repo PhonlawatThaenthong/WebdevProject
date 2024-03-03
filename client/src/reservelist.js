@@ -88,6 +88,9 @@ const ReserveForm = () => {
             }
         });
     }, []);
+    const handleHeaderClick = () => {
+        navigate('/Member');
+    };
 
     const menu = (
         <Menu>
@@ -163,14 +166,14 @@ const ReserveForm = () => {
     };
 
     return (
-        <Flex gap="middle" wrap="wrap" >
+        <Flex gap="middle" wrap="wrap" style={{ backgroundColor: "#F5F5F5" }}>
             <Helmet>
                 <title>HYJ - History Page</title>
             </Helmet>
             {contextHolder}
             <Layout style={layoutStyle}>
                 <Header style={headerStyle}>
-                    <Col>
+                    <Col onClick={isSmallScreen ? handleHeaderClick : undefined} style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
                         <span style={blueTextStyle}>H</span>
                         <span style={NormalTextStyle}>AT</span>
                         <span style={invtext}>.</span>

@@ -73,6 +73,15 @@
       "relation": "oneToMany",
       "target": "api::reserve.reserve",
       "mappedBy": "user_id"
+    },
+    "profile_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
     }
   }
 }

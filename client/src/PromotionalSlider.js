@@ -42,7 +42,9 @@ const PromotionalSlider = ({ images }) => {
         <Slider
           {...settings}
           style={{
-            marginTop: "50px",
+            marginTop: "0px",
+            marginBottom: "50px",
+            width: "100%",
           }}
         >
           {images.map((image, index) => (
@@ -54,6 +56,7 @@ const PromotionalSlider = ({ images }) => {
                   alignItems: "center",
                   justifyContent: "center",
                   height: "100%",
+                  width: "100%",
                 }}
               >
                 <img

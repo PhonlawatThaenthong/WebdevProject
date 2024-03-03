@@ -130,7 +130,7 @@ const Payment = () => {
     };
 
     return (
-        <Flex gap="middle" wrap="wrap">
+        <Flex gap="middle" wrap="wrap" style={{ backgroundColor: "#F5F5F5" }}>
             <Helmet>
                 <title>HYJ - Home Page</title>
             </Helmet>
@@ -205,21 +205,21 @@ const Payment = () => {
                 </Card>
 
             </Space>
-            <Popover 
-              title={<div style={{ textAlign: 'center' ,fontFamily: 'Kanit' }}>แสดงตัวอย่าง</div>}
-              
-             >
-            <FloatButton
-                icon={<QuestionCircleOutlined />}
-                onClick={showDrawer}
-                type="default"
-                style={{
-                    position: 'fixed',
-                    bottom: 20,
-                    right: 20,
-                    zIndex: 9999,
-                }}
-            />
+            <Popover
+                title={<div style={{ textAlign: 'center', fontFamily: 'Kanit' }}>แสดงตัวอย่าง</div>}
+
+            >
+                <FloatButton
+                    icon={<QuestionCircleOutlined />}
+                    onClick={showDrawer}
+                    type="default"
+                    style={{
+                        position: 'fixed',
+                        bottom: 20,
+                        right: 20,
+                        zIndex: 9999,
+                    }}
+                />
             </Popover>
             <Drawer title="ตัวอย่างสลิปการโอนเงิน" onClose={onClose} open={open} style={{ fontFamily: 'Kanit', display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
                 <p><strong>ตัวอย่างสลิปการโอนเงินธนาคาร</strong></p>

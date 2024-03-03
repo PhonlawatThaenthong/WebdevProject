@@ -67,7 +67,7 @@ const AdminForm = () => {
   const handleSearch = async (searchText) => {
     try {
       const res = await axios.get(
-        `http://localhost:1337/api/tours?filters[tour_name][$containsi]=${searchText}`
+        `http://localhost:1337/api/tours?filters[tour_name][$containsi]=${searchText}&populate=*`
       );
       setFilterData(res.data.data);
     } catch (error) {
@@ -285,7 +285,7 @@ const AdminForm = () => {
   };
 
   return (
-    <Flex gap="middle" wrap="wrap">
+    <Flex gap="middle" wrap="wrap" style={{ backgroundColor: "#F5F5F5" }}>
       <Helmet>
         <title>HYJ - Home Page</title>
       </Helmet>
@@ -451,7 +451,18 @@ const AdminForm = () => {
           onClick={() => setIsAddMenuOpen(true)}
         />
       </Layout>
-
+      <Button
+        type="primary"
+        onClick={() => navigate("/alltour")}
+        style={{
+          backgroundColor: "#1C3953",
+          borderColor: "#1C3953",
+          margin: "0 auto",
+          fontFamily: 'Kanit'
+        }}
+      >
+        ดูโปรแกรมทั้งหมด
+      </Button>
       <Header style={headerbottom}>
         <img src={Logo} alt="Logo" style={{ width: "auto", height: "50px" }} />
       </Header>

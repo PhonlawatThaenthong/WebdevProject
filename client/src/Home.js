@@ -56,7 +56,7 @@ const HomeForm = () => {
   const handleSearch = async (searchText) => {
     try {
       const res = await axios.get(
-        `http://localhost:1337/api/tours?filters[tour_name][$containsi]=${searchText}`
+        `http://localhost:1337/api/tours?filters[tour_name][$containsi]=${searchText}&populate=*`
       );
       setFilterData(res.data.data);
     } catch (error) {
@@ -108,14 +108,14 @@ const HomeForm = () => {
         families: ['Sriracha', 'Kanit']
       }
     });
-   }, []);
+  }, []);
 
   const menu = (
     <Menu>
       {jwt ? (
         <>
           <Menu.Item key="username" disabled>
-            <span style={{ fontFamily:'Kanit',color: "#48D3FF" }}>
+            <span style={{ fontFamily: 'Kanit', color: "#48D3FF" }}>
               {username && `สวัสดีคุณ, ${username}`}
             </span>
           </Menu.Item>
@@ -177,7 +177,7 @@ const HomeForm = () => {
     color: "#48D3FF",
     fontWeight: "bold",
     fontSize: isSmallScreen ? "24px" : "45px",
-    
+
   };
 
   const NormalTextStyle = {
@@ -197,7 +197,7 @@ const HomeForm = () => {
   };
 
   return (
-    <Flex gap="middle" wrap="wrap">
+    <Flex gap="middle" wrap="wrap" style={{ backgroundColor: "#F5F5F5" }}>
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>HYJ - Home Page</title>
@@ -268,7 +268,7 @@ const HomeForm = () => {
                     marginLeft: "40px",
                     color: "white",
                     fontSize: isSmallScreen ? "15px" : "18px",
-                    fontFamily:'Kanit'
+                    fontFamily: 'Kanit'
                   }}
                 >
                   เข้าสู่ระบบ
@@ -279,7 +279,7 @@ const HomeForm = () => {
                     marginLeft: "40px",
                     color: "white",
                     fontSize: isSmallScreen ? "15px" : "18px",
-                    fontFamily:'Kanit'
+                    fontFamily: 'Kanit'
                   }}
                 >
                   ลงทะเบียน
@@ -294,8 +294,8 @@ const HomeForm = () => {
           <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
         )}
         <span
-          style={{fontFamily:'Kanit',textAlign: "center", fontWeight: "bold", fontSize:isSmallScreen ? "25px":"45px" }}
-          
+          style={{ fontFamily: 'Kanit', textAlign: "center", fontWeight: "bold", fontSize: isSmallScreen ? "25px" : "45px" }}
+
         >
           โปรแกรมทัวร์แนะนำ
         </span>

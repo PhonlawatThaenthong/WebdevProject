@@ -126,7 +126,7 @@ const UploadReceipt = () => {
     };
 
     return (
-        <Flex gap="middle" wrap="wrap">
+        <Flex gap="middle" wrap="wrap" style={{ backgroundColor: "#F5F5F5" }}>
             <Helmet>
                 <title>HYJ - Home Page</title>
             </Helmet>
