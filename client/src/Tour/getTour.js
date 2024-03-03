@@ -256,11 +256,11 @@ const Tour = ({ data, filterData }) => {
                 {currentPage === "/admin" ? (
                   <Modal
                     title={attributes.tour_name}
-                    open={isModalOpen && (selectedTourId === id)}
+                    open={isModalOpen && selectedTourId === id}
                     footer={[
                       <Button
                         key="back"
-                        onClick={closeModal}
+                        onClick={() => {setIsModalOpen(false)}}
                       >
                         ปิด
                       </Button>,
@@ -268,7 +268,7 @@ const Tour = ({ data, filterData }) => {
                         title="Delete the tour"
                         description="Are you sure to delete this tour?"
                         onConfirm={() => {
-                          closeModal()
+                          () => {setIsModalOpen(false)}
                           handleTourDelete(id);
                         }}
                         okText="Yes"
@@ -280,7 +280,7 @@ const Tour = ({ data, filterData }) => {
                         key="submit"
                         type="primary"
                         onClick={() => {
-                          closeModal()
+                          () => {setIsModalOpen(false)}
                         }}
                       >
                         บันทึก
@@ -324,12 +324,12 @@ const Tour = ({ data, filterData }) => {
                   <Modal
                     style={{ fontFamily: 'Kanit' }}
                     title={attributes.tour_name}
-                    open={(isModalOpen && (selectedTourId === id))}
-                    onCancel={closeModal}
+                    open={(isModalOpen && selectedTourId === id)}
+                    onCancel={() => {setIsModalOpen(false)}}
                     footer={[
                       <Button
                         key="back"
-                        onClick={closeModal}
+                        onClick={() => {setIsModalOpen(false)}}
                       >
                         ปิด
                       </Button>,
