@@ -38,13 +38,6 @@ const Tour = ({ data, filterData }) => {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
-    setSelectedTourId(null);
-    setIsModalOpen(false);
-    console.log(isModalOpen);
-
-  };
-
   const getStatusColor = (status) => {
     switch (status) {
       case true:
@@ -139,7 +132,6 @@ const Tour = ({ data, filterData }) => {
               );
 
               temp_selectedTour = tourResult.data.data;
-              console.log(temp_selectedTour)
 
             } catch (error) {
               console.error(error);
@@ -252,7 +244,7 @@ const Tour = ({ data, filterData }) => {
         <Row gutter={[16, 16]}>
           {toursToDisplay.map(({ id, attributes }) => (
             <Col key={id} xs={24} sm={12} md={8} lg={8} style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
-              <Card hoverable onClick={() => { handleOpenModal(id) }} key={id} style={{ fontFamily: 'Kanit', width: 450, margin: 20, marginTop: 50 }}>
+              <Card  key={id} style={{ fontFamily: 'Kanit', width: 450, margin: 20, marginTop: 50 }}>
                 {currentPage === "/admin" ? (
                   <Modal
                     title={attributes.tour_name}
@@ -260,7 +252,7 @@ const Tour = ({ data, filterData }) => {
                     footer={[
                       <Button
                         key="back"
-                        onClick={() => {setIsModalOpen(false)}}
+                        onClick={() => { setIsModalOpen(false) }}
                       >
                         ปิด
                       </Button>,
@@ -268,8 +260,8 @@ const Tour = ({ data, filterData }) => {
                         title="Delete the tour"
                         description="Are you sure to delete this tour?"
                         onConfirm={() => {
-                          () => {setIsModalOpen(false)}
-                          handleTourDelete(id);
+                          setIsModalOpen(false)
+                          handleTourDelete(id)
                         }}
                         okText="Yes"
                         cancelText="No"
@@ -280,7 +272,7 @@ const Tour = ({ data, filterData }) => {
                         key="submit"
                         type="primary"
                         onClick={() => {
-                          () => {setIsModalOpen(false)}
+                          setIsModalOpen(false)
                         }}
                       >
                         บันทึก
@@ -325,11 +317,11 @@ const Tour = ({ data, filterData }) => {
                     style={{ fontFamily: 'Kanit' }}
                     title={attributes.tour_name}
                     open={(isModalOpen && selectedTourId === id)}
-                    onCancel={() => {setIsModalOpen(false)}}
+                    onCancel={() => { setIsModalOpen(false) }}
                     footer={[
                       <Button
                         key="back"
-                        onClick={() => {setIsModalOpen(false)}}
+                        onClick={() => { setIsModalOpen(false) }}
                       >
                         ปิด
                       </Button>,
