@@ -90,6 +90,7 @@ const Tour = ({ data, filterData }) => {
           tour_name: edit_tour.attributes.tour_name,
           price: edit_tour.attributes.price,
           description: edit_tour.attributes.description,
+          user_max: edit_tour.attributes.user_max,
         }
       };
 
@@ -393,6 +394,19 @@ const Tour = ({ data, filterData }) => {
                           ")"}
                       </b>
                     </span >
+                    <br />
+                    จำกัดจำนวน:
+                    <Input
+                      type="number"
+                      value={edit_tour.attributes.user_max}
+                      onChange={(e) => setedit_tour(prevState => ({
+                        ...prevState,
+                        attributes: {
+                          ...prevState.attributes,
+                          user_max: Number(e.target.value)
+                        }
+                      }))}
+                    />
                     <br />
                     ราคา:
                     <Input
