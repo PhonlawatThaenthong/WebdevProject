@@ -44,8 +44,12 @@ const Tour = ({ data, filterData }) => {
   };
 
   const handleforce = async () => {
-    const res = await axios.get(`http://localhost:1337/api/tours/1?populate=*`);
-    setedit_tour(res.data.data);
+    try {
+      const res = await axios.get(`http://localhost:1337/api/tours/1?populate=*`);
+      setedit_tour(res.data.data);
+    } catch (error) {
+      console.log()
+    }
   };
 
   const getStatusColor = (status) => {
@@ -59,14 +63,19 @@ const Tour = ({ data, filterData }) => {
 
   const handleSave = async () => {
     const hide = message.loading("กำลังบันทึก...", 0);
-
+  
     try {
-      console.log(`Sending Request to "http://localhost:1337/api/tours/${selectedTourId}"`);
-      console.log(edit_tour.attributes);
+      const payload = {
+        data: {
+          tour_name: edit_tour.attributes.tour_name,
+          print: edit_tour.attributes.price,
+          description: edit_tour.attributes.description,
+        }
+      };
 
       const response = await axios.put(
         `http://localhost:1337/api/tours/${selectedTourId}`,
-        { attributes: edit_tour.attributes },
+        payload,
         {
           headers: {
             Authorization: `Bearer ${jwt}`,
@@ -78,14 +87,20 @@ const Tour = ({ data, filterData }) => {
       hide();
       message.success("บันทึกการแก้ไขเรียบร้อยแล้ว!", 1);
     } catch (error) {
-      console.error("Error updating tour data:", error);
-
       hide();
-      message.error("การบันทึกการแก้ไขล้มเหลว โปรดลองอีกครั้ง", 1);
+      if (error.response) {
+        console.error("Server Error:", error.response.data);
+        message.error("เกิดข้อผิดพลาดจากเซิร์ฟเวอร์: " + error.response.data.message, 1);
+      } else if (error.request) {
+        console.error("Request Error:", error.request);
+        message.error("ไม่ได้รับการตอบกลับจากเซิร์ฟเวอร์", 1);
+      } else {
+        console.error("Client Error:", error.message);
+        message.error("มีข้อผิดพลาดในการส่งคำขอ: " + error.message, 1);
+      }
     }
   };
-
-
+  
   const getPrice = (price) => {
     const newPrice = price.toLocaleString("th-TH", {
       currency: "THB",
@@ -235,7 +250,7 @@ const Tour = ({ data, filterData }) => {
   const toursToDisplay = filterData.length > 0 ? filterData : data;
 
   useEffect(() => {
-    handleforce();
+    handleforce()
     WebFont.load({
       google: {
         families: ['Sriracha', 'Kanit']
@@ -333,6 +348,8 @@ const Tour = ({ data, filterData }) => {
                       />
                     </div>
                     {/* Admin Modal*/}
+                    <br />
+                    Tour ID: /api/tours/{id}
                     <br />
                     สถานะ:{" "}
                     <span style={{ color: getStatusColor(attributes.status) }}>

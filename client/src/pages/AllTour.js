@@ -53,7 +53,7 @@ const AllTour = () => {
 
   useEffect(() => {
     getAllData();
-    roleChecker();
+    if (jwt == null) {} else {roleChecker()}
   }, []);
 
   const handleHeaderClick = () => {
