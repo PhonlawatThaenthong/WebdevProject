@@ -209,15 +209,15 @@ const AdminForm = () => {
               {username && `สวัสดีคุณ, ${username}`}
             </span>
           </Menu.Item>
-          <Menu.Item key="logout" onClick={() => handleLogout()}>
-            ออกจากระบบ
-          </Menu.Item>
           <Menu.Item
             onClick={() => {
-              navigate("/history");
+              navigate("/confirm");
             }}
             key="History"
-          >History</Menu.Item>
+          >สถานะการจองของลูกค้า</Menu.Item> 
+          <Menu.Item key="logout" onClick={() => handleLogout()}>
+            ออกจากระบบ
+          </Menu.Item>  
         </>
       ) : (
         <></>
@@ -237,14 +237,14 @@ const AdminForm = () => {
             
           </Menu.Item>
           <Menu.Item key="profile" onClick={() => navigate("/profile")}>
-           โปรไฟล์ของคุณ  
+          {username && `โปรไฟล์ของ, ${username}`}
           </Menu.Item>
           <Menu.Item
             onClick={() => {
               navigate("/confirm");
             }}
             key="History"
-          >เช็คสถานะการจองลูกค้า</Menu.Item>
+          >สถานะการจองของลูกค้า</Menu.Item>
         </>
       ) : (
         <></>
@@ -443,7 +443,7 @@ const AdminForm = () => {
                   สวัสดีคุณ {username}
                 </Link>
                 {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
-                <Dropdown placement="bottom"
+                <Dropdown placement="bottomLeft"
                   overlay={menu2}
                   trigger={["click"]}
                  
