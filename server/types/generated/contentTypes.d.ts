@@ -362,6 +362,42 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiProfileProfile extends Schema.CollectionType {
+  collectionName: 'profiles';
+  info: {
+    singularName: 'profile';
+    pluralName: 'profiles';
+    displayName: 'Profile';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    profile_image: Attribute.Media;
+    users_permissions_user: Attribute.Relation<
+      'api::profile.profile',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::profile.profile',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::profile.profile',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiReserveReserve extends Schema.CollectionType {
   collectionName: 'reserves';
   info: {
@@ -846,6 +882,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'api::reserve.reserve'
     >;
     profile_image: Attribute.Media;
+    profile: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::profile.profile'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -873,6 +914,7 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::profile.profile': ApiProfileProfile;
       'api::reserve.reserve': ApiReserveReserve;
       'api::tour.tour': ApiTourTour;
       'plugin::upload.file': PluginUploadFile;

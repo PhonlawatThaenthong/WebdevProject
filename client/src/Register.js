@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, Modal, Row, Col, Card, Layout } from 'antd';
+import { Form, Input, Button, Modal, Row, Col, Card, Layout,Upload } from 'antd';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import useLocalState from './localStorage.js';
@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { useMediaQuery } from "react-responsive";
 import Logo from './Image/logo.png'
 import WebFont from 'webfontloader';
+import { UploadOutlined } from "@ant-design/icons";
 
 
 const { Header } = Layout;
@@ -21,6 +22,8 @@ const RegisterForm = () => {
     const [jwt, setjwt] = useLocalState(null, 'jwt');
     const isSmallScreen = useMediaQuery({ maxWidth: 768 });
     const [username, setUsername] = useState('')
+    const [imageFile, setImageFile] = useState(null);
+
 
     const validateConfirmPassword = ({ getFieldValue }) => ({
         validator(_, value) {
@@ -30,6 +33,14 @@ const RegisterForm = () => {
             return Promise.reject(new Error('The passwords do not match.'));
         },
     });
+
+    const handleImageUpload = (info) => {
+        if (info.file.status === "done") {
+          message.success(`${info.file.name} file uploaded successfully`);
+        } else if (info.file.status === "error") {
+          message.error(`${info.file.name} file upload failed.`);
+        }
+      };
 
     const handleSubmit = async (values) => {
         setSubmitEnabled(false);
@@ -164,7 +175,7 @@ const RegisterForm = () => {
 
     return (
         <div style={{}}>
-            <Header style={headerStyle}  onClick={handleHeaderClick}>
+            <Header style={headerStyle} onClick={handleHeaderClick}>
                 <Col>
                     <span style={blueTextStyle}>H</span>
                     <span style={NormalTextStyle}>AT</span>
@@ -226,7 +237,26 @@ const RegisterForm = () => {
                             >
                                 <Input />
                             </Form.Item>
-
+                            <Upload
+                                name="image"
+                                listType="picture-card"
+                                showUploadList={false}
+                                action="http://localhost:1337/api/upload"
+                                beforeUpload={(file) => {
+                                    setImageFile(file);
+                                    return false;
+                                }}
+                                onChange={handleImageUpload}
+                            >
+                                {imageFile ? (
+                                    <img src={URL.createObjectURL(imageFile)} alt="Tour" style={{ width: "100%" }} />
+                                ) : (
+                                    <div>
+                                        <UploadOutlined />
+                                        <div style={{ fontFamily: 'Kanit', marginTop: 8 }}>Upload</div>
+                                    </div>
+                                )}
+                            </Upload>
                             <Form.Item>
                                 <Button style={{ fontFamily: 'Kanit' }} type="primary" htmlType="submit" disabled={!submitEnabled}>
                                     ยืนยัน
