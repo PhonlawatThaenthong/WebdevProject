@@ -379,11 +379,12 @@ const AllTour = () => {
                 >
                 <Avatar
                   style={{
-                    marginLeft: "120px",
+                    marginLeft: "50px",
                     color: "white",
                     fontSize: "50px",
                     fontFamily: 'Kanit',
-                    marginBottom: "10px"
+                    marginBottom: "10px",
+                    marginRight: "-70px"
                   }}
                   size={52}
                   src={`http://localhost:1337${userimage.profile_image?.url}`}

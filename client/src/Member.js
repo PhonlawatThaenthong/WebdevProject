@@ -116,7 +116,7 @@ const MemberForm = () => {
               {username && `โปรไฟล์ของ, ${username}`}
             </span>
           </Menu.Item>
-          
+
           <Menu.Item
             onClick={() => {
               navigate("/history");
@@ -144,7 +144,7 @@ const MemberForm = () => {
           >
           </Menu.Item>
           <Menu.Item key="profile" onClick={() => navigate("/profile")}>
-          {username && `โปรไฟล์ของ, ${username}`}
+            {username && `โปรไฟล์ของ, ${username}`}
           </Menu.Item>
           <Menu.Item
             onClick={() => {
@@ -152,7 +152,7 @@ const MemberForm = () => {
             }}
             key="History"
           >ทัวร์ของคุณ</Menu.Item>
-           <Menu.Item key="logout" onClick={() => handleLogout()}>
+          <Menu.Item key="logout" onClick={() => handleLogout()}>
             ออกจากระบบ
           </Menu.Item>
         </>
@@ -160,7 +160,7 @@ const MemberForm = () => {
         <></>
       )}
     </Menu>
-  );    
+  );
 
   const searchPopoverContent = (
     <div>
@@ -280,7 +280,7 @@ const MemberForm = () => {
           <Col span={isSmallScreen ? 12 : 22}>
             {isSmallScreen ? (
               <div style={{ textAlign: isSmallScreen ? "right" : "left" }}>
-                <Dropdown 
+                <Dropdown
                   overlay={menu}
                   trigger={["click"]}
                   visible={menuVisible}
@@ -321,21 +321,22 @@ const MemberForm = () => {
                 <Dropdown placement="bottomLeft"
                   overlay={menu2}
                   trigger={["click"]}
-                 
-                 
+
+
                 >
-                <Avatar
-                  style={{
-                    marginLeft: "120px",
-                    color: "white",
-                    fontSize: "50px",
-                    fontFamily: 'Kanit',
-                    marginBottom: "10px"
-                  }}
-                  size={52}
-                  src={`http://localhost:1337${userimage.profile_image?.url}`}
-                />
-                 </Dropdown>
+                  <Avatar
+                    style={{
+                      marginLeft: "50px",
+                      color: "white",
+                      fontSize: "50px",
+                      fontFamily: 'Kanit',
+                      marginBottom: "10px",
+                      marginRight: "-70px"
+                    }}
+                    size={52}
+                    src={`http://localhost:1337${userimage.profile_image?.url}`}
+                  />
+                </Dropdown>
               </>
             )}
           </Col>

@@ -372,6 +372,7 @@ const ProfileForm = () => {
                                     >
                                         <Avatar
                                             style={{
+                                                marginLeft: "50px",
                                                 color: "white",
                                                 fontSize: "50px",
                                                 fontFamily: 'Kanit',
