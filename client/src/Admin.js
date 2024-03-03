@@ -18,6 +18,7 @@ import {
   Menu,
   Dropdown,
   Popover,
+  Avatar
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -52,7 +53,7 @@ const AdminForm = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [searchPopoverVisible, setSearchPopoverVisible] = useState(false);
   const [imageFile, setImageFile] = useState(null);
-
+  const [userimage, setUserImage] = useState({});
   const [filterData, setFilterData] = useState([]);
   const [allData, setAllData] = useState([]);
 
@@ -64,6 +65,15 @@ const AdminForm = () => {
       setFilterData(res.data.data);
     } catch (error) {
       console.error("error filter data", error);
+    }
+  };
+
+  const getImage = async () => {
+    try {
+      const res = await axios.get("http://localhost:1337/api/users/me?populate=*");
+      setUserImage(res.data);
+    } catch (error) {
+      console.error("การแสดงข้อมูล user ผิดพลาด", error);
     }
   };
 
@@ -174,6 +184,7 @@ const AdminForm = () => {
       navigate("/");
     } else roleChecker();
     getData();
+    getImage();
   }, []);
 
   useEffect(() => {
@@ -406,30 +417,34 @@ const AdminForm = () => {
                   สวัสดีคุณ {username}
                 </Link>
                 {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
-                <UserOutlined
+                <Avatar
                   onClick={() => {
                     navigate("/profile");
-
-                  }} style={{
+                  }}
+                  style={{
                     marginLeft: "120px",
                     color: "white",
-                    fontSize: "30px",
-                    fontFamily: 'Kanit'
-                  }} />
+                    fontSize: "50px",
+                    fontFamily: 'Kanit',
+                    marginBottom: "20px"
+                  }}
+                  size={52}
+                  src={`http://localhost:1337${userimage.profile_image?.url}`}
+                />
                 <LogoutOutlined
-
                   onClick={() => {
                     handleLogout();
                   }}
                   style={{
                     marginLeft: "30px",
                     color: "white",
-                    fontSize: "30px",
-                    fontFamily: 'Kanit'
+                    fontSize: "45px",
+                    fontFamily: 'Kanit',
+                    marginBottom: "15px"
                   }}
                 >
                   ออกจากระบบ
-                </LogoutOutlined >
+                </LogoutOutlined>
               </>
             )}
           </Col>

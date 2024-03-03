@@ -45,15 +45,8 @@ const MemberForm = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [searchPopoverVisible, setSearchPopoverVisible] = useState(false);
   const [userimage, setUserImage] = useState({});
-  
-  const getDataMe = async () => {
-    try {
-      const res = await axios.get("http://localhost:1337/api/users/me");
-      setUserData(res.data);
-    } catch (error) {
-      console.error("การแสดงข้อมูล user ผิดพลาด", error);
-    }
-  };
+
+
   const getImage = async () => {
     try {
       const res = await axios.get("http://localhost:1337/api/users/me?populate=*");
