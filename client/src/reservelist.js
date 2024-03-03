@@ -115,21 +115,15 @@ const ReserveForm = () => {
                             {username && `สวัสดีคุณ, ${username}`}
                         </span>
                     </Menu.Item>
-                    <Menu.Item key="logout" onClick={() => handleLogout()}>
-                        ออกจากระบบ
-                    </Menu.Item>
-                    <Menu.Item
-                        onClick={() => {
-                            navigate("/history");
-                        }}
-                        key="History"
-                    >History</Menu.Item>
                     <Menu.Item
                         onClick={() => {
                             navigate("/");
                         }}
                         key="back"
-                    >กลับ</Menu.Item>
+                    >กลับสู่หน้าหลัก</Menu.Item>
+                     <Menu.Item key="logout" onClick={() => handleLogout()}>
+                        ออกจากระบบ
+                    </Menu.Item>
                 </>
             ) : (
                 <></>
