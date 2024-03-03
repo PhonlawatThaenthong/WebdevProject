@@ -41,6 +41,8 @@ const Tour = ({ data, filterData }) => {
   const closeModal = () => {
     setSelectedTourId(null);
     setIsModalOpen(false);
+    console.log(isModalOpen);
+
   };
 
   const getStatusColor = (status) => {
@@ -59,7 +61,7 @@ const Tour = ({ data, filterData }) => {
     });
     return newPrice;
   };
-  
+
   const getStatus = (status) => {
     switch (status) {
       case true:

@@ -65,7 +65,7 @@ const ProfileForm = () => {
     const handleEditPhoneNumber = () => {
         setEditingPhoneNumber(true);
     };
- 
+
     const handleHeaderClick = () => {
         navigate('/Member');
     };
