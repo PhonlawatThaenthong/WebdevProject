@@ -106,6 +106,8 @@ const ProfileForm = () => {
         }
     };
 
+
+
     const menu = (
         <Menu>
             {jwt ? (
@@ -141,6 +143,65 @@ const ProfileForm = () => {
             )}
         </Menu>
     );
+    const menu2 = (
+        <Menu>
+            {jwt ? (
+                <>
+                    <Menu.Item
+                        onClick={() => {
+                            navigate("/profile");
+                        }}
+                        key="username"
+                    >
+                    </Menu.Item>
+                    <Menu.Item key="profile" onClick={() => navigate("/profile")}>
+                        {username && `โปรไฟล์ของ, ${username}`}
+                    </Menu.Item>
+                    <Menu.Item
+                        onClick={() => {
+                            navigate("/history");
+                        }}
+                        key="History"
+                    >ทัวร์ของคุณ</Menu.Item>
+                    <Menu.Item key="logout" onClick={() => handleLogout()}>
+                        ออกจากระบบ
+                    </Menu.Item>
+                </>
+            ) : (
+                <></>
+            )}
+        </Menu>
+    );
+    const menu3 = (
+        <Menu>
+        {jwt ? (
+          <>
+            <Menu.Item
+              onClick={() => {
+                navigate("/profile");
+              }}
+              key="username"
+            >
+              
+            </Menu.Item>
+            <Menu.Item key="profile" onClick={() => navigate("/profile")}>
+            {username && `โปรไฟล์ของ, ${username}`}
+            </Menu.Item>
+            <Menu.Item
+              onClick={() => {
+                navigate("/confirm");
+              }}
+              key="History"
+            >สถานะการจองของลูกค้า</Menu.Item>
+            <Menu.Item key="logout" onClick={() => handleLogout()}>
+              ออกจากระบบ
+            </Menu.Item> 
+          </>
+        ) : (
+          <></>
+        )}
+      </Menu>
+    );      
 
     const roleChecker = async () => {
         try {
@@ -303,19 +364,24 @@ const ProfileForm = () => {
                                 >
                                     สวัสดีคุณ {username}
                                 </Link>
-                                <Link
-                                    onClick={() => {
-                                        handleLogout();
-                                    }}
-                                    style={{
-                                        marginLeft: "50px",
-                                        color: "white",
-                                        fontSize: "18px",
-                                        fontFamily: 'Kanit'
-                                    }}
+                                <Dropdown
+                                    placement="bottomLeft"
+                                    trigger={["click"]}
+                                    overlay={rolename === "Member" ? menu2 : menu3}
+                                    
                                 >
-                                    ออกจากระบบ
-                                </Link>
+                                    <Avatar
+                                        style={{
+                                            marginLeft: "120px",
+                                            color: "white",
+                                            fontSize: "50px",
+                                            fontFamily: 'Kanit',
+                                            marginBottom: "10px"
+                                        }}
+                                        size={52}
+                                        src={`http://localhost:1337${userimage.profile_image?.url}`}
+                                    />
+                                </Dropdown>
                             </>
                         )}
                     </Col>
