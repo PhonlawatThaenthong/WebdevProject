@@ -113,18 +113,19 @@ const MemberForm = () => {
             key="username"
           >
             <span style={{ fontFamily: 'Kanit', color: "#48D3FF" }}>
-              {username && `สวัสดีคุณ, ${username}`}
+              {username && `โปรไฟล์ของ, ${username}`}
             </span>
           </Menu.Item>
-          <Menu.Item key="logout" onClick={() => handleLogout()}>
-            ออกจากระบบ
-          </Menu.Item>
+          
           <Menu.Item
             onClick={() => {
               navigate("/history");
             }}
             key="History"
-          >History</Menu.Item>
+          >ทัวร์ของคุณ </Menu.Item>
+          <Menu.Item key="logout" onClick={() => handleLogout()}>
+            ออกจากระบบ
+          </Menu.Item>
         </>
       ) : (
         <></>
@@ -143,14 +144,14 @@ const MemberForm = () => {
           >
           </Menu.Item>
           <Menu.Item key="profile" onClick={() => navigate("/profile")}>
-           โปรไฟล์ของคุณ  
+          {username && `โปรไฟล์ของ, ${username}`}
           </Menu.Item>
           <Menu.Item
             onClick={() => {
               navigate("/history");
             }}
             key="History"
-          >เช็คสถานะการจอง</Menu.Item>
+          >ทัวร์ของคุณ</Menu.Item>
         </>
       ) : (
         <></>
@@ -276,7 +277,7 @@ const MemberForm = () => {
           <Col span={isSmallScreen ? 12 : 22}>
             {isSmallScreen ? (
               <div style={{ textAlign: isSmallScreen ? "right" : "left" }}>
-                <Dropdown
+                <Dropdown 
                   overlay={menu}
                   trigger={["click"]}
                   visible={menuVisible}
@@ -314,7 +315,7 @@ const MemberForm = () => {
                   สวัสดีคุณ {username}
                 </Link>
                 {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
-                <Dropdown placement="bottom"
+                <Dropdown placement="bottomLeft"
                   overlay={menu2}
                   trigger={["click"]}
                  
