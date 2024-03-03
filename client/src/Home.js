@@ -27,9 +27,7 @@ import WebFont from 'webfontloader';
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
 import PromotionalSlider from "./PromotionalSlider";
-import picture from "./Image/Hat_Yai_Journey.png";
-import picture2 from "./Image/test.jpg";
-import test01 from "./Image/test-bg.jpg";
+import slide01 from "./Image/slide01.png";
 import Logo from "./Image/logo.png";
 import './index.css';
 import RecommendTour from "./Tour/recommendTour.js";
@@ -49,11 +47,8 @@ const HomeForm = () => {
   const [username, setUsername] = useState("");
 
   const promotionImages = [
-    // picture,
-    // picture2,
-    // "https://www.travelandleisure.com/thmb/iKSVprPgcIoY8G-xSpXdMuAS3Ns=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-great-barrier-reef-islands-australia-WBFAQ1023-4754187baade440197c4b03c6cb3366f.jpg",
-    test01,
-    test01,
+    slide01,
+    slide01,
   ];
 
   const handleSearch = async (searchText) => {

@@ -26,9 +26,8 @@ import axios from "axios";
 import useLocalState from "./localStorage.js";
 import { useMediaQuery } from "react-responsive";
 import { UploadOutlined } from "@ant-design/icons";
-import { MenuOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
+import { MenuOutlined, SearchOutlined,UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import WebFont from 'webfontloader';
-
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
 import PromotionalSlider from "./PromotionalSlider";
@@ -414,19 +413,30 @@ const AdminForm = () => {
                   สวัสดีคุณ {username}
                 </Link>
                 {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
-                <Link
+                <UserOutlined
+                  onClick={() => {
+                    navigate("/profile");
+
+                  }} style={{
+                    marginLeft: "120px",
+                    color: "white",
+                    fontSize: "30px",
+                    fontFamily: 'Kanit'
+                  }} />
+                <LogoutOutlined
+
                   onClick={() => {
                     handleLogout();
                   }}
                   style={{
-                    marginLeft: "50px",
+                    marginLeft: "30px",
                     color: "white",
-                    fontSize: "18px",
+                    fontSize: "30px",
                     fontFamily: 'Kanit'
                   }}
                 >
                   ออกจากระบบ
-                </Link>
+                </LogoutOutlined >
               </>
             )}
           </Col>
