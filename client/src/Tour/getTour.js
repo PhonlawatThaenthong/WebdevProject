@@ -225,18 +225,8 @@ const Tour = ({ data, filterData }) => {
       ) : (
         <Row gutter={[16, 16]}>
           {toursToDisplay.map(({ id, attributes }) => (
-<<<<<<< HEAD
             <Col key={id} xs={24} sm={12} md={8} lg={8} style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
               <Card hoverable key={id} style={{ fontFamily: 'Kanit', width: 450, margin: 20, marginTop: 50 }}>
-=======
-<<<<<<< HEAD
-            <Col key={id} xs={24} sm={12} md={8} lg={8} style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
-              <Card  key={id} style={{ fontFamily: 'Kanit', width: 450, margin: 20, marginTop: 50 }}>
-=======
-            <Col key={id} xs={24} sm={12} md={8} lg={8}>
-              <Card key={id} style={{ fontFamily: 'Kanit', width: 450, margin: 20, marginTop: 50 }}>
->>>>>>> 78538bc466aba0fd183f240214b15f34fc47b71d
->>>>>>> refs/remotes/origin/main
                 {currentPage === "/admin" ? (
                   <Modal
                     title={attributes.tour_name}
@@ -247,13 +237,9 @@ const Tour = ({ data, filterData }) => {
                     footer={[
                       <Button
                         key="back"
-<<<<<<< HEAD
-                        onClick={() => { setIsModalOpen(false) }}
-=======
                         onClick={() => {
                           setIsModalOpen(false);
                         }}
->>>>>>> 78538bc466aba0fd183f240214b15f34fc47b71d
                       >
                         ปิด
                       </Button>,
@@ -261,13 +247,8 @@ const Tour = ({ data, filterData }) => {
                         title="Delete the tour"
                         description="Are you sure to delete this tour?"
                         onConfirm={() => {
-<<<<<<< HEAD
-                          setIsModalOpen(false)
-                          handleTourDelete(id)
-=======
                           setIsModalOpen(false);
                           handleTourDelete(id);
->>>>>>> 78538bc466aba0fd183f240214b15f34fc47b71d
                         }}
                         okText="Yes"
                         cancelText="No"
@@ -278,11 +259,7 @@ const Tour = ({ data, filterData }) => {
                         key="submit"
                         type="primary"
                         onClick={() => {
-<<<<<<< HEAD
-                          setIsModalOpen(false)
-=======
                           setIsModalOpen(false);
->>>>>>> 78538bc466aba0fd183f240214b15f34fc47b71d
                         }}
                       >
                         บันทึก
@@ -326,14 +303,6 @@ const Tour = ({ data, filterData }) => {
                   <Modal
                     style={{ fontFamily: 'Kanit' }}
                     title={attributes.tour_name}
-<<<<<<< HEAD
-                    open={(isModalOpen && selectedTourId === id)}
-                    onCancel={() => { setIsModalOpen(false) }}
-                    footer={[
-                      <Button
-                        key="back"
-                        onClick={() => { setIsModalOpen(false) }}
-=======
                     open={isModalOpen && selectedTourId === id}
                     onCancel={() => {
                       setIsModalOpen(false);
@@ -344,7 +313,6 @@ const Tour = ({ data, filterData }) => {
                         onClick={() => {
                           setIsModalOpen(false);
                         }}
->>>>>>> 78538bc466aba0fd183f240214b15f34fc47b71d
                       >
                         ปิด
                       </Button>,
