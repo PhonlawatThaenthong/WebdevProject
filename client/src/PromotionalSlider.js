@@ -63,9 +63,9 @@ const PromotionalSlider = ({ images }) => {
                   src={image}
                   alt={`Promotion ${(index + 1) % index}`}
                   style={{
-                    maxWidth: "50%",
-                    maxHeight: "50%",
-                    borderRadius: "15px",
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    // borderRadius: "15px",
                     boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)", // Add boxShadow
                   }}
                 />
