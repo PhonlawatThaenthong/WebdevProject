@@ -27,10 +27,10 @@ import WebFont from 'webfontloader';
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
 import PromotionalSlider from "./PromotionalSlider";
-import slide01 from "./Image/slide01.png";
 import Logo from "./Image/logo.png";
 import './index.css';
 import RecommendTour from "./Tour/recommendTour.js";
+import promotionImages from "./Image/slide.js";
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -45,11 +45,6 @@ const HomeForm = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [searchPopoverVisible, setSearchPopoverVisible] = useState(false);
   const [username, setUsername] = useState("");
-
-  const promotionImages = [
-    slide01,
-    slide01,
-  ];
 
   const handleSearch = async (searchText) => {
     try {
