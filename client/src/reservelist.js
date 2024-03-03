@@ -150,12 +150,10 @@ const ReserveForm = () => {
                     <Menu.Item key="profile" onClick={() => navigate("/profile")}>
                         {username && `โปรไฟล์ของ, ${username}`}
                     </Menu.Item>
-                    <Menu.Item
-                        onClick={() => {
-                            navigate("/history");
-                        }}
-                        key="History"
-                    >ทัวร์ของคุณ</Menu.Item>
+                    
+                    <Menu.Item key="back" onClick={() => navigate("/member")}>
+                       กลับสู่หน้าหลัก
+                    </Menu.Item>
                     <Menu.Item key="logout" onClick={() => handleLogout()}>
                         ออกจากระบบ
                     </Menu.Item>
