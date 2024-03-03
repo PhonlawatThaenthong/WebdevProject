@@ -15,6 +15,7 @@ import {
   Menu,
   Dropdown,
   Popover,
+   Avatar
 } from "antd";
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
@@ -41,6 +42,7 @@ const AllTour = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [userimage, setUserImage] = useState({});
 
   const getAllData = async () => {
     try {
@@ -50,11 +52,24 @@ const AllTour = () => {
       console.error("error fetching all data", error);
     }
   };
+  const getImage = async () => {
+    try {
+      const res = await axios.get("http://localhost:1337/api/users/me?populate=*");
+      setUserImage(res.data);
+    } catch (error) {
+      console.error("การแสดงข้อมูล user ผิดพลาด", error);
+    }
+  };
+
 
   useEffect(() => {
     getAllData();
     if (jwt == null) {} else {roleChecker()}
+    getImage();
   }, []);
+ 
+ 
+  
 
   const handleHeaderClick = () => {
     navigate("/login");
@@ -117,6 +132,36 @@ const AllTour = () => {
       )}
     </Menu>
   );
+  const menu2 = (
+    <Menu>
+      {jwt ? (
+        <>
+          <Menu.Item
+            onClick={() => {
+              navigate("/profile");
+            }}
+            key="username"
+          >
+          </Menu.Item>
+          <Menu.Item key="profile" onClick={() => navigate("/profile")}>
+          {username && `โปรไฟล์ของ, ${username}`}
+          </Menu.Item>
+          <Menu.Item
+            onClick={() => {
+              navigate("/history");
+            }}
+            key="History"
+          >ทัวร์ของคุณ</Menu.Item>
+           <Menu.Item key="logout" onClick={() => handleLogout()}>
+            ออกจากระบบ
+          </Menu.Item>
+        </>
+      ) : (
+        <></>
+      )}
+    </Menu>
+  );    
+  
 
   const searchPopoverContent = (
     <div>
@@ -326,19 +371,24 @@ const AllTour = () => {
                       สวัสดีคุณ {username}
                     </Link>
                     {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
-                    <Link
-                      onClick={() => {
-                        handleLogout();
-                      }}
-                      style={{
-                        marginLeft: "50px",
-                        color: "white",
-                        fontSize: "18px",
-                        fontFamily: 'Kanit'
-                      }}
-                    >
-                      ออกจากระบบ
-                    </Link>
+                    <Dropdown placement="bottomLeft"
+                  overlay={menu2}
+                  trigger={["click"]}
+                 
+                 
+                >
+                <Avatar
+                  style={{
+                    marginLeft: "120px",
+                    color: "white",
+                    fontSize: "50px",
+                    fontFamily: 'Kanit',
+                    marginBottom: "10px"
+                  }}
+                  size={52}
+                  src={`http://localhost:1337${userimage.profile_image?.url}`}
+                />
+                 </Dropdown>
                   </>
                 )}
               </Col>
