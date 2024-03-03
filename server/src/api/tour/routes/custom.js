@@ -6,6 +6,11 @@ module.exports = {
       method: 'POST',
       path: '/tours/:id/complete',
       handler: 'tour.method_complete'
-    }
+    },
+    {
+      method: 'PUT',
+      path: '/tours/:id/refresh',
+      handler: 'tour.method_refresh'
+    },
   ]
 }

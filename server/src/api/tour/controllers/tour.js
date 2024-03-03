@@ -8,6 +8,38 @@ const { createCoreController } = require('@strapi/strapi').factories;
 
 module.exports = createCoreController('api::tour.tour', ({ strapi }) => ({
 
+    async method_refresh(ctx) {
+        const entityId = ctx.params.id;
+        try {
+            let target_Tour = await strapi.entityService.findOne('api::tour.tour', entityId)
+
+            if (target_Tour.user_amount >= target_Tour.user_max) {
+                target_Tour = await strapi.entityService.update('api::tour.tour', entityId, {
+                    data: {
+                        status: false
+                    }
+                })
+            } else {
+                target_Tour = await strapi.entityService.update('api::tour.tour', entityId, {
+                    data: {
+                        status: true
+                    }
+                })
+            }
+
+            ctx.body = {
+                status: "OK",
+                message: "Action Completed!",
+
+            };
+        } catch (err) {
+            ctx.body = {
+                status: "Failed",
+                message: err
+            };
+        }
+    },
+
     async method_complete(ctx) {
         const entityId = ctx.params.id;
         const { numberOfPeople } = ctx.request.body;
@@ -32,7 +64,7 @@ module.exports = createCoreController('api::tour.tour', ({ strapi }) => ({
             ctx.body = {
                 status: "OK",
                 message: "Action Completed!",
-                
+
             };
         } catch (err) {
             ctx.body = {

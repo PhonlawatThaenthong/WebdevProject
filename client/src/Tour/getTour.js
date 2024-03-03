@@ -64,8 +64,8 @@ const Tour = ({ data, filterData }) => {
   const getDate = (time) => {
     const dateObj = new Date(time);
     const months = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
     ];
 
     const year = dateObj.getFullYear();
@@ -76,14 +76,14 @@ const Tour = ({ data, filterData }) => {
     const seconds = String(dateObj.getSeconds()).padStart(2, "0");
 
     if ((`${date} ${month} ${year} ${hours}:${minutes}:${seconds}`) == "1 January 1970 07:00:00") {
-        return '-'
+      return '-'
     }
     return `${date} ${month} ${year} ${hours}:${minutes}:${seconds}`;
-};
+  };
 
   const handleSave = async () => {
     const hide = message.loading("กำลังบันทึก...", 0);
-  
+
     try {
       const payload = {
         data: {
@@ -100,6 +100,15 @@ const Tour = ({ data, filterData }) => {
           headers: {
             Authorization: `Bearer ${jwt}`,
             'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      await axios.put(
+        `http://localhost:1337/api/tours/${selectedTourId}/refresh`,
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
           },
         }
       );
@@ -121,7 +130,7 @@ const Tour = ({ data, filterData }) => {
       }
     }
   };
-  
+
   const getPrice = (price) => {
     const newPrice = price.toLocaleString("th-TH", {
       currency: "THB",
