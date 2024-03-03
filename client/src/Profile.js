@@ -27,6 +27,7 @@ import WebFont from 'webfontloader';
 import Boy from "./Image/boy.png"
 import Girl from "./Image/girl.png"
 import Logo from "./Image/logo.png";
+import useFormItemStatus from "antd/es/form/hooks/useFormItemStatus.js";
 
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -44,12 +45,20 @@ const ProfileForm = () => {
     const [editingName, setEditingName] = useState(false);
     const [editingEmail, setEditingEmail] = useState(false);
     const [editingPhoneNumber, setEditingPhoneNumber] = useState(false);
-
+    const [userimage, setUserImage] = useState({});
+    ;
     const getData = async () => {
         try {
-            const res = await axios.get("http://localhost:1337/api/users/me?populate=*");
+            const res = await axios.get("http://localhost:1337/api/users/me");
             setUserData(res.data);
-            const profilePictureUrl = res.data.profile_image.formats.thumbnail.url
+        } catch (error) {
+            console.error("การแสดงข้อมูล user ผิดพลาด", error);
+        }
+    };
+    const getImage = async () => {
+        try {
+            const res = await axios.get("http://localhost:1337/api/users/me?populate=*");
+            setUserImage(res.data);
         } catch (error) {
             console.error("การแสดงข้อมูล user ผิดพลาด", error);
         }
@@ -168,16 +177,13 @@ const ProfileForm = () => {
             .then(() => (window.location.href = "/"));
     };
 
-    const getProfileImage = () => {
-        const profileImage = rolename == "Membar" ? Boy : Girl;
-        return profileImage;
-    };
 
     useEffect(() => {
         if (jwt == null) {
             navigate("/");
         } else roleChecker();
         getData();
+        getImage();
     }, []);
 
     useEffect(() => {
@@ -315,7 +321,7 @@ const ProfileForm = () => {
                 <Layout>
                     <Content style={{ fontFamily: 'Kanit', padding: "24px", minHeight: 500 }}>
                         <div style={{ fontFamily: 'Kanit', textAlign: "center" }}>
-                            <Avatar size={100} src={`http://localhost:1337${userData.profile_image?.formats?.thumbnail.url}`} />
+                            <Avatar size={100} src={`http://localhost:1337${userimage.profile_image?.formats?.thumbnail.url}`} />
                             <h2>{userData.username}</h2>
                         </div>
                         <Descriptions title="User Information" bordered column={1}>
@@ -379,6 +385,16 @@ const ProfileForm = () => {
                         }}>
                             Save Changes
                         </Button>
+                        <Link onClick={() => {
+                            navigate("/history");
+                        }}
+                        ><Button type="primary" style={{
+                            marginTop: '16px', fontFamily: 'Kanit', marginLeft: '16px'
+
+                        }}>
+                                History
+                            </Button></Link>
+
                     </Content>
                 </Layout>
             </Layout>
