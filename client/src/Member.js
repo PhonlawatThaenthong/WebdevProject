@@ -27,11 +27,9 @@ import WebFont from 'webfontloader';
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
 import PromotionalSlider from "./PromotionalSlider";
-import picture from "./Image/Hat_Yai_Journey.png";
-import picture2 from "./Image/test.jpg";
 import Logo from "./Image/logo.png";
 import RecommendTour from "./Tour/recommendTour.js";
-
+import promotionImages from "./Image/slide.js";
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -47,11 +45,7 @@ const MemberForm = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [searchPopoverVisible, setSearchPopoverVisible] = useState(false);
   const [userimage, setUserImage] = useState({});
-  const promotionImages = [
-    picture,
-    picture2,
-    "https://www.travelandleisure.com/thmb/iKSVprPgcIoY8G-xSpXdMuAS3Ns=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-great-barrier-reef-islands-australia-WBFAQ1023-4754187baade440197c4b03c6cb3366f.jpg",
-  ];
+  
   const getDataMe = async () => {
     try {
       const res = await axios.get("http://localhost:1337/api/users/me");
