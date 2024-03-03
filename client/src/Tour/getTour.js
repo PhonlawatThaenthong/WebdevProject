@@ -61,6 +61,26 @@ const Tour = ({ data, filterData }) => {
     }
   };
 
+  const getDate = (time) => {
+    const dateObj = new Date(time);
+    const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    const year = dateObj.getFullYear();
+    const month = months[dateObj.getMonth()];
+    const date = dateObj.getDate();
+    const hours = String(dateObj.getHours()).padStart(2, "0");
+    const minutes = String(dateObj.getMinutes()).padStart(2, "0");
+    const seconds = String(dateObj.getSeconds()).padStart(2, "0");
+
+    if ((`${date} ${month} ${year} ${hours}:${minutes}:${seconds}`) == "1 January 1970 07:00:00") {
+        return '-'
+    }
+    return `${date} ${month} ${year} ${hours}:${minutes}:${seconds}`;
+};
+
   const handleSave = async () => {
     const hide = message.loading("กำลังบันทึก...", 0);
   
@@ -68,7 +88,7 @@ const Tour = ({ data, filterData }) => {
       const payload = {
         data: {
           tour_name: edit_tour.attributes.tour_name,
-          print: edit_tour.attributes.price,
+          price: edit_tour.attributes.price,
           description: edit_tour.attributes.description,
         }
       };
@@ -86,6 +106,7 @@ const Tour = ({ data, filterData }) => {
 
       hide();
       message.success("บันทึกการแก้ไขเรียบร้อยแล้ว!", 1);
+      window.location.href = "/admin";
     } catch (error) {
       hide();
       if (error.response) {
@@ -349,7 +370,7 @@ const Tour = ({ data, filterData }) => {
                     </div>
                     {/* Admin Modal*/}
                     <br />
-                    Tour ID: /api/tours/{id}
+                    * Tour ID: /api/tours/{id}
                     <br />
                     สถานะ:{" "}
                     <span style={{ color: getStatusColor(attributes.status) }}>
@@ -372,7 +393,7 @@ const Tour = ({ data, filterData }) => {
                         ...prevState,
                         attributes: {
                           ...prevState.attributes,
-                          price: e.target.value
+                          price: Number(e.target.value)
                         }
                       }))}
                     />
@@ -443,7 +464,7 @@ const Tour = ({ data, filterData }) => {
                     <br />
                     ราคา: {getPrice(attributes.price)} บาท / ท่าน
                     <br />
-                    ระยะเวลา:
+                    ระยะเวลา: {getDate(attributes.tour_date)}
                     <br />
                     รายละเอียด:
                     <br />
@@ -484,7 +505,7 @@ const Tour = ({ data, filterData }) => {
                 <br />
                 ราคา: {getPrice(attributes.price)} บาท / ท่าน
                 <br />
-                ระยะเวลา:
+                ระยะเวลา: {getDate(attributes.tour_date)}
                 <br />
                 <br></br>
                 {currentPage === "/admin" ? (
