@@ -152,6 +152,9 @@ const MemberForm = () => {
             }}
             key="History"
           >ทัวร์ของคุณ</Menu.Item>
+           <Menu.Item key="logout" onClick={() => handleLogout()}>
+            ออกจากระบบ
+          </Menu.Item>
         </>
       ) : (
         <></>
@@ -327,26 +330,12 @@ const MemberForm = () => {
                     color: "white",
                     fontSize: "50px",
                     fontFamily: 'Kanit',
-                    marginBottom: "20px"
+                    marginBottom: "10px"
                   }}
                   size={52}
                   src={`http://localhost:1337${userimage.profile_image?.url}`}
                 />
                  </Dropdown>
-                <LogoutOutlined
-                  onClick={() => {
-                    handleLogout();
-                  }}
-                  style={{
-                    marginLeft: "30px",
-                    color: "white",
-                    fontSize: "45px",
-                    fontFamily: 'Kanit',
-                    marginBottom: "15px"
-                  }}
-                >
-                  ออกจากระบบ
-                </LogoutOutlined>
               </>
             )}
           </Col>
