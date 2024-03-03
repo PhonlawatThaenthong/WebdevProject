@@ -12,7 +12,7 @@ import {
     Flex,
     Space,
     List,
-    Card, Menu, Dropdown, Popover
+    Card, Menu, Dropdown, Popover, Avatar
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -38,6 +38,7 @@ const ReserveForm = () => {
     const [username, setUsername] = useState('')
     const isSmallScreen = useMediaQuery({ maxWidth: 768 });
     const [menuVisible, setMenuVisible] = useState(false);
+    const [userimage, setUserImage] = useState({});
 
     const roleChecker = async () => {
         try {
@@ -63,6 +64,14 @@ const ReserveForm = () => {
             console.error(error);
         }
     };
+    const getImage = async () => {
+        try {
+            const res = await axios.get("http://localhost:1337/api/users/me?populate=*");
+            setUserImage(res.data);
+        } catch (error) {
+            console.error("การแสดงข้อมูล user ผิดพลาด", error);
+        }
+    };
 
     const handleLogout = async () => {
         setjwt(null)
@@ -79,8 +88,8 @@ const ReserveForm = () => {
         if (jwt == null) {
             navigate("/");
         } else roleChecker();
+        getImage();
     }, []);
-
     useEffect(() => {
         WebFont.load({
             google: {
@@ -121,6 +130,35 @@ const ReserveForm = () => {
                         }}
                         key="back"
                     >กลับ</Menu.Item>
+                </>
+            ) : (
+                <></>
+            )}
+        </Menu>
+    );
+    const menu2 = (
+        <Menu>
+            {jwt ? (
+                <>
+                    <Menu.Item
+                        onClick={() => {
+                            navigate("/profile");
+                        }}
+                        key="username"
+                    >
+                    </Menu.Item>
+                    <Menu.Item key="profile" onClick={() => navigate("/profile")}>
+                        {username && `โปรไฟล์ของ, ${username}`}
+                    </Menu.Item>
+                    <Menu.Item
+                        onClick={() => {
+                            navigate("/history");
+                        }}
+                        key="History"
+                    >ทัวร์ของคุณ</Menu.Item>
+                    <Menu.Item key="logout" onClick={() => handleLogout()}>
+                        ออกจากระบบ
+                    </Menu.Item>
                 </>
             ) : (
                 <></>
@@ -202,12 +240,25 @@ const ReserveForm = () => {
                                     สวัสดีคุณ {username}
                                 </Link>
 
-                                <Link
-                                    onClick={() => { handleLogout() }}
-                                    style={{ fontFamily: 'Kanit', marginLeft: "50px", color: "white", fontSize: "18px" }}
+                                <Dropdown placement="bottomLeft"
+                                    overlay={menu2}
+                                    trigger={["click"]}
+
+
                                 >
-                                    ออกจากระบบ
-                                </Link>
+                                    <Avatar
+                                        style={{
+                                            marginLeft: "50px",
+                                            color: "white",
+                                            fontSize: "50px",
+                                            fontFamily: 'Kanit',
+                                            marginBottom: "10px",
+                                            marginRight: "-70px"
+                                        }}
+                                        size={52}
+                                        src={`http://localhost:1337${userimage.profile_image?.url}`}
+                                    />
+                                </Dropdown>
                             </>
                         )}
                     </Col>
