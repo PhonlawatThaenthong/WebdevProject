@@ -21,7 +21,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import useLocalState from "./localStorage.js";
 import { useMediaQuery } from "react-responsive";
-import { MenuOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
+import { MenuOutlined, SearchOutlined, UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import WebFont from 'webfontloader';
 
 import Tour from "./Tour/getTour.js";
@@ -229,6 +229,7 @@ const MemberForm = () => {
           style={{
             ...headerStyle,
             justifyContent: isSmallScreen ? "center" : "flex-start",
+            display: 'flex',
           }}
         >
           <Col>
@@ -282,19 +283,31 @@ const MemberForm = () => {
                   สวัสดีคุณ {username}
                 </Link>
                 {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
-                <Link
+                
+                <UserOutlined
+                  onClick={() => {
+                    navigate("/profile");
+
+                  }} style={{
+                    marginLeft: "150px",
+                    color: "white",
+                    fontSize: "30px",
+                    fontFamily: 'Kanit'
+                  }} />
+                <LogoutOutlined
+
                   onClick={() => {
                     handleLogout();
                   }}
                   style={{
-                    marginLeft: "50px",
+                    marginLeft: "30px",
                     color: "white",
-                    fontSize: "18px",
+                    fontSize: "30px",
                     fontFamily: 'Kanit'
                   }}
                 >
                   ออกจากระบบ
-                </Link>
+                </LogoutOutlined >
               </>
             )}
           </Col>
