@@ -46,7 +46,7 @@ const ProfileForm = () => {
     const [editingEmail, setEditingEmail] = useState(false);
     const [editingPhoneNumber, setEditingPhoneNumber] = useState(false);
     const [userimage, setUserImage] = useState({});
-    
+
     const getData = async () => {
         try {
             const res = await axios.get("http://localhost:1337/api/users/me");
@@ -82,6 +82,8 @@ const ProfileForm = () => {
 
     const handleSaveChanges = async () => {
         const hide = message.loading("Saving changes...", 0);
+
+        console.log(userData)
 
         try {
             await axios.put(`http://localhost:1337/api/users/${userData.id}`, userData, {
@@ -321,7 +323,7 @@ const ProfileForm = () => {
                 <Layout>
                     <Content style={{ fontFamily: 'Kanit', padding: "24px", minHeight: 500 }}>
                         <div style={{ fontFamily: 'Kanit', textAlign: "center" }}>
-                            <Avatar size={100} src={`http://localhost:1337${userimage.profile_image?.url}`}  />
+                            <Avatar size={100} src={`http://localhost:1337${userimage.profile_image?.url}`} />
                             <h2>{userData.username}</h2>
                         </div>
                         <Descriptions title="User Information" bordered column={1}>

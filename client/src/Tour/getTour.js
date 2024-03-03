@@ -34,19 +34,18 @@ const Tour = ({ data, filterData }) => {
   const isSmallScreen = useMediaQuery({ maxWidth: 767 });
   const [numberOfPeople, setNumberOfPeople] = useState(1);
 
-  const [edit_name, setedit_name] = useState("");
-  const [edit_price, setedit_price] = useState(0);
-  const [edit_desc, setedit_desc] = useState("");
+  const [edit_tour, setedit_tour] = useState({});
 
-  const handleOpenModal = (id) => {
+  const handleOpenModal = async (id) => {
+    const res = await axios.get(`http://localhost:1337/api/tours/${id}?populate=*`);
+    setedit_tour(res.data.data);
     setSelectedTourId(id);
-    setIsModalOpen(true);
-    const tour = toursToDisplay.find((tour) => tour.id === id);
-    if (tour) {
-      setedit_desc(tour.attributes.description);
-      setedit_name(tour.attributes.tour_name);
-      setedit_price(tour.attributes.price);
-    };
+    setIsModalOpen(true)
+  };
+
+  const handleforce = async () => {
+    const res = await axios.get(`http://localhost:1337/api/tours/1?populate=*`);
+    setedit_tour(res.data.data);
   };
 
   const getStatusColor = (status) => {
@@ -62,22 +61,19 @@ const Tour = ({ data, filterData }) => {
     const hide = message.loading("กำลังบันทึก...", 0);
 
     try {
-      const requestData = {
-        attributes: {
-          tour_name: edit_name,
-          price: edit_price,
-          description: edit_desc,
+      console.log(`Sending Request to "http://localhost:1337/api/tours/${selectedTourId}"`);
+      console.log(edit_tour.attributes);
+
+      const response = await axios.put(
+        `http://localhost:1337/api/tours/${selectedTourId}`,
+        { attributes: edit_tour.attributes },
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+            'Content-Type': 'application/json',
+          },
         }
-      };
-
-      console.log(requestData)
-
-      await axios.put(`http://localhost:1337/api/tours/${selectedTourId}`, requestData, {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-          'Content-Type': 'application/json',
-        },
-      });
+      );
 
       hide();
       message.success("บันทึกการแก้ไขเรียบร้อยแล้ว!", 1);
@@ -88,6 +84,7 @@ const Tour = ({ data, filterData }) => {
       message.error("การบันทึกการแก้ไขล้มเหลว โปรดลองอีกครั้ง", 1);
     }
   };
+
 
   const getPrice = (price) => {
     const newPrice = price.toLocaleString("th-TH", {
@@ -238,6 +235,7 @@ const Tour = ({ data, filterData }) => {
   const toursToDisplay = filterData.length > 0 ? filterData : data;
 
   useEffect(() => {
+    handleforce();
     WebFont.load({
       google: {
         families: ['Sriracha', 'Kanit']
@@ -273,8 +271,14 @@ const Tour = ({ data, filterData }) => {
                   <Modal
                     title={
                       <Input
-                        value={edit_name}
-                        onChange={(e) => setedit_name(e.target.value)}
+                        value={edit_tour.attributes.tour_name}
+                        onChange={(e) => setedit_tour(prevState => ({
+                          ...prevState,
+                          attributes: {
+                            ...prevState.attributes,
+                            tour_name: e.target.value
+                          }
+                        }))}
                         style={{
                           width: "80%"
                         }}
@@ -346,15 +350,27 @@ const Tour = ({ data, filterData }) => {
                     ราคา:
                     <Input
                       type="number"
-                      value={edit_price}
-                      onChange={(e) => setedit_price(Number(edit_price))}
+                      value={edit_tour.attributes.price}
+                      onChange={(e) => setedit_tour(prevState => ({
+                        ...prevState,
+                        attributes: {
+                          ...prevState.attributes,
+                          price: e.target.value
+                        }
+                      }))}
                     />
                     <br />
                     ระยะเวลา:
                     <br />รายละเอียด:
                     <TextArea
-                      value={edit_desc}
-                      onChange={(e) => setedit_desc(e.target.value)}
+                      value={edit_tour.attributes.description}
+                      onChange={(e) => setedit_tour(prevState => ({
+                        ...prevState,
+                        attributes: {
+                          ...prevState.attributes,
+                          description: e.target.value
+                        }
+                      }))}
                       autoSize={{ minRows: 3, maxRows: 8 }}
                     />
                     <br></br>
