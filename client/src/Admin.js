@@ -439,7 +439,7 @@ const AdminForm = () => {
         <h2
           style={{ fontFamily: 'Kanit', textAlign: "center", fontWeight: "bold", fontSize: isSmallScreen ? "25px" : "45px" }}
         >
-          โปรแกรมทัวร์แนะนำ
+          โปรแกรมทั้งหมด
         </h2>
         <Tour data={allData} filterData={filterData} />
         <FloatButton
@@ -451,18 +451,6 @@ const AdminForm = () => {
           onClick={() => setIsAddMenuOpen(true)}
         />
       </Layout>
-      <Button
-        type="primary"
-        onClick={() => navigate("/alltour")}
-        style={{
-          backgroundColor: "#1C3953",
-          borderColor: "#1C3953",
-          margin: "0 auto",
-          fontFamily: 'Kanit'
-        }}
-      >
-        ดูโปรแกรมทั้งหมด
-      </Button>
       <Header style={headerbottom}>
         <img src={Logo} alt="Logo" style={{ width: "auto", height: "50px" }} />
       </Header>
