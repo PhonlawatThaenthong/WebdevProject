@@ -17,7 +17,7 @@ import {
     Flex,
     Space,
     List,
-    Card, Menu, Dropdown, Popover
+    Card, Menu, Dropdown, Popover, Avatar
 } from "antd";
 import LoadingIcon from "./Navbar/LoadingIcon.js";
 import WebFont from 'webfontloader';
@@ -38,7 +38,7 @@ const Confirm = ({ data, filterData }) => {
     const isSmallScreen = useMediaQuery({ maxWidth: 767 });
     const [messageApi, contextHolder] = message.useMessage();
     const [menuVisible, setMenuVisible] = useState(false);
-
+    const [userimage, setUserImage] = useState({});
     const [allData, setAllData] = useState([]);
 
     const roleChecker = async () => {
@@ -63,6 +63,14 @@ const Confirm = ({ data, filterData }) => {
             }
         } catch (error) {
             console.error(error);
+        }
+    };
+    const getImage = async () => {
+        try {
+            const res = await axios.get("http://localhost:1337/api/users/me?populate=*");
+            setUserImage(res.data);
+        } catch (error) {
+            console.error("การแสดงข้อมูล user ผิดพลาด", error);
         }
     };
 
@@ -221,8 +229,10 @@ const Confirm = ({ data, filterData }) => {
         if (jwt == null) {
             navigate("/");
         } else roleChecker();
-        getData()
+        getData();
+        getImage();
     }, []);
+
 
     useEffect(() => {
         WebFont.load({
@@ -264,6 +274,36 @@ const Confirm = ({ data, filterData }) => {
                         }}
                         key="back"
                     >กลับ</Menu.Item>
+                </>
+            ) : (
+                <></>
+            )}
+        </Menu>
+    );
+    const menu2 = (
+        <Menu>
+            {jwt ? (
+                <>
+                    <Menu.Item
+                        onClick={() => {
+                            navigate("/profile");
+                        }}
+                        key="username"
+                    >
+
+                    </Menu.Item>
+                    <Menu.Item key="profile" onClick={() => navigate("/profile")}>
+                        {username && `โปรไฟล์ของ, ${username}`}
+                    </Menu.Item>
+                    <Menu.Item
+                        onClick={() => {
+                            navigate("/confirm");
+                        }}
+                        key="History"
+                    >สถานะการจองของลูกค้า</Menu.Item>
+                    <Menu.Item key="logout" onClick={() => handleLogout()}>
+                        ออกจากระบบ
+                    </Menu.Item>
                 </>
             ) : (
                 <></>
@@ -345,12 +385,25 @@ const Confirm = ({ data, filterData }) => {
                                     สวัสดีคุณ {username}
                                 </Link>
 
-                                <Link
-                                    onClick={() => { handleLogout() }}
-                                    style={{ fontFamily: 'Kanit', marginLeft: "50px", color: "white", fontSize: "18px" }}
+                                <Dropdown placement="bottomLeft"
+                                    overlay={menu2}
+                                    trigger={["click"]}
+
+
                                 >
-                                    ออกจากระบบ
-                                </Link>
+                                    <Avatar
+                                        style={{
+                                            marginLeft: "50px",
+                                            color: "white",
+                                            fontSize: "50px",
+                                            fontFamily: 'Kanit',
+                                            marginBottom: "10px",
+                                            marginRight: "-70px"
+                                        }}
+                                        size={52}
+                                        src={`http://localhost:1337${userimage.profile_image?.url}`}
+                                    />
+                                </Dropdown>
                             </>
                         )}
                     </Col>
@@ -379,81 +432,81 @@ const Confirm = ({ data, filterData }) => {
                         </b>
                     ) : (
                         <Row gutter={[16, 16]}>
-                        {allData.map(({ id, attributes }) => (
-                            <Card
-                            key={id}
-                            style={{
-                                fontFamily: 'Kanit',
-                                width: 300,
-                                margin: isSmallScreen ? '10px auto' : '20px',
-                                marginTop: isSmallScreen ? '25px' : '50px'
-                            }}
-                        >
-                                {attributes.payment_status === false && (
-                                    <Image
-                                        src={`https://cdn-icons-png.freepik.com/512/6475/6475938.png`}
-                                        preview={false}
-                                    />)}
-                                {attributes.payment_status === true && (
-                                    <Image
-                                        src={`https://thumb.ac-illust.com/98/98f98abb339a27ca448a784926b8329d_t.jpeg`}
-                                        preview={false}
-                                    />)}
-                                <b style={{ fontSize: "18px", fontFamily: 'Kanit' }}>{attributes.tour_id.data.attributes.tour_name}</b>
-                                <br />
-                                สถานะ:{" "}
-                                <span style={{ color: getStatusColor(attributes.payment_status) }}>
-                                    <b>{getStatus(attributes.payment_status)}</b>
-                                </span>
-                                <br />
-                                ประเภทการชำระเงิน: {attributes.payment_method}
-                                <br />
-                                จำนวน: {attributes.reserve_amount} ท่าน
-                                <br />
-                                ราคา: {getPrice((attributes.total_price / attributes.reserve_amount))} บาท / ท่าน
-                                <br />
-                                ราคารวม: {getPrice(attributes.total_price)} บาท
-                                <br />
-                                วันที่จอง: {getDate(attributes.reserve_date)}
-                                <br />
-                                วันที่ยืนยัน: {getDate(attributes.confirm_date)}
-                                <br />
-                                {attributes.payment_status === false && (
-                                    <Button
+                            {allData.map(({ id, attributes }) => (
+                                <Card
+                                    key={id}
+                                    style={{
+                                        fontFamily: 'Kanit',
+                                        width: 300,
+                                        margin: isSmallScreen ? '10px auto' : '20px',
+                                        marginTop: isSmallScreen ? '25px' : '50px'
+                                    }}
+                                >
+                                    {attributes.payment_status === false && (
+                                        <Image
+                                            src={`https://cdn-icons-png.freepik.com/512/6475/6475938.png`}
+                                            preview={false}
+                                        />)}
+                                    {attributes.payment_status === true && (
+                                        <Image
+                                            src={`https://thumb.ac-illust.com/98/98f98abb339a27ca448a784926b8329d_t.jpeg`}
+                                            preview={false}
+                                        />)}
+                                    <b style={{ fontSize: "18px", fontFamily: 'Kanit' }}>{attributes.tour_id.data.attributes.tour_name}</b>
+                                    <br />
+                                    สถานะ:{" "}
+                                    <span style={{ color: getStatusColor(attributes.payment_status) }}>
+                                        <b>{getStatus(attributes.payment_status)}</b>
+                                    </span>
+                                    <br />
+                                    ประเภทการชำระเงิน: {attributes.payment_method}
+                                    <br />
+                                    จำนวน: {attributes.reserve_amount} ท่าน
+                                    <br />
+                                    ราคา: {getPrice((attributes.total_price / attributes.reserve_amount))} บาท / ท่าน
+                                    <br />
+                                    ราคารวม: {getPrice(attributes.total_price)} บาท
+                                    <br />
+                                    วันที่จอง: {getDate(attributes.reserve_date)}
+                                    <br />
+                                    วันที่ยืนยัน: {getDate(attributes.confirm_date)}
+                                    <br />
+                                    {attributes.payment_status === false && (
+                                        <Button
 
-                                        type="primary"
-                                        onClick={() => show_modal_confirm(id)}
-                                        style={{
-                                            fontFamily: 'Kanit',
-                                            textAlign: 'center',
-                                            marginTop: 10,
-                                            backgroundColor: 'green',
-                                            borderColor: 'green',
-                                        }}
-                                    >
-                                        Confirm Reservation
-                                    </Button>
-                                )}
-                                {attributes.payment_status === true && (
-                                    <Button danger
-                                        type="primary"
-                                        onClick={() => show_modal_cancel(id)}
-                                        style={{ fontFamily: 'Kanit', textAlign: 'center', marginTop: 10 }}
-                                    >
-                                        Cancel Reservation
-                                    </Button>
-                                )}
-                                {attributes.payment_status === true && (
-                                    <Button
-                                        type="primary"
-                                        onClick={() => show_modal_delete(id)}
-                                        style={{ fontFamily: 'Kanit', textAlign: 'center', marginTop: 10, }}
-                                    >
-                                        Delete Reservation
-                                    </Button>
-                                )}
-                                <br></br>
-                            </Card>
+                                            type="primary"
+                                            onClick={() => show_modal_confirm(id)}
+                                            style={{
+                                                fontFamily: 'Kanit',
+                                                textAlign: 'center',
+                                                marginTop: 10,
+                                                backgroundColor: 'green',
+                                                borderColor: 'green',
+                                            }}
+                                        >
+                                            Confirm Reservation
+                                        </Button>
+                                    )}
+                                    {attributes.payment_status === true && (
+                                        <Button danger
+                                            type="primary"
+                                            onClick={() => show_modal_cancel(id)}
+                                            style={{ fontFamily: 'Kanit', textAlign: 'center', marginTop: 10 }}
+                                        >
+                                            Cancel Reservation
+                                        </Button>
+                                    )}
+                                    {attributes.payment_status === true && (
+                                        <Button
+                                            type="primary"
+                                            onClick={() => show_modal_delete(id)}
+                                            style={{ fontFamily: 'Kanit', textAlign: 'center', marginTop: 10, }}
+                                        >
+                                            Delete Reservation
+                                        </Button>
+                                    )}
+                                    <br></br>
+                                </Card>
                             ))}
                         </Row>
                     )}
