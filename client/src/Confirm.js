@@ -22,7 +22,7 @@ import {
 import LoadingIcon from "./Navbar/LoadingIcon.js";
 import WebFont from 'webfontloader';
 import { Helmet } from "react-helmet";
-import { MenuOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons';
+import { MenuOutlined, SearchOutlined, UserOutlined,UnorderedListOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -363,7 +363,7 @@ const Confirm = ({ data, filterData }) => {
                         {isSmallScreen ? (
                             <div style={{ textAlign: isSmallScreen ? 'right' : 'left' }}>
                                 <Dropdown overlay={menu} trigger={['click']} visible={menuVisible} onVisibleChange={setMenuVisible}>
-                                    <UserOutlined style={{ fontSize: '25px', marginRight: '8px' }} />
+                                <UnorderedListOutlined  style={{ fontSize: '25px', marginRight: '8px' }} />
                                 </Dropdown>
 
                             </div>
