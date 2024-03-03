@@ -135,8 +135,9 @@ const CardHistory = ({ data, filterData }) => {
           <LoadingIcon />
         </b>
       ) : (
-        userReserves.map(({ id, attributes }) => (
-          <Card key={id} style={{ fontFamily: 'Kanit', width: 300, margin: 20, marginTop: 50 }}>
+        <Row gutter={[16, 16]}>
+        {userReserves.map(({ id, attributes }) => (
+          <Card key={id} xs={24} sm={12} md={8} lg={8} style={{ fontFamily: 'Kanit', width: 300, margin: 20, marginTop: 50 }}>
             {attributes.payment_status === false && (
               <Image
                 src={`https://cdn-icons-png.freepik.com/512/6475/6475938.png`}
@@ -167,7 +168,8 @@ const CardHistory = ({ data, filterData }) => {
             วันที่ยืนยัน: {getDate(attributes.confirm_date)}
             <br></br>
           </Card>
-        ))
+        ))}
+        </Row>
       )}
     </div>
   );

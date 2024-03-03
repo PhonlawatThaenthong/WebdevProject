@@ -145,7 +145,7 @@ const Confirm = ({ data, filterData }) => {
         try {
             const res = await axios.delete(
                 `http://localhost:1337/api/reserves/${reserveId}`);
-            message.success("Cancelled Reservation!");
+            message.success("Delete Reservation!");
             getData();
         } catch (error) {
             console.error("error delete status", error);
@@ -378,7 +378,8 @@ const Confirm = ({ data, filterData }) => {
                             <LoadingIcon />
                         </b>
                     ) : (
-                        allData.map(({ id, attributes }) => (
+                        <Row gutter={[16, 16]}>
+                        {allData.map(({ id, attributes }) => (
                             <Card
                             key={id}
                             style={{
@@ -453,7 +454,8 @@ const Confirm = ({ data, filterData }) => {
                                 )}
                                 <br></br>
                             </Card>
-                        ))
+                            ))}
+                        </Row>
                     )}
                 </div>
 
