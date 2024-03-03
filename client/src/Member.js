@@ -131,6 +131,32 @@ const MemberForm = () => {
       )}
     </Menu>
   );
+  const menu2 = (
+    <Menu>
+      {jwt ? (
+        <>
+          <Menu.Item
+            onClick={() => {
+              navigate("/profile");
+            }}
+            key="username"
+          >
+          </Menu.Item>
+          <Menu.Item key="profile" onClick={() => navigate("/profile")}>
+           โปรไฟล์ของคุณ  
+          </Menu.Item>
+          <Menu.Item
+            onClick={() => {
+              navigate("/history");
+            }}
+            key="History"
+          >เช็คสถานะการจอง</Menu.Item>
+        </>
+      ) : (
+        <></>
+      )}
+    </Menu>
+  );    
 
   const searchPopoverContent = (
     <div>
@@ -288,10 +314,13 @@ const MemberForm = () => {
                   สวัสดีคุณ {username}
                 </Link>
                 {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
+                <Dropdown placement="bottom"
+                  overlay={menu2}
+                  trigger={["click"]}
+                 
+                 
+                >
                 <Avatar
-                  onClick={() => {
-                    navigate("/profile");
-                  }}
                   style={{
                     marginLeft: "120px",
                     color: "white",
@@ -302,6 +331,7 @@ const MemberForm = () => {
                   size={52}
                   src={`http://localhost:1337${userimage.profile_image?.url}`}
                 />
+                 </Dropdown>
                 <LogoutOutlined
                   onClick={() => {
                     handleLogout();
