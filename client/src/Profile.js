@@ -325,38 +325,27 @@ const ProfileForm = () => {
             </Helmet>
             {contextHolder}
             <Layout style={layoutStyle}>
-                <Header
-                    style={{
-                        ...headerStyle,
-                        justifyContent: isSmallScreen ? "center" : "flex-start",
-                    }}
-                >
-                    <Col span={isSmallScreen ? 12 : 22} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <div style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
-                            <span style={blueTextStyle}>H</span>
-                            <span style={NormalTextStyle}>AT</span>
-                            <span style={invtext}>.</span>
-                            <span style={blueTextStyle}>Y</span>
-                            <span style={NormalTextStyle}>AI</span>
-                            <span style={invtext}>.</span>
-                            <span style={blueTextStyle}>J</span>
-                            <span style={NormalTextStyle}>ourney</span>
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center', marginLeft: 'auto' }}>
-                            {isSmallScreen ? (
-                                <div style={{ textAlign: isSmallScreen ? "right" : "left" }}>
-                                    <Dropdown
-                                        overlay={menu}
-                                        trigger={["click"]}
-                                        visible={menuVisible}
-                                        onVisibleChange={setMenuVisible}
-                                    >
-                                        <UserOutlined
-                                            style={{ fontSize: "25px", marginRight: "8px" }}
-                                        />
-                                    </Dropdown>
-                                </div>
-                            ) : (
+            <Header style={headerStyle}>
+                   
+                    <Col onClick={isSmallScreen ? handleHeaderClick : undefined} style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
+                        <span style={blueTextStyle}>H</span>
+                        <span style={NormalTextStyle}>AT</span>
+                        <span style={invtext}>.</span>
+                        <span style={blueTextStyle}>Y</span>
+                        <span style={NormalTextStyle}>AI</span>
+                        <span style={invtext}>.</span>
+                        <span style={blueTextStyle}>J</span>
+                        <span style={NormalTextStyle}>ourney</span>
+                    </Col>
+                        <Col span={isSmallScreen ? 12 : 22}>
+                        {isSmallScreen ? (
+                            <div style={{ textAlign: isSmallScreen ? 'right' : 'left' }}>
+                                <Dropdown overlay={menu} trigger={['click']} visible={menuVisible} onVisibleChange={setMenuVisible}>
+                                    <UserOutlined style={{ fontSize: '25px', marginRight: '8px' }} />
+                                </Dropdown>
+
+                            </div>
+                        ) : (
                                 <>
                                     <Link
                                         onClick={() => {
@@ -392,8 +381,9 @@ const ProfileForm = () => {
                                     </Dropdown>
                                 </>
                             )}
-                        </div>
-                    </Col>
+                        </Col>
+                        
+                 
 
                 </Header>
                 <Layout>
