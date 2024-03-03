@@ -321,7 +321,7 @@ const ProfileForm = () => {
                 <Layout>
                     <Content style={{ fontFamily: 'Kanit', padding: "24px", minHeight: 500 }}>
                         <div style={{ fontFamily: 'Kanit', textAlign: "center" }}>
-                            <Avatar size={100} src={`http://localhost:1337${userimage.profile_image?.formats?.thumbnail.url}`} />
+                            <Avatar size={100} src={`http://localhost:1337${userimage.profile_image?.url}`}  />
                             <h2>{userData.username}</h2>
                         </div>
                         <Descriptions title="User Information" bordered column={1}>
