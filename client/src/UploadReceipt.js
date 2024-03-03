@@ -176,6 +176,12 @@ const UploadReceipt = () => {
                             ทางแอดมินจะทำการอัพเดตสถานะตามคิว รบกวนไม่ทักแชทซ้ำ หากมีการทักซ้ำเท่ากับต่อคิวใหม่
                             <br />
                             **ก่อนทำการโอนเงิน กรุณาเติมข้อความในหมายเหตุว่า "เที่ยวกับ Hatyai Journey" ทุกครั้ง หากลืมบันทึกทางเราขอทำการโอนคืน**
+                            <br />
+                            <Link
+                            onClick={showDrawer}
+                        >
+                            ตัวอย่างการอัพโหลดหลักฐานการโอนเงิน
+                        </Link>
                         </Card>
                         <br />
                         <Button type="primary" block onClick={handleButtonClick}style={{ fontFamily: 'Kanit' }}>ขั้นตอนถัดไป</Button>

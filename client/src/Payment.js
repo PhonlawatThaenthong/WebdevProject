@@ -130,7 +130,7 @@ const Payment = () => {
     };
 
     return (
-        <Flex gap="middle" wrap="wrap" style={{ backgroundColor: "#F5F5F5" }}>
+        <Flex gap="middle" wrap="wrap">
             <Helmet>
                 <title>HYJ - Home Page</title>
             </Helmet>
@@ -200,6 +200,12 @@ const Payment = () => {
                     <Card title="ชำระเงินเสร็จเรียบร้อยแล้วใช่หรือไม่?" bordered={false} style={{ fontFamily: 'Kanit', width: isSmallScreen ? '100%' : 950 }}>
                         <p>เมื่อทำการชำระเงินเรียบร้อยแล้วต้องทำการแจ้งสลิปหลักฐานการโอนเงินพร้อมระบุหมายเหตุทุกครั้ง เมื่อการชำระเงินของคุณได้รับการยืนยันแล้ว </p>
                         <p>สถานะการชำระในช่องประวัติการซื้อจะเปลี่ยนแปลง</p>
+                        <Link
+                            onClick={showDrawer}
+                        >
+                            ตัวอย่างสลิปการโอนเงิน
+                        </Link>
+
                         <Button type="primary" block style={{ fontFamily: 'Kanit', backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }} onClick={handleButtonClick}>ใช่ ฉันชำระเงินแล้ว</Button>
                     </Card>
                 </Card>
@@ -207,7 +213,6 @@ const Payment = () => {
             </Space>
             <Popover
                 title={<div style={{ textAlign: 'center', fontFamily: 'Kanit' }}>แสดงตัวอย่าง</div>}
-
             >
                 <FloatButton
                     icon={<QuestionCircleOutlined />}
