@@ -22,6 +22,8 @@ import {
 import LoadingIcon from "../Navbar/LoadingIcon.js";
 import WebFont from 'webfontloader';
 
+const { TextArea } = Input;
+
 const Tour = ({ data, filterData }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -31,11 +33,20 @@ const Tour = ({ data, filterData }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isSmallScreen = useMediaQuery({ maxWidth: 767 });
   const [numberOfPeople, setNumberOfPeople] = useState(1);
-  const [userId, setUserId] = useState("")
+
+  const [edit_name, setedit_name] = useState("");
+  const [edit_price, setedit_price] = useState(0);
+  const [edit_desc, setedit_desc] = useState("");
 
   const handleOpenModal = (id) => {
     setSelectedTourId(id);
     setIsModalOpen(true);
+    const tour = toursToDisplay.find((tour) => tour.id === id);
+    if (tour) {
+      setedit_desc(tour.attributes.description);
+      setedit_name(tour.attributes.tour_name);
+      setedit_price(tour.attributes.price);
+    };
   };
 
   const getStatusColor = (status) => {
@@ -44,6 +55,37 @@ const Tour = ({ data, filterData }) => {
         return `rgba(0, 255, 0)`;
       case false:
         return `rgba(255, 0, 0)`;
+    }
+  };
+
+  const handleSave = async () => {
+    const hide = message.loading("กำลังบันทึก...", 0);
+
+    try {
+      const requestData = {
+        attributes: {
+          tour_name: edit_name,
+          price: edit_price,
+          description: edit_desc,
+        }
+      };
+
+      console.log(requestData)
+
+      await axios.put(`http://localhost:1337/api/tours/${selectedTourId}`, requestData, {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      hide();
+      message.success("บันทึกการแก้ไขเรียบร้อยแล้ว!", 1);
+    } catch (error) {
+      console.error("Error updating tour data:", error);
+
+      hide();
+      message.error("การบันทึกการแก้ไขล้มเหลว โปรดลองอีกครั้ง", 1);
     }
   };
 
@@ -229,7 +271,15 @@ const Tour = ({ data, filterData }) => {
               <Card hoverable key={id} style={{ fontFamily: 'Kanit', width: 450, margin: 20, marginTop: 50 }}>
                 {currentPage === "/admin" ? (
                   <Modal
-                    title={attributes.tour_name}
+                    title={
+                      <Input
+                        value={edit_name}
+                        onChange={(e) => setedit_name(e.target.value)}
+                        style={{
+                          width: "80%"
+                        }}
+                      />
+                    }
                     open={isModalOpen && selectedTourId === id}
                     onCancel={() => {
                       setIsModalOpen(false);
@@ -259,6 +309,7 @@ const Tour = ({ data, filterData }) => {
                         key="submit"
                         type="primary"
                         onClick={() => {
+                          handleSave();
                           setIsModalOpen(false);
                         }}
                       >
@@ -292,10 +343,20 @@ const Tour = ({ data, filterData }) => {
                       </b>
                     </span >
                     <br />
-                    ราคา: {getPrice(attributes.price)} บาท / ท่าน
+                    ราคา:
+                    <Input
+                      type="number"
+                      value={edit_price}
+                      onChange={(e) => setedit_price(Number(edit_price))}
+                    />
                     <br />
                     ระยะเวลา:
-                    <br />
+                    <br />รายละเอียด:
+                    <TextArea
+                      value={edit_desc}
+                      onChange={(e) => setedit_desc(e.target.value)}
+                      autoSize={{ minRows: 3, maxRows: 8 }}
+                    />
                     <br></br>
                   </Modal>
                 ) : (
@@ -347,7 +408,7 @@ const Tour = ({ data, filterData }) => {
                       </b>
                     </span>
                     <br />
-                    ราคา: {getPrice(attributes.price)} บาท
+                    ราคา: {getPrice(attributes.price)} บาท / ท่าน
                     <br />
                     ระยะเวลา:
                     <br />

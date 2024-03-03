@@ -46,7 +46,7 @@ const ProfileForm = () => {
     const [editingEmail, setEditingEmail] = useState(false);
     const [editingPhoneNumber, setEditingPhoneNumber] = useState(false);
     const [userimage, setUserImage] = useState({});
-    ;
+    
     const getData = async () => {
         try {
             const res = await axios.get("http://localhost:1337/api/users/me");
