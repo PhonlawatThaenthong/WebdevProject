@@ -23,7 +23,6 @@ import useLocalState from "./localStorage.js";
 import { useMediaQuery } from "react-responsive";
 import { MenuOutlined, SearchOutlined, UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import WebFont from 'webfontloader';
-
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
 import PromotionalSlider from "./PromotionalSlider";
@@ -283,13 +282,13 @@ const MemberForm = () => {
                   สวัสดีคุณ {username}
                 </Link>
                 {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
-                
+
                 <UserOutlined
                   onClick={() => {
                     navigate("/profile");
 
                   }} style={{
-                    marginLeft: "150px",
+                    marginLeft: "120px",
                     color: "white",
                     fontSize: "30px",
                     fontFamily: 'Kanit'
