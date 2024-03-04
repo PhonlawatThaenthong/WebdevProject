@@ -22,7 +22,7 @@ import {
 import LoadingIcon from "./Navbar/LoadingIcon.js";
 import WebFont from 'webfontloader';
 import { Helmet } from "react-helmet";
-import { MenuOutlined, SearchOutlined, UserOutlined,UnorderedListOutlined } from '@ant-design/icons';
+import { MenuOutlined, SearchOutlined, UserOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -259,7 +259,7 @@ const Confirm = ({ data, filterData }) => {
                             {username && `สวัสดีคุณ, ${username}`}
                         </span>
                     </Menu.Item>
-                
+
                     <Menu.Item
                         onClick={() => {
                             navigate("/");
@@ -290,9 +290,9 @@ const Confirm = ({ data, filterData }) => {
                     <Menu.Item key="profile" onClick={() => navigate("/profile")}>
                         {username && `โปรไฟล์ของ, ${username}`}
                     </Menu.Item>
-                   
+
                     <Menu.Item key="back" onClick={() => navigate("/admin")}>
-                       กลับสู่หน้าหลัก
+                        กลับสู่หน้าหลัก
                     </Menu.Item>
                     <Menu.Item key="logout" onClick={() => handleLogout()}>
                         ออกจากระบบ
@@ -363,7 +363,7 @@ const Confirm = ({ data, filterData }) => {
                         {isSmallScreen ? (
                             <div style={{ textAlign: isSmallScreen ? 'right' : 'left' }}>
                                 <Dropdown overlay={menu} trigger={['click']} visible={menuVisible} onVisibleChange={setMenuVisible}>
-                                <UnorderedListOutlined  style={{ fontSize: '25px', marginRight: '8px' }} />
+                                    <UnorderedListOutlined style={{ fontSize: '25px', marginRight: '8px' }} />
                                 </Dropdown>
 
                             </div>
@@ -466,7 +466,6 @@ const Confirm = ({ data, filterData }) => {
                                     <br />
                                     {attributes.payment_status === false && (
                                         <Button
-
                                             type="primary"
                                             onClick={() => show_modal_confirm(id)}
                                             style={{
@@ -480,6 +479,15 @@ const Confirm = ({ data, filterData }) => {
                                             Confirm Reservation
                                         </Button>
                                     )}
+                                    {attributes.payment_status === false && (
+                                        <Button
+                                            type="primary"
+                                            onClick={() => show_modal_delete(id)}
+                                            style={{ fontFamily: 'Kanit', textAlign: 'center', marginTop: 10, }}
+                                        >
+                                            Delete Reservation
+                                        </Button>
+                                    )}
                                     {attributes.payment_status === true && (
                                         <Button danger
                                             type="primary"
@@ -491,6 +499,7 @@ const Confirm = ({ data, filterData }) => {
                                     )}
                                     {attributes.payment_status === true && (
                                         <Button
+                                            disabled
                                             type="primary"
                                             onClick={() => show_modal_delete(id)}
                                             style={{ fontFamily: 'Kanit', textAlign: 'center', marginTop: 10, }}
