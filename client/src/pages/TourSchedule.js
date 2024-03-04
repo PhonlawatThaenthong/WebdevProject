@@ -43,7 +43,7 @@ const TourSchedule = () => {
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ['Sriracha', 'Chilanka']
+        families: ['Kanit']
       }
     });
     const getTourSchedule = async () => {
