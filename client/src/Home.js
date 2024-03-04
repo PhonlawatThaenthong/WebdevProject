@@ -291,6 +291,7 @@ const HomeForm = () => {
 
         >
           <div className="scroll_button">
+            <button onClick={handleScrollToElement}>Scroll to Element</button>
             <button>Scroll to Element</button>
           </div>
 
