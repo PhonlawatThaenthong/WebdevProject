@@ -18,6 +18,7 @@ import {
   Space,
   Popconfirm,
   message,
+  Cascader
 } from "antd";
 import LoadingIcon from "../Navbar/LoadingIcon.js";
 import WebFont from "webfontloader";
@@ -38,6 +39,21 @@ const Tour = ({ data, filterData }) => {
 
   const handleTourScheduleClick = (tourId) => {
     navigate(`/tour-schedule/${tourId}`);
+  };
+
+  const options = [
+    {
+      value: 'ว่าง',
+      label: 'ว่าง',
+    },
+    {
+      value: 'test',
+      label: 'test',
+    },
+  ];
+
+  const onChange = (value) => {
+    console.log(value);
   };
 
   const handleOpenModal = async (id) => {
@@ -266,7 +282,7 @@ const Tour = ({ data, filterData }) => {
           onOk: () => {
             handleBook();
           },
-          onCancel: () => {},
+          onCancel: () => { },
         });
       } catch (error) {
         console.error("error selecting tour", error);
@@ -284,7 +300,7 @@ const Tour = ({ data, filterData }) => {
         onOk: () => {
           navigate("/login");
         },
-        onCancel: () => {},
+        onCancel: () => { },
       });
     }
   };
@@ -334,6 +350,7 @@ const Tour = ({ data, filterData }) => {
         </b>
       ) : (
         <Row gutter={[16, 16]}>
+          <Cascader options={options} onChange={onChange} placeholder="Filters" style={{}}/>
           {toursToDisplay.map(({ id, attributes }) => (
             <Col
               key={id}
