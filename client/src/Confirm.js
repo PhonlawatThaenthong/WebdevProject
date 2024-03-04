@@ -207,6 +207,8 @@ const Confirm = ({ data, filterData }) => {
         return newPrice
     };
 
+    
+
     const getStatus = (status) => {
         switch (status) {
             case true:
@@ -224,6 +226,8 @@ const Confirm = ({ data, filterData }) => {
             console.error("error fetching tour data", error);
         }
     };
+    
+    
 
     useEffect(() => {
         if (jwt == null) {
@@ -464,6 +468,11 @@ const Confirm = ({ data, filterData }) => {
                                     <br />
                                     วันที่ยืนยัน: {getDate(attributes.confirm_date)}
                                     <br />
+                                    ชื่อผู้จอง: {attributes.user_id.data.attributes.username}
+                                    <br />
+                                    ช่องทางการติดต่อ: {attributes.user_phone}
+                                    <br />
+                                    
                                     {attributes.payment_status === false && (
                                         <Button
                                             type="primary"
