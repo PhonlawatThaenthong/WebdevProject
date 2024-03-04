@@ -111,6 +111,21 @@ const AllTour = () => {
     }
   };
 
+  const options = [
+    {
+      value: 'ว่าง',
+      label: 'ว่าง',
+    },
+    {
+      value: 'test',
+      label: 'test',
+    },
+  ];
+
+  const onChange = (value) => {
+    console.log(value);
+  };
+
   const menu = (
     <Menu>
       {jwt ? (
@@ -198,7 +213,7 @@ const AllTour = () => {
   const layoutStyle = {
     borderRadius: 0,
     overflow: "hidden",
-    backgroundColor: "#EEEEEE",
+    backgroundColor: "#F5F5F5",
   };
 
   const blueTextStyle = {
@@ -371,8 +386,6 @@ const AllTour = () => {
                     <Dropdown placement="bottomLeft"
                       overlay={menu2}
                       trigger={["click"]}
-
-
                     >
                       <Avatar
                         style={{
@@ -400,6 +413,7 @@ const AllTour = () => {
             style={{ maxWidth: '300px' }}
           />
         </div>
+        <Cascader options={options} onChange={onChange} placeholder="Filters" style={{}} />
         <Tour data={allData} filterData={filterData} />
       </Layout>
       <Button

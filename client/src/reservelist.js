@@ -174,7 +174,7 @@ const ReserveForm = () => {
     const layoutStyle = {
         borderRadius: 0,
         overflow: 'hidden',
-        backgroundColor: '#EEEEEE',
+        backgroundColor: '#F5F5F5',
     };
 
     const blueTextStyle = {

@@ -41,21 +41,6 @@ const Tour = ({ data, filterData }) => {
     navigate(`/tour-schedule/${tourId}`);
   };
 
-  const options = [
-    {
-      value: 'ว่าง',
-      label: 'ว่าง',
-    },
-    {
-      value: 'test',
-      label: 'test',
-    },
-  ];
-
-  const onChange = (value) => {
-    console.log(value);
-  };
-
   const handleOpenModal = async (id) => {
     const res = await axios.get(
       `http://localhost:1337/api/tours/${id}?populate=*`
@@ -350,7 +335,6 @@ const Tour = ({ data, filterData }) => {
         </b>
       ) : (
         <Row gutter={[16, 16]}>
-          <Cascader options={options} onChange={onChange} placeholder="Filters" style={{}}/>
           {toursToDisplay.map(({ id, attributes }) => (
             <Col
               key={id}
