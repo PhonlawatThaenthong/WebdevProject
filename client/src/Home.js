@@ -284,22 +284,10 @@ const HomeForm = () => {
           {isSmallScreen ? (
             <></>
           ) : (
-            <h2
-              id="scroll"
-              style={{
-                fontFamily: "Kanit",
-                textAlign: "center",
-                fontWeight: "bold",
-                fontSize: isSmallScreen ? "25px" : "45px",
-              }}
-            >
-              <div className="scroll_button">
-                <button onClick={handleScrollToElement} className="circle_button"></button>
-              </div>
-              โปรแกรมทัวร์แนะนำ
-            </h2>
+            <div className="scroll_button">
+              <button onClick={handleScrollToElement} className="circle_button"></button>
+            </div>
           )}
-
           โปรแกรมทัวร์แนะนำ
         </span>
         <RecommendTour />

@@ -352,8 +352,17 @@ const AllTour = () => {
                       visible={menuVisible}
                       onVisibleChange={setMenuVisible}
                     >
-                      <UserOutlined
-                        style={{ fontSize: "25px", marginRight: "8px" }}
+                      <Avatar
+                        style={{
+                          marginLeft: "50px",
+                          color: "white",
+                          fontSize: "50px",
+                          fontFamily: "Kanit",
+                          marginBottom: "10px",
+                          marginRight: "-10px",
+                        }}
+                        size={52}
+                        src={`http://localhost:1337${userimage.profile_image?.url}`}
                       />
                     </Dropdown>
                     <Popover
@@ -363,7 +372,7 @@ const AllTour = () => {
                       onVisibleChange={setSearchPopoverVisible}
                     >
                       <SearchOutlined
-                        style={{ fontSize: "25px", marginLeft: "8px" }}
+                        style={{ fontSize: "25px", marginLeft: "30px" }}
                       />
                     </Popover>
                   </div>
