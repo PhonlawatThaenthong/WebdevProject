@@ -190,9 +190,8 @@ const HomeForm = () => {
   };
 
   const handleScrollToElement = () => {
-    const element = document.getElementById(scroll);
-    console.log(element);
-    // element.scrollIntoView({ behavior: 'smooth' });
+    const element = document.getElementById('scroll');
+    element.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -292,7 +291,7 @@ const HomeForm = () => {
         ) : (
           <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
         )}
-        <span
+        <span id="scroll"
           style={{ fontFamily: 'Kanit', textAlign: "center", fontWeight: "bold", fontSize: isSmallScreen ? "25px" : "45px" }}
 
         >
@@ -303,7 +302,7 @@ const HomeForm = () => {
 
           โปรแกรมทัวร์แนะนำ
         </span>
-        <RecommendTour id={scroll} />
+        <RecommendTour />
       </Layout>
       <Button
         type="primary"
