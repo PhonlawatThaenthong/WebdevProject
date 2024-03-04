@@ -237,26 +237,6 @@ const RegisterForm = () => {
                             >
                                 <Input />
                             </Form.Item>
-                            <Upload
-                                name="image"
-                                listType="picture-card"
-                                showUploadList={false}
-                                action="http://localhost:1337/api/upload"
-                                beforeUpload={(file) => {
-                                    setImageFile(file);
-                                    return false;
-                                }}
-                                onChange={handleImageUpload}
-                            >
-                                {imageFile ? (
-                                    <img src={URL.createObjectURL(imageFile)} alt="Tour" style={{ width: "100%" }} />
-                                ) : (
-                                    <div>
-                                        <UploadOutlined />
-                                        <div style={{ fontFamily: 'Kanit', marginTop: 8 }}>Upload</div>
-                                    </div>
-                                )}
-                            </Upload>
                             <Form.Item>
                                 <Button style={{ fontFamily: 'Kanit' }} type="primary" htmlType="submit" disabled={!submitEnabled}>
                                     ยืนยัน
