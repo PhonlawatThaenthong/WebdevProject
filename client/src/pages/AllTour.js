@@ -15,7 +15,7 @@ import {
   Menu,
   Dropdown,
   Popover,
-   Avatar
+  Avatar
 } from "antd";
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
@@ -61,15 +61,11 @@ const AllTour = () => {
     }
   };
 
-
   useEffect(() => {
     getAllData();
-    if (jwt == null) {} else {roleChecker()}
+    if (jwt == null) { } else { roleChecker() }
     getImage();
   }, []);
- 
- 
-  
 
   const handleHeaderClick = () => {
     navigate("/login");
@@ -144,7 +140,7 @@ const AllTour = () => {
           >
           </Menu.Item>
           <Menu.Item key="profile" onClick={() => navigate("/profile")}>
-          {username && `โปรไฟล์ของ, ${username}`}
+            {username && `โปรไฟล์ของ, ${username}`}
           </Menu.Item>
           <Menu.Item
             onClick={() => {
@@ -152,7 +148,7 @@ const AllTour = () => {
             }}
             key="History"
           >ทัวร์ของคุณ</Menu.Item>
-           <Menu.Item key="logout" onClick={() => handleLogout()}>
+          <Menu.Item key="logout" onClick={() => handleLogout()}>
             ออกจากระบบ
           </Menu.Item>
         </>
@@ -160,8 +156,8 @@ const AllTour = () => {
         <></>
       )}
     </Menu>
-  );    
-  
+  );
+
 
   const searchPopoverContent = (
     <div>
@@ -372,24 +368,24 @@ const AllTour = () => {
                     </Link>
                     {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
                     <Dropdown placement="bottomLeft"
-                  overlay={menu2}
-                  trigger={["click"]}
-                 
-                 
-                >
-                <Avatar
-                  style={{
-                    marginLeft: "50px",
-                    color: "white",
-                    fontSize: "50px",
-                    fontFamily: 'Kanit',
-                    marginBottom: "10px",
-                    marginRight: "-70px"
-                  }}
-                  size={52}
-                  src={`http://localhost:1337${userimage.profile_image?.url}`}
-                />
-                 </Dropdown>
+                      overlay={menu2}
+                      trigger={["click"]}
+
+
+                    >
+                      <Avatar
+                        style={{
+                          marginLeft: "50px",
+                          color: "white",
+                          fontSize: "50px",
+                          fontFamily: 'Kanit',
+                          marginBottom: "10px",
+                          marginRight: "-70px"
+                        }}
+                        size={52}
+                        src={`http://localhost:1337${userimage.profile_image?.url}`}
+                      />
+                    </Dropdown>
                   </>
                 )}
               </Col>
