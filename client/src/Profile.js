@@ -21,7 +21,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import useLocalState from "./localStorage.js";
 import { useMediaQuery } from "react-responsive";
-import { MenuOutlined, SearchOutlined, UserOutlined,UnorderedListOutlined } from "@ant-design/icons";
+import { MenuOutlined, SearchOutlined, UserOutlined, UnorderedListOutlined } from "@ant-design/icons";
 import WebFont from 'webfontloader';
 
 import Boy from "./Image/boy.png"
@@ -122,7 +122,7 @@ const ProfileForm = () => {
                             {username && `สวัสดีคุณ, ${username}`}
                         </span>
                     </Menu.Item>
-                   
+
                     <Menu.Item
                         onClick={() => {
                             navigate("/history");
@@ -165,7 +165,7 @@ const ProfileForm = () => {
                         key="History"
                     >ทัวร์ของคุณ</Menu.Item>
                     <Menu.Item key="back" onClick={() => navigate("/member")}>
-                       กลับสู่หน้าหลัก
+                        กลับสู่หน้าหลัก
                     </Menu.Item>
                     <Menu.Item key="logout" onClick={() => handleLogout()}>
                         ออกจากระบบ
@@ -191,7 +191,7 @@ const ProfileForm = () => {
                     <Menu.Item key="profile" onClick={() => navigate("/profile")}>
                         {username && `โปรไฟล์ของ, ${username}`}
                     </Menu.Item>
-                    
+
                     <Menu.Item
                         onClick={() => {
                             navigate("/confirm");
@@ -199,7 +199,7 @@ const ProfileForm = () => {
                         key="History"
                     >สถานะการจองของลูกค้า</Menu.Item>
                     <Menu.Item key="back" onClick={() => navigate("/admin")}>
-                       กลับสู่หน้าหลัก
+                        กลับสู่หน้าหลัก
                     </Menu.Item>
                     <Menu.Item key="logout" onClick={() => handleLogout()}>
                         ออกจากระบบ
@@ -297,7 +297,7 @@ const ProfileForm = () => {
     const layoutStyle = {
         borderRadius: 0,
         overflow: "hidden",
-        backgroundColor: "#EEEEEE",
+        backgroundColor: "#F5F5F5",
     };
 
     const blueTextStyle = {
@@ -326,8 +326,8 @@ const ProfileForm = () => {
             </Helmet>
             {contextHolder}
             <Layout style={layoutStyle}>
-            <Header style={headerStyle}>
-                   
+                <Header style={headerStyle}>
+
                     <Col onClick={isSmallScreen ? handleHeaderClick : undefined} style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
                         <span style={blueTextStyle}>H</span>
                         <span style={NormalTextStyle}>AT</span>
@@ -338,7 +338,7 @@ const ProfileForm = () => {
                         <span style={blueTextStyle}>J</span>
                         <span style={NormalTextStyle}>ourney</span>
                     </Col>
-                        <Col span={isSmallScreen ? 12 : 22}>
+                    <Col span={isSmallScreen ? 12 : 22}>
                         {isSmallScreen ? (
                             <div style={{ textAlign: isSmallScreen ? 'right' : 'left' }}>
                                 <Dropdown overlay={menu} trigger={['click']} visible={menuVisible} onVisibleChange={setMenuVisible}>
@@ -347,44 +347,46 @@ const ProfileForm = () => {
 
                             </div>
                         ) : (
-                                <>
-                                    <Link
-                                        onClick={() => {
-                                            navigate("/member");
-                                        }}
+                            <div style={{ textAlign: 'right' }}> {/* Align content to the right */}
+                                <Link
+                                    onClick={() => {
+                                        navigate("/member");
+                                    }}
+                                    style={{
+                                        marginRight: "50px",
+                                        color: "white",
+                                        fontSize: isSmallScreen ? "14px" : "18px",
+                                        width: "300px",
+                                        fontFamily: 'Kanit'
+                                    }}
+                                >
+                                    สวัสดีคุณ {username}
+                                </Link>
+                                <Dropdown
+                                    placement="bottomLeft"
+                                    trigger={["click"]}
+                                    overlay={rolename === "Member" ? menu2 : menu3}
+                                >
+                                    <Avatar
                                         style={{
-                                            marginRight: "50px",
+                                            marginLeft: "50px",
                                             color: "white",
-                                            fontSize: isSmallScreen ? "14px" : "18px",
-                                            width: "300px",
-                                            fontFamily: 'Kanit'
+                                            fontSize: "50px",
+                                            fontFamily: 'Kanit',
+                                            marginBottom: "10px",
+                                            marginRight: "200px"
                                         }}
-                                    >
-                                        สวัสดีคุณ {username}
-                                    </Link>
-                                    <Dropdown
-                                        placement="bottomLeft"
-                                        trigger={["click"]}
-                                        overlay={rolename === "Member" ? menu2 : menu3}
-                                    >
-                                        <Avatar
-                                            style={{
-                                                marginLeft: "50px",
-                                                color: "white",
-                                                fontSize: "50px",
-                                                fontFamily: 'Kanit',
-                                                marginBottom: "10px",
-                                                marginRight: "-70px"
-                                            }}
-                                            size={52}
-                                            src={`http://localhost:1337${userimage.profile_image?.url}`}
-                                        />
-                                    </Dropdown>
-                                </>
-                            )}
-                        </Col>
-                        
-                 
+                                        size={52}
+                                        src={`http://localhost:1337${userimage.profile_image?.url}`}
+                                    />
+                                </Dropdown>
+                            </div>
+                        )}
+
+
+                    </Col>
+
+
 
                 </Header>
                 <Layout>

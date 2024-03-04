@@ -81,12 +81,6 @@
       "allowedTypes": [
         "images"
       ]
-    },
-    "profile": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::profile.profile",
-      "inversedBy": "users_permissions_user"
     }
   }
 }
