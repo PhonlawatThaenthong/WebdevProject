@@ -20,7 +20,7 @@ import {
   message,
 } from "antd";
 import LoadingIcon from "../Navbar/LoadingIcon.js";
-import WebFont from 'webfontloader';
+import WebFont from "webfontloader";
 
 const { TextArea } = Input;
 
@@ -36,19 +36,27 @@ const Tour = ({ data, filterData }) => {
 
   const [edit_tour, setedit_tour] = useState({});
 
+  const handleTourScheduleClick = (tourId) => {
+    navigate(`/tour-schedule/${tourId}`);
+  };
+
   const handleOpenModal = async (id) => {
-    const res = await axios.get(`http://localhost:1337/api/tours/${id}?populate=*`);
+    const res = await axios.get(
+      `http://localhost:1337/api/tours/${id}?populate=*`
+    );
     setedit_tour(res.data.data);
     setSelectedTourId(id);
-    setIsModalOpen(true)
+    setIsModalOpen(true);
   };
 
   const handleforce = async () => {
     try {
-      const res = await axios.get(`http://localhost:1337/api/tours/1?populate=*`);
+      const res = await axios.get(
+        `http://localhost:1337/api/tours/1?populate=*`
+      );
       setedit_tour(res.data.data);
     } catch (error) {
-      console.log()
+      console.log();
     }
   };
 
@@ -64,8 +72,18 @@ const Tour = ({ data, filterData }) => {
   const getDate = (time) => {
     const dateObj = new Date(time);
     const months = [
-      "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
     ];
 
     const year = dateObj.getFullYear();
@@ -75,8 +93,11 @@ const Tour = ({ data, filterData }) => {
     const minutes = String(dateObj.getMinutes()).padStart(2, "0");
     const seconds = String(dateObj.getSeconds()).padStart(2, "0");
 
-    if ((`${date} ${month} ${year} ${hours}:${minutes}:${seconds}`) == "1 January 1970 07:00:00") {
-      return '-'
+    if (
+      `${date} ${month} ${year} ${hours}:${minutes}:${seconds}` ==
+      "1 January 1970 07:00:00"
+    ) {
+      return "-";
     }
     return `${date} ${month} ${year} ${hours}:${minutes}:${seconds}`;
   };
@@ -91,7 +112,7 @@ const Tour = ({ data, filterData }) => {
           price: edit_tour.attributes.price,
           description: edit_tour.attributes.description,
           user_max: edit_tour.attributes.user_max,
-        }
+        },
       };
 
       const response = await axios.put(
@@ -100,7 +121,7 @@ const Tour = ({ data, filterData }) => {
         {
           headers: {
             Authorization: `Bearer ${jwt}`,
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
@@ -121,7 +142,10 @@ const Tour = ({ data, filterData }) => {
       hide();
       if (error.response) {
         console.error("Server Error:", error.response.data);
-        message.error("เกิดข้อผิดพลาดจากเซิร์ฟเวอร์: " + error.response.data.message, 1);
+        message.error(
+          "เกิดข้อผิดพลาดจากเซิร์ฟเวอร์: " + error.response.data.message,
+          1
+        );
       } else if (error.request) {
         console.error("Request Error:", error.request);
         message.error("ไม่ได้รับการตอบกลับจากเซิร์ฟเวอร์", 1);
@@ -160,14 +184,11 @@ const Tour = ({ data, filterData }) => {
           var tmp_max = res_tour.data.data.attributes.user_max;
 
           if (tmp_amount >= tmp_max) {
-
             Modal.error({
               title: "Error",
               content: "ขออภัยทัวร์นี้เต็มแล้ว",
             });
-
           } else {
-
             const res = await axios.post(
               `http://localhost:1337/api/tours/${selectedTourId}/complete`,
               {
@@ -182,9 +203,9 @@ const Tour = ({ data, filterData }) => {
 
             //
 
-            let temp_userID = ""
-            let temp_selectedTour = []
-            let temp_date = new Date()
+            let temp_userID = "";
+            let temp_selectedTour = [];
+            let temp_date = new Date();
 
             try {
               axios.defaults.headers.common = {
@@ -201,7 +222,6 @@ const Tour = ({ data, filterData }) => {
               );
 
               temp_selectedTour = tourResult.data.data;
-
             } catch (error) {
               console.error(error);
             }
@@ -210,30 +230,35 @@ const Tour = ({ data, filterData }) => {
               tour_id: selectedTourId,
               user_id: temp_userID,
               reserve_amount: numberOfPeople,
-              total_price: (temp_selectedTour.attributes.price * numberOfPeople),
+              total_price: temp_selectedTour.attributes.price * numberOfPeople,
               reserve_date: temp_date,
             };
 
             const formData = new FormData();
-            formData.append('data', JSON.stringify(addNewTour));
+            formData.append("data", JSON.stringify(addNewTour));
 
-            const response = await axios.post('http://localhost:1337/api/reserves', formData, {
-              headers: {
-                'Content-Type': 'multipart/form-data'
+            const response = await axios.post(
+              "http://localhost:1337/api/reserves",
+              formData,
+              {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
               }
-            });
+            );
 
             //
 
-            navigate('/payments')
-
+            navigate("/payments");
           }
         };
         Modal.confirm({
           title: "ยืนยันการจองทัวร์",
           content: (
             <div>
-              <p style={{ fontFamily: 'Kanit' }}>กรุณายืนยันการจองทัวร์และดำเนินการชำระเงิน</p>
+              <p style={{ fontFamily: "Kanit" }}>
+                กรุณายืนยันการจองทัวร์และดำเนินการชำระเงิน
+              </p>
             </div>
           ),
           okText: "ยืนยัน",
@@ -241,7 +266,7 @@ const Tour = ({ data, filterData }) => {
           onOk: () => {
             handleBook();
           },
-          onCancel: () => { },
+          onCancel: () => {},
         });
       } catch (error) {
         console.error("error selecting tour", error);
@@ -251,7 +276,7 @@ const Tour = ({ data, filterData }) => {
         title: "ท่านยังไม่ได้ล็อกอิน",
         content: (
           <div>
-            <p style={{ fontFamily: 'Kanit' }}>กรุณาทำการล็อกอินก่อนจองทัวร์</p>
+            <p style={{ fontFamily: "Kanit" }}>กรุณาทำการล็อกอินก่อนจองทัวร์</p>
           </div>
         ),
         okText: "ล็อกอิน",
@@ -259,7 +284,7 @@ const Tour = ({ data, filterData }) => {
         onOk: () => {
           navigate("/login");
         },
-        onCancel: () => { },
+        onCancel: () => {},
       });
     }
   };
@@ -281,16 +306,15 @@ const Tour = ({ data, filterData }) => {
   const toursToDisplay = filterData.length > 0 ? filterData : data;
 
   useEffect(() => {
-    handleforce()
+    handleforce();
     WebFont.load({
       google: {
-        families: ['Sriracha', 'Kanit']
-      }
+        families: ["Sriracha", "Kanit"],
+      },
     });
   }, []);
 
   return (
-
     <div
       style={{
         display: isSmallScreen ? "grid" : "flex",
@@ -311,22 +335,43 @@ const Tour = ({ data, filterData }) => {
       ) : (
         <Row gutter={[16, 16]}>
           {toursToDisplay.map(({ id, attributes }) => (
-            <Col key={id} xs={24} sm={12} md={8} lg={8} style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
-              <Card hoverable key={id} style={{ fontFamily: 'Kanit', width: 450, margin: 20, marginTop: 50 }}>
+            <Col
+              key={id}
+              xs={24}
+              sm={12}
+              md={8}
+              lg={8}
+              style={{
+                display: "flex",
+                width: isSmallScreen ? "100%" : "auto",
+              }}
+            >
+              <Card
+                hoverable
+                key={id}
+                style={{
+                  fontFamily: "Kanit",
+                  width: 450,
+                  margin: 20,
+                  marginTop: 50,
+                }}
+              >
                 {currentPage === "/admin" ? (
                   <Modal
                     title={
                       <Input
                         value={edit_tour.attributes.tour_name}
-                        onChange={(e) => setedit_tour(prevState => ({
-                          ...prevState,
-                          attributes: {
-                            ...prevState.attributes,
-                            tour_name: e.target.value
-                          }
-                        }))}
+                        onChange={(e) =>
+                          setedit_tour((prevState) => ({
+                            ...prevState,
+                            attributes: {
+                              ...prevState.attributes,
+                              tour_name: e.target.value,
+                            },
+                          }))
+                        }
                         style={{
-                          width: "80%"
+                          width: "80%",
                         }}
                       />
                     }
@@ -379,8 +424,7 @@ const Tour = ({ data, filterData }) => {
                       />
                     </div>
                     {/* Admin Modal*/}
-                    <br />
-                    * Tour ID: /api/tours/{id}
+                    <br />* Tour ID: /api/tours/{id}
                     <br />
                     สถานะ:{" "}
                     <span style={{ color: getStatusColor(attributes.status) }}>
@@ -393,45 +437,52 @@ const Tour = ({ data, filterData }) => {
                           attributes.user_max +
                           ")"}
                       </b>
-                    </span >
+                    </span>
                     <br />
                     จำกัดจำนวน:
                     <Input
                       type="number"
                       value={edit_tour.attributes.user_max}
-                      onChange={(e) => setedit_tour(prevState => ({
-                        ...prevState,
-                        attributes: {
-                          ...prevState.attributes,
-                          user_max: Number(e.target.value)
-                        }
-                      }))}
+                      onChange={(e) =>
+                        setedit_tour((prevState) => ({
+                          ...prevState,
+                          attributes: {
+                            ...prevState.attributes,
+                            user_max: Number(e.target.value),
+                          },
+                        }))
+                      }
                     />
                     <br />
                     ราคา:
                     <Input
                       type="number"
                       value={edit_tour.attributes.price}
-                      onChange={(e) => setedit_tour(prevState => ({
-                        ...prevState,
-                        attributes: {
-                          ...prevState.attributes,
-                          price: Number(e.target.value)
-                        }
-                      }))}
+                      onChange={(e) =>
+                        setedit_tour((prevState) => ({
+                          ...prevState,
+                          attributes: {
+                            ...prevState.attributes,
+                            price: Number(e.target.value),
+                          },
+                        }))
+                      }
                     />
                     <br />
                     ระยะเวลา:
-                    <br />รายละเอียด:
+                    <br />
+                    รายละเอียด:
                     <TextArea
                       value={edit_tour.attributes.description}
-                      onChange={(e) => setedit_tour(prevState => ({
-                        ...prevState,
-                        attributes: {
-                          ...prevState.attributes,
-                          description: e.target.value
-                        }
-                      }))}
+                      onChange={(e) =>
+                        setedit_tour((prevState) => ({
+                          ...prevState,
+                          attributes: {
+                            ...prevState.attributes,
+                            description: e.target.value,
+                          },
+                        }))
+                      }
                       autoSize={{ minRows: 3, maxRows: 8 }}
                     />
                     <br></br>
@@ -439,7 +490,7 @@ const Tour = ({ data, filterData }) => {
                 ) : (
                   // VVVVVVVV THIS IS NON ADMIN MODAL PLEASE EDIT THIS ONLY /////////////////////////////////////////////////////
                   <Modal
-                    style={{ fontFamily: 'Kanit' }}
+                    style={{ fontFamily: "Kanit" }}
                     title={attributes.tour_name}
                     open={isModalOpen && selectedTourId === id}
                     onCancel={() => {
@@ -454,7 +505,18 @@ const Tour = ({ data, filterData }) => {
                       >
                         ปิด
                       </Button>,
-                      <Button key="submit" type="primary" onClick={handleSelect}>
+                      <Button
+                        key="submit"
+                        type="default"
+                        onClick={() => handleTourScheduleClick(id)} // ส่ง id ของทัวร์ไปยังฟังก์ชัน
+                      >
+                        ตารางท่องเที่ยว
+                      </Button>,
+                      <Button
+                        key="submit"
+                        type="primary"
+                        onClick={handleSelect}
+                      >
                         จองทัวร์
                       </Button>,
                     ]}
@@ -499,9 +561,10 @@ const Tour = ({ data, filterData }) => {
                       type="number"
                       min={1}
                       value={numberOfPeople}
-                      onChange={(e) => setNumberOfPeople(parseInt(e.target.value, 10))}
+                      onChange={(e) =>
+                        setNumberOfPeople(parseInt(e.target.value, 10))
+                      }
                     />
-
                   </Modal>
                 )}
                 <div style={{ textAlign: "center" }}>
@@ -522,7 +585,11 @@ const Tour = ({ data, filterData }) => {
                   <b>{getStatus(attributes.status)}</b>
                   <b>
                     {" "}
-                    {"(" + attributes.user_amount + "/" + attributes.user_max + ")"}
+                    {"(" +
+                      attributes.user_amount +
+                      "/" +
+                      attributes.user_max +
+                      ")"}
                   </b>
                 </span>
                 <br />
@@ -536,7 +603,7 @@ const Tour = ({ data, filterData }) => {
                     type="primary"
                     onClick={() => handleOpenModal(id)}
                     style={{
-                      fontFamily: 'Kanit',
+                      fontFamily: "Kanit",
                       display: "block",
                       margin: "0 auto",
                       backgroundColor: "#DE3163",
@@ -549,7 +616,11 @@ const Tour = ({ data, filterData }) => {
                   <Button
                     type="primary"
                     onClick={() => handleOpenModal(id)}
-                    style={{ fontFamily: 'Kanit', display: "block", margin: "0 auto" }}
+                    style={{
+                      fontFamily: "Kanit",
+                      display: "block",
+                      margin: "0 auto",
+                    }}
                   >
                     ดูเพิ่มเติม
                   </Button>
@@ -560,7 +631,6 @@ const Tour = ({ data, filterData }) => {
         </Row>
       )}
     </div>
-
   );
 };
 
