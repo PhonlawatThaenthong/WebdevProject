@@ -21,7 +21,7 @@ import axios from 'axios';
 import useLocalState from './localStorage.js';
 import CardHistory from "./Tour/getHistory.js";
 import { useMediaQuery } from "react-responsive";
-import { MenuOutlined, SearchOutlined, UserOutlined,UnorderedListOutlined } from '@ant-design/icons';
+import { MenuOutlined, SearchOutlined, UserOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import WebFont from 'webfontloader';
 
 
@@ -121,7 +121,7 @@ const ReserveForm = () => {
                         }}
                         key="back"
                     >กลับสู่หน้าหลัก</Menu.Item>
-                     <Menu.Item key="logout" onClick={() => handleLogout()}>
+                    <Menu.Item key="logout" onClick={() => handleLogout()}>
                         ออกจากระบบ
                     </Menu.Item>
                 </>
@@ -144,9 +144,9 @@ const ReserveForm = () => {
                     <Menu.Item key="profile" onClick={() => navigate("/profile")}>
                         {username && `โปรไฟล์ของ, ${username}`}
                     </Menu.Item>
-                    
+
                     <Menu.Item key="back" onClick={() => navigate("/member")}>
-                       กลับสู่หน้าหลัก
+                        กลับสู่หน้าหลัก
                     </Menu.Item>
                     <Menu.Item key="logout" onClick={() => handleLogout()}>
                         ออกจากระบบ
@@ -217,7 +217,18 @@ const ReserveForm = () => {
                         {isSmallScreen ? (
                             <div style={{ textAlign: isSmallScreen ? 'right' : 'left' }}>
                                 <Dropdown overlay={menu} trigger={['click']} visible={menuVisible} onVisibleChange={setMenuVisible}>
-                                    <UnorderedListOutlined style={{ fontSize: '25px', marginRight: '8px' }} />
+                                    <Avatar
+                                        style={{
+                                            marginLeft: "50px",
+                                            color: "white",
+                                            fontSize: "50px",
+                                            fontFamily: "Kanit",
+                                            marginBottom: "10px",
+                                            marginRight: "-10px",
+                                        }}
+                                        size={52}
+                                        src={`http://localhost:1337${userimage.profile_image?.url}`}
+                                    />
                                 </Dropdown>
 
                             </div>

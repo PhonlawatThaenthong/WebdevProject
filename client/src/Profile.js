@@ -400,7 +400,18 @@ const ProfileForm = () => {
                         {isSmallScreen ? (
                             <div style={{ textAlign: isSmallScreen ? 'right' : 'left' }}>
                                 <Dropdown overlay={menu} trigger={['click']} visible={menuVisible} onVisibleChange={setMenuVisible}>
-                                    <UnorderedListOutlined style={{ fontSize: '25px', marginRight: '8px' }} />
+                                    <Avatar
+                                        style={{
+                                            marginLeft: "50px",
+                                            color: "white",
+                                            fontSize: "50px",
+                                            fontFamily: "Kanit",
+                                            marginBottom: "10px",
+                                            marginRight: "-10px",
+                                        }}
+                                        size={52}
+                                        src={`http://localhost:1337${userimage.profile_image?.url}`}
+                                    />
                                 </Dropdown>
 
                             </div>
