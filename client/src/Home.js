@@ -290,6 +290,10 @@ const HomeForm = () => {
           style={{ fontFamily: 'Kanit', textAlign: "center", fontWeight: "bold", fontSize: isSmallScreen ? "25px" : "45px" }}
 
         >
+          <div className="scroll_button">
+            <button>Scroll to Element</button>
+          </div>
+
           โปรแกรมทัวร์แนะนำ
         </span>
         <RecommendTour />
