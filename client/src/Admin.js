@@ -502,7 +502,7 @@ const AdminForm = () => {
               <div className="scroll_button">
                 <button onClick={handleScrollToElement} className="circle_button"></button>
               </div>
-              โปรแกรมทัวร์แนะนำ
+              
             </h2>
           )}
 
