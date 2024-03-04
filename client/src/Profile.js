@@ -13,7 +13,7 @@ import {
     Space,
     Menu,
     Dropdown,
-    Popover, Avatar, Descriptions
+    Popover, Avatar, Descriptions, Upload
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +23,7 @@ import useLocalState from "./localStorage.js";
 import { useMediaQuery } from "react-responsive";
 import { MenuOutlined, SearchOutlined, UserOutlined, UnorderedListOutlined } from "@ant-design/icons";
 import WebFont from 'webfontloader';
+import { UploadOutlined } from "@ant-design/icons";
 
 import Boy from "./Image/boy.png"
 import Girl from "./Image/girl.png"
@@ -46,6 +47,8 @@ const ProfileForm = () => {
     const [editingEmail, setEditingEmail] = useState(false);
     const [editingPhoneNumber, setEditingPhoneNumber] = useState(false);
     const [userimage, setUserImage] = useState({});
+    const [imageFile, setImageFile] = useState(null);
+
 
     const getData = async () => {
         try {
@@ -61,6 +64,61 @@ const ProfileForm = () => {
             setUserImage(res.data);
         } catch (error) {
             console.error("การแสดงข้อมูล user ผิดพลาด", error);
+        }
+    };
+
+    const handleImageUpload = (info) => {
+        if (info.file.status === "done") {
+            message.success(`${info.file.name} file uploaded successfully`);
+        } else if (info.file.status === "error") {
+            message.error(`${info.file.name} file upload failed.`);
+        }
+    };
+
+    const handleDeleteImage = async () => {
+        try {
+            const formData = new FormData();
+            formData.append('deleteProfileImage', true);
+            await axios.delete(`http://localhost:1337/api/users/me`, {
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                    'Content-Type': 'multipart/form-data',
+                },
+                data: formData,
+            });
+            setUserImage({});
+            message.success("Profile image deleted successfully!", 1);
+        } catch (error) {
+            console.error("Error deleting profile image:", error);
+            message.error("Failed to delete profile image. Please try again.", 1);
+        }
+    };
+
+
+    const handleImageChange = async () => {
+        const image = imageFile;
+        try {
+            const response = await axios.get(`http://localhost:1337/api/users/me`)
+
+            if (userimage) { await handleDeleteImage(); }
+
+            if (image) {
+                const formData = new FormData();
+                formData.append("field", "profile_image");
+                formData.append("ref", "plugin::users-permissions.user");
+                formData.append("refId", userData.id);
+                formData.append("files", image);
+
+                axios.post(`http://localhost:1337/api/upload`, formData)
+                    .then((response) => {
+                        console.log(response);
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+            }
+        } catch (error) {
+            console.error("Error uploading image:", error);
         }
     };
 
@@ -438,7 +496,7 @@ const ProfileForm = () => {
                                             const inputPhoneNumber = e.target.value;
                                             const formattedPhoneNumber = inputPhoneNumber.slice(0, 10);
                                             setUserData({ ...userData, phone_number: formattedPhoneNumber });
-                                        }}                                        
+                                        }}
                                     />
                                 ) : (
                                     userData.phone_number
@@ -454,6 +512,30 @@ const ProfileForm = () => {
                             <Descriptions.Item label="Role">{rolename}</Descriptions.Item>
                             <Descriptions.Item label="Password">********</Descriptions.Item>
                         </Descriptions>
+                        <Upload
+                            name="image"
+                            listType="picture-card"
+                            showUploadList={false}
+                            action="http://localhost:1337/api/upload"
+                            beforeUpload={(file) => {
+                                setImageFile(file);
+                                return false;
+                            }}
+                            onChange={handleImageUpload}
+                        >
+                            {imageFile ? (
+                                <img src={URL.createObjectURL(imageFile)} alt="Tour" style={{ width: "100%" }} />
+                            ) : (
+                                <div>
+                                    <UploadOutlined />
+                                    <div style={{ fontFamily: 'Kanit', marginTop: 8 }}>Upload</div>
+                                </div>
+                            )}
+                        </Upload>
+                        <Button onClick={handleImageChange} type="primary" style={{
+                            marginTop: '16px', fontFamily: 'Kanit', backgroundColor: 'black',
+                            borderColor: 'green', marginRight: '16px'
+                        }}> Upload </Button>
                         <Button type="primary" onClick={handleSaveChanges} style={{
                             marginTop: '16px', fontFamily: 'Kanit', backgroundColor: 'green',
                             borderColor: 'green',
