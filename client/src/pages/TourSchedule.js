@@ -4,30 +4,18 @@ import axios from "axios";
 import { Table } from "antd";
 import useLocalState from "../localStorage.js";
 import { MenuOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
-import Logo from "../Image/logo.png";
-import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import SearchBar from "../Navbar/SearchBar";
 import { useMediaQuery } from "react-responsive";
-import WebFont from 'webfontloader';
+import WebFont from "webfontloader";
 import {
-  Form,
-  Input,
   Button,
-  Image,
-  message,
-  Modal,
-  Row,
   Col,
   Layout,
-  Flex,
-  Space,
   Menu,
   Dropdown,
   Popover,
   Avatar,
-  Cascader
 } from "antd";
 
 const TourSchedule = () => {
@@ -43,8 +31,8 @@ const TourSchedule = () => {
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ['Kanit']
-      }
+        families: ["Kanit"],
+      },
     });
     const getTourSchedule = async () => {
       try {
@@ -56,34 +44,6 @@ const TourSchedule = () => {
         console.error("Error fetching tour data:", error);
       }
     };
-
-    const getImage = async () => {
-      try {
-        const res = await axios.get("http://localhost:1337/api/users/me?populate=*");
-        setUserImage(res.data);
-      } catch (error) {
-        console.error("การแสดงข้อมูล user ผิดพลาด", error);
-      }
-    };
-
-    const roleChecker = async () => {
-      try {
-        axios.defaults.headers.common = {
-          Authorization: `Bearer ${jwt}`,
-        };
-        const userResult = await axios.get(
-          "http://localhost:1337/api/users/me?populate=role"
-        );
-
-        setUsername(userResult.data.username);
-
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    roleChecker()
-    getImage()
 
     if (tourId) {
       getTourSchedule();
@@ -127,27 +87,6 @@ const TourSchedule = () => {
     fontWeight: "bold",
     fontSize: "45px",
     width: isSmallScreen ? "100%" : "auto",
-  };
-
-  const headerbottom = {
-    textAlign: "center",
-    color: "#fff",
-    height: 60,
-    paddingInline: "center",
-    lineHeight: "120x",
-    backgroundColor: "#1C3953",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontWeight: "bold",
-    fontSize: "45px",
-    width: "100%",
-  };
-
-  const layoutStyle = {
-    borderRadius: 0,
-    overflow: "hidden",
-    backgroundColor: "#F5F5F5",
   };
 
   const blueTextStyle = {
@@ -195,8 +134,7 @@ const TourSchedule = () => {
               navigate("/profile");
             }}
             key="username"
-          >
-          </Menu.Item>
+          ></Menu.Item>
           <Menu.Item key="profile" onClick={() => navigate("/profile")}>
             {username && `โปรไฟล์ของ, ${username}`}
           </Menu.Item>
@@ -205,7 +143,9 @@ const TourSchedule = () => {
               navigate("/history");
             }}
             key="History"
-          >ทัวร์ของคุณ</Menu.Item>
+          >
+            ทัวร์ของคุณ
+          </Menu.Item>
           <Menu.Item key="logout" onClick={() => handleLogout()}>
             ออกจากระบบ
           </Menu.Item>
@@ -218,8 +158,8 @@ const TourSchedule = () => {
 
   return (
     <div gap="middle" wrap="wrap" style={{ backgroundColor: "#F5F5F5" }}>
-      {jwt === null ?
-        (<Header
+      {jwt === null ? (
+        <Header
           style={{
             ...headerStyle,
             justifyContent: isSmallScreen ? "center" : "flex-start",
@@ -300,85 +240,86 @@ const TourSchedule = () => {
             )}
           </Col>
         </Header>
-        ) : (
-          <Header
-            style={{
-              ...headerStyle,
-              justifyContent: isSmallScreen ? "center" : "flex-start",
-            }}
-          >
-            <Col>
-              <span style={blueTextStyle}>H</span>
-              <span style={NormalTextStyle}>AT</span>
-              <span style={invtext}>.</span>
-              <span style={blueTextStyle}>Y</span>
-              <span style={NormalTextStyle}>AI</span>
-              <span style={invtext}>.</span>
-              <span style={blueTextStyle}>J</span>
-              <span style={NormalTextStyle}>ourney</span>
-            </Col>
-            <Col span={isSmallScreen ? 12 : 22}>
-              {isSmallScreen ? (
-                <div style={{ textAlign: isSmallScreen ? "right" : "left" }}>
-                  <Dropdown
-                    overlay={menu}
-                    trigger={["click"]}
-                    visible={menuVisible}
-                    onVisibleChange={setMenuVisible}
-                  >
-                    <UserOutlined
-                      style={{ fontSize: "25px", marginRight: "8px" }}
-                    />
-                  </Dropdown>
-                  <Popover
-                    content={searchPopoverContent}
-                    trigger="click"
-                    visible={searchPopoverVisible}
-                    onVisibleChange={setSearchPopoverVisible}
-                  >
-                    <SearchOutlined
-                      style={{ fontSize: "25px", marginLeft: "8px" }}
-                    />
-                  </Popover>
-                </div>
-              ) : (
-                <>
-                  <Link
-                    onClick={() => {
-                      navigate("/profile");
-                    }}
+      ) : (
+        <Header
+          style={{
+            ...headerStyle,
+            justifyContent: isSmallScreen ? "center" : "flex-start",
+          }}
+        >
+          <Col>
+            <span style={blueTextStyle}>H</span>
+            <span style={NormalTextStyle}>AT</span>
+            <span style={invtext}>.</span>
+            <span style={blueTextStyle}>Y</span>
+            <span style={NormalTextStyle}>AI</span>
+            <span style={invtext}>.</span>
+            <span style={blueTextStyle}>J</span>
+            <span style={NormalTextStyle}>ourney</span>
+          </Col>
+          <Col span={isSmallScreen ? 12 : 22}>
+            {isSmallScreen ? (
+              <div style={{ textAlign: isSmallScreen ? "right" : "left" }}>
+                <Dropdown
+                  overlay={menu}
+                  trigger={["click"]}
+                  visible={menuVisible}
+                  onVisibleChange={setMenuVisible}
+                >
+                  <UserOutlined
+                    style={{ fontSize: "25px", marginRight: "8px" }}
+                  />
+                </Dropdown>
+                <Popover
+                  content={searchPopoverContent}
+                  trigger="click"
+                  visible={searchPopoverVisible}
+                  onVisibleChange={setSearchPopoverVisible}
+                >
+                  <SearchOutlined
+                    style={{ fontSize: "25px", marginLeft: "8px" }}
+                  />
+                </Popover>
+              </div>
+            ) : (
+              <>
+                <Link
+                  onClick={() => {
+                    navigate("/profile");
+                  }}
+                  style={{
+                    marginRight: "50px",
+                    color: "white",
+                    fontSize: isSmallScreen ? "14px" : "18px",
+                    width: "300px",
+                    fontFamily: "Kanit",
+                  }}
+                >
+                  สวัสดีคุณ {username}
+                </Link>
+                <Dropdown
+                  placement="bottomLeft"
+                  overlay={menu2}
+                  trigger={["click"]}
+                >
+                  <Avatar
                     style={{
-                      marginRight: "50px",
+                      marginLeft: "50px",
                       color: "white",
-                      fontSize: isSmallScreen ? "14px" : "18px",
-                      width: "300px",
-                      fontFamily: 'Kanit'
+                      fontSize: "50px",
+                      fontFamily: "Kanit",
+                      marginBottom: "10px",
+                      marginRight: "-70px",
                     }}
-                  >
-                    สวัสดีคุณ {username}
-                  </Link>
-                  <Dropdown placement="bottomLeft"
-                    overlay={menu2}
-                    trigger={["click"]}
-                  >
-                    <Avatar
-                      style={{
-                        marginLeft: "50px",
-                        color: "white",
-                        fontSize: "50px",
-                        fontFamily: 'Kanit',
-                        marginBottom: "10px",
-                        marginRight: "-70px"
-                      }}
-                      size={52}
-                      src={`http://localhost:1337${userimage.profile_image?.url}`}
-                    />
-                  </Dropdown>
-                </>
-              )}
-            </Col>
-          </Header>
-        )}
+                    size={52}
+                    src={`http://localhost:1337${userimage.profile_image?.url}`}
+                  />
+                </Dropdown>
+              </>
+            )}
+          </Col>
+        </Header>
+      )}
       <h3>ตารางท่องเที่ยว: {tourSchedule.attributes.tour_name}</h3>
       <Table columns={columns} dataSource={dataSource} />
       <Button
@@ -387,7 +328,7 @@ const TourSchedule = () => {
         style={{
           backgroundColor: "#1C3953",
           borderColor: "#1C3953",
-          margin: "0 auto"
+          margin: "0 auto",
         }}
       >
         Back
