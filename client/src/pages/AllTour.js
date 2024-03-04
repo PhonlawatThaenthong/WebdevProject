@@ -53,12 +53,29 @@ const AllTour = () => {
       console.error("error fetching all data", error);
     }
   };
+
   const getImage = async () => {
     try {
       const res = await axios.get("http://localhost:1337/api/users/me?populate=*");
       setUserImage(res.data);
     } catch (error) {
       console.error("การแสดงข้อมูล user ผิดพลาด", error);
+    }
+  };
+
+  const roleChecker = async () => {
+    try {
+      axios.defaults.headers.common = {
+        Authorization: `Bearer ${jwt}`,
+      };
+      const userResult = await axios.get(
+        "http://localhost:1337/api/users/me?populate=role"
+      );
+
+      setUsername(userResult.data.username);
+
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -82,22 +99,6 @@ const AllTour = () => {
       })
       .then(() => message.success("เสร็จสิ้น!", 0.5))
       .then(() => (window.location.href = "/"));
-  };
-
-  const roleChecker = async () => {
-    try {
-      axios.defaults.headers.common = {
-        Authorization: `Bearer ${jwt}`,
-      };
-      const userResult = await axios.get(
-        "http://localhost:1337/api/users/me?populate=role"
-      );
-
-      setUsername(userResult.data.username);
-
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   const handleSearch = async (searchText) => {
