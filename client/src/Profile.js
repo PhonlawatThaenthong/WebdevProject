@@ -434,7 +434,11 @@ const ProfileForm = () => {
                                 {editingPhoneNumber ? (
                                     <Input
                                         value={userData.phone_number}
-                                        onChange={(e) => setUserData({ ...userData, phone_number: e.target.value })}
+                                        onChange={(e) => {
+                                            const inputPhoneNumber = e.target.value;
+                                            const formattedPhoneNumber = inputPhoneNumber.slice(0, 10);
+                                            setUserData({ ...userData, phone_number: formattedPhoneNumber });
+                                        }}                                        
                                     />
                                 ) : (
                                     userData.phone_number
