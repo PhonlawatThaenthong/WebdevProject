@@ -189,6 +189,12 @@ const HomeForm = () => {
     marginTop: isSmallScreen ? "150px" : "50px",
   };
 
+  const handleScrollToElement = () => {
+    const element = document.getElementById(scroll);
+    console.log(element);
+    // element.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <Flex gap="middle" wrap="wrap" style={{ backgroundColor: "#F5F5F5" }}>
       <Helmet>
@@ -291,13 +297,13 @@ const HomeForm = () => {
 
         >
           <div className="scroll_button">
-            {/* <button onClick={handleScrollToElement}>Scroll to Element</button> */}
-            <button>Scroll to Element</button>
+            <button onClick={handleScrollToElement}>Scroll to Element</button>
+            {/* <button>Scroll to Element</button> */}
           </div>
 
           โปรแกรมทัวร์แนะนำ
         </span>
-        <RecommendTour />
+        <RecommendTour id={scroll} />
       </Layout>
       <Button
         type="primary"
