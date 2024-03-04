@@ -227,12 +227,17 @@ const Tour = ({ data, filterData }) => {
               console.error(error);
             }
 
+            const user = await axios.get(
+              "http://localhost:1337/api/users/me"
+            );
+
             const addNewTour = {
               tour_id: selectedTourId,
               user_id: temp_userID,
               reserve_amount: numberOfPeople,
               total_price: temp_selectedTour.attributes.price * numberOfPeople,
               reserve_date: temp_date,
+              user_phone: user.data.phone_number,
             };
 
             const formData = new FormData();

@@ -41,6 +41,9 @@
     },
     "confirm_date": {
       "type": "datetime"
+    },
+    "user_phone": {
+      "type": "string"
     }
   }
 }

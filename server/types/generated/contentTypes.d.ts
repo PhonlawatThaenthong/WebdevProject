@@ -390,6 +390,7 @@ export interface ApiReserveReserve extends Schema.CollectionType {
     payment_method: Attribute.String;
     payment_status: Attribute.Boolean & Attribute.DefaultTo<false>;
     confirm_date: Attribute.DateTime;
+    user_phone: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
