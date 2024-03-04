@@ -46,17 +46,6 @@ const HomeForm = () => {
   const [searchPopoverVisible, setSearchPopoverVisible] = useState(false);
   const [username, setUsername] = useState("");
 
-  const handleSearch = async (searchText) => {
-    try {
-      const res = await axios.get(
-        `http://localhost:1337/api/tours?filters[tour_name][$containsi]=${searchText}&populate=*`
-      );
-      setFilterData(res.data.data);
-    } catch (error) {
-      console.error("error filter data", error);
-    }
-  };
-
   const getData = async () => {
     try {
       const res = await axios.get("http://localhost:1337/api/tours?populate=*");
@@ -122,11 +111,6 @@ const HomeForm = () => {
     </Menu>
   );
 
-  const searchPopoverContent = (
-    <div>
-      <SearchBar onSearch={handleSearch} />
-    </div>
-  );
   const handleHeaderClick = () => {
     navigate("/login");
   };
@@ -259,7 +243,6 @@ const HomeForm = () => {
               </div>
             ) : (
               <>
-                <SearchBar onSearch={handleSearch} />
                 <Link
                   to="/login"
                   style={{

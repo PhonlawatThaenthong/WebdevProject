@@ -14,7 +14,7 @@ import {
   Menu,
   Dropdown,
   Popover,
-  Avatar
+  Avatar,
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -22,8 +22,13 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import useLocalState from "./localStorage.js";
 import { useMediaQuery } from "react-responsive";
-import { MenuOutlined, SearchOutlined, UserOutlined, LogoutOutlined } from "@ant-design/icons";
-import WebFont from 'webfontloader';
+import {
+  MenuOutlined,
+  SearchOutlined,
+  UserOutlined,
+  LogoutOutlined,
+} from "@ant-design/icons";
+import WebFont from "webfontloader";
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
 import PromotionalSlider from "./PromotionalSlider";
@@ -46,25 +51,14 @@ const MemberForm = () => {
   const [searchPopoverVisible, setSearchPopoverVisible] = useState(false);
   const [userimage, setUserImage] = useState({});
 
-
   const getImage = async () => {
     try {
-      const res = await axios.get("http://localhost:1337/api/users/me?populate=*");
+      const res = await axios.get(
+        "http://localhost:1337/api/users/me?populate=*"
+      );
       setUserImage(res.data);
     } catch (error) {
       console.error("การแสดงข้อมูล user ผิดพลาด", error);
-    }
-  };
-
-
-  const handleSearch = async (searchText) => {
-    try {
-      const res = await axios.get(
-        `http://localhost:1337/api/tours?filters[tour_name][$containsi]=${searchText}&populate=*`
-      );
-      setFilterData(res.data.data);
-    } catch (error) {
-      console.error("การค้นหาผิดพลาด", error);
     }
   };
 
@@ -112,7 +106,7 @@ const MemberForm = () => {
             }}
             key="username"
           >
-            <span style={{ fontFamily: 'Kanit', color: "#48D3FF" }}>
+            <span style={{ fontFamily: "Kanit", color: "#48D3FF" }}>
               {username && `โปรไฟล์ของ, ${username}`}
             </span>
           </Menu.Item>
@@ -122,7 +116,9 @@ const MemberForm = () => {
               navigate("/history");
             }}
             key="History"
-          >ทัวร์ของคุณ </Menu.Item>
+          >
+            ทัวร์ของคุณ{" "}
+          </Menu.Item>
           <Menu.Item key="logout" onClick={() => handleLogout()}>
             ออกจากระบบ
           </Menu.Item>
@@ -141,8 +137,7 @@ const MemberForm = () => {
               navigate("/profile");
             }}
             key="username"
-          >
-          </Menu.Item>
+          ></Menu.Item>
           <Menu.Item key="profile" onClick={() => navigate("/profile")}>
             {username && `โปรไฟล์ของ, ${username}`}
           </Menu.Item>
@@ -151,7 +146,9 @@ const MemberForm = () => {
               navigate("/history");
             }}
             key="History"
-          >ทัวร์ของคุณ</Menu.Item>
+          >
+            ทัวร์ของคุณ
+          </Menu.Item>
           <Menu.Item key="logout" onClick={() => handleLogout()}>
             ออกจากระบบ
           </Menu.Item>
@@ -160,12 +157,6 @@ const MemberForm = () => {
         <></>
       )}
     </Menu>
-  );
-
-  const searchPopoverContent = (
-    <div>
-      <SearchBar onSearch={handleSearch} />
-    </div>
   );
 
   const handleLogout = async () => {
@@ -191,8 +182,8 @@ const MemberForm = () => {
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ['Sriracha', 'Chilanka']
-      }
+        families: ["Sriracha", "Chilanka"],
+      },
     });
   }, []);
 
@@ -254,8 +245,8 @@ const MemberForm = () => {
   };
 
   const handleScrollToElement = () => {
-    const element = document.getElementById('scroll');
-    element.scrollIntoView({ behavior: 'smooth' });
+    const element = document.getElementById("scroll");
+    element.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -269,7 +260,7 @@ const MemberForm = () => {
           style={{
             ...headerStyle,
             justifyContent: isSmallScreen ? "center" : "flex-start",
-            display: 'flex',
+            display: "flex",
           }}
         >
           <Col>
@@ -317,26 +308,24 @@ const MemberForm = () => {
                     color: "white",
                     fontSize: isSmallScreen ? "14px" : "18px",
                     width: "300px",
-                    fontFamily: 'Kanit'
+                    fontFamily: "Kanit",
                   }}
                 >
                   สวัสดีคุณ {username}
                 </Link>
-                {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
-                <Dropdown placement="bottomLeft"
+                <Dropdown
+                  placement="bottomLeft"
                   overlay={menu2}
                   trigger={["click"]}
-
-
                 >
                   <Avatar
                     style={{
                       marginLeft: "50px",
                       color: "white",
                       fontSize: "50px",
-                      fontFamily: 'Kanit',
+                      fontFamily: "Kanit",
                       marginBottom: "10px",
-                      marginRight: "-70px"
+                      marginRight: "-70px",
                     }}
                     size={52}
                     src={`http://localhost:1337${userimage.profile_image?.url}`}
@@ -349,15 +338,23 @@ const MemberForm = () => {
         {isSmallScreen ? (
           <></>
         ) : (
-          <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
+          <PromotionalSlider
+            images={promotionImages}
+            style={promotionalSliderStyle}
+          />
         )}
-        <h2 id="scroll"
-          style={{ fontFamily: 'Kanit', textAlign: "center", fontWeight: "bold", fontSize: isSmallScreen ? "25px" : "45px" }}
+        <h2
+          id="scroll"
+          style={{
+            fontFamily: "Kanit",
+            textAlign: "center",
+            fontWeight: "bold",
+            fontSize: isSmallScreen ? "25px" : "45px",
+          }}
         >
           <div className="scroll_button">
             <button onClick={handleScrollToElement}>Scroll to Element</button>
           </div>
-
           โปรแกรมทัวร์แนะนำ
         </h2>
         <RecommendTour />
@@ -369,7 +366,7 @@ const MemberForm = () => {
           backgroundColor: "#1C3953",
           borderColor: "#1C3953",
           margin: "0 auto",
-          fontFamily: 'Kanit'
+          fontFamily: "Kanit",
         }}
       >
         ดูโปรแกรมทั้งหมด
