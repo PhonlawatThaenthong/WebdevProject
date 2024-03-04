@@ -43,7 +43,7 @@ const TourSchedule = () => {
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ['Sriracha', 'Chilanka']
+        families: ['Kanit']
       }
     });
     const getTourSchedule = async () => {
@@ -65,7 +65,7 @@ const TourSchedule = () => {
         console.error("การแสดงข้อมูล user ผิดพลาด", error);
       }
     };
-  
+
     const roleChecker = async () => {
       try {
         axios.defaults.headers.common = {
@@ -74,9 +74,9 @@ const TourSchedule = () => {
         const userResult = await axios.get(
           "http://localhost:1337/api/users/me?populate=role"
         );
-  
+
         setUsername(userResult.data.username);
-  
+
       } catch (error) {
         console.error(error);
       }
@@ -217,7 +217,7 @@ const TourSchedule = () => {
   );
 
   return (
-    <div>
+    <div gap="middle" wrap="wrap" style={{ backgroundColor: "#F5F5F5" }}>
       {jwt === null ?
         (<Header
           style={{
@@ -381,6 +381,17 @@ const TourSchedule = () => {
         )}
       <h3>ตารางท่องเที่ยว: {tourSchedule.attributes.tour_name}</h3>
       <Table columns={columns} dataSource={dataSource} />
+      <Button
+        type="primary"
+        onClick={() => navigate("/")}
+        style={{
+          backgroundColor: "#1C3953",
+          borderColor: "#1C3953",
+          margin: "0 auto"
+        }}
+      >
+        Back
+      </Button>
     </div>
   );
 };
