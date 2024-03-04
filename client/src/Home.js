@@ -178,13 +178,6 @@ const HomeForm = () => {
     element.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const searchPopoverContent = (
-    <div>
-      <p>Popover Content Goes Here</p>
-      {/* Add your content for the popover */}
-    </div>
-  );
-
   return (
     <Flex gap="middle" wrap="wrap" style={{ backgroundColor: "#F5F5F5" }}>
       <Helmet>
@@ -237,16 +230,7 @@ const HomeForm = () => {
                     style={{ fontSize: "25px", marginRight: "8px" }}
                   />
                 </Dropdown>
-                <Popover
-                  content={searchPopoverContent}
-                  trigger="click"
-                  visible={searchPopoverVisible}
-                  onVisibleChange={setSearchPopoverVisible}
-                >
-                  <SearchOutlined
-                    style={{ fontSize: "25px", marginLeft: "8px" }}
-                  />
-                </Popover>
+
               </div>
             ) : (
               <>

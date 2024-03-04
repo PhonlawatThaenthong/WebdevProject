@@ -16,7 +16,7 @@ const SearchBar = ({ onSearch }) => {
   const searchInput = {
     placeholder: "ค้นหาสถานที่ท่องเที่ยว หรือโปรแกรมทัวร์",
     color: "black",
-    width: isSmallScreen ? "75%" : "30%",
+    width: isSmallScreen ? "70%" : "30%",
     height: "40px",
     fontWeight: "bold",
     justifyContent: "center",
