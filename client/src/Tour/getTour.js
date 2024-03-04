@@ -238,6 +238,7 @@ const Tour = ({ data, filterData }) => {
               total_price: temp_selectedTour.attributes.price * numberOfPeople,
               reserve_date: temp_date,
               user_phone: user.data.phone_number,
+              user_email:user.data.email,
             };
 
             const formData = new FormData();

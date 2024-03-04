@@ -473,6 +473,8 @@ const Confirm = ({ data, filterData }) => {
                                     <br />
                                     ช่องทางการติดต่อ: {attributes.user_phone}
                                     <br />
+                                    อีเมลของผู้จอง: {attributes.user_email}
+                                    <br />
                                     
                                     {attributes.payment_status === false && (
                                         <Button

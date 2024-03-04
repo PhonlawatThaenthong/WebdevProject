@@ -170,6 +170,8 @@ const CardHistory = ({ data, filterData }) => {
             ชื่อผู้จอง: {attributes.user_id.data.attributes.username}
             <br />
             ช่องทางการติดต่อ: {attributes.user_phone}
+            <br />
+            อีเมลของผู้จอง: {attributes.user_email}
             <br></br>
           </Card>
         ))}
