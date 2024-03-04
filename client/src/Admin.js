@@ -319,6 +319,11 @@ const AdminForm = () => {
     marginTop: isSmallScreen ? "150px" : "50px",
   };
 
+  const handleScrollToElement = () => {
+    const element = document.getElementById('scroll');
+    element.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <Flex gap="middle" wrap="wrap" style={{ backgroundColor: "#F5F5F5" }}>
       <Helmet>
@@ -483,9 +488,13 @@ const AdminForm = () => {
         ) : (
           <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
         )}
-        <h2
+        <h2 id="scroll"
           style={{ fontFamily: 'Kanit', textAlign: "center", fontWeight: "bold", fontSize: isSmallScreen ? "25px" : "45px" }}
         >
+          <div className="scroll_button">
+            <button onClick={handleScrollToElement}>Scroll to Element</button>
+          </div>
+
           โปรแกรมทั้งหมด
         </h2>
         <Tour data={allData} filterData={filterData} />
