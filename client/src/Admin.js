@@ -492,7 +492,7 @@ const AdminForm = () => {
           style={{ fontFamily: 'Kanit', textAlign: "center", fontWeight: "bold", fontSize: isSmallScreen ? "25px" : "45px" }}
         >
           <div className="scroll_button">
-            <button onClick={handleScrollToElement}>Scroll to Element</button>
+            <button onClick={handleScrollToElement} className="circle_button"></button>
           </div>
 
           โปรแกรมทั้งหมด

@@ -65,8 +65,7 @@ const PromotionalSlider = ({ images }) => {
                   style={{
                     maxWidth: "100%",
                     maxHeight: "100%",
-                    // borderRadius: "15px",
-                    // boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)", // Add boxShadow
+                    opacity: 0.85
                   }}
                 />
               </div>
