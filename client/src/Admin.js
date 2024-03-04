@@ -47,15 +47,17 @@ const AdminForm = () => {
   const [jwt, setjwt] = useLocalState(null, "jwt");
   const [username, setUsername] = useState("");
   const isSmallScreen = useMediaQuery({ maxWidth: 768 });
-  const [create_name, setcreate_name] = useState("");
-  const [create_desc, setcreate_desc] = useState("");
-  const [create_price, setcreate_price] = useState(0);
   const [menuVisible, setMenuVisible] = useState(false);
   const [searchPopoverVisible, setSearchPopoverVisible] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [userimage, setUserImage] = useState({});
   const [filterData, setFilterData] = useState([]);
   const [allData, setAllData] = useState([]);
+
+  const [create_name, setcreate_name] = useState("");
+  const [create_desc, setcreate_desc] = useState("");
+  const [create_price, setcreate_price] = useState(0);
+  const [create_max, setcreate_max] = useState(50);
 
   const handleSearch = async (searchText) => {
     try {
@@ -139,6 +141,7 @@ const AdminForm = () => {
         tour_name: create_name,
         description: create_desc,
         price: create_price,
+        user_max: create_max,
         status: true,
         tour_image: uploadedImages.map(image => ({ id: image.id }))
       };
@@ -350,17 +353,23 @@ const AdminForm = () => {
           value={create_name}
           onChange={(e) => setcreate_name(e.target.value)}
         />
-        <p>รายละเอียด: </p>
-        <TextArea
-          value={create_desc}
-          onChange={(e) => setcreate_desc(e.target.value)}
-          autoSize={{ minRows: 1, maxRows: 10 }}
+        <p>จำกัดจำนวน: </p>
+        <Input
+          type="number"
+          value={create_max}
+          onChange={(e) => setcreate_max(e.target.value)}
         />
         <p>ราคา: </p>
         <Input
           type="number"
           value={create_price}
           onChange={(e) => setcreate_price(e.target.value)}
+        />
+        <p>รายละเอียด: </p>
+        <TextArea
+          value={create_desc}
+          onChange={(e) => setcreate_desc(e.target.value)}
+          autoSize={{ minRows: 1, maxRows: 10 }}
         />
         <p>วันที่: </p>
         <RangePicker />
