@@ -1,86 +1,87 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Home from './Home';
-import Login from './Login';
-import Register from './Register';
-import Member from './Member';
-import Admin from './Admin';
-import Payment from './Payment';
-import UploadReceipt from './UploadReceipt';
-import AllStepDone from './AllStepDone';
-import ReserveForm from './reservelist';
-import AllTour from './pages/AllTour';
-import Confirm from './Confirm';
-import ProfileForm from './Profile';
+import Home from "./Home";
+import Login from "./Login";
+import Register from "./Register";
+import Member from "./Member";
+import Admin from "./Admin";
+import Payment from "./Payment";
+import UploadReceipt from "./UploadReceipt";
+import AllStepDone from "./AllStepDone";
+import ReserveForm from "./reservelist";
+import AllTour from "./pages/AllTour";
+import Confirm from "./Confirm";
+import ProfileForm from "./Profile";
+import TourSchedule from "./pages/TourSchedule";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home/>,
+    element: <Home />,
   },
   {
     path: "/home",
-    element: <Home/>,
+    element: <Home />,
   },
   {
     path: "/login",
-    element: <Login/>,
+    element: <Login />,
   },
   {
     path: "/register",
-    element: <Register/>,
+    element: <Register />,
   },
   {
     path: "/member",
-    element: <Member/>,
+    element: <Member />,
   },
   {
     path: "/admin",
-    element: <Admin/>,
+    element: <Admin />,
   },
   {
     path: "/payments",
-    element: <Payment/>,
+    element: <Payment />,
   },
   {
     path: "/uploadreceipt",
-    element: <UploadReceipt/>,
+    element: <UploadReceipt />,
   },
   {
     path: "/AllStepDone",
-    element: <AllStepDone/>,
+    element: <AllStepDone />,
   },
   {
     path: "/history",
-    element: <ReserveForm/>,
+    element: <ReserveForm />,
   },
   {
     path: "/alltour",
-    element: <AllTour/>,
+    element: <AllTour />,
+  },
+  {
+    path: "/tour-schedule/:tourId",
+    element: <TourSchedule />,
   },
   {
     path: "/confirm",
-    element: <Confirm/>,
+    element: <Confirm />,
   },
   {
     path: "/profile",
-    element:<ProfileForm/>
+    element: <ProfileForm />,
   },
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-     <RouterProvider router={router} />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
-
 
 reportWebVitals();

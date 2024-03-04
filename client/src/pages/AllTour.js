@@ -15,7 +15,8 @@ import {
   Menu,
   Dropdown,
   Popover,
-   Avatar
+  Avatar,
+  Cascader
 } from "antd";
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
@@ -52,6 +53,7 @@ const AllTour = () => {
       console.error("error fetching all data", error);
     }
   };
+
   const getImage = async () => {
     try {
       const res = await axios.get("http://localhost:1337/api/users/me?populate=*");
@@ -59,32 +61,6 @@ const AllTour = () => {
     } catch (error) {
       console.error("การแสดงข้อมูล user ผิดพลาด", error);
     }
-  };
-
-
-  useEffect(() => {
-    getAllData();
-    if (jwt == null) {} else {roleChecker()}
-    getImage();
-  }, []);
- 
- 
-  
-
-  const handleHeaderClick = () => {
-    navigate("/login");
-  };
-
-  const handleLogout = async () => {
-    setjwt(null);
-    messageApi
-      .open({
-        type: "loading",
-        content: "กรุณารอสักครู่...",
-        duration: 1,
-      })
-      .then(() => message.success("เสร็จสิ้น!", 0.5))
-      .then(() => (window.location.href = "/"));
   };
 
   const roleChecker = async () => {
@@ -103,6 +79,28 @@ const AllTour = () => {
     }
   };
 
+  useEffect(() => {
+    getAllData();
+    if (jwt == null) { } else { roleChecker() }
+    getImage();
+  }, []);
+
+  const handleHeaderClick = () => {
+    navigate("/login");
+  };
+
+  const handleLogout = async () => {
+    setjwt(null);
+    messageApi
+      .open({
+        type: "loading",
+        content: "กรุณารอสักครู่...",
+        duration: 1,
+      })
+      .then(() => message.success("เสร็จสิ้น!", 0.5))
+      .then(() => (window.location.href = "/"));
+  };
+
   const handleSearch = async (searchText) => {
     try {
       const res = await axios.get(
@@ -112,6 +110,21 @@ const AllTour = () => {
     } catch (error) {
       console.error("error filter data", error);
     }
+  };
+
+  const options = [
+    {
+      value: 'ว่าง',
+      label: 'ว่าง',
+    },
+    {
+      value: 'test',
+      label: 'test',
+    },
+  ];
+
+  const onChange = (value) => {
+    console.log(value);
   };
 
   const menu = (
@@ -144,7 +157,7 @@ const AllTour = () => {
           >
           </Menu.Item>
           <Menu.Item key="profile" onClick={() => navigate("/profile")}>
-          {username && `โปรไฟล์ของ, ${username}`}
+            {username && `โปรไฟล์ของ, ${username}`}
           </Menu.Item>
           <Menu.Item
             onClick={() => {
@@ -152,7 +165,7 @@ const AllTour = () => {
             }}
             key="History"
           >ทัวร์ของคุณ</Menu.Item>
-           <Menu.Item key="logout" onClick={() => handleLogout()}>
+          <Menu.Item key="logout" onClick={() => handleLogout()}>
             ออกจากระบบ
           </Menu.Item>
         </>
@@ -160,8 +173,8 @@ const AllTour = () => {
         <></>
       )}
     </Menu>
-  );    
-  
+  );
+
 
   const searchPopoverContent = (
     <div>
@@ -201,7 +214,7 @@ const AllTour = () => {
   const layoutStyle = {
     borderRadius: 0,
     overflow: "hidden",
-    backgroundColor: "#EEEEEE",
+    backgroundColor: "#F5F5F5",
   };
 
   const blueTextStyle = {
@@ -372,24 +385,22 @@ const AllTour = () => {
                     </Link>
                     {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
                     <Dropdown placement="bottomLeft"
-                  overlay={menu2}
-                  trigger={["click"]}
-                 
-                 
-                >
-                <Avatar
-                  style={{
-                    marginLeft: "50px",
-                    color: "white",
-                    fontSize: "50px",
-                    fontFamily: 'Kanit',
-                    marginBottom: "10px",
-                    marginRight: "-70px"
-                  }}
-                  size={52}
-                  src={`http://localhost:1337${userimage.profile_image?.url}`}
-                />
-                 </Dropdown>
+                      overlay={menu2}
+                      trigger={["click"]}
+                    >
+                      <Avatar
+                        style={{
+                          marginLeft: "50px",
+                          color: "white",
+                          fontSize: "50px",
+                          fontFamily: 'Kanit',
+                          marginBottom: "10px",
+                          marginRight: "-70px"
+                        }}
+                        size={52}
+                        src={`http://localhost:1337${userimage.profile_image?.url}`}
+                      />
+                    </Dropdown>
                   </>
                 )}
               </Col>
@@ -403,6 +414,11 @@ const AllTour = () => {
             style={{ maxWidth: '300px' }}
           />
         </div>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+          <span style={{ marginRight: '10px', display: 'flex', justifyContent: 'center', marginTop: '5px' }}>Filters:</span>
+          <Cascader options={options} onChange={onChange} />
+        </div>
+
         <Tour data={allData} filterData={filterData} />
       </Layout>
       <Button

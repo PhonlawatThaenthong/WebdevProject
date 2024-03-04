@@ -163,7 +163,7 @@ const HomeForm = () => {
   const layoutStyle = {
     borderRadius: 0,
     overflow: "hidden",
-    backgroundColor: "#EEEEEE",
+    backgroundColor: "#F5F5F5",
   };
 
   const blueTextStyle = {
@@ -187,6 +187,11 @@ const HomeForm = () => {
 
   const promotionalSliderStyle = {
     marginTop: isSmallScreen ? "150px" : "50px",
+  };
+
+  const handleScrollToElement = () => {
+    const element = document.getElementById('scroll');
+    element.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -286,10 +291,15 @@ const HomeForm = () => {
         ) : (
           <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
         )}
-        <span
+        <span id="scroll"
           style={{ fontFamily: 'Kanit', textAlign: "center", fontWeight: "bold", fontSize: isSmallScreen ? "25px" : "45px" }}
 
         >
+          <div className="scroll_button">
+            <button onClick={handleScrollToElement}>Scroll to Element</button>
+            {/* <button>Scroll to Element</button> */}
+          </div>
+
           โปรแกรมทัวร์แนะนำ
         </span>
         <RecommendTour />

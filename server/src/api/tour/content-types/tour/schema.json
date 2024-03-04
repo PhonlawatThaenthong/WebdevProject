@@ -42,6 +42,9 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "destination": {
+      "type": "json"
     }
   }
 }
