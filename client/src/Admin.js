@@ -483,17 +483,28 @@ const AdminForm = () => {
             )}
           </Col>
         </Header>
-        {isSmallScreen ? (
-          <></>
-        ) : (
-          <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
-        )}
+        <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
         <h2 id="scroll"
           style={{ fontFamily: 'Kanit', textAlign: "center", fontWeight: "bold", fontSize: isSmallScreen ? "25px" : "45px" }}
         >
-          <div className="scroll_button">
-            <button onClick={handleScrollToElement} className="circle_button"></button>
-          </div>
+          {isSmallScreen ? (
+            <></>
+          ) : (
+            <h2
+              id="scroll"
+              style={{
+                fontFamily: "Kanit",
+                textAlign: "center",
+                fontWeight: "bold",
+                fontSize: isSmallScreen ? "25px" : "45px",
+              }}
+            >
+              <div className="scroll_button">
+                <button onClick={handleScrollToElement} className="circle_button"></button>
+              </div>
+              โปรแกรมทัวร์แนะนำ
+            </h2>
+          )}
 
           โปรแกรมทั้งหมด
         </h2>

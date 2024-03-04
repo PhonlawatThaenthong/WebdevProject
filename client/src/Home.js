@@ -178,6 +178,13 @@ const HomeForm = () => {
     element.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const searchPopoverContent = (
+    <div>
+      <p>Popover Content Goes Here</p>
+      {/* Add your content for the popover */}
+    </div>
+  );
+
   return (
     <Flex gap="middle" wrap="wrap" style={{ backgroundColor: "#F5F5F5" }}>
       <Helmet>
@@ -269,18 +276,29 @@ const HomeForm = () => {
             )}
           </Col>
         </Header>
-        {isSmallScreen ? (
-          <></>
-        ) : (
-          <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
-        )}
+        <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
         <span id="scroll"
           style={{ fontFamily: 'Kanit', textAlign: "center", fontWeight: "bold", fontSize: isSmallScreen ? "25px" : "45px" }}
 
         >
-          <div className="scroll_button">
-            <button onClick={handleScrollToElement} className="circle_button"></button>
-          </div>
+          {isSmallScreen ? (
+            <></>
+          ) : (
+            <h2
+              id="scroll"
+              style={{
+                fontFamily: "Kanit",
+                textAlign: "center",
+                fontWeight: "bold",
+                fontSize: isSmallScreen ? "25px" : "45px",
+              }}
+            >
+              <div className="scroll_button">
+                <button onClick={handleScrollToElement} className="circle_button"></button>
+              </div>
+              โปรแกรมทัวร์แนะนำ
+            </h2>
+          )}
 
           โปรแกรมทัวร์แนะนำ
         </span>
