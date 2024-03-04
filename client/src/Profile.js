@@ -512,6 +512,7 @@ const ProfileForm = () => {
                             <Descriptions.Item label="Role">{rolename}</Descriptions.Item>
                             <Descriptions.Item label="Password">********</Descriptions.Item>
                         </Descriptions>
+                        <h2>Change Avatar Profile</h2>
                         <Upload
                             name="image"
                             listType="picture-card"
@@ -535,12 +536,12 @@ const ProfileForm = () => {
                         <Button onClick={handleImageChange} type="primary" style={{
                             marginTop: '16px', fontFamily: 'Kanit', backgroundColor: 'black',
                             borderColor: 'green', marginRight: '16px'
-                        }}> Upload </Button>
+                        }}> Change Avatar </Button>
                         <Button type="primary" onClick={handleSaveChanges} style={{
                             marginTop: '16px', fontFamily: 'Kanit', backgroundColor: 'green',
                             borderColor: 'green',
                         }}>
-                            Save Changes
+                            Save Edit Information
                         </Button>
                         <Link onClick={() => {
                             navigate("/history");
