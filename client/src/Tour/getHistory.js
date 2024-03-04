@@ -167,6 +167,8 @@ const CardHistory = ({ data, filterData }) => {
             <br />
             วันที่ยืนยัน: {getDate(attributes.confirm_date)}
             <br />
+            ชื่อผู้จอง: {attributes.user_id.data.attributes.username}
+            <br />
             ช่องทางการติดต่อ: {attributes.user_phone}
             <br></br>
           </Card>
