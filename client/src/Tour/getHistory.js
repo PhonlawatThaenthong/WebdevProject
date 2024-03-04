@@ -137,7 +137,7 @@ const CardHistory = ({ data, filterData }) => {
       ) : (
         <Row gutter={[16, 16]}>
         {userReserves.map(({ id, attributes }) => (
-          <Card key={id} xs={24} sm={12} md={8} lg={8} style={{ fontFamily: 'Kanit', width: 300, margin: 20, marginTop: 50 }}>
+          <Card hoverable key={id} xs={24} sm={12} md={8} lg={8} style={{ fontFamily: 'Kanit', width: 300, margin: 20, marginTop: 50 }}>
             {attributes.payment_status === false && (
               <Image
                 src={`https://cdn-icons-png.freepik.com/512/6475/6475938.png`}

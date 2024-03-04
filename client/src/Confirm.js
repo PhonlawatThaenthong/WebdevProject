@@ -431,6 +431,7 @@ const Confirm = ({ data, filterData }) => {
                         <Row gutter={[16, 16]}>
                             {allData.map(({ id, attributes }) => (
                                 <Card
+                                hoverable
                                     key={id}
                                     style={{
                                         fontFamily: 'Kanit',
