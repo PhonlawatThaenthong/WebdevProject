@@ -58,13 +58,7 @@ const RegisterForm = () => {
             axios.defaults.headers.common = {
                 Authorization: `Bearer ${jwt}`,
             };
-            const userResult = await axios.get('http://localhost:1337/api/users/me?populate=role');
-
-            if (userResult.data.role && userResult.data.role.name === 'Member') {
-                navigate('/member');
-            } else {
-                navigate('/admin');
-            }
+            navigate('/login');
         } catch (error) {
             console.error(error);
             setErrorMessage('Have already username or email');
