@@ -16,6 +16,8 @@ import {
   Popover,
   Avatar,
   Select,
+  Drawer,
+  Collapse
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +29,10 @@ import { UploadOutlined } from "@ant-design/icons";
 import {
   SearchOutlined,
 } from "@ant-design/icons";
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  MinusCircleOutlined, PlusOutlined, TeamOutlined,
+  MailOutlined, PhoneOutlined, MessageOutlined, FileAddOutlined
+} from "@ant-design/icons";
 import WebFont from "webfontloader";
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
@@ -37,7 +42,6 @@ import promotionImages from "./Image/slide.js";
 import moment from "moment";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-
 dayjs.extend(customParseFormat);
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -46,6 +50,7 @@ const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 const { Option } = Select;
 
+let url3 = "https://qr-official.line.me/gs/M_305iwzmm_GW.png?oat_content=qr"
 const AdminForm = () => {
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
@@ -59,14 +64,15 @@ const AdminForm = () => {
   const [userimage, setUserImage] = useState({});
   const [filterData, setFilterData] = useState([]);
   const [allData, setAllData] = useState([]);
-
   const [create_name, setcreate_name] = useState("");
   const [create_desc, setcreate_desc] = useState("");
   const [create_date, setcreate_date] = useState(new Date());
   const [create_price, setcreate_price] = useState(0);
   const [create_max, setcreate_max] = useState(50);
   const [create_destination, setcreate_destination] = useState([{}]);
-
+  const [open, setOpen] = useState(false);
+  const { Panel } = Collapse;
+  const [drawerVisible, setDrawerVisible] = useState(false);
   const handleSubmit = (values) => {
     console.log("Form values:", values.names);
   };
@@ -81,6 +87,21 @@ const AdminForm = () => {
       console.error("error filter data", error);
     }
   };
+
+  const showDrawer = () => {
+    if (!drawerVisible) {
+      setOpen(true);
+      setDrawerVisible(true);
+    } else {
+      setOpen(false);
+      setDrawerVisible(false);
+    }
+  };
+  const onClose = () => {
+    setOpen(false);
+    setDrawerVisible(false);
+  };
+
 
   const getImage = async () => {
     try {
@@ -694,19 +715,97 @@ const AdminForm = () => {
           โปรแกรมทั้งหมด
         </h2>
         <Tour data={allData} filterData={filterData} />
-        <FloatButton
-          tooltip={<div>เพิ่มทัวร์ใหม่</div>}
-          shape="square"
+        <FloatButton.Group
+          trigger="click"
           type="primary"
-          style={{ fontFamily: "Kanit", right: 24 }}
-          icon="+"
-          onClick={() => setIsAddMenuOpen(true)}
-        />
+          icon={<TeamOutlined />}
+          style={{
+            right: 24,
+
+          }}
+         
+        >
+          <FloatButton
+            tooltip={<div>เพิ่มทัวร์ใหม่</div>}
+            icon={<FileAddOutlined/>}
+            onClick={() => setIsAddMenuOpen(true)}
+            type="primary"
+            style={{
+              fontFamily: "Kanit",
+              right: 24,
+              width: "45px", 
+              height: "45px", 
+            }}
+          />
+          <FloatButton
+            tooltip={<div>ติดต่อเรา</div>}
+            icon={<MessageOutlined/>}
+            onClick={showDrawer}
+            type="primary"
+            style={{
+              fontFamily: "Kanit",
+              right: 24,
+              width: "45px", 
+              height: "45px", 
+            }}
+          />
+        </FloatButton.Group>
       </Layout>
+
       <Footer style={headerbottom}>
         <img src={Logo} alt="Logo" style={{ width: "auto", height: "50px" }} />
       </Footer>
+      <Drawer title="ช่องทางการติดต่อ  " onClose={onClose} open={open} style={{ fontFamily: 'Kanit', display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
+        <Collapse defaultActiveKey={['1']}>
+          <Panel style={{ fontFamily: 'Kanit' }} header="ช่องทาง Line " key="1">
+            <div style={{ fontFamily: 'Kanit', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+
+              <p><strong>
+
+                ชื่อบัญชี: HAT YAI Journey
+                <br />
+                Lind ID : @305iwzmm
+                <br />
+
+              </strong>
+              </p>
+              <br />
+
+            </div>
+            <img src={url3} className="Logo1" alt="" style={{ width: isSmallScreen ? '100%' : "100%", }} />
+          </Panel>
+          <Panel style={{ fontFamily: 'Kanit' }} header="ช่องทางอีเมล" key="2">
+            <div style={{ fontFamily: 'Kanit', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+
+              <p><strong>
+                Name :  HATYAI Journey Inc.
+                <br />
+                Email : HATYAIJourney@gmail.com
+              </strong>
+              </p>
+              <MailOutlined />
+            </div>
+          </Panel>
+          <Panel style={{ fontFamily: 'Kanit' }} header="ช่องทางเบอร์โทรศัพท์ " key="3">
+            <div style={{ fontFamily: 'Kanit', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+
+              <p><strong>
+
+                เบอร์ :  062-0XX-XXXX{' '}
+                <br />
+                สำนักงาน: บจ. หาดใหญ่ จอว์ลนี่ เซอร์วิสเซส สำนักงานใหญ่ 1 (ประชายินดี 5)
+
+              </strong>
+              </p>
+              <PhoneOutlined />
+
+            </div>
+          </Panel>
+
+        </Collapse>
+      </Drawer>
     </Flex>
+
   );
 };
 
