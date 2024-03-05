@@ -108,10 +108,13 @@ const Tour = ({ data, filterData }) => {
   const handleSave = async () => {
     const hide = message.loading("กำลังบันทึก...", 0);
 
+    const formattedDate = moment(edit_tour.attributes.tour_date).format("YYYY-MM-DD HH:mm:ss");
+
     try {
       const payload = {
         data: {
           tour_name: edit_tour.attributes.tour_name,
+          tour_date: formattedDate,
           price: edit_tour.attributes.price,
           description: edit_tour.attributes.description,
           user_max: edit_tour.attributes.user_max,
@@ -479,7 +482,19 @@ const Tour = ({ data, filterData }) => {
                     />
                     <br />ระยะเวลา
                     <div>
-                      <DatePicker value={moment(edit_tour.attributes.tour_date)} />
+                      <DatePicker
+                        format="YYYY-MM-DD HH:mm:ss"
+                        value={moment(edit_tour.attributes.tour_date)}
+                        onChange={(date, dateString) =>
+                          setedit_tour((prevState) => ({
+                            ...prevState,
+                            attributes: {
+                              ...prevState.attributes,
+                              tour_date: dateString,
+                            },
+                          }))
+                        }
+                      />
                     </div>
                     <br />
                     รายละเอียด:
