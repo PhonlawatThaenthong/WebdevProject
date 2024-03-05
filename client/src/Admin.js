@@ -17,7 +17,8 @@ import {
   Avatar,
   Select,
   Drawer,
-  Collapse
+  Collapse,
+  Space
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -73,8 +74,9 @@ const AdminForm = () => {
   const [open, setOpen] = useState(false);
   const { Panel } = Collapse;
   const [drawerVisible, setDrawerVisible] = useState(false);
-  const handleSubmit = (values) => {
-    console.log("Form values:", values.names);
+
+  const onFinish = (values) => {
+    setcreate_destination(JSON.stringify(values.tour_place))
   };
 
   const handleSearch = async (searchText) => {
@@ -488,73 +490,65 @@ const AdminForm = () => {
         />
         <p>ตารางทัวร์: </p>
         <Form
-          name="dynamic_form_item"
-          onFinish={handleSubmit}
+          name="dynamic_form_nest_item"
+          onFinish={onFinish}
           style={{
-            alignItems: "center",
-            margin: "0",
-            alignContent: "center",
+            maxWidth: 600,
           }}
+          autoComplete="off"
         >
-          <Form.List name="names">
+          <Form.List name="tour_place">
             {(fields, { add, remove }) => (
               <>
-                {fields.map((field, index) => (
-                  <div key={field.key}>
-                    <Form.Item label={index === 0 ? "" : ""} required={false}>
-                      <Form.Item
-                        {...field}
-                        validateTrigger={["onChange", "onBlur"]}
-                        noStyle
-                      >
-                        <Input
-                          placeholder="Destination"
-                          rules={[
-                            {
-                              required: true,
-                              whitespace: true,
-                              message: "Required",
-                            },
-                          ]}
-                          style={{ width: "60%" }}
-                        />
-                        <Input
-                          placeholder="Time"
-                          rules={[
-                            {
-                              required: true,
-                              whitespace: true,
-                              message: "Required",
-                            },
-                          ]}
-                          style={{ width: "60%" }}
-                        />
-                      </Form.Item>
-                      {fields.length > 0 ? (
-                        <MinusCircleOutlined
-                          className="dynamic-delete-button"
-                          onClick={() => remove(field.name)}
-                        />
-                      ) : null}
+                {fields.map(({ key, name, ...restField }) => (
+                  <Space
+                    key={key}
+                    style={{
+                      display: 'flex',
+                      marginBottom: 8,
+                    }}
+                    align="baseline"
+                  >
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'place_name']}
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Missing Name',
+                        },
+                      ]}
+                    >
+                      <Input placeholder="ชื่อสถานที่" />
                     </Form.Item>
-                  </div>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'place_time']}
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Missing Time',
+                        },
+                      ]}
+                    >
+                      <Input placeholder="00:00-01:00" />
+                    </Form.Item>
+                    <MinusCircleOutlined onClick={() => remove(name)} />
+                  </Space>
                 ))}
                 <Form.Item>
-                  <Button
-                    type="dashed"
-                    onClick={() => add()}
-                    style={{ width: "60%" }}
-                    icon={<PlusOutlined />}
-                  >
+                  <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
                     Add
                   </Button>
                 </Form.Item>
               </>
             )}
           </Form.List>
-          <Button type="primary" htmlType="submit">
-            Save
-          </Button>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Save
+            </Button>
+          </Form.Item>
         </Form>
         <p>รูปภาพ: </p>
         <Upload
@@ -723,30 +717,30 @@ const AdminForm = () => {
             right: 24,
 
           }}
-         
+
         >
           <FloatButton
             tooltip={<div>เพิ่มทัวร์ใหม่</div>}
-            icon={<FileAddOutlined/>}
+            icon={<FileAddOutlined />}
             onClick={() => setIsAddMenuOpen(true)}
             type="primary"
             style={{
               fontFamily: "Kanit",
               right: 24,
-              width: "45px", 
-              height: "45px", 
+              width: "45px",
+              height: "45px",
             }}
           />
           <FloatButton
             tooltip={<div>ติดต่อเรา</div>}
-            icon={<MessageOutlined/>}
+            icon={<MessageOutlined />}
             onClick={showDrawer}
             type="primary"
             style={{
               fontFamily: "Kanit",
               right: 24,
-              width: "45px", 
-              height: "45px", 
+              width: "45px",
+              height: "45px",
             }}
           />
         </FloatButton.Group>
