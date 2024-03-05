@@ -141,16 +141,33 @@ const AdminForm = () => {
 
   const handleAddTour = async (e) => {
     try {
+
+      if (!create_date) {
+        message.error('Please select a date for the tour.');
+        return;
+      }
+  
+      const formattedDate = moment(create_date).format("YYYY-MM-DD HH:mm:ss");
+  
+      if (!imageFile) {
+        message.error('Please upload an image for the tour.');
+        return;
+      }
+
       const imageFiles = Array.isArray(imageFile) ? imageFile : [imageFile];
       const uploadedImages = await Promise.all(imageFiles.map(uploadImage));
       const addNewTour = {
         tour_name: create_name,
+        tour_date: create_date,
         description: create_desc,
         price: create_price,
         user_max: create_max,
         status: true,
-        tour_image: uploadedImages.map(image => ({ id: image.id }))
+        tour_image: uploadedImages.map(image => ({ id: image.id })),
+        tour_date: formattedDate
       };
+
+      console.log(addNewTour)
 
       const formData = new FormData();
       formData.append('data', JSON.stringify(addNewTour));
@@ -164,7 +181,7 @@ const AdminForm = () => {
       console.log('Upload response:', response.data);
       message.success('Tour added successfully');
       setIsAddMenuOpen(false);
-      window.location.reload();
+      //window.location.reload();
     } catch (error) {
       console.error('Error uploading data:', error);
       message.error('Failed to add tour');
@@ -384,7 +401,7 @@ const AdminForm = () => {
         />
         <p>วันที่ทัวร์: </p>
         <DatePicker
-        de
+          de
           showTime
           format="YYYY-MM-DD HH:mm:ss"
           defaultValue={dayjs(create_date)}
