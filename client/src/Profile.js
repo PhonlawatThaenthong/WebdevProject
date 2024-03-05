@@ -451,7 +451,7 @@ const ProfileForm = () => {
                                         src={`http://localhost:1337${userimage.profile_image?.url}`}
                                     />
                                 </Dropdown>
-                                
+
                             </div>
                         ) : (
                             <div style={{ textAlign: 'right' }}> {/* Align content to the right */}
@@ -502,12 +502,17 @@ const ProfileForm = () => {
                             <Avatar onClick={() => setPreviewVisible(true)} size={100} src={`http://localhost:1337${userimage.profile_image?.url}`} />
                             <h2>{userData.username}</h2>
                             <Modal
-                                    visible={previewVisible}
-                                    onCancel={() => setPreviewVisible(false)}
-                                    footer={null}
-                                >
-                                    <img alt="Profile" style={{ width: '100%' }} src={`http://localhost:1337${userimage.profile_image?.url}`} />
-                                </Modal>
+                                visible={previewVisible}
+                                onCancel={() => setPreviewVisible(false)}
+                                footer={null}
+                                width={userimage.profile_image?.size} // Adjust the width as needed
+                            >
+                                <img
+                                    alt="Profile"
+                                    style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
+                                    src={`http://localhost:1337${userimage.profile_image?.url}`}
+                                />
+                            </Modal>
                         </div>
                         <Descriptions title="User Information" bordered column={1} >
                             <Descriptions.Item label="Name">

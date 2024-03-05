@@ -40,6 +40,8 @@ const Tour = ({ data, filterData }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isSmallScreen = useMediaQuery({ maxWidth: 767 });
   const [numberOfPeople, setNumberOfPeople] = useState(1);
+  const [previewVisible, setPreviewVisible] = useState(false);
+
 
   const [edit_tour, setedit_tour] = useState({});
 
@@ -557,7 +559,7 @@ const Tour = ({ data, filterData }) => {
                   >
                     {/* User Modal*/}
                     <div style={{ textAlign: "center" }}>
-                      <Image
+                      <Image onClick={() => setPreviewVisible(true)}
                         src={
                           attributes.tour_image && attributes.tour_image.data
                             ? `http://localhost:1337${attributes.tour_image.data.attributes.formats.thumbnail.url}`
@@ -565,6 +567,17 @@ const Tour = ({ data, filterData }) => {
                         }
                         preview={false}
                       />
+                      <Modal
+                        visible={previewVisible}
+                        onCancel={() => setPreviewVisible(false)}
+                        footer={null}
+                      >
+                        <img alt="tour" style={{ width: '100%' }} src={
+                          attributes.tour_image && attributes.tour_image.data
+                            ? `http://localhost:1337${attributes.tour_image.data.attributes.formats.thumbnail.url}`
+                            : ""
+                        } />
+                      </Modal>
                     </div>
                     {/* User Modal*/}
                     <br />
