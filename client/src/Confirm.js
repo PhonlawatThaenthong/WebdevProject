@@ -207,7 +207,7 @@ const Confirm = ({ data, filterData }) => {
         return newPrice
     };
 
-    
+
 
     const getStatus = (status) => {
         switch (status) {
@@ -226,8 +226,8 @@ const Confirm = ({ data, filterData }) => {
             console.error("error fetching tour data", error);
         }
     };
-    
-    
+
+
 
     useEffect(() => {
         if (jwt == null) {
@@ -260,7 +260,7 @@ const Confirm = ({ data, filterData }) => {
                         key="username"
                     >
                         <span style={{ fontFamily: 'Kanit', color: "#48D3FF" }}>
-                            {username && `สวัสดีคุณ, ${username}`}
+                            {username && `โปรไฟล์ของ, ${username}`}
                         </span>
                     </Menu.Item>
 
@@ -367,7 +367,18 @@ const Confirm = ({ data, filterData }) => {
                         {isSmallScreen ? (
                             <div style={{ textAlign: isSmallScreen ? 'right' : 'left' }}>
                                 <Dropdown overlay={menu} trigger={['click']} visible={menuVisible} onVisibleChange={setMenuVisible}>
-                                    <UnorderedListOutlined style={{ fontSize: '25px', marginRight: '8px' }} />
+                                    <Avatar
+                                        style={{
+                                            marginLeft: "50px",
+                                            color: "white",
+                                            fontSize: "50px",
+                                            fontFamily: "Kanit",
+                                            marginBottom: "10px",
+                                            marginRight: "-10px",
+                                        }}
+                                        size={52}
+                                        src={`http://localhost:1337${userimage.profile_image?.url}`}
+                                    />
                                 </Dropdown>
 
                             </div>
@@ -431,7 +442,7 @@ const Confirm = ({ data, filterData }) => {
                         <Row gutter={[16, 16]}>
                             {allData.map(({ id, attributes }) => (
                                 <Card
-                                hoverable
+                                    hoverable
                                     key={id}
                                     style={{
                                         fontFamily: 'Kanit',
@@ -475,7 +486,7 @@ const Confirm = ({ data, filterData }) => {
                                     <br />
                                     อีเมลของผู้จอง: {attributes.user_email}
                                     <br />
-                                    
+
                                     {attributes.payment_status === false && (
                                         <Button
                                             type="primary"

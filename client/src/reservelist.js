@@ -112,7 +112,7 @@ const ReserveForm = () => {
                         key="username"
                     >
                         <span style={{ fontFamily: 'Kanit', color: "#48D3FF" }}>
-                            {username && `สวัสดีคุณ, ${username}`}
+                        {username && `โปรไฟล์ของ, ${username}`}
                         </span>
                     </Menu.Item>
                     <Menu.Item
