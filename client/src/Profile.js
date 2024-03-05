@@ -87,6 +87,13 @@ const ProfileForm = () => {
                 data: formData,
             });
             setUserImage({});
+            console.log(`${userimage.profile_image?.id}`)
+            await axios.delete(`http://localhost:1337/api/upload/files/${userimage.profile_image?.id}`, {
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
             message.success("Profile image deleted successfully!", 1);
         } catch (error) {
             console.error("Error deleting profile image:", error);
@@ -117,6 +124,7 @@ const ProfileForm = () => {
                         console.error(error);
                     });
             }
+            window.location.reload()
         } catch (error) {
             console.error("Error uploading image:", error);
         }
