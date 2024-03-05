@@ -558,7 +558,9 @@ const ProfileForm = () => {
                                 </Button>
                             </Descriptions.Item>
                             <Descriptions.Item label="Role">{rolename}</Descriptions.Item>
-                            <Descriptions.Item label="Password">********</Descriptions.Item>
+                            <Descriptions.Item label="Password">
+                                <span style={{ color: 'red' }}>Secret</span>
+                            </Descriptions.Item>
                         </Descriptions>
                         <h2>Change Avatar Profile</h2>
                         <Upload
