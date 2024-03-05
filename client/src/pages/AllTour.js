@@ -131,10 +131,24 @@ const AllTour = () => {
     <Menu>
       {jwt ? (
         <>
-          <Menu.Item key="username" disabled>
-            <span style={{ color: "#48D3FF" }}>
-              {username && `สวัสดีคุณ, ${username}`}
+          <Menu.Item
+            onClick={() => {
+              navigate("/profile");
+            }}
+            key="username"
+          >
+            <span style={{ fontFamily: "Kanit", color: "#48D3FF" }}>
+              {username && `โปรไฟล์ของ, ${username}`}
             </span>
+          </Menu.Item>
+
+          <Menu.Item
+            onClick={() => {
+              navigate("/history");
+            }}
+            key="History"
+          >
+            ทัวร์ของคุณ{" "}
           </Menu.Item>
           <Menu.Item key="logout" onClick={() => handleLogout()}>
             ออกจากระบบ
