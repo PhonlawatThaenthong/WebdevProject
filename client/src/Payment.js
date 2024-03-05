@@ -201,11 +201,12 @@ const Payment = () => {
                         <p>เมื่อทำการชำระเงินเรียบร้อยแล้วต้องทำการแจ้งสลิปหลักฐานการโอนเงินพร้อมระบุหมายเหตุทุกครั้ง เมื่อการชำระเงินของคุณได้รับการยืนยันแล้ว </p>
                         <p>สถานะการชำระในช่องประวัติการซื้อจะเปลี่ยนแปลง</p>
                         <Link
-                            onClick={showDrawer}
+                            onClick={showDrawer} style={{fontSize:'25px'}}
                         >
                             ตัวอย่างสลิปการโอนเงิน
                         </Link>
-
+                        <br/>
+                        <br/>
                         <Button type="primary" block style={{ fontFamily: 'Kanit', backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }} onClick={handleButtonClick}>ใช่ ฉันชำระเงินแล้ว</Button>
                     </Card>
                 </Card>

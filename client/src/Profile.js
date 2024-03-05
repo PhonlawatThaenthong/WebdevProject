@@ -129,6 +129,7 @@ const ProfileForm = () => {
                     });
             }
             window.location.reload()
+            message.success("Profile image change successfully!", 1);
         } catch (error) {
             console.error("Error uploading image:", error);
         }

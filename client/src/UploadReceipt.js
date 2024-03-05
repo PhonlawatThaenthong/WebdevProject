@@ -179,6 +179,7 @@ const UploadReceipt = () => {
                             <br />
                             <Link
                             onClick={showDrawer}
+                            style={{fontSize:'25px'}}
                         >
                             ตัวอย่างการอัพโหลดหลักฐานการโอนเงิน
                         </Link>
