@@ -352,7 +352,9 @@ const TourSchedule = () => {
           </Col>
         </Header>
       )}
-      <h3>ตารางท่องเที่ยว: {tourSchedule.attributes.tour_name}</h3>
+      <h3 style={{ textAlign: "center" }}>
+        ตารางท่องเที่ยว: {tourSchedule.attributes.tour_name}
+      </h3>
       <Table columns={columns} dataSource={dataSource} />
       <Button
         type="primary"
@@ -360,7 +362,7 @@ const TourSchedule = () => {
         style={{
           backgroundColor: "#1C3953",
           borderColor: "#1C3953",
-          margin: "0 auto",
+          margin: "0",
         }}
       >
         Back
