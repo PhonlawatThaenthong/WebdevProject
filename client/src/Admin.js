@@ -19,7 +19,7 @@ import {
   Dropdown,
   Popover,
   Avatar,
-  Select
+  Select,
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -28,17 +28,22 @@ import axios from "axios";
 import useLocalState from "./localStorage.js";
 import { useMediaQuery } from "react-responsive";
 import { UploadOutlined } from "@ant-design/icons";
-import { MenuOutlined, SearchOutlined, UserOutlined, LogoutOutlined } from "@ant-design/icons";
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import WebFont from 'webfontloader';
+import {
+  MenuOutlined,
+  SearchOutlined,
+  UserOutlined,
+  LogoutOutlined,
+} from "@ant-design/icons";
+import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import WebFont from "webfontloader";
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
 import PromotionalSlider from "./PromotionalSlider";
 import Logo from "./Image/logo.png";
 import promotionImages from "./Image/slide.js";
-import moment from 'moment';
-import dayjs from 'dayjs';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
+import moment from "moment";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 
 dayjs.extend(customParseFormat);
 
@@ -64,13 +69,13 @@ const AdminForm = () => {
 
   const [create_name, setcreate_name] = useState("");
   const [create_desc, setcreate_desc] = useState("");
-  const [create_date, setcreate_date] = useState((new Date));
+  const [create_date, setcreate_date] = useState(new Date());
   const [create_price, setcreate_price] = useState(0);
   const [create_max, setcreate_max] = useState(50);
   const [create_destination, setcreate_destination] = useState([{}]);
 
   const handleSubmit = (values) => {
-    console.log('Form values:', values.names);
+    console.log("Form values:", values.names);
   };
 
   const handleSearch = async (searchText) => {
@@ -86,7 +91,9 @@ const AdminForm = () => {
 
   const getImage = async () => {
     try {
-      const res = await axios.get("http://localhost:1337/api/users/me?populate=*");
+      const res = await axios.get(
+        "http://localhost:1337/api/users/me?populate=*"
+      );
       setUserImage(res.data);
     } catch (error) {
       console.error("การแสดงข้อมูล user ผิดพลาด", error);
@@ -149,23 +156,22 @@ const AdminForm = () => {
 
   const handleAddTour = async (e) => {
     try {
-
       const formattedDate = moment(create_date).format("YYYY-MM-DD HH:mm:ss");
 
-      console.log('Destination:', create_destination);
-      
+      console.log("Destination:", create_destination);
+
       if (!create_date) {
-        message.error('Please select a date for the tour.');
+        message.error("Please select a date for the tour.");
         return;
       }
 
       if (create_destination.length === 0) {
-        message.error('Please add at least one destination');
+        message.error("Please add at least one destination");
         return;
       }
 
       if (!imageFile) {
-        message.error('Please upload an image for the tour.');
+        message.error("Please upload an image for the tour.");
         return;
       }
 
@@ -178,43 +184,50 @@ const AdminForm = () => {
         price: create_price,
         user_max: create_max,
         status: true,
-        tour_image: uploadedImages.map(image => ({ id: image.id })),
+        tour_image: uploadedImages.map((image) => ({ id: image.id })),
         tour_date: formattedDate,
       };
 
       const formData = new FormData();
-      formData.append('data', JSON.stringify(addNewTour));
-      /*
-            const response = await axios.post('http://localhost:1337/api/tours', formData, {
-              headers: {
-                'Content-Type': 'multipart/form-data'
-              }
-            });
-            */
+      formData.append("data", JSON.stringify(addNewTour));
 
-      console.log('Upload response:', response.data);
-      message.success('Tour added successfully');
+      const response = await axios.post(
+        "http://localhost:1337/api/tours",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      console.log("Upload response:", response.data);
+      message.success("Tour added successfully");
       setIsAddMenuOpen(false);
       //window.location.reload();
     } catch (error) {
-      console.error('Error uploading data:', error);
-      message.error('Failed to add tour');
+      console.error("Error uploading data:", error);
+      message.error("Failed to add tour");
     }
   };
 
   const uploadImage = async (image) => {
     try {
       const formData = new FormData();
-      formData.append('files', image);
-      const response = await axios.post('http://localhost:1337/api/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+      formData.append("files", image);
+      const response = await axios.post(
+        "http://localhost:1337/api/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
-      });
+      );
 
       return response.data[0];
     } catch (error) {
-      console.error('Error uploading image:', error);
+      console.error("Error uploading image:", error);
       throw error;
     }
   };
@@ -230,8 +243,8 @@ const AdminForm = () => {
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ['Sriracha', 'Chilanka']
-      }
+        families: ["Sriracha", "Chilanka"],
+      },
     });
   }, []);
 
@@ -245,7 +258,7 @@ const AdminForm = () => {
             }}
             key="username"
           >
-            <span style={{ fontFamily: 'Kanit', color: "#48D3FF" }}>
+            <span style={{ fontFamily: "Kanit", color: "#48D3FF" }}>
               {username && `สวัสดีคุณ, ${username}`}
             </span>
           </Menu.Item>
@@ -254,7 +267,9 @@ const AdminForm = () => {
               navigate("/confirm");
             }}
             key="History"
-          >สถานะการจองของลูกค้า</Menu.Item>
+          >
+            สถานะการจองของลูกค้า
+          </Menu.Item>
           <Menu.Item key="logout" onClick={() => handleLogout()}>
             ออกจากระบบ
           </Menu.Item>
@@ -273,9 +288,7 @@ const AdminForm = () => {
               navigate("/profile");
             }}
             key="username"
-          >
-
-          </Menu.Item>
+          ></Menu.Item>
           <Menu.Item key="profile" onClick={() => navigate("/profile")}>
             {username && `โปรไฟล์ของ, ${username}`}
           </Menu.Item>
@@ -284,7 +297,9 @@ const AdminForm = () => {
               navigate("/confirm");
             }}
             key="History"
-          >สถานะการจองของลูกค้า</Menu.Item>
+          >
+            สถานะการจองของลูกค้า
+          </Menu.Item>
           <Menu.Item key="logout" onClick={() => handleLogout()}>
             ออกจากระบบ
           </Menu.Item>
@@ -388,8 +403,8 @@ const AdminForm = () => {
   };
 
   const handleScrollToElement = () => {
-    const element = document.getElementById('scroll');
-    element.scrollIntoView({ behavior: 'smooth' });
+    const element = document.getElementById("scroll");
+    element.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -402,21 +417,26 @@ const AdminForm = () => {
       <Modal
         title="Add New Tour"
         open={isAddMenuOpen}
-        style={{ fontFamily: 'Kanit' }}
+        style={{ fontFamily: "Kanit" }}
         onCancel={() => {
           setIsAddMenuOpen(false);
         }}
         footer={[
           <Button
             key="back"
-            style={{ fontFamily: 'Kanit' }}
+            style={{ fontFamily: "Kanit" }}
             onClick={() => {
               setIsAddMenuOpen(false);
             }}
           >
             ยกเลิก
           </Button>,
-          <Button style={{ fontFamily: 'Kanit' }} key="submit" type="primary" onClick={handleAddTour} >
+          <Button
+            style={{ fontFamily: "Kanit" }}
+            key="submit"
+            type="primary"
+            onClick={handleAddTour}
+          >
             เพิ่ม
           </Button>,
         ]}
@@ -458,7 +478,7 @@ const AdminForm = () => {
           style={{
             alignItems: "center",
             margin: "0",
-            alignContent: "center"
+            alignContent: "center",
           }}
         >
           <Form.List name="names">
@@ -466,29 +486,34 @@ const AdminForm = () => {
               <>
                 {fields.map((field, index) => (
                   <div key={field.key}>
-                    <Form.Item
-                      label={index === 0 ? '' : ''}
-                      required={false}
-                    >
+                    <Form.Item label={index === 0 ? "" : ""} required={false}>
                       <Form.Item
                         {...field}
-                        validateTrigger={['onChange', 'onBlur']}
+                        validateTrigger={["onChange", "onBlur"]}
                         noStyle
                       >
-                        <Input placeholder="Destination" rules={[
-                          {
-                            required: true,
-                            whitespace: true,
-                            message: 'Required',
-                          },
-                        ]} style={{ width: '60%' }} />
-                        <Input placeholder="Time" rules={[
-                          {
-                            required: true,
-                            whitespace: true,
-                            message: 'Required',
-                          },
-                        ]} style={{ width: '60%' }} />
+                        <Input
+                          placeholder="Destination"
+                          rules={[
+                            {
+                              required: true,
+                              whitespace: true,
+                              message: "Required",
+                            },
+                          ]}
+                          style={{ width: "60%" }}
+                        />
+                        <Input
+                          placeholder="Time"
+                          rules={[
+                            {
+                              required: true,
+                              whitespace: true,
+                              message: "Required",
+                            },
+                          ]}
+                          style={{ width: "60%" }}
+                        />
                       </Form.Item>
                       {fields.length > 0 ? (
                         <MinusCircleOutlined
@@ -503,7 +528,7 @@ const AdminForm = () => {
                   <Button
                     type="dashed"
                     onClick={() => add()}
-                    style={{ width: '60%' }}
+                    style={{ width: "60%" }}
                     icon={<PlusOutlined />}
                   >
                     Add
@@ -529,11 +554,15 @@ const AdminForm = () => {
           onChange={handleImageUpload}
         >
           {imageFile ? (
-            <img src={URL.createObjectURL(imageFile)} alt="Tour" style={{ width: "100%" }} />
+            <img
+              src={URL.createObjectURL(imageFile)}
+              alt="Tour"
+              style={{ width: "100%" }}
+            />
           ) : (
             <div>
               <UploadOutlined />
-              <div style={{ fontFamily: 'Kanit', marginTop: 8 }}>Upload</div>
+              <div style={{ fontFamily: "Kanit", marginTop: 8 }}>Upload</div>
             </div>
           )}
         </Upload>
@@ -558,41 +587,45 @@ const AdminForm = () => {
             <span style={NormalTextStyle}>ourney</span>
           </Col>
           <Col span={isSmallScreen ? 12 : 22}>
-                {isSmallScreen ? (
-                  <div style={{ textAlign: isSmallScreen ? "right" : "left" }}>
-                    <Popover
-                    content={searchPopoverContent}
-                    trigger="click"
-                    visible={searchPopoverVisible}
-                    onVisibleChange={setSearchPopoverVisible}
-                  >
-                    <SearchOutlined
-                      style={{ fontSize: "35px", marginLeft: "8px", marginBottom: "10px"  }}
-                    />
-                  </Popover>
-                    <Dropdown
-                    overlay={menu}
-                    trigger={["click"]}
-                    visible={menuVisible}
-                    onVisibleChange={setMenuVisible}
-                  >
-                   <Avatar
-                        style={{
-                          marginLeft: "20px",
-                          color: "white",
-                          fontSize: "50px",
-                          fontFamily: 'Kanit',
-                          marginBottom: "15px",
-                          marginRight: "-15px"
-                        }}
-                        size={52}
-                        src={`http://localhost:1337${userimage.profile_image?.url}`}
-                    />
-                  </Dropdown> 
+            {isSmallScreen ? (
+              <div style={{ textAlign: isSmallScreen ? "right" : "left" }}>
+                <Popover
+                  content={searchPopoverContent}
+                  trigger="click"
+                  visible={searchPopoverVisible}
+                  onVisibleChange={setSearchPopoverVisible}
+                >
+                  <SearchOutlined
+                    style={{
+                      fontSize: "35px",
+                      marginLeft: "8px",
+                      marginBottom: "10px",
+                    }}
+                  />
+                </Popover>
+                <Dropdown
+                  overlay={menu}
+                  trigger={["click"]}
+                  visible={menuVisible}
+                  onVisibleChange={setMenuVisible}
+                >
+                  <Avatar
+                    style={{
+                      marginLeft: "20px",
+                      color: "white",
+                      fontSize: "50px",
+                      fontFamily: "Kanit",
+                      marginBottom: "15px",
+                      marginRight: "-15px",
+                    }}
+                    size={52}
+                    src={`http://localhost:1337${userimage.profile_image?.url}`}
+                  />
+                </Dropdown>
               </div>
             ) : (
               <>
-                <div style={{ textAlign: 'right' }}>
+                <div style={{ textAlign: "right" }}>
                   <Link
                     onClick={() => {
                       navigate("/profile");
@@ -602,13 +635,14 @@ const AdminForm = () => {
                       color: "white",
                       fontSize: isSmallScreen ? "14px" : "18px",
                       width: "300px",
-                      fontFamily: 'Kanit'
+                      fontFamily: "Kanit",
                     }}
                   >
                     สวัสดีคุณ {username}
                   </Link>
                   {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
-                  <Dropdown placement="bottomLeft"
+                  <Dropdown
+                    placement="bottomLeft"
                     overlay={menu2}
                     trigger={["click"]}
                   >
@@ -617,9 +651,9 @@ const AdminForm = () => {
                         marginLeft: "50px",
                         color: "white",
                         fontSize: "50px",
-                        fontFamily: 'Kanit',
+                        fontFamily: "Kanit",
                         marginBottom: "10px",
-                        marginRight: "200px"
+                        marginRight: "200px",
                       }}
                       size={52}
                       src={`http://localhost:1337${userimage.profile_image?.url}`}
@@ -630,9 +664,18 @@ const AdminForm = () => {
             )}
           </Col>
         </Header>
-        <PromotionalSlider images={promotionImages} style={promotionalSliderStyle} />
-        <h2 id="scroll"
-          style={{ fontFamily: 'Kanit', textAlign: "center", fontWeight: "bold", fontSize: isSmallScreen ? "25px" : "45px" }}
+        <PromotionalSlider
+          images={promotionImages}
+          style={promotionalSliderStyle}
+        />
+        <h2
+          id="scroll"
+          style={{
+            fontFamily: "Kanit",
+            textAlign: "center",
+            fontWeight: "bold",
+            fontSize: isSmallScreen ? "25px" : "45px",
+          }}
         >
           {isSmallScreen ? (
             <></>
@@ -647,7 +690,10 @@ const AdminForm = () => {
               }}
             >
               <div className="scroll_button">
-                <button onClick={handleScrollToElement} className="circle_button"></button>
+                <button
+                  onClick={handleScrollToElement}
+                  className="circle_button"
+                ></button>
               </div>
             </h2>
           )}
@@ -658,7 +704,7 @@ const AdminForm = () => {
           tooltip={<div>เพิ่มทัวร์ใหม่</div>}
           shape="square"
           type="primary"
-          style={{ fontFamily: 'Kanit', right: 24 }}
+          style={{ fontFamily: "Kanit", right: 24 }}
           icon="+"
           onClick={() => setIsAddMenuOpen(true)}
         />
