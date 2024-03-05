@@ -306,7 +306,7 @@ const TourSchedule = () => {
                       fontSize: "50px",
                       fontFamily: "Kanit",
                       marginBottom: "10px",
-                      marginRight: "-10px",
+                      marginRight: "60px",
                     }}
                     size={52}
                     src={`http://localhost:1337${userimage.profile_image?.url}`}
