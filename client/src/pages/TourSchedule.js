@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Table } from "antd";
 import useLocalState from "../localStorage.js";
-import {  SearchOutlined, UserOutlined } from "@ant-design/icons";
+import { SearchOutlined, UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
@@ -19,6 +19,8 @@ const TourSchedule = () => {
   const [username, setUsername] = useState("");
   const [userimage, setUserImage] = useState({});
   const navigate = useNavigate();
+  const [menuVisible, setMenuVisible] = useState(false);
+
 
   const getImage = async () => {
     try {
@@ -29,6 +31,10 @@ const TourSchedule = () => {
     } catch (error) {
       console.error("การแสดงข้อมูล user ผิดพลาด", error);
     }
+  };
+
+  const handleHeaderClick = () => {
+    navigate("/login");
   };
 
   const roleChecker = async () => {
@@ -236,19 +242,10 @@ const TourSchedule = () => {
                 >
                   <UserOutlined
                     onClick={isSmallScreen ? handleHeaderClick : undefined}
-                    style={{ fontSize: "25px", marginRight: "8px" }}
+                    style={{ fontSize: "25px", marginRight: "80px" }}
                   />
                 </Dropdown>
-                <Popover
-                  content={searchPopoverContent}
-                  trigger="click"
-                  visible={searchPopoverVisible}
-                  onVisibleChange={setSearchPopoverVisible}
-                >
-                  <SearchOutlined
-                    style={{ fontSize: "25px", marginLeft: "8px" }}
-                  />
-                </Popover>
+
               </div>
             ) : (
               <>
@@ -302,20 +299,20 @@ const TourSchedule = () => {
                   visible={menuVisible}
                   onVisibleChange={setMenuVisible}
                 >
-                  <UserOutlined
-                    style={{ fontSize: "25px", marginRight: "8px" }}
+                  <Avatar
+                    style={{
+                      marginLeft: "50px",
+                      color: "white",
+                      fontSize: "50px",
+                      fontFamily: "Kanit",
+                      marginBottom: "10px",
+                      marginRight: "-10px",
+                    }}
+                    size={52}
+                    src={`http://localhost:1337${userimage.profile_image?.url}`}
                   />
                 </Dropdown>
-                <Popover
-                  content={searchPopoverContent}
-                  trigger="click"
-                  visible={searchPopoverVisible}
-                  onVisibleChange={setSearchPopoverVisible}
-                >
-                  <SearchOutlined
-                    style={{ fontSize: "25px", marginLeft: "8px" }}
-                  />
-                </Popover>
+
               </div>
             ) : (
               <>
@@ -371,7 +368,7 @@ const TourSchedule = () => {
             backgroundColor: "#1C3953",
             borderColor: "#1C3953",
             margin: "0",
-            width: "5%",
+            width: isSmallScreen ? "15%" : "5%",
           }}
         >
           Back
