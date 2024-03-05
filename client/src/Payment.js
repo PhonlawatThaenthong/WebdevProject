@@ -56,8 +56,8 @@ const Payment = () => {
 
     let url = "https://s3-symbol-logo.tradingview.com/the-siam-commercial-bank-public-company--600.png"
     let url2 = "https://play-lh.googleusercontent.com/eOzvk-ekluYaeLuvDkLb5RJ0KqfFQpodZDnppxPfpEfqEqbNo5erEkmwLBgqP-k-e2kQ"
-    let url3 = "https://cdn.discordapp.com/attachments/1070568112459632682/1213149402600972349/IMG_0249.png?ex=65f46c6c&is=65e1f76c&hm=e3ec34b2ed73a84befba06e8012e280ef8ae5355abb49277ac2c7189d0d234f9&"
-    let url4 = "https://cdn.discordapp.com/attachments/1070568112459632682/1213151058814042132/IMG_0253.png?ex=65f46df7&is=65e1f8f7&hm=7a34b633c11ce7abe5681e5160867598dd8e088d58177ee4adc83d7b66df005d&"
+    let url3 = "https://cdn.discordapp.com/attachments/1070568112459632682/1214559642076844072/IMG_0245.png?ex=65f98dd0&is=65e718d0&hm=48a840551f8eb05669dd36e33e51dff97cdd85dc8ddc036c0bd69dd8e829c93f&"
+    let url4 = "https://cdn.discordapp.com/attachments/1070568112459632682/1214560058713579540/IMG_0252.jpg?ex=65f98e33&is=65e71933&hm=37a17356739a43e6ceae28ef76c2e9c0c6da179fd6b372cce1892843df975311&"
     const roleChecker = async () => {
         try {
             axios.defaults.headers.common = {
