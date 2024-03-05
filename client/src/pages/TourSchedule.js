@@ -359,7 +359,7 @@ const TourSchedule = () => {
         <h3>ตารางท่องเที่ยว: {tourSchedule.attributes.tour_name}</h3>
         <h3>{formatDate}</h3>
       </div>
-      <Table columns={columns} dataSource={dataSource} />
+      <Table columns={columns} dataSource={dataSource} style={{ marginLeft: "5%", marginRight: "5%" }} />
       <Layout gap="middle" style={layoutStyle}>
         <Button
           type="primary"
