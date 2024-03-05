@@ -238,7 +238,7 @@ const Tour = ({ data, filterData }) => {
               total_price: temp_selectedTour.attributes.price * numberOfPeople,
               reserve_date: temp_date,
               user_phone: user.data.phone_number,
-              user_email:user.data.email,
+              user_email: user.data.email,
             };
 
             const formData = new FormData();
@@ -347,7 +347,7 @@ const Tour = ({ data, filterData }) => {
               xs={24}
               sm={12}
               md={toursToDisplay.length === 1 ? 24 : (toursToDisplay.length === 2 ? 12 : 8)}
-      lg={toursToDisplay.length === 1 ? 24 : (toursToDisplay.length === 2 ? 12 : 8)}
+              lg={toursToDisplay.length === 1 ? 24 : (toursToDisplay.length === 2 ? 12 : 8)}
               style={{
                 display: "flex",
                 width: isSmallScreen ? "100%" : "auto",

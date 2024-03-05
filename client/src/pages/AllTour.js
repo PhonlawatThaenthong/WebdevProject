@@ -427,20 +427,19 @@ const AllTour = () => {
           <span style={{ marginRight: '10px', display: 'flex', justifyContent: 'center', marginTop: '5px' }}>Filters:</span>
           <Cascader options={options} onChange={onChange} />
         </div>
-
         <Tour data={allData} filterData={filterData} />
+        <Button
+          type="primary"
+          onClick={() => navigate("/")}
+          style={{
+            backgroundColor: "#1C3953",
+            borderColor: "#1C3953",
+            margin: "0 auto"
+          }}
+        >
+          Back
+        </Button>
       </Layout>
-      <Button
-        type="primary"
-        onClick={() => navigate("/")}
-        style={{
-          backgroundColor: "#1C3953",
-          borderColor: "#1C3953",
-          margin: "0 auto"
-        }}
-      >
-        Back
-      </Button>
       <Header style={headerbottom}>
         <img src={Logo} alt="Logo" style={{ width: "auto", height: "50px" }} />
       </Header>
