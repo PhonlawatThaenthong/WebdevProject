@@ -21,6 +21,8 @@ import PromotionalSlider from "./PromotionalSlider";
 import Logo from "./Image/logo.png";
 import RecommendTour from "./Tour/recommendTour.js";
 import promotionImages from "./Image/slide.js";
+import Contact from "./Navbar/Contact.js"
+
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -359,6 +361,8 @@ const MemberForm = () => {
       >
         ดูโปรแกรมทั้งหมด
       </Button>
+      <Contact/>
+      
       <Footer style={headerbottom}>
         <img src={Logo} alt="Logo" style={{ width: "auto", height: "50px" }} />
       </Footer>
