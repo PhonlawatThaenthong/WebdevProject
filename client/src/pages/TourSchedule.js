@@ -60,8 +60,6 @@ const TourSchedule = () => {
         families: ["Kanit"],
       },
     });
-    getImage();
-    roleChecker();
     const getTourSchedule = async () => {
       try {
         const response = await axios.get(
@@ -76,6 +74,12 @@ const TourSchedule = () => {
     if (tourId) {
       getTourSchedule();
     }
+
+    if (jwt == null) { } else {
+      getImage();
+      roleChecker();
+    }
+
   }, [tourId]);
 
   if (!tourSchedule) {
