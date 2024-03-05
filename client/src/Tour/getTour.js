@@ -514,8 +514,8 @@ const Tour = ({ data, filterData }) => {
                       </Button>,
                       <Button
                         key="submit"
-                        type="default"
-                        onClick={() => handleTourScheduleClick(id)} // ส่ง id ของทัวร์ไปยังฟังก์ชัน
+                        type="primary"
+                        onClick={() => handleTourScheduleClick(id)}
                       >
                         ตารางท่องเที่ยว
                       </Button>,
@@ -523,6 +523,9 @@ const Tour = ({ data, filterData }) => {
                         key="submit"
                         type="primary"
                         onClick={handleSelect}
+                        style={{
+                          backgroundColor: "green"
+                        }}
                       >
                         จองทัวร์
                       </Button>,
