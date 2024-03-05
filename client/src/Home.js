@@ -234,10 +234,11 @@ const HomeForm = () => {
               </div>
             ) : (
               <>
+              <div style={{ textAlign: 'center' }}>
                 <Link
                   to="/login"
                   style={{
-                    marginLeft: "40px",
+                    marginLeft: "600px",
                     color: "white",
                     fontSize: isSmallScreen ? "15px" : "18px",
                     fontFamily: 'Kanit'
@@ -248,7 +249,7 @@ const HomeForm = () => {
                 <Link
                   to="/register"
                   style={{
-                    marginLeft: "40px",
+                    marginLeft: "50px",
                     color: "white",
                     fontSize: isSmallScreen ? "15px" : "18px",
                     fontFamily: 'Kanit'
@@ -256,6 +257,7 @@ const HomeForm = () => {
                 >
                   ลงทะเบียน
                 </Link>
+                </div>
               </>
             )}
           </Col>

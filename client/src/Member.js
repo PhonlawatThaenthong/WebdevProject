@@ -299,6 +299,7 @@ const MemberForm = () => {
               </div>
             ) : (
               <>
+              <div style={{ textAlign: 'right' }}>
                 <Link
                   onClick={() => {
                     navigate("/profile");
@@ -325,12 +326,13 @@ const MemberForm = () => {
                       fontSize: "50px",
                       fontFamily: "Kanit",
                       marginBottom: "10px",
-                      marginRight: "-70px",
+                      marginRight: "200px",
                     }}
                     size={52}
                     src={`http://localhost:1337${userimage.profile_image?.url}`}
                   />
                 </Dropdown>
+                </div>
               </>
             )}
           </Col>
