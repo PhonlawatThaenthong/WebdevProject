@@ -13,7 +13,7 @@ import {
     Space,
     Menu,
     Dropdown,
-    Popover, Avatar, Descriptions, Upload
+    Popover, Avatar, Descriptions, Upload, Input as AntInput
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -48,6 +48,10 @@ const ProfileForm = () => {
     const [editingPhoneNumber, setEditingPhoneNumber] = useState(false);
     const [userimage, setUserImage] = useState({});
     const [imageFile, setImageFile] = useState(null);
+    const [changePasswordModalVisible, setChangePasswordModalVisible] = useState(false);
+    const [currentPassword, setCurrentPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
 
     const getData = async () => {
@@ -145,6 +149,31 @@ const ProfileForm = () => {
     const handleHeaderClick = () => {
         navigate('/Member');
     };
+
+    const handleShowChangePasswordModal = () => {
+        setChangePasswordModalVisible(true);
+    };
+
+    const handleCloseChangePasswordModal = () => {
+        setChangePasswordModalVisible(false);
+    };
+
+    const handleChangePassword = async () => {
+        try {
+            await axios.post('http://localhost:1337/api/auth/change-password', {
+                currentPassword: currentPassword,
+                password: newPassword,
+                passwordConfirmation: confirmPassword,
+            })
+            handleCloseChangePasswordModal();
+            message.success("Changes Password successfully!", 1);
+            window.location.reload()
+        } catch (error) {
+            console.error("Error updating user data:", error);
+            message.error("Incorrect Password", 1);
+        }
+    };
+
 
     const handleSaveChanges = async () => {
         const hide = message.loading("Saving changes...", 0);
@@ -571,7 +600,52 @@ const ProfileForm = () => {
                         }}>
                                 History
                             </Button></Link>
+                        <Button type="primary" onClick={handleShowChangePasswordModal} style={{
+                            marginLeft: '16px', marginTop: '16px', fontFamily: 'Kanit', backgroundColor: 'red', borderColor: 'red',
+                        }}>
+                            Change Password
+                        </Button>
 
+                        <Modal
+                            title="Change Password"
+                            visible={changePasswordModalVisible}
+                            onOk={handleChangePassword}
+                            onCancel={handleCloseChangePasswordModal}
+                        >
+                            <Form>
+                                <Form.Item
+                                    label="Current Password"
+                                    name="currentPassword"
+                                    rules={[{ required: true, message: 'Please input your current password!' }]}
+                                >
+                                    <AntInput.Password value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} />
+                                </Form.Item>
+                                <Form.Item
+                                    label="New Password"
+                                    name="newPassword"
+                                    rules={[{ required: true, message: 'Please input your new password!' }]}
+                                >
+                                    <AntInput.Password value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Confirm Password"
+                                    name="confirmPassword"
+                                    rules={[
+                                        { required: true, message: 'Please confirm your new password!' },
+                                        ({ getFieldValue }) => ({
+                                            validator(_, value) {
+                                                if (!value || getFieldValue('newPassword') === value) {
+                                                    return Promise.resolve();
+                                                }
+                                                return Promise.reject(new Error('The two passwords do not match!'));
+                                            },
+                                        }),
+                                    ]}
+                                >
+                                    <AntInput.Password value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                                </Form.Item>
+                            </Form>
+                        </Modal>
                     </Content>
                 </Layout>
             </Layout>
