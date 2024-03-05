@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useLocalState from "../localStorage.js";
 import { useMediaQuery } from "react-responsive";
+import moment from 'moment';
 
 import {
   Card,
@@ -18,7 +19,8 @@ import {
   Space,
   Popconfirm,
   message,
-  Cascader
+  Cascader,
+  DatePicker
 } from "antd";
 import LoadingIcon from "../Navbar/LoadingIcon.js";
 import WebFont from "webfontloader";
@@ -475,8 +477,10 @@ const Tour = ({ data, filterData }) => {
                         }))
                       }
                     />
-                    <br />
-                    ระยะเวลา:
+                    <br />ระยะเวลา
+                    <div>
+                      <DatePicker value={moment(edit_tour.attributes.tour_date)} />
+                    </div>
                     <br />
                     รายละเอียด:
                     <TextArea
