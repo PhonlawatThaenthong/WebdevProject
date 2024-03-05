@@ -505,7 +505,7 @@ const ProfileForm = () => {
                                 visible={previewVisible}
                                 onCancel={() => setPreviewVisible(false)}
                                 footer={null}
-                                width={userimage.profile_image?.size} // Adjust the width as needed
+                                width={userimage.profile_image?.size}
                             >
                                 <img
                                     alt="Profile"

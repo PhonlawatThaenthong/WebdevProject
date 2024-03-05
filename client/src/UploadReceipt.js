@@ -53,7 +53,7 @@ const UploadReceipt = () => {
             console.error(error)
         }
     };
-     const handleHeaderClick = () => {
+    const handleHeaderClick = () => {
         navigate('/Member');
     };
 
@@ -72,7 +72,7 @@ const UploadReceipt = () => {
             }
         });
     }, []);
-    
+
     const showDrawer = () => {
         if (!drawerVisible) {
             setOpen(true);
@@ -132,7 +132,7 @@ const UploadReceipt = () => {
             </Helmet>
 
             <Layout style={layoutStyle}>
-                <Header  onClick={isSmallScreen ? handleHeaderClick : undefined} style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
+                <Header onClick={isSmallScreen ? handleHeaderClick : undefined} style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
                     <Col>
                         <span style={blueTextStyle}>H</span>
                         <span style={NormalTextStyle}>AT</span>
@@ -151,12 +151,12 @@ const UploadReceipt = () => {
                 </Header>
             </Layout>
             <Space direction="vertical" size="middle" style={{ display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
-                <Card title="อัพโหลดหลักฐานการชำระเงิน" bordered={false} style={{ fontFamily: 'Kanit',width: isSmallScreen ? '100%' : 950 }}>
-                    <div style={{ fontFamily: 'Kanit',display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <div style={{ fontFamily: 'Kanit',marginBottom: '20px', textAlign: 'center' }}>
+                <Card title="อัพโหลดหลักฐานการชำระเงิน" bordered={false} style={{ fontFamily: 'Kanit', width: isSmallScreen ? '100%' : 950 }}>
+                    <div style={{ fontFamily: 'Kanit', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <div style={{ fontFamily: 'Kanit', marginBottom: '20px', textAlign: 'center' }}>
                             <img src={url} className="Logo1" alt="" style={{ width: isSmallScreen ? '100%' : "100%", }} />
                         </div>
-                        <Card style={{fontFamily: 'Kanit', width: isSmallScreen ? '100%' : "75%", backgroundColor: '#F9F9F9' }}> <p><strong>
+                        <Card style={{ fontFamily: 'Kanit', width: isSmallScreen ? '100%' : "75%", backgroundColor: '#F9F9F9' }}> <p><strong>
                             ชื่อบัญชี: HAT YAI Journey
                             <br />
                             Lind ID : @305iwzmm
@@ -167,50 +167,53 @@ const UploadReceipt = () => {
                             <br />
                             2.ชื่อรายการที่ทำการจอง
                             <br />
-                            3.จำนวนการเข้าจอง 
+                            3.จำนวนการเข้าจอง
                             <br />
                             4.สลิปโอนเงิน พร้อมหมายเหตุ
                         </strong>
                             <br />
                         </p>
                             ทางแอดมินจะทำการอัพเดตสถานะตามคิว รบกวนไม่ทักแชทซ้ำ หากมีการทักซ้ำเท่ากับต่อคิวใหม่
-                            <br />
-                            **ก่อนทำการโอนเงิน กรุณาเติมข้อความในหมายเหตุว่า "เที่ยวกับ Hatyai Journey" ทุกครั้ง หากลืมบันทึกทางเราขอทำการโอนคืน**
-                            <br />
+                            <p>
+                                <strong style={{ color: 'red', fontSize: '16px' }}>
+                                    ก่อนทำการโอนเงิน กรุณาเติมข้อความในหมายเหตุว่า "เที่ยวกับ Hatyai Journey" ทุกครั้ง หากไม่มีทางเราขอทำการโอนคืน
+                                </strong>
+                            </p>
+
                             <Link
-                            onClick={showDrawer}
-                            style={{fontSize:'25px'}}
-                        >
-                            ตัวอย่างการอัพโหลดหลักฐานการโอนเงิน
-                        </Link>
+                                onClick={showDrawer}
+                                style={{ fontSize: '25px' }}
+                            >
+                                ตัวอย่างการอัพโหลดหลักฐานการโอนเงิน
+                            </Link>
                         </Card>
                         <br />
-                        <Button type="primary" block onClick={handleButtonClick}style={{ fontFamily: 'Kanit' }}>ขั้นตอนถัดไป</Button>
+                        <Button type="primary" block onClick={handleButtonClick} style={{ fontFamily: 'Kanit' }}>ขั้นตอนถัดไป</Button>
                     </div>
                 </Card>
             </Space>
-            <Popover 
-              title={<div style={{ textAlign: 'center' ,fontFamily: 'Kanit' }}>แสดงตัวอย่าง</div>}
-             >
-            <FloatButton
-                icon={<QuestionCircleOutlined />}
-                onClick={showDrawer}
-                type="default"
-                style={{
-                    position: 'fixed',
-                    bottom: 20,
-                    right: 20,
-                    zIndex: 9999,
-                }}
-            />
-           </Popover>
+            <Popover
+                title={<div style={{ textAlign: 'center', fontFamily: 'Kanit' }}>แสดงตัวอย่าง</div>}
+            >
+                <FloatButton
+                    icon={<QuestionCircleOutlined />}
+                    onClick={showDrawer}
+                    type="default"
+                    style={{
+                        position: 'fixed',
+                        bottom: 20,
+                        right: 20,
+                        zIndex: 9999,
+                    }}
+                />
+            </Popover>
             <Drawer title="ตัวอย่างการอัพโหลดหลักฐานการโอนเงิน" onClose={onClose} open={open} style={{ fontFamily: 'Kanit', display: 'flex', width: isSmallScreen ? '100%' : 'auto' }}>
                 <p><strong>ตัวอย่างการอัพโหลดหลักฐานการโอนเงินผ่านทาง Line</strong></p>
                 <br />
                 <img src={url3} className="Logo3" alt="" style={{ width: isSmallScreen ? '100%' : '100%', marginLeft: 'auto' }} />
                 <br />
                 <p><strong>กรุณาเติมข้อความในหมายเหตุทุกครั้ง</strong></p>
-               <p><strong>หากลืมบันทึกหมายเหตุทางเราขอทำการโอนคืน</strong></p>
+                <p><strong>หากลืมบันทึกหมายเหตุทางเราขอทำการโอนคืน</strong></p>
             </Drawer>
         </Flex >
     );
