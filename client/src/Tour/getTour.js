@@ -198,7 +198,7 @@ const Tour = ({ data, filterData }) => {
               content: "ขออภัยทัวร์นี้เต็มแล้ว",
             });
           } 
-          else if ((tmp_amount+numberOfPeople) >= tmp_max){
+          else if ((tmp_amount+numberOfPeople) > tmp_max){
             Modal.error({
               title: "Error",
               content: "ขออภัยจำนวนที่รับได้ไม่เพียงพอ",
