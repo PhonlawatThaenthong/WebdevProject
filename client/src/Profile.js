@@ -512,7 +512,7 @@ const ProfileForm = () => {
                                 />
                             </Modal>
                         </div>
-                        <Descriptions title="User Information" bordered column={1} >
+                        <Descriptions title="รายละเอียดของผู้ใช้" bordered column={1} >
                             <Descriptions.Item label="Name">
                                 {editingName ? (
                                     <Input
