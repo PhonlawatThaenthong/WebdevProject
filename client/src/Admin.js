@@ -376,8 +376,8 @@ const AdminForm = () => {
           onChange={(e) => setcreate_desc(e.target.value)}
           autoSize={{ minRows: 1, maxRows: 10 }}
         />
-        <p>วันที่: </p>
-        <RangePicker />
+        <p>วันที่ทัวร์: </p>
+        <DatePicker showTime  format="YYYY-MM-DD HH:mm:ss"/>
         <p>รูปภาพ: </p>
         <Upload
           name="image"

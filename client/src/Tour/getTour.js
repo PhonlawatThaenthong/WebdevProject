@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useLocalState from "../localStorage.js";
 import { useMediaQuery } from "react-responsive";
 import moment from 'moment';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 import {
   Card,
@@ -26,6 +28,8 @@ import LoadingIcon from "../Navbar/LoadingIcon.js";
 import WebFont from "webfontloader";
 
 const { TextArea } = Input;
+
+dayjs.extend(customParseFormat);
 
 const Tour = ({ data, filterData }) => {
   const location = useLocation();
@@ -480,11 +484,12 @@ const Tour = ({ data, filterData }) => {
                         }))
                       }
                     />
-                    <br />วันที่ทัวร์
+                    <br />วันที่ทัวร์:
                     <div>
                       <DatePicker
+                        showTime
                         format="YYYY-MM-DD HH:mm:ss"
-                        value={moment(edit_tour.attributes.tour_date)}
+                        defaultValue={dayjs(edit_tour.attributes.tour_date)}
                         onChange={(date, dateString) =>
                           setedit_tour((prevState) => ({
                             ...prevState,
@@ -578,7 +583,7 @@ const Tour = ({ data, filterData }) => {
                     <br />
                     ราคา: {getPrice(attributes.price)} บาท / ท่าน
                     <br />
-                    วันที่ทัวร์: {getDate(attributes.tour_date)}
+                    วันที่ทัวร์:: {getDate(attributes.tour_date)}
                     <br />
                     รายละเอียด:
                     <br />
@@ -624,7 +629,7 @@ const Tour = ({ data, filterData }) => {
                 <br />
                 ราคา: {getPrice(attributes.price)} บาท / ท่าน
                 <br />
-                วันที่ทัวร์: {getDate(attributes.tour_date)}
+                วันที่ทัวร์:: {getDate(attributes.tour_date)}
                 <br />
                 <br></br>
                 {currentPage === "/admin" ? (
