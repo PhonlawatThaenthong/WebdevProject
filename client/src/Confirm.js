@@ -103,7 +103,7 @@ const Confirm = ({ data, filterData }) => {
         });
     }
 
-    const show_modal_delete = (id) => {
+    const show_modal_delete = (id, attributes) => {
         Modal.confirm({
             title: "ดำเนินการเสร็จสิ้น",
             content: (
@@ -115,6 +115,8 @@ const Confirm = ({ data, filterData }) => {
             cancelText: "ยกเลิก",
             onOk: () => {
                 DeleteStatus(id)
+                RemoveAmount(attributes)
+                console.log(attributes)
             },
             onCancel: () => { },
         });
@@ -152,6 +154,21 @@ const Confirm = ({ data, filterData }) => {
             getData();
         } catch (error) {
             console.error("error delete status", error);
+            message.error("Action Failed!");
+            console.log(allData);
+        }
+    };
+
+    const RemoveAmount = async (attributes) => {
+        try {
+            const des = await axios.put(
+                `http://localhost:1337/api/tours/${attributes.tour_id.data.id}/less`, {
+                numberOfPeople: attributes.reserve_amount
+            });
+            message.success("Cancelled Reservation!");
+            getData();
+        } catch (error) {
+            console.error("error updating status", error);
             message.error("Action Failed!");
         }
     };
@@ -219,6 +236,7 @@ const Confirm = ({ data, filterData }) => {
             setAllData(res.data.data);
         } catch (error) {
             console.error("error fetching tour data", error);
+
         }
     };
 
@@ -500,7 +518,7 @@ const Confirm = ({ data, filterData }) => {
                                     {attributes.payment_status === false && (
                                         <Button
                                             type="primary"
-                                            onClick={() => show_modal_delete(id)}
+                                            onClick={() => show_modal_delete(id, attributes)}
                                             style={{ fontFamily: 'Kanit', textAlign: 'center', marginTop: 10, }}
                                         >
                                             Delete Reservation

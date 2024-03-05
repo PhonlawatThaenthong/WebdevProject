@@ -17,5 +17,10 @@ module.exports = {
       path: '/tours/:id/remove',
       handler: 'tour.deleteRelation'
   },
+  {
+    method: 'PUT',
+    path: '/tours/:id/less',
+    handler: 'tour.method_delete'
+  },
   ]
 }
