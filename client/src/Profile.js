@@ -512,8 +512,8 @@ const ProfileForm = () => {
                                 />
                             </Modal>
                         </div>
-                        <Descriptions title="User Information" bordered column={1} >
-                            <Descriptions.Item label="Name">
+                        <Descriptions title="รายละเอียดของผู้ใช้" bordered column={1} >
+                            <Descriptions.Item label="ชื่อผู้ใช้">
                                 {editingName ? (
                                     <Input
                                         value={userData.username}
@@ -527,7 +527,7 @@ const ProfileForm = () => {
                                     onClick={handleEditName}
                                     style={{ marginLeft: '8px', fontFamily: 'Kanit' }}
                                 >
-                                    {editingName ? '' : "Edit"}
+                                    {editingName ? '' : "แก้ไข"}
                                 </Button>
                             </Descriptions.Item>
                             <Descriptions.Item label="Email">
@@ -544,10 +544,10 @@ const ProfileForm = () => {
                                     onClick={handleEditEmail}
                                     style={{ marginLeft: '8px', fontFamily: 'Kanit' }}
                                 >
-                                    {editingEmail ? '' : "Edit"}
+                                    {editingEmail ? '' : "แก้ไข"}
                                 </Button>
                             </Descriptions.Item>
-                            <Descriptions.Item label="Phone Number">
+                            <Descriptions.Item label="หมายเลขโทรศัพท์">
                                 {editingPhoneNumber ? (
                                     <Input
                                         value={userData.phone_number}
@@ -565,15 +565,15 @@ const ProfileForm = () => {
                                     onClick={handleEditPhoneNumber}
                                     style={{ marginLeft: '8px', fontFamily: 'Kanit' }}
                                 >
-                                    {editingPhoneNumber ? '' : "Edit"}
+                                    {editingPhoneNumber ? '' : "แก้ไข"}
                                 </Button>
                             </Descriptions.Item>
-                            <Descriptions.Item label="Role">{rolename}</Descriptions.Item>
-                            <Descriptions.Item label="Password">
-                                <span style={{ color: 'red' }}>Secret</span>
+                            <Descriptions.Item label="บทบาท">{rolename}</Descriptions.Item>
+                            <Descriptions.Item label="รหัสผ่าน">
+                                <span style={{ color: 'red' }}>ความลับ</span>
                             </Descriptions.Item>
                         </Descriptions>
-                        <h2 style={{ color: '#36cfc9' }}>Change Avatar Profile</h2>
+                        <h2 style={{ color: '#36cfc9' }}>เปลี่ยนรูปโปรไฟล์</h2>
                         <Upload
                             name="image"
                             listType="picture-card"
@@ -597,12 +597,12 @@ const ProfileForm = () => {
                         <Button onClick={handleImageChange} type="primary" style={{
                             marginTop: '16px', fontFamily: 'Kanit', backgroundColor: 'black',
                             borderColor: 'green', marginRight: '16px'
-                        }}> Change Avatar </Button>
+                        }}> ยืนยันการเปลี่ยนรูปโปรไฟล์ </Button>
                         <Button type="primary" onClick={handleSaveChanges} style={{
                             marginTop: '16px', fontFamily: 'Kanit', backgroundColor: 'green',
                             borderColor: 'green',
                         }}>
-                            Save Edit Information
+                            ยืนยันการแก้ไขข้อมูล
                         </Button>
                         <Link onClick={() => {
                             navigate("/history");
@@ -611,12 +611,12 @@ const ProfileForm = () => {
                             marginTop: '16px', fontFamily: 'Kanit', marginLeft: '16px'
 
                         }}>
-                                History
+                                ประวัติการจองทัวร์
                             </Button></Link>
                         <Button type="primary" onClick={handleShowChangePasswordModal} style={{
                             marginLeft: '16px', marginTop: '16px', fontFamily: 'Kanit', backgroundColor: 'red', borderColor: 'red',
                         }}>
-                            Change Password
+                            ยืนยันการเปลี่ยนรหัสผ่าน
                         </Button>
 
                         <Modal

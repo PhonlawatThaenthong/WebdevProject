@@ -432,10 +432,10 @@ const AllTour = () => {
             style={{ maxWidth: '300px' }}
           />
         </div>
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+        {/*<div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
           <span style={{ marginRight: '10px', display: 'flex', justifyContent: 'center', marginTop: '5px' }}>Filters:</span>
           <Cascader options={options} onChange={onChange} />
-        </div>
+                      </div>*/}
         <Tour data={allData} filterData={filterData} />
         <Button
           type="primary"
