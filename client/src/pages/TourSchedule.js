@@ -8,15 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import WebFont from "webfontloader";
-import {
-  Button,
-  Col,
-  Layout,
-  Menu,
-  Dropdown,
-  Popover,
-  Avatar,
-} from "antd";
+import { Button, Col, Layout, Menu, Dropdown, Popover, Avatar } from "antd";
 
 const TourSchedule = () => {
   const { Header, Footer, Sider, Content } = Layout;
@@ -75,11 +67,11 @@ const TourSchedule = () => {
       getTourSchedule();
     }
 
-    if (jwt == null) { } else {
+    if (jwt == null) {
+    } else {
       getImage();
       roleChecker();
     }
-
   }, [tourId]);
 
   if (!tourSchedule) {
@@ -143,7 +135,7 @@ const TourSchedule = () => {
     borderRadius: 0,
     overflow: "hidden",
     backgroundColor: "#F5F5F5",
-    alignItems:"center",
+    alignItems: "center",
   };
 
   const menu = (
@@ -194,6 +186,11 @@ const TourSchedule = () => {
       )}
     </Menu>
   );
+
+  const rawDate = tourSchedule.attributes.tour_date;
+  const dateObj = new Date(rawDate);
+  const options = { day: "numeric", month: "long", year: "numeric" };
+  const formatDate = dateObj.toLocaleDateString("th-TH", options);
 
   return (
     <div gap="middle" wrap="wrap" style={{ backgroundColor: "#F5F5F5" }}>
@@ -322,48 +319,49 @@ const TourSchedule = () => {
               </div>
             ) : (
               <>
-              <div style={{ textAlign: 'right' }}>
-                <Link
-                  onClick={() => {
-                    navigate("/profile");
-                  }}
-                  style={{
-                    marginRight: "50px",
-                    color: "white",
-                    fontSize: isSmallScreen ? "14px" : "18px",
-                    width: "300px",
-                    fontFamily: "Kanit",
-                  }}
-                >
-                  สวัสดีคุณ {username}
-                </Link>
-                <Dropdown
-                  placement="bottomLeft"
-                  overlay={menu2}
-                  trigger={["click"]}
-                >
-                  <Avatar
-                    style={{
-                      marginLeft: "50px",
-                      color: "white",
-                      fontSize: "50px",
-                      fontFamily: "Kanit",
-                      marginBottom: "10px",
-                      marginRight: "200px",
+                <div style={{ textAlign: "right" }}>
+                  <Link
+                    onClick={() => {
+                      navigate("/profile");
                     }}
-                    size={52}
-                    src={`http://localhost:1337${userimage.profile_image?.url}`}
-                  />
-                </Dropdown>
+                    style={{
+                      marginRight: "50px",
+                      color: "white",
+                      fontSize: isSmallScreen ? "14px" : "18px",
+                      width: "300px",
+                      fontFamily: "Kanit",
+                    }}
+                  >
+                    สวัสดีคุณ {username}
+                  </Link>
+                  <Dropdown
+                    placement="bottomLeft"
+                    overlay={menu2}
+                    trigger={["click"]}
+                  >
+                    <Avatar
+                      style={{
+                        marginLeft: "50px",
+                        color: "white",
+                        fontSize: "50px",
+                        fontFamily: "Kanit",
+                        marginBottom: "10px",
+                        marginRight: "200px",
+                      }}
+                      size={52}
+                      src={`http://localhost:1337${userimage.profile_image?.url}`}
+                    />
+                  </Dropdown>
                 </div>
               </>
             )}
           </Col>
         </Header>
       )}
-      <h3 style={{ textAlign: "center" }}>
-        ตารางท่องเที่ยว: {tourSchedule.attributes.tour_name}
-      </h3>
+      <div style={{ textAlign: "center" }}>
+        <h3>ตารางท่องเที่ยว: {tourSchedule.attributes.tour_name}</h3>
+        <h3>{formatDate}</h3>
+      </div>
       <Table columns={columns} dataSource={dataSource} />
       <Layout gap="middle" style={layoutStyle}>
         <Button
@@ -373,7 +371,7 @@ const TourSchedule = () => {
             backgroundColor: "#1C3953",
             borderColor: "#1C3953",
             margin: "0",
-            width: "5%"
+            width: "5%",
           }}
         >
           Back
