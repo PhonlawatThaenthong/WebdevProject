@@ -69,6 +69,8 @@ const AdminForm = () => {
   const [create_max, setcreate_max] = useState(50);
   const [create_destination, setcreate_destination] = useState([]);
 
+
+
   const handleSearch = async (searchText) => {
     try {
       const res = await axios.get(
@@ -146,6 +148,8 @@ const AdminForm = () => {
   const handleAddTour = async (e) => {
     try {
 
+      const formattedDate = moment(create_date).format("YYYY-MM-DD HH:mm:ss");
+
       if (!create_date) {
         message.error('Please select a date for the tour.');
         return;
@@ -156,14 +160,12 @@ const AdminForm = () => {
         return;
       }
 
-      console.log('Destination:', create_destination);
-
-      const formattedDate = moment(create_date).format("YYYY-MM-DD HH:mm:ss");
-
       if (!imageFile) {
         message.error('Please upload an image for the tour.');
         return;
       }
+
+      console.log('Destination:', create_destination);
 
       const imageFiles = Array.isArray(imageFile) ? imageFile : [imageFile];
       const uploadedImages = await Promise.all(imageFiles.map(uploadImage));
@@ -175,7 +177,7 @@ const AdminForm = () => {
         user_max: create_max,
         status: true,
         tour_image: uploadedImages.map(image => ({ id: image.id })),
-        tour_date: formattedDate
+        tour_date: formattedDate,
       };
 
       const formData = new FormData();
@@ -185,7 +187,8 @@ const AdminForm = () => {
               headers: {
                 'Content-Type': 'multipart/form-data'
               }
-            });*/
+            });
+            */
 
       console.log('Upload response:', response.data);
       message.success('Tour added successfully');
@@ -453,79 +456,53 @@ const AdminForm = () => {
         <p>ตารางทัวร์: </p>
         <Form
           name="dynamic_form_item"
-          {...formItemLayoutWithOutLabel}
           onFinish={onFinish}
           style={{
-            maxWidth: 600,
+            alignItems:"center"
           }}
         >
-          <Form.List
-            name="names"
-            rules={[
-              {
-                validator: async (_, names) => {
-                  if (!names || names.length < 1) {
-                    return Promise.reject(new Error('At least 1 destination'));
-                  }
-                },
-              },
-            ]}
-          >
-            {(fields, { add, remove }, { errors }) => (
+          <Form.List name="names">
+            {(fields, { add, remove }) => (
               <>
                 {fields.map((field, index) => (
-                  <Form.Item
-                    {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
-                    label={index === 0 ? `สถานที่` : ``}
-                    required={false}
-                    key={field.key}
-                  >
+                  <div key={field.key}>
                     <Form.Item
-                      {...field}
-                      validateTrigger={['onChange', 'onBlur']}
-                      rules={[
-                        {
-                          required: true,
-                          whitespace: true,
-                          message: "Required",
-                        },
-                      ]}
-                      noStyle
+                      label={index === 0 ? '' : ''}
+                      required={false}
                     >
-                      <Input
-                        placeholder="ชื่อสถานที่"
-                        style={{
-                          width: '60%',
-                        }}
-                      />
-                      <p></p>
-                      <Input
-                        placeholder="เวลา"
-                        style={{
-                          width: '60%',
-                        }}
-                      />
+                      <Form.Item
+                        {...field}
+                        validateTrigger={['onChange', 'onBlur']}
+                        rules={[
+                          {
+                            required: true,
+                            whitespace: true,
+                            message: 'Please input destination',
+                          },
+                        ]}
+                        noStyle
+                      >
+                        <Input placeholder="Destination" style={{ width: '60%' }} />
+                        <Input placeholder="Time" style={{ width: '60%' }} />
+                      </Form.Item>
+                      {fields.length > 0 ? (
+                        <MinusCircleOutlined
+                          className="dynamic-delete-button"
+                          onClick={() => remove(field.name)}
+                        />
+                      ) : null}
                     </Form.Item>
-                    {fields.length > 0 ? (
-                      <MinusCircleOutlined
-                        className="dynamic-delete-button"
-                        onClick={() => remove(field.name)}
-                      />
-                    ) : null}
-                  </Form.Item>
+                  </div>
                 ))}
                 <Form.Item>
                   <Button
                     type="dashed"
                     onClick={() => add()}
-                    style={{
-                      width: '60%',
-                    }}
+                    style={{ width: '60%' }}
                     icon={<PlusOutlined />}
                   >
-                    Add field
+                    Add Destination
                   </Button>
-                  <Form.ErrorList errors={errors} />
                 </Form.Item>
               </>
             )}
