@@ -226,29 +226,30 @@ const HomeForm = () => {
               </div>
             ) : (
               <>
-              <div style={{ textAlign: 'center' }}>
-                <Link
-                  to="/login"
-                  style={{
-                    marginLeft: "600px",
-                    color: "white",
-                    fontSize: isSmallScreen ? "15px" : "18px",
-                    fontFamily: 'Kanit'
-                  }}
-                >
-                  เข้าสู่ระบบ
-                </Link>
-                <Link
-                  to="/register"
-                  style={{
-                    marginLeft: "50px",
-                    color: "white",
-                    fontSize: isSmallScreen ? "15px" : "18px",
-                    fontFamily: 'Kanit'
-                  }}
-                >
-                  ลงทะเบียน
-                </Link>
+                <div style={{ textAlign: 'center' }}>
+                  <Link
+                    to="/login"
+                    style={{
+                      marginLeft: "600px",
+                      color: "white",
+                      fontSize: isSmallScreen ? "15px" : "18px",
+                      fontFamily: 'Kanit'
+                    }}
+                  >
+                    เข้าสู่ระบบ
+                  </Link>
+                  <Link
+                    to="/register"
+                    style={{
+                      marginLeft: "50px",
+                      marginRight: "50px",
+                      color: "white",
+                      fontSize: isSmallScreen ? "15px" : "18px",
+                      fontFamily: 'Kanit'
+                    }}
+                  >
+                    ลงทะเบียน
+                  </Link>
                 </div>
               </>
             )}
@@ -282,7 +283,7 @@ const HomeForm = () => {
       >
         ดูโปรแกรมทั้งหมด
       </Button>
-      <Contact/>  
+      <Contact />
       <Footer style={headerbottom}>
         <img src={Logo} alt="Logo" style={{ width: "auto", height: "50px" }} />
       </Footer>
