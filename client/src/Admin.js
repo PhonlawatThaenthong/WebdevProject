@@ -67,9 +67,11 @@ const AdminForm = () => {
   const [create_date, setcreate_date] = useState((new Date));
   const [create_price, setcreate_price] = useState(0);
   const [create_max, setcreate_max] = useState(50);
-  const [create_destination, setcreate_destination] = useState([]);
+  const [create_destination, setcreate_destination] = useState([{}]);
 
-
+  const handleSubmit = (values) => {
+    console.log('Form values:', values.names);
+  };
 
   const handleSearch = async (searchText) => {
     try {
@@ -150,6 +152,8 @@ const AdminForm = () => {
 
       const formattedDate = moment(create_date).format("YYYY-MM-DD HH:mm:ss");
 
+      console.log('Destination:', create_destination);
+      
       if (!create_date) {
         message.error('Please select a date for the tour.');
         return;
@@ -164,8 +168,6 @@ const AdminForm = () => {
         message.error('Please upload an image for the tour.');
         return;
       }
-
-      console.log('Destination:', create_destination);
 
       const imageFiles = Array.isArray(imageFile) ? imageFile : [imageFile];
       const uploadedImages = await Promise.all(imageFiles.map(uploadImage));
@@ -329,10 +331,6 @@ const AdminForm = () => {
     },
   };
 
-  const onFinish = (values) => {
-    console.log('Received values of form:', values);
-  };
-
   const headerStyle = {
     textAlign: "center",
     color: "#fff",
@@ -456,9 +454,11 @@ const AdminForm = () => {
         <p>ตารางทัวร์: </p>
         <Form
           name="dynamic_form_item"
-          onFinish={onFinish}
+          onFinish={handleSubmit}
           style={{
-            alignItems:"center"
+            alignItems: "center",
+            margin: "0",
+            alignContent: "center"
           }}
         >
           <Form.List name="names">
@@ -473,17 +473,22 @@ const AdminForm = () => {
                       <Form.Item
                         {...field}
                         validateTrigger={['onChange', 'onBlur']}
-                        rules={[
+                        noStyle
+                      >
+                        <Input placeholder="Destination" rules={[
                           {
                             required: true,
                             whitespace: true,
-                            message: 'Please input destination',
+                            message: 'Required',
                           },
-                        ]}
-                        noStyle
-                      >
-                        <Input placeholder="Destination" style={{ width: '60%' }} />
-                        <Input placeholder="Time" style={{ width: '60%' }} />
+                        ]} style={{ width: '60%' }} />
+                        <Input placeholder="Time" rules={[
+                          {
+                            required: true,
+                            whitespace: true,
+                            message: 'Required',
+                          },
+                        ]} style={{ width: '60%' }} />
                       </Form.Item>
                       {fields.length > 0 ? (
                         <MinusCircleOutlined
@@ -501,12 +506,15 @@ const AdminForm = () => {
                     style={{ width: '60%' }}
                     icon={<PlusOutlined />}
                   >
-                    Add Destination
+                    Add
                   </Button>
                 </Form.Item>
               </>
             )}
           </Form.List>
+          <Button type="primary" htmlType="submit">
+            Save
+          </Button>
         </Form>
         <p>รูปภาพ: </p>
         <Upload
