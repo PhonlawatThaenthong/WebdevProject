@@ -346,8 +346,8 @@ const Tour = ({ data, filterData }) => {
               key={id}
               xs={24}
               sm={12}
-              md={toursToDisplay.length <= 1 ? 18 : 8}
-              lg={toursToDisplay.length <= 1 ? 18 : 8}
+              md={toursToDisplay.length === 1 ? 24 : (toursToDisplay.length === 2 ? 12 : 8)}
+      lg={toursToDisplay.length === 1 ? 24 : (toursToDisplay.length === 2 ? 12 : 8)}
               style={{
                 display: "flex",
                 width: isSmallScreen ? "100%" : "auto",
