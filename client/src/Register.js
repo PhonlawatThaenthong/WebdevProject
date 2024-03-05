@@ -9,6 +9,7 @@ import { useMediaQuery } from "react-responsive";
 import Logo from './Image/logo.png'
 import WebFont from 'webfontloader';
 import { UploadOutlined } from "@ant-design/icons";
+import { Footer } from 'antd/es/layout/layout.js';
 
 
 const { Header } = Layout;
@@ -253,9 +254,9 @@ const RegisterForm = () => {
                     </Button>
                 </Modal>
             </Row>
-            <Header style={headerbottom}>
+            <Footer style={headerbottom}>
                 <img src={Logo} alt="Logo" style={{ width: 'auto', height: '30px', }} />
-            </Header>
+            </Footer>
         </div>
     );
 };

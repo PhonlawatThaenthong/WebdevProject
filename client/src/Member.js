@@ -373,9 +373,9 @@ const MemberForm = () => {
       >
         ดูโปรแกรมทั้งหมด
       </Button>
-      <Header style={headerbottom}>
+      <Footer style={headerbottom}>
         <img src={Logo} alt="Logo" style={{ width: "auto", height: "50px" }} />
-      </Header>
+      </Footer>
     </Flex>
   );
 };

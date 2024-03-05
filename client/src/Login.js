@@ -8,6 +8,7 @@ import useLocalState from "./localStorage.js";
 import { useMediaQuery } from "react-responsive";
 import Logo from './Image/logo.png'
 import WebFont from 'webfontloader';
+import { Footer } from "antd/es/layout/layout.js";
 
 const { Header } = Layout;
 
@@ -242,9 +243,9 @@ const LoginForm = () => {
           </Button>
         </Modal>
       </Row>
-      <Header style={headerbottom}>
+      <Footer style={headerbottom}>
         <img src={Logo} alt="Logo" style={{ width: 'auto', height: '50px', }} />
-      </Header>
+      </Footer>
     </div>
   );
 };
