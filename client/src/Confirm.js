@@ -414,7 +414,7 @@ const Confirm = ({ data, filterData }) => {
 
 
                 </Header>
-                <span style={{ fontFamily: 'Kanit', textAlign: 'center', fontSize: "50px" }}>Reserve</span>
+                <span style={{ fontFamily: 'Kanit', textAlign: 'center', fontSize: "50px" }}>สถานะการจองของลูกค้า</span>
 
                 <div
                     style={{
