@@ -139,6 +139,13 @@ const TourSchedule = () => {
     fontSize: isSmallScreen ? "24px" : "45px",
   };
 
+  const layoutStyle = {
+    borderRadius: 0,
+    overflow: "hidden",
+    backgroundColor: "#F5F5F5",
+    alignItems:"center",
+  };
+
   const menu = (
     <Menu>
       {jwt ? (
@@ -358,17 +365,20 @@ const TourSchedule = () => {
         ตารางท่องเที่ยว: {tourSchedule.attributes.tour_name}
       </h3>
       <Table columns={columns} dataSource={dataSource} />
-      <Button
-        type="primary"
-        onClick={() => navigate("/")}
-        style={{
-          backgroundColor: "#1C3953",
-          borderColor: "#1C3953",
-          margin: "0",
-        }}
-      >
-        Back
-      </Button>
+      <Layout gap="middle" style={layoutStyle}>
+        <Button
+          type="primary"
+          onClick={() => navigate("/")}
+          style={{
+            backgroundColor: "#1C3953",
+            borderColor: "#1C3953",
+            margin: "0",
+            width: "5%"
+          }}
+        >
+          Back
+        </Button>
+      </Layout>
     </div>
   );
 };

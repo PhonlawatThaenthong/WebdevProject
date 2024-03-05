@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useLocalState from "../localStorage.js";
 import { useMediaQuery } from "react-responsive";
+import moment from 'moment';
 
 import {
   Card,
@@ -18,7 +19,8 @@ import {
   Space,
   Popconfirm,
   message,
-  Cascader
+  Cascader,
+  DatePicker
 } from "antd";
 import LoadingIcon from "../Navbar/LoadingIcon.js";
 import WebFont from "webfontloader";
@@ -106,10 +108,13 @@ const Tour = ({ data, filterData }) => {
   const handleSave = async () => {
     const hide = message.loading("กำลังบันทึก...", 0);
 
+    const formattedDate = moment(edit_tour.attributes.tour_date).format("YYYY-MM-DD HH:mm:ss");
+
     try {
       const payload = {
         data: {
           tour_name: edit_tour.attributes.tour_name,
+          tour_date: formattedDate,
           price: edit_tour.attributes.price,
           description: edit_tour.attributes.description,
           user_max: edit_tour.attributes.user_max,
@@ -475,8 +480,22 @@ const Tour = ({ data, filterData }) => {
                         }))
                       }
                     />
-                    <br />
-                    ระยะเวลา:
+                    <br />วันที่ทัวร์
+                    <div>
+                      <DatePicker
+                        format="YYYY-MM-DD HH:mm:ss"
+                        value={moment(edit_tour.attributes.tour_date)}
+                        onChange={(date, dateString) =>
+                          setedit_tour((prevState) => ({
+                            ...prevState,
+                            attributes: {
+                              ...prevState.attributes,
+                              tour_date: dateString,
+                            },
+                          }))
+                        }
+                      />
+                    </div>
                     <br />
                     รายละเอียด:
                     <TextArea
@@ -559,7 +578,7 @@ const Tour = ({ data, filterData }) => {
                     <br />
                     ราคา: {getPrice(attributes.price)} บาท / ท่าน
                     <br />
-                    ระยะเวลา: {getDate(attributes.tour_date)}
+                    วันที่ทัวร์: {getDate(attributes.tour_date)}
                     <br />
                     รายละเอียด:
                     <br />
@@ -605,7 +624,7 @@ const Tour = ({ data, filterData }) => {
                 <br />
                 ราคา: {getPrice(attributes.price)} บาท / ท่าน
                 <br />
-                ระยะเวลา: {getDate(attributes.tour_date)}
+                วันที่ทัวร์: {getDate(attributes.tour_date)}
                 <br />
                 <br></br>
                 {currentPage === "/admin" ? (
