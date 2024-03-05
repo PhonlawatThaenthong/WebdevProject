@@ -52,6 +52,7 @@ const ProfileForm = () => {
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [previewVisible, setPreviewVisible] = useState(false);
 
 
     const getData = async () => {
@@ -450,7 +451,7 @@ const ProfileForm = () => {
                                         src={`http://localhost:1337${userimage.profile_image?.url}`}
                                     />
                                 </Dropdown>
-
+                                
                             </div>
                         ) : (
                             <div style={{ textAlign: 'right' }}> {/* Align content to the right */}
@@ -498,8 +499,15 @@ const ProfileForm = () => {
                 <Layout>
                     <Content style={{ fontFamily: 'Kanit', padding: "24px", minHeight: 500 }}>
                         <div style={{ fontFamily: 'Kanit', textAlign: "center" }}>
-                            <Avatar size={100} src={`http://localhost:1337${userimage.profile_image?.url}`} />
+                            <Avatar onClick={() => setPreviewVisible(true)} size={100} src={`http://localhost:1337${userimage.profile_image?.url}`} />
                             <h2>{userData.username}</h2>
+                            <Modal
+                                    visible={previewVisible}
+                                    onCancel={() => setPreviewVisible(false)}
+                                    footer={null}
+                                >
+                                    <img alt="Profile" style={{ width: '100%' }} src={`http://localhost:1337${userimage.profile_image?.url}`} />
+                                </Modal>
                         </div>
                         <Descriptions title="User Information" bordered column={1} >
                             <Descriptions.Item label="Name">
@@ -562,7 +570,7 @@ const ProfileForm = () => {
                                 <span style={{ color: 'red' }}>Secret</span>
                             </Descriptions.Item>
                         </Descriptions>
-                        <h2 style={{color:'#36cfc9'}}>Change Avatar Profile</h2>
+                        <h2 style={{ color: '#36cfc9' }}>Change Avatar Profile</h2>
                         <Upload
                             name="image"
                             listType="picture-card"
