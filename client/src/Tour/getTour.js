@@ -44,6 +44,7 @@ const Tour = ({ data, filterData }) => {
     navigate(`/tour-schedule/${tourId}`);
   };
 
+
   const handleOpenModal = async (id) => {
     const res = await axios.get(
       `http://localhost:1337/api/tours/${id}?populate=*`
@@ -190,12 +191,19 @@ const Tour = ({ data, filterData }) => {
           var tmp_amount = res_tour.data.data.attributes.user_amount;
           var tmp_max = res_tour.data.data.attributes.user_max;
 
+
           if (tmp_amount >= tmp_max) {
             Modal.error({
               title: "Error",
               content: "ขออภัยทัวร์นี้เต็มแล้ว",
             });
-          } else {
+          } 
+          else if ((tmp_amount+numberOfPeople) >= tmp_max){
+            Modal.error({
+              title: "Error",
+              content: "ขออภัยจำนวนที่รับได้ไม่เพียงพอ",
+            });
+          } else{
             const res = await axios.post(
               `http://localhost:1337/api/tours/${selectedTourId}/complete`,
               {
@@ -315,6 +323,8 @@ const Tour = ({ data, filterData }) => {
       console.error("Error deleting tour:", error);
     }
   };
+
+  
 
   const toursToDisplay = filterData.length > 0 ? filterData : data;
 
