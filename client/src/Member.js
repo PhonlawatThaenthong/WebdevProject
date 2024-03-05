@@ -283,52 +283,52 @@ const MemberForm = () => {
                     src={`http://localhost:1337${userimage.profile_image?.url}`}
                   />
                 </Dropdown>
-                
+
               </div>
             ) : (
               <>
-              <div style={{ textAlign: 'right' }}>
-                <Link
-                  onClick={() => {
-                    navigate("/profile");
-                  }}
-                  style={{
-                    marginRight: "50px",
-                    color: "white",
-                    fontSize: isSmallScreen ? "14px" : "18px",
-                    width: "300px",
-                    fontFamily: "Kanit",
-                  }}
-                >
-                  สวัสดีคุณ {username}
-                </Link>
-                <Dropdown
-                  placement="bottomLeft"
-                  overlay={menu2}
-                  trigger={["click"]}
-                >
-                  <Avatar
-                    style={{
-                      marginLeft: "50px",
-                      color: "white",
-                      fontSize: "50px",
-                      fontFamily: "Kanit",
-                      marginBottom: "10px",
-                      marginRight: "200px",
+                <div style={{ textAlign: 'right' }}>
+                  <Link
+                    onClick={() => {
+                      navigate("/profile");
                     }}
-                    size={52}
-                    src={`http://localhost:1337${userimage.profile_image?.url}`}
-                  />
-                </Dropdown>
+                    style={{
+                      marginRight: "20px",
+                      color: "white",
+                      fontSize: isSmallScreen ? "14px" : "18px",
+                      width: "300px",
+                      fontFamily: "Kanit",
+                    }}
+                  >
+                    สวัสดีคุณ {username}
+                  </Link>
+                  <Dropdown
+                    placement="bottomLeft"
+                    overlay={menu2}
+                    trigger={["click"]}
+                  >
+                    <Avatar
+                      style={{
+                        marginLeft: "50px",
+                        color: "white",
+                        fontSize: "50px",
+                        fontFamily: "Kanit",
+                        marginBottom: "10px",
+                        marginRight: "250px",
+                      }}
+                      size={52}
+                      src={`http://localhost:1337${userimage.profile_image?.url}`}
+                    />
+                  </Dropdown>
                 </div>
               </>
             )}
           </Col>
         </Header>
-          <PromotionalSlider
-            images={promotionImages}
-            style={promotionalSliderStyle}
-          />
+        <PromotionalSlider
+          images={promotionImages}
+          style={promotionalSliderStyle}
+        />
         <h2
           id="scroll"
           style={{
@@ -341,9 +341,9 @@ const MemberForm = () => {
           {isSmallScreen ? (
             <></>
           ) : (
-              <div className="scroll_button">
-                <button onClick={handleScrollToElement} className="circle_button"></button>
-              </div>
+            <div className="scroll_button">
+              <button onClick={handleScrollToElement} className="circle_button"></button>
+            </div>
           )}
           โปรแกรมทัวร์แนะนำ
         </h2>
@@ -361,8 +361,8 @@ const MemberForm = () => {
       >
         ดูโปรแกรมทั้งหมด
       </Button>
-      <Contact/>
-      
+      <Contact />
+
       <Footer style={headerbottom}>
         <img src={Logo} alt="Logo" style={{ width: "auto", height: "50px" }} />
       </Footer>
