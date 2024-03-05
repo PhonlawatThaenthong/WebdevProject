@@ -18,7 +18,8 @@ import {
   Menu,
   Dropdown,
   Popover,
-  Avatar
+  Avatar,
+  Select
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -28,6 +29,7 @@ import useLocalState from "./localStorage.js";
 import { useMediaQuery } from "react-responsive";
 import { UploadOutlined } from "@ant-design/icons";
 import { MenuOutlined, SearchOutlined, UserOutlined, LogoutOutlined } from "@ant-design/icons";
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import WebFont from 'webfontloader';
 import Tour from "./Tour/getTour.js";
 import SearchBar from "./Navbar/SearchBar";
@@ -44,6 +46,7 @@ const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
+const { Option } = Select;
 
 const AdminForm = () => {
   const navigate = useNavigate();
@@ -64,6 +67,7 @@ const AdminForm = () => {
   const [create_date, setcreate_date] = useState((new Date));
   const [create_price, setcreate_price] = useState(0);
   const [create_max, setcreate_max] = useState(50);
+  const [create_destination, setcreate_destination] = useState([]);
 
   const handleSearch = async (searchText) => {
     try {
@@ -146,9 +150,16 @@ const AdminForm = () => {
         message.error('Please select a date for the tour.');
         return;
       }
-  
+
+      if (create_destination.length === 0) {
+        message.error('Please add at least one destination');
+        return;
+      }
+
+      console.log('Destination:', create_destination);
+
       const formattedDate = moment(create_date).format("YYYY-MM-DD HH:mm:ss");
-  
+
       if (!imageFile) {
         message.error('Please upload an image for the tour.');
         return;
@@ -169,17 +180,17 @@ const AdminForm = () => {
 
       const formData = new FormData();
       formData.append('data', JSON.stringify(addNewTour));
-
-      const response = await axios.post('http://localhost:1337/api/tours', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
+      /*
+            const response = await axios.post('http://localhost:1337/api/tours', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            });*/
 
       console.log('Upload response:', response.data);
       message.success('Tour added successfully');
       setIsAddMenuOpen(false);
-      window.location.reload();
+      //window.location.reload();
     } catch (error) {
       console.error('Error uploading data:', error);
       message.error('Failed to add tour');
@@ -283,6 +294,41 @@ const AdminForm = () => {
       <SearchBar onSearch={handleSearch} />
     </div>
   );
+
+  const formItemLayout = {
+    labelCol: {
+      xs: {
+        span: 24,
+      },
+      sm: {
+        span: 4,
+      },
+    },
+    wrapperCol: {
+      xs: {
+        span: 24,
+      },
+      sm: {
+        span: 20,
+      },
+    },
+  };
+  const formItemLayoutWithOutLabel = {
+    wrapperCol: {
+      xs: {
+        span: 24,
+        offset: 0,
+      },
+      sm: {
+        span: 20,
+        offset: 4,
+      },
+    },
+  };
+
+  const onFinish = (values) => {
+    console.log('Received values of form:', values);
+  };
 
   const headerStyle = {
     textAlign: "center",
@@ -404,6 +450,87 @@ const AdminForm = () => {
           format="YYYY-MM-DD HH:mm:ss"
           defaultValue={dayjs(create_date)}
         />
+        <p>ตารางทัวร์: </p>
+        <Form
+          name="dynamic_form_item"
+          {...formItemLayoutWithOutLabel}
+          onFinish={onFinish}
+          style={{
+            maxWidth: 600,
+          }}
+        >
+          <Form.List
+            name="names"
+            rules={[
+              {
+                validator: async (_, names) => {
+                  if (!names || names.length < 1) {
+                    return Promise.reject(new Error('At least 1 destination'));
+                  }
+                },
+              },
+            ]}
+          >
+            {(fields, { add, remove }, { errors }) => (
+              <>
+                {fields.map((field, index) => (
+                  <Form.Item
+                    {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
+                    label={index === 0 ? `สถานที่` : ``}
+                    required={false}
+                    key={field.key}
+                  >
+                    <Form.Item
+                      {...field}
+                      validateTrigger={['onChange', 'onBlur']}
+                      rules={[
+                        {
+                          required: true,
+                          whitespace: true,
+                          message: "Required",
+                        },
+                      ]}
+                      noStyle
+                    >
+                      <Input
+                        placeholder="ชื่อสถานที่"
+                        style={{
+                          width: '60%',
+                        }}
+                      />
+                      <p></p>
+                      <Input
+                        placeholder="เวลา"
+                        style={{
+                          width: '60%',
+                        }}
+                      />
+                    </Form.Item>
+                    {fields.length > 0 ? (
+                      <MinusCircleOutlined
+                        className="dynamic-delete-button"
+                        onClick={() => remove(field.name)}
+                      />
+                    ) : null}
+                  </Form.Item>
+                ))}
+                <Form.Item>
+                  <Button
+                    type="dashed"
+                    onClick={() => add()}
+                    style={{
+                      width: '60%',
+                    }}
+                    icon={<PlusOutlined />}
+                  >
+                    Add field
+                  </Button>
+                  <Form.ErrorList errors={errors} />
+                </Form.Item>
+              </>
+            )}
+          </Form.List>
+        </Form>
         <p>รูปภาพ: </p>
         <Upload
           name="image"
@@ -499,8 +626,6 @@ const AdminForm = () => {
                   <Dropdown placement="bottomLeft"
                     overlay={menu2}
                     trigger={["click"]}
-
-
                   >
                     <Avatar
                       style={{
@@ -539,10 +664,8 @@ const AdminForm = () => {
               <div className="scroll_button">
                 <button onClick={handleScrollToElement} className="circle_button"></button>
               </div>
-
             </h2>
           )}
-
           โปรแกรมทั้งหมด
         </h2>
         <Tour data={allData} filterData={filterData} />
