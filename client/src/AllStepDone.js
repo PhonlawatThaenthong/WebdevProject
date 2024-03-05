@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
-    Form,
     Input,
     Button,
-    Modal,
-    Row,
-    Image,
     Col,
     Layout,
     Flex,
@@ -15,7 +11,6 @@ import {
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import axios from 'axios';
 import useLocalState from './localStorage.js';
 import Step from "./Navbar/Step.js";

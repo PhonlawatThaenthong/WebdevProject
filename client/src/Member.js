@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from "react";
 import {
-  Form,
   Input,
   Button,
-  Image,
   message,
-  Modal,
-  Row,
   Col,
   Layout,
   Flex,
-  Space,
   Menu,
   Dropdown,
-  Popover,
   Avatar,
 } from "antd";
 import { Helmet } from "react-helmet";
@@ -22,15 +16,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import useLocalState from "./localStorage.js";
 import { useMediaQuery } from "react-responsive";
-import {
-  MenuOutlined,
-  SearchOutlined,
-  UserOutlined,
-  LogoutOutlined,
-} from "@ant-design/icons";
 import WebFont from "webfontloader";
-import Tour from "./Tour/getTour.js";
-import SearchBar from "./Navbar/SearchBar";
 import PromotionalSlider from "./PromotionalSlider";
 import Logo from "./Image/logo.png";
 import RecommendTour from "./Tour/recommendTour.js";

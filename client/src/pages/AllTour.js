@@ -1,17 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import {
-  Form,
-  Input,
   Button,
-  Image,
   message,
-  Modal,
-  Row,
   Col,
   Layout,
   Flex,
-  Space,
   Menu,
   Dropdown,
   Popover,
@@ -22,7 +16,7 @@ import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 import useLocalState from "../localStorage.js";
 import SearchBar from "../Navbar/SearchBar";
-import { MenuOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
+import { SearchOutlined, UserOutlined } from "@ant-design/icons";
 import Logo from "../Image/logo.png";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -361,22 +355,22 @@ const AllTour = () => {
                 {isSmallScreen ? (
                   <div style={{ textAlign: isSmallScreen ? "right" : "left" }}>
                     <Popover
-                    content={searchPopoverContent}
-                    trigger="click"
-                    visible={searchPopoverVisible}
-                    onVisibleChange={setSearchPopoverVisible}
-                  >
-                    <SearchOutlined
-                      style={{ fontSize: "35px", marginLeft: "8px", marginBottom: "10px"  }}
-                    />
-                  </Popover>
+                      content={searchPopoverContent}
+                      trigger="click"
+                      visible={searchPopoverVisible}
+                      onVisibleChange={setSearchPopoverVisible}
+                    >
+                      <SearchOutlined
+                        style={{ fontSize: "35px", marginLeft: "8px", marginBottom: "10px" }}
+                      />
+                    </Popover>
                     <Dropdown
-                    overlay={menu}
-                    trigger={["click"]}
-                    visible={menuVisible}
-                    onVisibleChange={setMenuVisible}
-                  >
-                   <Avatar
+                      overlay={menu}
+                      trigger={["click"]}
+                      visible={menuVisible}
+                      onVisibleChange={setMenuVisible}
+                    >
+                      <Avatar
                         style={{
                           marginLeft: "20px",
                           color: "white",
@@ -387,9 +381,9 @@ const AllTour = () => {
                         }}
                         size={52}
                         src={`http://localhost:1337${userimage.profile_image?.url}`}
-                    />
-                  </Dropdown>
-                  
+                      />
+                    </Dropdown>
+
                   </div>
                 ) : (
                   <>

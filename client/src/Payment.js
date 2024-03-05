@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
-    Form,
     Input,
     Button,
-    Modal,
-    Row,
-    Image,
     Col,
     Layout,
     Flex,

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Table } from "antd";
 import useLocalState from "../localStorage.js";
-import { MenuOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
+import {  SearchOutlined, UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
@@ -255,7 +255,7 @@ const TourSchedule = () => {
                 <Link
                   to="/login"
                   style={{
-                    marginLeft: "40px",
+                    marginLeft: "600px",
                     color: "white",
                     fontSize: isSmallScreen ? "15px" : "18px",
                   }}
@@ -265,7 +265,7 @@ const TourSchedule = () => {
                 <Link
                   to="/register"
                   style={{
-                    marginLeft: "40px",
+                    marginLeft: "50px",
                     color: "white",
                     fontSize: isSmallScreen ? "15px" : "18px",
                   }}

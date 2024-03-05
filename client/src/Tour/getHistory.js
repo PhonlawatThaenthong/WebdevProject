@@ -6,18 +6,8 @@ import { useMediaQuery } from "react-responsive";
 
 import {
   Card,
-  Form,
-  Input,
   Image,
-  Button,
-  Modal,
   Row,
-  Col,
-  Layout,
-  Flex,
-  Space,
-  Popconfirm,
-  message,
 } from "antd";
 import LoadingIcon from "../Navbar/LoadingIcon.js";
 import WebFont from 'webfontloader';

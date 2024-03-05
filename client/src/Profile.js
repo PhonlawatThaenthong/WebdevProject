@@ -25,8 +25,6 @@ import { MenuOutlined, SearchOutlined, UserOutlined, UnorderedListOutlined } fro
 import WebFont from 'webfontloader';
 import { UploadOutlined } from "@ant-design/icons";
 
-import Boy from "./Image/boy.png"
-import Girl from "./Image/girl.png"
 import Logo from "./Image/logo.png";
 import useFormItemStatus from "antd/es/form/hooks/useFormItemStatus.js";
 

@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from "react";
 import {
-    Form,
     Input,
-    Button,
-    Image,
     message,
-    Modal,
-    Row,
     Col,
     Layout,
     Flex,
-    Space,
-    List,
-    Card, Menu, Dropdown, Popover, Avatar
+     Menu, Dropdown, Avatar
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -21,12 +14,10 @@ import axios from 'axios';
 import useLocalState from './localStorage.js';
 import CardHistory from "./Tour/getHistory.js";
 import { useMediaQuery } from "react-responsive";
-import { MenuOutlined, SearchOutlined, UserOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import WebFont from 'webfontloader';
 
 
 
-import SearchBar from "./Navbar/SearchBar";
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;

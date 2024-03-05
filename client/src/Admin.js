@@ -3,16 +3,12 @@ import {
   Form,
   Input,
   Button,
-  Image,
   message,
   Modal,
-  Row,
   Col,
   Layout,
   Flex,
-  Space,
   FloatButton,
-  InputNumber,
   DatePicker,
   Upload,
   Menu,
@@ -29,10 +25,7 @@ import useLocalState from "./localStorage.js";
 import { useMediaQuery } from "react-responsive";
 import { UploadOutlined } from "@ant-design/icons";
 import {
-  MenuOutlined,
   SearchOutlined,
-  UserOutlined,
-  LogoutOutlined,
 } from "@ant-design/icons";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import WebFont from "webfontloader";

@@ -5,8 +5,6 @@ import useLocalState from "./localStorage.js";
 import { useMediaQuery } from "react-responsive";
 
 import {
-    Form,
-    Input,
     Button,
     Image,
     message,
@@ -15,14 +13,11 @@ import {
     Col,
     Layout,
     Flex,
-    Space,
-    List,
-    Card, Menu, Dropdown, Popover, Avatar
+    Card, Menu, Dropdown, Avatar
 } from "antd";
 import LoadingIcon from "./Navbar/LoadingIcon.js";
 import WebFont from 'webfontloader';
 import { Helmet } from "react-helmet";
-import { MenuOutlined, SearchOutlined, UserOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
 const { Header, Footer, Sider, Content } = Layout;

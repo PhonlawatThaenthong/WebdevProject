@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, Modal, Row, Col, Card, Layout,Upload } from 'antd';
+import { Form, Input, Button, Modal, Row, Col, Card, Layout } from 'antd';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import useLocalState from './localStorage.js';
@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import { useMediaQuery } from "react-responsive";
 import Logo from './Image/logo.png'
 import WebFont from 'webfontloader';
-import { UploadOutlined } from "@ant-design/icons";
 import { Footer } from 'antd/es/layout/layout.js';
 
 
