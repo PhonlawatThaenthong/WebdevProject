@@ -381,7 +381,7 @@ export interface ApiReserveReserve extends Schema.CollectionType {
     >;
     tour_id: Attribute.Relation<
       'api::reserve.reserve',
-      'oneToOne',
+      'manyToOne',
       'api::tour.tour'
     >;
     reserve_date: Attribute.DateTime;
@@ -431,6 +431,11 @@ export interface ApiTourTour extends Schema.CollectionType {
     user_max: Attribute.Integer & Attribute.DefaultTo<50>;
     tour_image: Attribute.Media;
     destination: Attribute.JSON;
+    reserves: Attribute.Relation<
+      'api::tour.tour',
+      'oneToMany',
+      'api::reserve.reserve'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

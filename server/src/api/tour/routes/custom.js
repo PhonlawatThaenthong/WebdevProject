@@ -12,5 +12,10 @@ module.exports = {
       path: '/tours/:id/refresh',
       handler: 'tour.method_refresh'
     },
+    {
+      method: 'DELETE',
+      path: '/tours/:id/remove',
+      handler: 'tour.deleteRelation'
+  },
   ]
 }

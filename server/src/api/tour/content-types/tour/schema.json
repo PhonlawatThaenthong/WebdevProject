@@ -45,6 +45,12 @@
     },
     "destination": {
       "type": "json"
+    },
+    "reserves": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::reserve.reserve",
+      "mappedBy": "tour_id"
     }
   }
 }

@@ -20,8 +20,9 @@
     },
     "tour_id": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::tour.tour"
+      "relation": "manyToOne",
+      "target": "api::tour.tour",
+      "inversedBy": "reserves"
     },
     "reserve_date": {
       "type": "datetime"

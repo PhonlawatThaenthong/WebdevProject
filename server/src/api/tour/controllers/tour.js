@@ -74,4 +74,31 @@ module.exports = createCoreController('api::tour.tour', ({ strapi }) => ({
         }
     },
 
+    async deleteRelation(ctx) {
+        const entityId = ctx.params.id;
+        const event = await strapi.entityService.findOne('api::tour.tour', entityId);
+
+        if (!event) {
+            return ctx.notFound(`Not Found`);
+        }
+        
+        ctx.body = { Stats: `Deleting ${entityId}` }
+        const entries = await strapi.entityService.findMany('api::reserve.reserve', {
+            populate: '*',
+            filters: {
+                tour_id: {
+                    id: {
+                        $eq: entityId,
+                    },
+                },
+
+            }
+        });
+    
+        for (let i of entries) {
+            const entry = await strapi.entityService.delete('api::reserve.reserve', i.id);
+        }
+        const entry = await strapi.entityService.delete('api::tour.tour', entityId);
+    },
+
 }));

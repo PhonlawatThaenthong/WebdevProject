@@ -304,7 +304,7 @@ const Tour = ({ data, filterData }) => {
 
   const handleTourDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:1337/api/tours/${id}`, {
+      await axios.delete(`http://localhost:1337/api/tours/${id}/remove`, {
         headers: {
           Authorization: `Bearer ${jwt}`,
         },
