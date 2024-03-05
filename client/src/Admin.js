@@ -71,13 +71,16 @@ const AdminForm = () => {
   const [create_price, setcreate_price] = useState(0);
   const [create_max, setcreate_max] = useState(50);
   const [create_destination, setcreate_destination] = useState([{}]);
+  const [create_setSave, setcreate_setSave] = useState(false)
   const [open, setOpen] = useState(false);
   const { Panel } = Collapse;
   const [drawerVisible, setDrawerVisible] = useState(false);
 
   const onFinish = (values) => {
-    setcreate_destination(JSON.stringify(values.tour_place))
-  };
+    setcreate_setSave(true)
+    const jsonparse = JSON.stringify(values.tour_place)
+    setcreate_destination(JSON.parse(jsonparse))
+  }
 
   const handleSearch = async (searchText) => {
     try {
@@ -99,6 +102,7 @@ const AdminForm = () => {
       setDrawerVisible(false);
     }
   };
+
   const onClose = () => {
     setOpen(false);
     setDrawerVisible(false);
@@ -174,7 +178,10 @@ const AdminForm = () => {
     try {
       const formattedDate = moment(create_date).format("YYYY-MM-DD HH:mm:ss");
 
-      console.log("Destination:", create_destination);
+      if (create_setSave == false) {
+        message.error("Please save destinations!");
+        return;
+      }
 
       if (!create_date) {
         message.error("Please select a date for the tour.");
@@ -222,6 +229,7 @@ const AdminForm = () => {
       console.log("Upload response:", response.data);
       message.success("Tour added successfully");
       setIsAddMenuOpen(false);
+      window.location.reload()
     } catch (error) {
       console.error("Error uploading data:", error);
       message.error("Failed to add tour");
@@ -511,7 +519,7 @@ const AdminForm = () => {
                   >
                     <Form.Item
                       {...restField}
-                      name={[name, 'place_name']}
+                      name={[name, 'name']}
                       rules={[
                         {
                           required: true,
@@ -523,7 +531,7 @@ const AdminForm = () => {
                     </Form.Item>
                     <Form.Item
                       {...restField}
-                      name={[name, 'place_time']}
+                      name={[name, 'time']}
                       rules={[
                         {
                           required: true,
@@ -722,7 +730,10 @@ const AdminForm = () => {
           <FloatButton
             tooltip={<div>เพิ่มทัวร์ใหม่</div>}
             icon={<FileAddOutlined />}
-            onClick={() => setIsAddMenuOpen(true)}
+            onClick={() => {
+              setIsAddMenuOpen(true)
+              setcreate_setSave(false)
+            }}
             type="primary"
             style={{
               fontFamily: "Kanit",
