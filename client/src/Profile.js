@@ -501,7 +501,7 @@ const ProfileForm = () => {
                             <Avatar size={100} src={`http://localhost:1337${userimage.profile_image?.url}`} />
                             <h2>{userData.username}</h2>
                         </div>
-                        <Descriptions title="User Information" bordered column={1}>
+                        <Descriptions title="User Information" bordered column={1} >
                             <Descriptions.Item label="Name">
                                 {editingName ? (
                                     <Input
@@ -562,7 +562,7 @@ const ProfileForm = () => {
                                 <span style={{ color: 'red' }}>Secret</span>
                             </Descriptions.Item>
                         </Descriptions>
-                        <h2>Change Avatar Profile</h2>
+                        <h2 style={{color:'#36cfc9'}}>Change Avatar Profile</h2>
                         <Upload
                             name="image"
                             listType="picture-card"
