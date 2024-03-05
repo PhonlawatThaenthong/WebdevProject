@@ -371,7 +371,7 @@ const TourSchedule = () => {
             width: isSmallScreen ? "15%" : "5%",
           }}
         >
-          Back
+          ย้อนกลับ
         </Button>
       </Layout>
     </div>

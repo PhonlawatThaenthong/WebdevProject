@@ -591,7 +591,7 @@ const Tour = ({ data, filterData }) => {
                     <br />
                     ราคา: {getPrice(attributes.price)} บาท / ท่าน
                     <br />
-                    วันที่ทัวร์:: {getDate(attributes.tour_date)}
+                    วันที่ทัวร์: {getDate(attributes.tour_date)}
                     <br />
                     รายละเอียด:
                     <br />
@@ -637,7 +637,7 @@ const Tour = ({ data, filterData }) => {
                 <br />
                 ราคา: {getPrice(attributes.price)} บาท / ท่าน
                 <br />
-                วันที่ทัวร์:: {getDate(attributes.tour_date)}
+                วันที่ทัวร์: {getDate(attributes.tour_date)}
                 <br />
                 <br></br>
                 {currentPage === "/admin" ? (
