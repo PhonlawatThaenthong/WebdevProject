@@ -177,6 +177,7 @@ const AdminForm = () => {
 
       const imageFiles = Array.isArray(imageFile) ? imageFile : [imageFile];
       const uploadedImages = await Promise.all(imageFiles.map(uploadImage));
+
       const addNewTour = {
         tour_name: create_name,
         tour_date: create_date,
@@ -185,6 +186,7 @@ const AdminForm = () => {
         user_max: create_max,
         status: true,
         tour_image: uploadedImages.map((image) => ({ id: image.id })),
+        destination: create_destination,
         tour_date: formattedDate,
       };
 
@@ -204,7 +206,6 @@ const AdminForm = () => {
       console.log("Upload response:", response.data);
       message.success("Tour added successfully");
       setIsAddMenuOpen(false);
-      //window.location.reload();
     } catch (error) {
       console.error("Error uploading data:", error);
       message.error("Failed to add tour");
