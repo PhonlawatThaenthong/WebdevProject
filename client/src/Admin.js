@@ -34,6 +34,11 @@ import SearchBar from "./Navbar/SearchBar";
 import PromotionalSlider from "./PromotionalSlider";
 import Logo from "./Image/logo.png";
 import promotionImages from "./Image/slide.js";
+import moment from 'moment';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(customParseFormat);
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -56,6 +61,7 @@ const AdminForm = () => {
 
   const [create_name, setcreate_name] = useState("");
   const [create_desc, setcreate_desc] = useState("");
+  const [create_date, setcreate_date] = useState((new Date));
   const [create_price, setcreate_price] = useState(0);
   const [create_max, setcreate_max] = useState(50);
 
@@ -377,7 +383,12 @@ const AdminForm = () => {
           autoSize={{ minRows: 1, maxRows: 10 }}
         />
         <p>วันที่ทัวร์: </p>
-        <DatePicker showTime  format="YYYY-MM-DD HH:mm:ss"/>
+        <DatePicker
+        de
+          showTime
+          format="YYYY-MM-DD HH:mm:ss"
+          defaultValue={dayjs(create_date)}
+        />
         <p>รูปภาพ: </p>
         <Upload
           name="image"
@@ -454,41 +465,41 @@ const AdminForm = () => {
               </div>
             ) : (
               <>
-               <div style={{ textAlign: 'right' }}>
-                <Link
-                  onClick={() => {
-                    navigate("/profile");
-                  }}
-                  style={{
-                    marginRight: "50px",
-                    color: "white",
-                    fontSize: isSmallScreen ? "14px" : "18px",
-                    width: "300px",
-                    fontFamily: 'Kanit'
-                  }}
-                >
-                  สวัสดีคุณ {username}
-                </Link>
-                {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
-                <Dropdown placement="bottomLeft"
-                  overlay={menu2}
-                  trigger={["click"]}
-
-
-                >
-                  <Avatar
-                    style={{
-                      marginLeft: "50px",
-                      color: "white",
-                      fontSize: "50px",
-                      fontFamily: 'Kanit',
-                      marginBottom: "10px",
-                      marginRight: "200px"
+                <div style={{ textAlign: 'right' }}>
+                  <Link
+                    onClick={() => {
+                      navigate("/profile");
                     }}
-                    size={52}
-                    src={`http://localhost:1337${userimage.profile_image?.url}`}
-                  />
-                </Dropdown>
+                    style={{
+                      marginRight: "50px",
+                      color: "white",
+                      fontSize: isSmallScreen ? "14px" : "18px",
+                      width: "300px",
+                      fontFamily: 'Kanit'
+                    }}
+                  >
+                    สวัสดีคุณ {username}
+                  </Link>
+                  {isSmallScreen ? null : <SearchBar onSearch={handleSearch} />}
+                  <Dropdown placement="bottomLeft"
+                    overlay={menu2}
+                    trigger={["click"]}
+
+
+                  >
+                    <Avatar
+                      style={{
+                        marginLeft: "50px",
+                        color: "white",
+                        fontSize: "50px",
+                        fontFamily: 'Kanit',
+                        marginBottom: "10px",
+                        marginRight: "200px"
+                      }}
+                      size={52}
+                      src={`http://localhost:1337${userimage.profile_image?.url}`}
+                    />
+                  </Dropdown>
                 </div>
               </>
             )}
@@ -513,7 +524,7 @@ const AdminForm = () => {
               <div className="scroll_button">
                 <button onClick={handleScrollToElement} className="circle_button"></button>
               </div>
-              
+
             </h2>
           )}
 
