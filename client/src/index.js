@@ -17,7 +17,7 @@ import AllTour from "./pages/AllTour";
 import Confirm from "./Confirm";
 import ProfileForm from "./Profile";
 import TourSchedule from "./pages/TourSchedule";
-import Howto from "./Howto";
+
 
 const router = createBrowserRouter([
   {
@@ -71,10 +71,6 @@ const router = createBrowserRouter([
   {
     path: "/confirm",
     element: <Confirm />,
-  },
-  {
-    path: "/howto",
-    element: <Howto />,
   },
   {
     path: "/profile",
