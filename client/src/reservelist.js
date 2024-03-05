@@ -202,8 +202,8 @@ const ReserveForm = () => {
             </Helmet>
             {contextHolder}
             <Layout style={layoutStyle}>
-                <Header style={headerStyle}>
-                    <Col onClick={isSmallScreen ? handleHeaderClick : undefined} style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
+                <Header style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }}>
+                    <Col onClick={isSmallScreen ? handleHeaderClick : undefined} style={{ ...headerStyle, justifyContent: isSmallScreen ? 'center' : 'flex-start' }} >
                         <span style={blueTextStyle}>H</span>
                         <span style={NormalTextStyle}>AT</span>
                         <span style={invtext}>.</span>
