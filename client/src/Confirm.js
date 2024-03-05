@@ -20,6 +20,8 @@ import WebFont from 'webfontloader';
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
+import { config, config2 } from "./config.js";
+
 const { Header, Footer, Sider, Content } = Layout;
 
 
@@ -42,7 +44,7 @@ const Confirm = ({ data, filterData }) => {
                 Authorization: `Bearer ${jwt}`,
             };
             const userResult = await axios.get(
-                "http://localhost:1337/api/users/me?populate=role"
+                `${config.serverUrlPrefix}/users/me?populate=role`
             );
 
             setUsername(userResult.data.username);
@@ -62,7 +64,7 @@ const Confirm = ({ data, filterData }) => {
     };
     const getImage = async () => {
         try {
-            const res = await axios.get("http://localhost:1337/api/users/me?populate=*");
+            const res = await axios.get(`${config.serverUrlPrefix}/users/me?populate=*`);
             setUserImage(res.data);
         } catch (error) {
             console.error("การแสดงข้อมูล user ผิดพลาด", error);
@@ -125,7 +127,7 @@ const Confirm = ({ data, filterData }) => {
     const updateStatus = async (reserveId) => {
         try {
             const res = await axios.post(
-                `http://localhost:1337/api/reserve/${reserveId}/method_confirm`);
+                `${config.serverUrlPrefix}/reserve/${reserveId}/method_confirm`);
             message.success("Confirmed Reservation!");
             getData();
         } catch (error) {
@@ -137,7 +139,7 @@ const Confirm = ({ data, filterData }) => {
     const CancelStatus = async (reserveId) => {
         try {
             const res = await axios.post(
-                `http://localhost:1337/api/reserve/${reserveId}/method_cancel`);
+                `${config.serverUrlPrefix}/reserve/${reserveId}/method_cancel`);
             message.success("Cancelled Reservation!");
             getData();
         } catch (error) {
@@ -149,7 +151,7 @@ const Confirm = ({ data, filterData }) => {
     const DeleteStatus = async (reserveId) => {
         try {
             const res = await axios.delete(
-                `http://localhost:1337/api/reserves/${reserveId}`);
+                `${config.serverUrlPrefix}/reserves/${reserveId}`);
             message.success("Delete Reservation!");
             getData();
         } catch (error) {
@@ -162,7 +164,7 @@ const Confirm = ({ data, filterData }) => {
     const RemoveAmount = async (attributes) => {
         try {
             const des = await axios.put(
-                `http://localhost:1337/api/tours/${attributes.tour_id.data.id}/less`, {
+                `${config.serverUrlPrefix}/tours/${attributes.tour_id.data.id}/less`, {
                 numberOfPeople: attributes.reserve_amount
             });
             message.success("Cancelled Reservation!");
@@ -232,7 +234,7 @@ const Confirm = ({ data, filterData }) => {
 
     const getData = async () => {
         try {
-            const res = await axios.get("http://localhost:1337/api/reserves?populate=*");
+            const res = await axios.get(`${config.serverUrlPrefix}/reserves?populate=*`);
             setAllData(res.data.data);
         } catch (error) {
             console.error("error fetching tour data", error);
@@ -390,7 +392,7 @@ const Confirm = ({ data, filterData }) => {
                                             marginRight: "-10px",
                                         }}
                                         size={52}
-                                        src={`http://localhost:1337${userimage.profile_image?.url}`}
+                                        src={`${config2.serverUrlPrefix}${userimage.profile_image?.url}`}
                                     />
                                 </Dropdown>
 
@@ -422,7 +424,7 @@ const Confirm = ({ data, filterData }) => {
                                             marginRight: "-70px"
                                         }}
                                         size={52}
-                                        src={`http://localhost:1337${userimage.profile_image?.url}`}
+                                        src={`${config2.serverUrlPrefix}${userimage.profile_image?.url}`}
                                     />
                                 </Dropdown>
                             </>

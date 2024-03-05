@@ -10,6 +10,8 @@ import { useMediaQuery } from "react-responsive";
 import WebFont from "webfontloader";
 import { Button, Col, Layout, Menu, Dropdown, Popover, Avatar } from "antd";
 
+import { config, config2 } from "../config.js";
+
 const TourSchedule = () => {
   const { Header, Footer, Sider, Content } = Layout;
   const { tourId } = useParams();
@@ -25,7 +27,7 @@ const TourSchedule = () => {
   const getImage = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:1337/api/users/me?populate=*"
+        `${config.serverUrlPrefix}/users/me?populate=*`
       );
       setUserImage(res.data);
     } catch (error) {
@@ -43,7 +45,7 @@ const TourSchedule = () => {
         Authorization: `Bearer ${jwt}`,
       };
       const userResult = await axios.get(
-        "http://localhost:1337/api/users/me?populate=role"
+        `${config.serverUrlPrefix}/users/me?populate=role`
       );
 
       setUsername(userResult.data.username);
@@ -61,7 +63,7 @@ const TourSchedule = () => {
     const getTourSchedule = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:1337/api/tours/${tourId}?populate=*`
+          `${config.serverUrlPrefix}/tours/${tourId}?populate=*`
         );
         setTourSchedule(response.data.data);
       } catch (error) {
@@ -309,7 +311,7 @@ const TourSchedule = () => {
                       marginRight: "60px",
                     }}
                     size={52}
-                    src={`http://localhost:1337${userimage.profile_image?.url}`}
+                    src={`${config2.serverUrlPrefix}${userimage.profile_image?.url}`}
                   />
                 </Dropdown>
 
@@ -346,7 +348,7 @@ const TourSchedule = () => {
                         marginRight: "200px",
                       }}
                       size={52}
-                      src={`http://localhost:1337${userimage.profile_image?.url}`}
+                      src={`${config2.serverUrlPrefix}${userimage.profile_image?.url}`}
                     />
                   </Dropdown>
                 </div>

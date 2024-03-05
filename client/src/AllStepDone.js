@@ -17,6 +17,8 @@ import Step from "./Navbar/Step.js";
 import { useMediaQuery } from "react-responsive";
 import WebFont from 'webfontloader';
 
+import { config } from "./config.js";
+
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
 
@@ -35,7 +37,7 @@ const AllStepDone = () => {
             axios.defaults.headers.common = {
                 Authorization: `Bearer ${jwt}`,
             };
-            const userResult = await axios.get('http://localhost:1337/api/users/me?populate=role');
+            const userResult = await axios.get(`${config.serverUrlPrefix}/users/me?populate=role`);
             setUsername(userResult.data.username)
         } catch (error) {
             console.error(error)

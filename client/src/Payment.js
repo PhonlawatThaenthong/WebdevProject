@@ -21,6 +21,9 @@ import Step from "./Navbar/Step.js";
 import { useMediaQuery } from "react-responsive";
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import WebFont from 'webfontloader';
+
+import { config } from "./config.js";
+
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
 
@@ -59,7 +62,7 @@ const Payment = () => {
             axios.defaults.headers.common = {
                 Authorization: `Bearer ${jwt}`,
             };
-            const userResult = await axios.get('http://localhost:1337/api/users/me?populate=role');
+            const userResult = await axios.get(`${config.serverUrlPrefix}/users/me?populate=role`);
             setUsername(userResult.data.username)
         } catch (error) {
             console.error(error)
@@ -197,12 +200,12 @@ const Payment = () => {
                         <p>เมื่อทำการชำระเงินเรียบร้อยแล้วต้องทำการแจ้งสลิปหลักฐานการโอนเงินพร้อมระบุหมายเหตุทุกครั้ง เมื่อการชำระเงินของคุณได้รับการยืนยันแล้ว </p>
                         <p>สถานะการชำระในช่องประวัติการซื้อจะเปลี่ยนแปลง</p>
                         <Link
-                            onClick={showDrawer} style={{fontSize:'25px'}}
+                            onClick={showDrawer} style={{ fontSize: '25px' }}
                         >
                             ตัวอย่างสลิปการโอนเงิน
                         </Link>
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         <Button type="primary" block style={{ fontFamily: 'Kanit', backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }} onClick={handleButtonClick}>ใช่ ฉันชำระเงินแล้ว</Button>
                     </Card>
                 </Card>

@@ -25,6 +25,8 @@ import 'react-calendar/dist/Calendar.css';
 
 import Tour from "../Tour/getTour";
 
+import { config, config2 } from "../config.js";
+
 const AllTour = () => {
   const [allData, setAllData] = useState([]);
   const { Header, Footer, Sider, Content } = Layout;
@@ -41,7 +43,7 @@ const AllTour = () => {
 
   const getAllData = async () => {
     try {
-      const res = await axios.get("http://localhost:1337/api/tours?populate=*");
+      const res = await axios.get(`${config.serverUrlPrefix}/tours?populate=*`);
       setAllData(res.data.data);
     } catch (error) {
       console.error("error fetching all data", error);
@@ -50,7 +52,7 @@ const AllTour = () => {
 
   const getImage = async () => {
     try {
-      const res = await axios.get("http://localhost:1337/api/users/me?populate=*");
+      const res = await axios.get(`${config.serverUrlPrefix}/users/me?populate=*`);
       setUserImage(res.data);
     } catch (error) {
       console.error("การแสดงข้อมูล user ผิดพลาด", error);
@@ -63,7 +65,7 @@ const AllTour = () => {
         Authorization: `Bearer ${jwt}`,
       };
       const userResult = await axios.get(
-        "http://localhost:1337/api/users/me?populate=role"
+        `${config.serverUrlPrefix}/users/me?populate=role`
       );
 
       setUsername(userResult.data.username);
@@ -98,7 +100,7 @@ const AllTour = () => {
   const handleSearch = async (searchText) => {
     try {
       const res = await axios.get(
-        `http://localhost:1337/api/tours?filters[tour_name][$containsi]=${searchText}&populate=*`
+        `${config.serverUrlPrefix}/tours?filters[tour_name][$containsi]=${searchText}&populate=*`
       );
       setFilterData(res.data.data);
     } catch (error) {
@@ -380,7 +382,7 @@ const AllTour = () => {
                           marginRight: "-15px"
                         }}
                         size={52}
-                        src={`http://localhost:1337${userimage.profile_image?.url}`}
+                        src={`${config2.serverUrlPrefix}${userimage.profile_image?.url}`}
                       />
                     </Dropdown>
 
@@ -416,7 +418,7 @@ const AllTour = () => {
                           marginRight: "-70px"
                         }}
                         size={52}
-                        src={`http://localhost:1337${userimage.profile_image?.url}`}
+                        src={`${config2.serverUrlPrefix}${userimage.profile_image?.url}`}
                       />
                     </Dropdown>
                   </>

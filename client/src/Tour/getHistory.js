@@ -12,6 +12,8 @@ import {
 import LoadingIcon from "../Navbar/LoadingIcon.js";
 import WebFont from 'webfontloader';
 
+import { config } from "../config.js";
+
 const CardHistory = ({ data, filterData }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -29,7 +31,7 @@ const CardHistory = ({ data, filterData }) => {
         Authorization: `Bearer ${jwt}`,
       };
       const userResult = await axios.get(
-        "http://localhost:1337/api/users/me?populate=role"
+        `${config.serverUrlPrefix}/users/me?populate=role`
       );
       setUsername(userResult.data.username);
     } catch (error) {
@@ -82,7 +84,7 @@ const CardHistory = ({ data, filterData }) => {
 
   const getData = async () => {
     try {
-      const res = await axios.get("http://localhost:1337/api/reserves?populate=*");
+      const res = await axios.get(`${config.serverUrlPrefix}/reserves?populate=*`);
       setAllData(res.data.data);
     } catch (error) {
       console.error("error fetching tour data", error);
@@ -126,45 +128,45 @@ const CardHistory = ({ data, filterData }) => {
         </b>
       ) : (
         <Row gutter={[16, 16]}>
-        {userReserves.map(({ id, attributes }) => (
-          <Card hoverable key={id} xs={24} sm={12} md={8} lg={8} style={{ fontFamily: 'Kanit', width: 300, margin: 20, marginTop: 50 }}>
-            {attributes.payment_status === false && (
-              <Image
-                src={`https://cdn-icons-png.freepik.com/512/6475/6475938.png`}
-                preview={false}
-              />)}
-            {attributes.payment_status === true && (
-              <Image
-                src={`https://thumb.ac-illust.com/98/98f98abb339a27ca448a784926b8329d_t.jpeg`}
-                preview={false}
-              />)}
-            <b style={{ fontSize: "18px", fontFamily: 'Kanit' }}>{attributes.tour_id.data.attributes.tour_name}</b>
-            <br />
-            สถานะ:{" "}
-            <span style={{ color: getStatusColor(attributes.payment_status) }}>
-              <b>{getStatus(attributes.payment_status)}</b>
-            </span>
-            <br />
-            ประเภทการชำระเงิน: {attributes.payment_method}
-            <br />
-            จำนวน: {attributes.reserve_amount} ท่าน
-            <br />
-            ราคา: {getPrice((attributes.total_price / attributes.reserve_amount))} บาท / ท่าน
-            <br />
-            ราคารวม: {getPrice(attributes.total_price)} บาท
-            <br />
-            วันที่จอง: {getDate(attributes.reserve_date)}
-            <br />
-            วันที่ยืนยัน: {getDate(attributes.confirm_date)}
-            <br />
-            ชื่อผู้จอง: {attributes.user_id.data.attributes.username}
-            <br />
-            ช่องทางการติดต่อ: {attributes.user_phone}
-            <br />
-            อีเมลของผู้จอง: {attributes.user_email}
-            <br></br>
-          </Card>
-        ))}
+          {userReserves.map(({ id, attributes }) => (
+            <Card hoverable key={id} xs={24} sm={12} md={8} lg={8} style={{ fontFamily: 'Kanit', width: 300, margin: 20, marginTop: 50 }}>
+              {attributes.payment_status === false && (
+                <Image
+                  src={`https://cdn-icons-png.freepik.com/512/6475/6475938.png`}
+                  preview={false}
+                />)}
+              {attributes.payment_status === true && (
+                <Image
+                  src={`https://thumb.ac-illust.com/98/98f98abb339a27ca448a784926b8329d_t.jpeg`}
+                  preview={false}
+                />)}
+              <b style={{ fontSize: "18px", fontFamily: 'Kanit' }}>{attributes.tour_id.data.attributes.tour_name}</b>
+              <br />
+              สถานะ:{" "}
+              <span style={{ color: getStatusColor(attributes.payment_status) }}>
+                <b>{getStatus(attributes.payment_status)}</b>
+              </span>
+              <br />
+              ประเภทการชำระเงิน: {attributes.payment_method}
+              <br />
+              จำนวน: {attributes.reserve_amount} ท่าน
+              <br />
+              ราคา: {getPrice((attributes.total_price / attributes.reserve_amount))} บาท / ท่าน
+              <br />
+              ราคารวม: {getPrice(attributes.total_price)} บาท
+              <br />
+              วันที่จอง: {getDate(attributes.reserve_date)}
+              <br />
+              วันที่ยืนยัน: {getDate(attributes.confirm_date)}
+              <br />
+              ชื่อผู้จอง: {attributes.user_id.data.attributes.username}
+              <br />
+              ช่องทางการติดต่อ: {attributes.user_phone}
+              <br />
+              อีเมลของผู้จอง: {attributes.user_email}
+              <br></br>
+            </Card>
+          ))}
         </Row>
       )}
     </div>

@@ -5,7 +5,7 @@ import {
     Col,
     Layout,
     Flex,
-     Menu, Dropdown, Avatar
+    Menu, Dropdown, Avatar
 } from "antd";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +15,8 @@ import useLocalState from './localStorage.js';
 import CardHistory from "./Tour/getHistory.js";
 import { useMediaQuery } from "react-responsive";
 import WebFont from 'webfontloader';
+
+import { config, config2 } from "./config.js";
 
 
 
@@ -37,7 +39,7 @@ const ReserveForm = () => {
                 Authorization: `Bearer ${jwt}`,
             };
             const userResult = await axios.get(
-                "http://localhost:1337/api/users/me?populate=role"
+                `${config.serverUrlPrefix}/users/me?populate=role`
             );
 
             setUsername(userResult.data.username);
@@ -57,7 +59,7 @@ const ReserveForm = () => {
     };
     const getImage = async () => {
         try {
-            const res = await axios.get("http://localhost:1337/api/users/me?populate=*");
+            const res = await axios.get(`${config.serverUrlPrefix}/users/me?populate=*`);
             setUserImage(res.data);
         } catch (error) {
             console.error("การแสดงข้อมูล user ผิดพลาด", error);
@@ -103,7 +105,7 @@ const ReserveForm = () => {
                         key="username"
                     >
                         <span style={{ fontFamily: 'Kanit', color: "#48D3FF" }}>
-                        {username && `โปรไฟล์ของ, ${username}`}
+                            {username && `โปรไฟล์ของ, ${username}`}
                         </span>
                     </Menu.Item>
                     <Menu.Item
@@ -218,7 +220,7 @@ const ReserveForm = () => {
                                             marginRight: "-10px",
                                         }}
                                         size={52}
-                                        src={`http://localhost:1337${userimage.profile_image?.url}`}
+                                        src={`${config2.serverUrlPrefix}${userimage.profile_image?.url}`}
                                     />
                                 </Dropdown>
 
@@ -250,7 +252,7 @@ const ReserveForm = () => {
                                             marginRight: "-70px"
                                         }}
                                         size={52}
-                                        src={`http://localhost:1337${userimage.profile_image?.url}`}
+                                        src={`${config2.serverUrlPrefix}${userimage.profile_image?.url}`}
                                     />
                                 </Dropdown>
                             </>

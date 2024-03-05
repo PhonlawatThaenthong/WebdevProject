@@ -45,6 +45,8 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
 
+import { config, config2 } from "./config.js";
+
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
 const { RangePicker } = DatePicker;
@@ -85,7 +87,7 @@ const AdminForm = () => {
   const handleSearch = async (searchText) => {
     try {
       const res = await axios.get(
-        `http://localhost:1337/api/tours?filters[tour_name][$containsi]=${searchText}&populate=*`
+        `${config.serverUrlPrefix}/tours?filters[tour_name][$containsi]=${searchText}&populate=*`
       );
       setFilterData(res.data.data);
     } catch (error) {
@@ -112,7 +114,7 @@ const AdminForm = () => {
   const getImage = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:1337/api/users/me?populate=*"
+        `${config.serverUrlPrefix}/users/me?populate=*`
       );
       setUserImage(res.data);
     } catch (error) {
@@ -122,7 +124,7 @@ const AdminForm = () => {
 
   const getData = async () => {
     try {
-      const res = await axios.get("http://localhost:1337/api/tours?populate=*");
+      const res = await axios.get(`${config.serverUrlPrefix}/tours?populate=*`);
       setAllData(res.data.data);
     } catch (error) {
       console.error("error fetching tour data", error);
@@ -135,7 +137,7 @@ const AdminForm = () => {
         Authorization: `Bearer ${jwt}`,
       };
       const userResult = await axios.get(
-        "http://localhost:1337/api/users/me?populate=role"
+        `${config.serverUrlPrefix}/users/me?populate=role`
       );
 
       setUsername(userResult.data.username);
@@ -217,7 +219,7 @@ const AdminForm = () => {
       formData.append("data", JSON.stringify(addNewTour));
 
       const response = await axios.post(
-        "http://localhost:1337/api/tours",
+        `${config.serverUrlPrefix}/tours`,
         formData,
         {
           headers: {
@@ -241,7 +243,7 @@ const AdminForm = () => {
       const formData = new FormData();
       formData.append("files", image);
       const response = await axios.post(
-        "http://localhost:1337/api/upload",
+        `${config.serverUrlPrefix}/upload`,
         formData,
         {
           headers: {
@@ -563,7 +565,7 @@ const AdminForm = () => {
           name="image"
           listType="picture-card"
           showUploadList={false}
-          action="http://localhost:1337/api/upload"
+          action={`${config.serverUrlPrefix}/upload`}
           beforeUpload={(file) => {
             setImageFile(file);
             return false;
@@ -636,7 +638,7 @@ const AdminForm = () => {
                       marginRight: "-15px",
                     }}
                     size={52}
-                    src={`http://localhost:1337${userimage.profile_image?.url}`}
+                    src={`${config2.serverUrlPrefix}${userimage.profile_image?.url}`}
                   />
                 </Dropdown>
               </div>
@@ -673,7 +675,7 @@ const AdminForm = () => {
                         marginRight: "200px",
                       }}
                       size={52}
-                      src={`http://localhost:1337${userimage.profile_image?.url}`}
+                      src={`${config2.serverUrlPrefix}${userimage.profile_image?.url}`}
                     />
                   </Dropdown>
                 </div>

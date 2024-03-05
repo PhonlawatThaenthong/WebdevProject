@@ -23,6 +23,8 @@ import RecommendTour from "./Tour/recommendTour.js";
 import promotionImages from "./Image/slide.js";
 import Contact from "./Navbar/Contact.js"
 
+import { config, config2 } from "./config.js";
+
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -42,7 +44,7 @@ const MemberForm = () => {
   const getImage = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:1337/api/users/me?populate=*"
+        `${config.serverUrlPrefix}/users/me?populate=*`
       );
       setUserImage(res.data);
     } catch (error) {
@@ -52,7 +54,7 @@ const MemberForm = () => {
 
   const getData = async () => {
     try {
-      const res = await axios.get("http://localhost:1337/api/tours?populate=*");
+      const res = await axios.get(`${config.serverUrlPrefix}/tours?populate=*`);
       setAllData(res.data.data);
     } catch (error) {
       console.error("การแสดงข้อมูลทัวร์ผิดพลาด", error);
@@ -65,7 +67,7 @@ const MemberForm = () => {
         Authorization: `Bearer ${jwt}`,
       };
       const userResult = await axios.get(
-        "http://localhost:1337/api/users/me?populate=role"
+        `${config.serverUrlPrefix}/users/me?populate=role`
       );
 
       setUsername(userResult.data.username);
@@ -280,7 +282,7 @@ const MemberForm = () => {
                       marginRight: "-10px",
                     }}
                     size={52}
-                    src={`http://localhost:1337${userimage.profile_image?.url}`}
+                    src={`${config2.serverUrlPrefix}${userimage.profile_image?.url}`}
                   />
                 </Dropdown>
 
@@ -317,7 +319,7 @@ const MemberForm = () => {
                         marginRight: "250px",
                       }}
                       size={52}
-                      src={`http://localhost:1337${userimage.profile_image?.url}`}
+                      src={`${config2.serverUrlPrefix}${userimage.profile_image?.url}`}
                     />
                   </Dropdown>
                 </div>

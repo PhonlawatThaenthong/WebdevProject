@@ -24,6 +24,8 @@ import './index.css';
 import RecommendTour from "./Tour/recommendTour.js";
 import promotionImages from "./Image/slide.js";
 
+import { config } from "./config.js";
+
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
 
@@ -40,7 +42,7 @@ const HomeForm = () => {
 
   const getData = async () => {
     try {
-      const res = await axios.get("http://localhost:1337/api/tours?populate=*");
+      const res = await axios.get(`${config.serverUrlPrefix}/tours?populate=*`);
       setAllData(res.data.data);
     } catch (error) {
       console.error("error fetching tour data", error);
@@ -53,7 +55,7 @@ const HomeForm = () => {
         Authorization: `Bearer ${jwt}`,
       };
       const userResult = await axios.get(
-        "http://localhost:1337/api/users/me?populate=role"
+        `${config.serverUrlPrefix}/users/me?populate=role`
       );
 
       if (userResult.data.role && userResult.data.role.name === "Member") {

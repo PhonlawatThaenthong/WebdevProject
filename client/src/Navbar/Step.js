@@ -18,4 +18,3 @@ const Step = ({ current }) => (
 );
 
 export default Step;
-    

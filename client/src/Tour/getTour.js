@@ -22,6 +22,8 @@ import {
 import LoadingIcon from "../Navbar/LoadingIcon.js";
 import WebFont from "webfontloader";
 
+import { config, config2 } from "../config.js";
+
 const { TextArea } = Input;
 
 dayjs.extend(customParseFormat);
@@ -47,7 +49,7 @@ const Tour = ({ data, filterData }) => {
 
   const handleOpenModal = async (id) => {
     const res = await axios.get(
-      `http://localhost:1337/api/tours/${id}?populate=*`
+      `${config.serverUrlPrefix}/tours/${id}?populate=*`
     );
     setedit_tour(res.data.data);
     setSelectedTourId(id);
@@ -57,7 +59,7 @@ const Tour = ({ data, filterData }) => {
   const handleforce = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:1337/api/tours/1?populate=*`
+        `${config.serverUrlPrefix}/tours/1?populate=*`
       );
       setedit_tour(res.data.data);
     } catch (error) {
@@ -124,7 +126,7 @@ const Tour = ({ data, filterData }) => {
       };
 
       const response = await axios.put(
-        `http://localhost:1337/api/tours/${selectedTourId}`,
+        `${config.serverUrlPrefix}/tours/${selectedTourId}`,
         payload,
         {
           headers: {
@@ -135,7 +137,7 @@ const Tour = ({ data, filterData }) => {
       );
 
       await axios.put(
-        `http://localhost:1337/api/tours/${selectedTourId}/refresh`,
+        `${config.serverUrlPrefix}/tours/${selectedTourId}/refresh`,
         {
           headers: {
             Authorization: `Bearer ${jwt}`,
@@ -186,7 +188,7 @@ const Tour = ({ data, filterData }) => {
       try {
         const handleBook = async () => {
           const res_tour = await axios.get(
-            `http://localhost:1337/api/tours/${selectedTourId}?populate=*`
+            `${config.serverUrlPrefix}/tours/${selectedTourId}?populate=*`
           );
           var tmp_amount = res_tour.data.data.attributes.user_amount;
           var tmp_max = res_tour.data.data.attributes.user_max;
@@ -197,15 +199,15 @@ const Tour = ({ data, filterData }) => {
               title: "Error",
               content: "ขออภัยทัวร์นี้เต็มแล้ว",
             });
-          } 
-          else if ((tmp_amount+numberOfPeople) > tmp_max){
+          }
+          else if ((tmp_amount + numberOfPeople) > tmp_max) {
             Modal.error({
               title: "Error",
               content: "ขออภัยจำนวนที่รับได้ไม่เพียงพอ",
             });
-          } else{
+          } else {
             const res = await axios.post(
-              `http://localhost:1337/api/tours/${selectedTourId}/complete`,
+              `${config.serverUrlPrefix}/tours/${selectedTourId}/complete`,
               {
                 numberOfPeople: numberOfPeople,
               },
@@ -227,13 +229,13 @@ const Tour = ({ data, filterData }) => {
                 Authorization: `Bearer ${jwt}`,
               };
               const userResult = await axios.get(
-                "http://localhost:1337/api/users/me?populate=role"
+                `${config.serverUrlPrefix}/users/me?populate=role`
               );
 
               temp_userID = userResult.data.id;
 
               const tourResult = await axios.get(
-                `http://localhost:1337/api/tours/${selectedTourId}?populate=*`
+                `${config.serverUrlPrefix}/tours/${selectedTourId}?populate=*`
               );
 
               temp_selectedTour = tourResult.data.data;
@@ -242,7 +244,7 @@ const Tour = ({ data, filterData }) => {
             }
 
             const user = await axios.get(
-              "http://localhost:1337/api/users/me"
+              `${config.serverUrlPrefix}/users/me`
             );
 
             const addNewTour = {
@@ -259,7 +261,7 @@ const Tour = ({ data, filterData }) => {
             formData.append("data", JSON.stringify(addNewTour));
 
             const response = await axios.post(
-              "http://localhost:1337/api/reserves",
+              `${config.serverUrlPrefix}/reserves`,
               formData,
               {
                 headers: {
@@ -312,7 +314,7 @@ const Tour = ({ data, filterData }) => {
 
   const handleTourDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:1337/api/tours/${id}/remove`, {
+      await axios.delete(`${config.serverUrlPrefix}/tours/${id}/remove`, {
         headers: {
           Authorization: `Bearer ${jwt}`,
         },
@@ -324,7 +326,7 @@ const Tour = ({ data, filterData }) => {
     }
   };
 
-  
+
 
   const toursToDisplay = filterData.length > 0 ? filterData : data;
 
@@ -440,7 +442,7 @@ const Tour = ({ data, filterData }) => {
                       <Image
                         src={
                           attributes.tour_image && attributes.tour_image.data
-                            ? `http://localhost:1337${attributes.tour_image.data.attributes.formats.thumbnail.url}`
+                            ? `${config2.serverUrlPrefix}${attributes.tour_image.data.attributes.formats.thumbnail.url}`
                             : ""
                         }
                         preview={false}
@@ -567,7 +569,7 @@ const Tour = ({ data, filterData }) => {
                       <Image onClick={() => setPreviewVisible(true)}
                         src={
                           attributes.tour_image && attributes.tour_image.data
-                            ? `http://localhost:1337${attributes.tour_image.data.attributes.formats.thumbnail.url}`
+                            ? `${config2.serverUrlPrefix}${attributes.tour_image.data.attributes.formats.thumbnail.url}`
                             : ""
                         }
                         preview={false}
@@ -579,7 +581,7 @@ const Tour = ({ data, filterData }) => {
                       >
                         <img alt="tour" style={{ width: '100%' }} src={
                           attributes.tour_image && attributes.tour_image.data
-                            ? `http://localhost:1337${attributes.tour_image.data.attributes.formats.thumbnail.url}`
+                            ? `${config2.serverUrlPrefix}${attributes.tour_image.data.attributes.formats.thumbnail.url}`
                             : ""
                         } />
                       </Modal>
@@ -623,7 +625,7 @@ const Tour = ({ data, filterData }) => {
                   <Image
                     src={
                       attributes.tour_image && attributes.tour_image.data
-                        ? `http://localhost:1337${attributes.tour_image.data.attributes.formats.thumbnail.url}`
+                        ? `${config2.serverUrlPrefix}${attributes.tour_image.data.attributes.formats.thumbnail.url}`
                         : ""
                     }
                     preview={false}

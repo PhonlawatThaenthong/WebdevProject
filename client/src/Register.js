@@ -10,6 +10,8 @@ import Logo from './Image/logo.png'
 import WebFont from 'webfontloader';
 import { Footer } from 'antd/es/layout/layout.js';
 
+import { config } from './config.js';
+
 
 const { Header } = Layout;
 
@@ -36,17 +38,17 @@ const RegisterForm = () => {
 
     const handleImageUpload = (info) => {
         if (info.file.status === "done") {
-          message.success(`${info.file.name} file uploaded successfully`);
+            message.success(`${info.file.name} file uploaded successfully`);
         } else if (info.file.status === "error") {
-          message.error(`${info.file.name} file upload failed.`);
+            message.error(`${info.file.name} file upload failed.`);
         }
-      };
+    };
 
     const handleSubmit = async (values) => {
         setSubmitEnabled(false);
 
         try {
-            const registerResult = await axios.post('http://localhost:1337/api/auth/local/register', {
+            const registerResult = await axios.post(`${config.serverUrlPrefix}/auth/local/register`, {
                 username: values.username,
                 password: values.password,
                 email: values.email,
@@ -77,7 +79,7 @@ const RegisterForm = () => {
             axios.defaults.headers.common = {
                 Authorization: `Bearer ${jwt}`,
             };
-            const userResult = await axios.get('http://localhost:1337/api/users/me?populate=role');
+            const userResult = await axios.get(`${config.serverUrlPrefix}/users/me?populate=role`);
 
             setUsername(userResult.data.username)
 

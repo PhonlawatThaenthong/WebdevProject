@@ -10,6 +10,8 @@ import Logo from './Image/logo.png'
 import WebFont from 'webfontloader';
 import { Footer } from "antd/es/layout/layout.js";
 
+import { config } from "./config.js";
+
 const { Header } = Layout;
 
 const LoginForm = () => {
@@ -29,7 +31,7 @@ const LoginForm = () => {
     setSubmitEnabled(false);
     try {
       const loginResult = await axios.post(
-        "http://localhost:1337/api/auth/local",
+        `${config.serverUrlPrefix}/auth/local`,
         {
           identifier: values.username,
           password: values.password,
@@ -42,7 +44,7 @@ const LoginForm = () => {
         Authorization: `Bearer ${loginResult.data.jwt}`,
       };
       const userResult = await axios.get(
-        "http://localhost:1337/api/users/me?populate=role"
+        `${config.serverUrlPrefix}/users/me?populate=role`
       );
 
       if (userResult.data.role && userResult.data.role.name === "Member") {
@@ -64,7 +66,7 @@ const LoginForm = () => {
       axios.defaults.headers.common = {
         Authorization: `Bearer ${jwt}`,
       };
-      const userResult = await axios.get('http://localhost:1337/api/users/me?populate=role');
+      const userResult = await axios.get(`${config.serverUrlPrefix}/users/me?populate=role`);
 
       setUsername(userResult.data.username)
 

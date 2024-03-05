@@ -28,6 +28,8 @@ import { UploadOutlined } from "@ant-design/icons";
 import Logo from "./Image/logo.png";
 import useFormItemStatus from "antd/es/form/hooks/useFormItemStatus.js";
 
+import { config, config2 } from "./config.js";
+
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -55,7 +57,7 @@ const ProfileForm = () => {
 
     const getData = async () => {
         try {
-            const res = await axios.get("http://localhost:1337/api/users/me");
+            const res = await axios.get(`${config.serverUrlPrefix}/users/me`);
             setUserData(res.data);
         } catch (error) {
             console.error("การแสดงข้อมูล user ผิดพลาด", error);
@@ -63,7 +65,7 @@ const ProfileForm = () => {
     };
     const getImage = async () => {
         try {
-            const res = await axios.get("http://localhost:1337/api/users/me?populate=*");
+            const res = await axios.get(`${config.serverUrlPrefix}/users/me?populate=*`);
             setUserImage(res.data);
         } catch (error) {
             console.error("การแสดงข้อมูล user ผิดพลาด", error);
@@ -82,7 +84,7 @@ const ProfileForm = () => {
         try {
             const formData = new FormData();
             formData.append('deleteProfileImage', true);
-            await axios.delete(`http://localhost:1337/api/users/me`, {
+            await axios.delete(`${config.serverUrlPrefix}/users/me`, {
                 headers: {
                     Authorization: `Bearer ${jwt}`,
                     'Content-Type': 'multipart/form-data',
@@ -91,7 +93,7 @@ const ProfileForm = () => {
             });
             setUserImage({});
             console.log(`${userimage.profile_image?.id}`)
-            await axios.delete(`http://localhost:1337/api/upload/files/${userimage.profile_image?.id}`, {
+            await axios.delete(`${config.serverUrlPrefix}/upload/files/${userimage.profile_image?.id}`, {
                 headers: {
                     Authorization: `Bearer ${jwt}`,
                     'Content-Type': 'multipart/form-data',
@@ -108,7 +110,7 @@ const ProfileForm = () => {
     const handleImageChange = async () => {
         const image = imageFile;
         try {
-            const response = await axios.get(`http://localhost:1337/api/users/me`)
+            const response = await axios.get(`${config.serverUrlPrefix}/users/me`)
 
             if (userimage) { await handleDeleteImage(); }
 
@@ -119,7 +121,7 @@ const ProfileForm = () => {
                 formData.append("refId", userData.id);
                 formData.append("files", image);
 
-                axios.post(`http://localhost:1337/api/upload`, formData)
+                axios.post(`${config.serverUrlPrefix}/upload`, formData)
                     .then((response) => {
                         console.log(response);
                     })
@@ -160,7 +162,7 @@ const ProfileForm = () => {
 
     const handleChangePassword = async () => {
         try {
-            await axios.post('http://localhost:1337/api/auth/change-password', {
+            await axios.post(`${config.serverUrlPrefix}/auth/change-password`, {
                 currentPassword: currentPassword,
                 password: newPassword,
                 passwordConfirmation: confirmPassword,
@@ -181,7 +183,7 @@ const ProfileForm = () => {
         console.log(userData)
 
         try {
-            await axios.put(`http://localhost:1337/api/users/${userData.id}`, userData, {
+            await axios.put(`${config.serverUrlPrefix}/users/${userData.id}`, userData, {
                 headers: {
                     Authorization: `Bearer ${jwt}`,
                 },
@@ -312,7 +314,7 @@ const ProfileForm = () => {
                 Authorization: `Bearer ${jwt}`,
             };
             const userResult = await axios.get(
-                "http://localhost:1337/api/users/me?populate=role"
+                `${config.serverUrlPrefix}/users/me?populate=role`
             );
 
             setUsername(userResult.data.username);
@@ -446,7 +448,7 @@ const ProfileForm = () => {
                                             marginRight: "-10px",
                                         }}
                                         size={52}
-                                        src={`http://localhost:1337${userimage.profile_image?.url}`}
+                                        src={`${config2.serverUrlPrefix}${userimage.profile_image?.url}`}
                                     />
                                 </Dropdown>
 
@@ -482,7 +484,7 @@ const ProfileForm = () => {
                                             marginRight: "200px"
                                         }}
                                         size={52}
-                                        src={`http://localhost:1337${userimage.profile_image?.url}`}
+                                        src={`${config2.serverUrlPrefix}${userimage.profile_image?.url}`}
                                     />
                                 </Dropdown>
                             </div>
@@ -497,7 +499,7 @@ const ProfileForm = () => {
                 <Layout>
                     <Content style={{ fontFamily: 'Kanit', padding: "24px", minHeight: 500 }}>
                         <div style={{ fontFamily: 'Kanit', textAlign: "center" }}>
-                            <Avatar onClick={() => setPreviewVisible(true)} size={100} src={`http://localhost:1337${userimage.profile_image?.url}`} />
+                            <Avatar onClick={() => setPreviewVisible(true)} size={100} src={`${config2.serverUrlPrefix}${userimage.profile_image?.url}`} />
                             <h2>{userData.username}</h2>
                             <Modal
                                 visible={previewVisible}
@@ -508,7 +510,7 @@ const ProfileForm = () => {
                                 <img
                                     alt="Profile"
                                     style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
-                                    src={`http://localhost:1337${userimage.profile_image?.url}`}
+                                    src={`${config2.serverUrlPrefix}${userimage.profile_image?.url}`}
                                 />
                             </Modal>
                         </div>
@@ -578,7 +580,7 @@ const ProfileForm = () => {
                             name="image"
                             listType="picture-card"
                             showUploadList={false}
-                            action="http://localhost:1337/api/upload"
+                            action={`${config.serverUrlPrefix}/upload`}
                             beforeUpload={(file) => {
                                 setImageFile(file);
                                 return false;
