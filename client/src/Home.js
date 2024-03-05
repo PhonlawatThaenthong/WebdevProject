@@ -17,7 +17,7 @@ import axios from "axios";
 import useLocalState from "./localStorage.js";
 import { useMediaQuery } from "react-responsive";
 import WebFont from 'webfontloader';
-
+import Contact from "./Navbar/Contact.js"
 import PromotionalSlider from "./PromotionalSlider";
 import Logo from "./Image/logo.png";
 import './index.css';
@@ -282,6 +282,7 @@ const HomeForm = () => {
       >
         ดูโปรแกรมทั้งหมด
       </Button>
+      <Contact/>  
       <Footer style={headerbottom}>
         <img src={Logo} alt="Logo" style={{ width: "auto", height: "50px" }} />
       </Footer>
