@@ -550,37 +550,37 @@ const AdminForm = () => {
             <span style={NormalTextStyle}>ourney</span>
           </Col>
           <Col span={isSmallScreen ? 12 : 22}>
-            {isSmallScreen ? (
-              <div style={{ textAlign: isSmallScreen ? "right" : "left" }}>
-                <Dropdown
-                  overlay={menu}
-                  trigger={["click"]}
-                  visible={menuVisible}
-                  onVisibleChange={setMenuVisible}
-                >
-                  <Avatar
-                    style={{
-                      marginLeft: "50px",
-                      color: "white",
-                      fontSize: "50px",
-                      fontFamily: "Kanit",
-                      marginBottom: "10px",
-                      marginRight: "-10px",
-                    }}
-                    size={52}
-                    src={`http://localhost:1337${userimage.profile_image?.url}`}
-                  />
-                </Dropdown>
-                <Popover
-                  content={searchPopoverContent}
-                  trigger="click"
-                  visible={searchPopoverVisible}
-                  onVisibleChange={setSearchPopoverVisible}
-                >
-                  <SearchOutlined
-                    style={{ fontSize: "25px", marginLeft: "30px" }}
-                  />
-                </Popover>
+                {isSmallScreen ? (
+                  <div style={{ textAlign: isSmallScreen ? "right" : "left" }}>
+                    <Popover
+                    content={searchPopoverContent}
+                    trigger="click"
+                    visible={searchPopoverVisible}
+                    onVisibleChange={setSearchPopoverVisible}
+                  >
+                    <SearchOutlined
+                      style={{ fontSize: "35px", marginLeft: "8px", marginBottom: "10px"  }}
+                    />
+                  </Popover>
+                    <Dropdown
+                    overlay={menu}
+                    trigger={["click"]}
+                    visible={menuVisible}
+                    onVisibleChange={setMenuVisible}
+                  >
+                   <Avatar
+                        style={{
+                          marginLeft: "20px",
+                          color: "white",
+                          fontSize: "50px",
+                          fontFamily: 'Kanit',
+                          marginBottom: "15px",
+                          marginRight: "-15px"
+                        }}
+                        size={52}
+                        src={`http://localhost:1337${userimage.profile_image?.url}`}
+                    />
+                  </Dropdown> 
               </div>
             ) : (
               <>
