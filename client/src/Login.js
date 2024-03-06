@@ -9,7 +9,7 @@ import { useMediaQuery } from "react-responsive";
 import Logo from './Image/logo.png'
 import WebFont from 'webfontloader';
 import { Footer } from "antd/es/layout/layout.js";
-
+import Contact from "./Navbar/Contact.js"
 import { config } from "./config.js";
 
 const { Header } = Layout;
@@ -228,6 +228,9 @@ const LoginForm = () => {
                 <span style={{ fontFamily: 'Kanit', marginRight: "8px" }}>ยังไม่มีบัญชี?</span>
                 <Link to="/register" style={{ fontFamily: 'Kanit' }}>สมัครสมาชิก</Link>
               </Form.Item>
+              <Form.Item>
+                <span style={{ fontFamily: 'Kanit', marginRight: "8px" }}>หากลืมรหัสผ่าน โปรดติดต่อแอดมินมุมขวาล่าง</span>
+              </Form.Item>
             </Form>
           </Card>
         </Col>
@@ -245,6 +248,7 @@ const LoginForm = () => {
           </Button>
         </Modal>
       </Row>
+      <Contact />
       <Footer style={headerbottom}>
         <img src={Logo} alt="Logo" style={{ width: 'auto', height: '50px', }} />
       </Footer>

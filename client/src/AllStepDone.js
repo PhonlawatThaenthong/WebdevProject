@@ -47,6 +47,10 @@ const AllStepDone = () => {
         navigate('/member');
     };
 
+    const handleButtonClicks = () => {
+        navigate('/history');
+    };
+
     const handleHeaderClick = () => {
         navigate('/Member');
     };
@@ -154,6 +158,8 @@ const AllStepDone = () => {
                     </div>
                     <Button type="primary" style={{ fontFamily: 'Kanit', backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF' }}
                         onClick={handleButtonClick}>กลับสู่หน้าหลัก</Button>
+                    <Button type="primary" style={{ fontFamily: 'Kanit', backgroundColor: '#fff', borderColor: '#91D5FF', color: '#1890FF', marginLeft: '10px' }}
+                        onClick={handleButtonClicks}>ดูทัวร์ของคุณ</Button>
                 </Card>
             </Space>
         </Flex>

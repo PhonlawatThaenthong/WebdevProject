@@ -370,7 +370,7 @@ const TourSchedule = () => {
             backgroundColor: "#1C3953",
             borderColor: "#1C3953",
             margin: "0",
-            width: isSmallScreen ? "15%" : "5%",
+            width: isSmallScreen ? "15%" : "8%",
           }}
         >
           ย้อนกลับ
