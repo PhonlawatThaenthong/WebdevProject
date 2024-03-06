@@ -125,7 +125,7 @@ const AllStepDone = () => {
     return (
         <Flex gap="middle" wrap="wrap" style={{ backgroundColor: "#F5F5F5" }}>
             <Helmet>
-                <title>HATYAI Journey -เว็ปจองทัวร์หาดใหญ่ที่ดีที่สุด</title>
+                <title>HATYAI Journey - เว็ปจองทัวร์หาดใหญ่ที่ดีที่สุด</title>
             </Helmet>
 
             <Layout style={layoutStyle}>

@@ -182,7 +182,7 @@ const LoginForm = () => {
       </Header>
       <Row justify="center" align="middle" style={rowStyle}>
         <Helmet>
-          <title>HATYAI Journey -เว็ปจองทัวร์หาดใหญ่ที่ดีที่สุด</title>
+          <title>HATYAI Journey - เว็ปจองทัวร์หาดใหญ่ที่ดีที่สุด</title>
         </Helmet>
 
         <Col >
