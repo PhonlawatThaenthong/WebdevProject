@@ -167,7 +167,14 @@ const Confirm = ({ data, filterData }) => {
                 `${config.serverUrlPrefix}/tours/${attributes.tour_id.data.id}/less`, {
                 numberOfPeople: attributes.reserve_amount
             });
-            message.success("Cancelled Reservation!");
+            const res = await axios.put(
+                `${config.serverUrlPrefix}/tours/${attributes.tour_id.data.id}/refresh`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                }
+            );
             getData();
         } catch (error) {
             console.error("error updating status", error);

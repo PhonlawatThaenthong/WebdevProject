@@ -39,13 +39,11 @@ const Tour = ({ data, filterData }) => {
   const [numberOfPeople, setNumberOfPeople] = useState(1);
   const [previewVisible, setPreviewVisible] = useState(false);
 
-
   const [edit_tour, setedit_tour] = useState({});
 
   const handleTourScheduleClick = (tourId) => {
     navigate(`/tour-schedule/${tourId}`);
   };
-
 
   const handleOpenModal = async (id) => {
     const res = await axios.get(
@@ -382,8 +380,6 @@ const Tour = ({ data, filterData }) => {
       console.error("Error deleting tour:", error);
     }
   };
-
-
 
   const toursToDisplay = filterData.length > 0 ? filterData : data;
 
