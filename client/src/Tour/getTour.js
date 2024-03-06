@@ -73,7 +73,7 @@ const Tour = ({ data, filterData }) => {
         return `rgba(0, 204, 0)`;
       case false:
         return `rgba(255, 0, 0)`;
-    } 
+    }
   };
 
   const getDate = (time) => {
@@ -147,7 +147,58 @@ const Tour = ({ data, filterData }) => {
 
       hide();
       message.success("บันทึกการแก้ไขเรียบร้อยแล้ว!", 1);
-      window.location.href = "/admin";
+      window.location.href = "/admin"
+    } catch (error) {
+      hide();
+      if (error.response) {
+        console.error("Server Error:", error.response.data);
+        message.error(
+          "เกิดข้อผิดพลาดจากเซิร์ฟเวอร์: " + error.response.data.message,
+          1
+        );
+      } else if (error.request) {
+        console.error("Request Error:", error.request);
+        message.error("ไม่ได้รับการตอบกลับจากเซิร์ฟเวอร์", 1);
+      } else {
+        console.error("Client Error:", error.message);
+        message.error("มีข้อผิดพลาดในการส่งคำขอ: " + error.message, 1);
+      }
+    }
+  };
+
+  const handleDuplicate = async () => {
+    const hide = message.loading("กำลังสร้างทัวร์ใหม่...", 0);
+
+    const formattedDate = moment(edit_tour.attributes.tour_date).format(
+      "YYYY-MM-DD HH:mm:ss"
+    );
+
+    try {
+      const payload = {
+        data: {
+          tour_name: edit_tour.attributes.tour_name,
+          tour_date: formattedDate,
+          status: true,
+          price: edit_tour.attributes.price,
+          description: edit_tour.attributes.description,
+          user_max: edit_tour.attributes.user_max,
+        },
+      };
+
+      const response = await axios.post(
+        `${config.serverUrlPrefix}/tours`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      hide();
+      message.success("สร้างทัวร์ใหม่เรียบร้อยแล้ว!", 1);
+      window.location.href = "/admin"
     } catch (error) {
       hide();
       if (error.response) {
@@ -320,6 +371,7 @@ const Tour = ({ data, filterData }) => {
         },
       });
 
+      message.success("ลบทัวร์เรียบร้อย!");
       window.location.href = "/";
     } catch (error) {
       console.error("Error deleting tour:", error);
@@ -423,8 +475,19 @@ const Tour = ({ data, filterData }) => {
                         okText="Yes"
                         cancelText="No"
                       >
-                        <Button style={{ backgroundColor: "red", color: "white"}}>ลบ</Button>
+                        <Button style={{ backgroundColor: "#DE3163", color: "white" }}>ลบ</Button>
                       </Popconfirm>,
+                      <Button
+                        key="submit"
+                        type="primary"
+                        style={{ backgroundColor: "#00cc00", color: "white" }}
+                        onClick={() => {
+                          handleDuplicate();
+                          setIsModalOpen(false);
+                        }}
+                      >
+                        ทำซ้ำ
+                      </Button>,
                       <Button
                         key="submit"
                         type="primary"
@@ -653,18 +716,20 @@ const Tour = ({ data, filterData }) => {
                 <br />
                 <br></br>
                 {currentPage === "/admin" ? (
-                  <Button
-                    type="primary"
-                    onClick={() => handleOpenModal(id)}
-                    style={{
-                      fontFamily: "Kanit",
-                      display: "block",
-                      margin: "0 auto",
-                      backgroundColor: "#DE3163",
-                    }}
-                  >
-                    Edit
-                  </Button>
+                  <>
+                    <Button
+                      type="primary"
+                      onClick={() => handleOpenModal(id)}
+                      style={{
+                        fontFamily: "Kanit",
+                        display: "block",
+                        margin: "0 auto",
+                        backgroundColor: "#DE3163",
+                      }}
+                    >
+                      แก้ไข
+                    </Button>
+                  </>
                 ) : (
                   // VVVVVVVV THIS IS NON ADMIN MODAL PLEASE EDIT THIS ONLY /////////////////////////////////////////////////////
                   <Button

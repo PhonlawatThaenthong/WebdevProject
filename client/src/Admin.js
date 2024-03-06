@@ -229,9 +229,9 @@ const AdminForm = () => {
       );
 
       console.log("Upload response:", response.data);
-      message.success("Tour added successfully");
+      message.success("เพิ่มทัวร์ใหม่เรียบร้อย!");
       setIsAddMenuOpen(false);
-      window.location.reload()
+      window.location.href = "/admin"
     } catch (error) {
       console.error("Error uploading data:", error);
       message.error("Failed to add tour");
