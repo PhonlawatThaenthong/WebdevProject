@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { json, useLocation, useNavigate } from "react-router-dom";
 import useLocalState from "../localStorage.js";
 import { useMediaQuery } from "react-responsive";
 import moment from 'moment';
@@ -174,16 +174,21 @@ const Tour = ({ data, filterData }) => {
     );
 
     try {
+      console.log(edit_tour.attributes)
       const payload = {
         data: {
           tour_name: edit_tour.attributes.tour_name,
           tour_date: formattedDate,
-          status: true,
           price: edit_tour.attributes.price,
+          status: true,
           description: edit_tour.attributes.description,
           user_max: edit_tour.attributes.user_max,
+          destination: edit_tour.attributes.destination,
+          tour_image: edit_tour.attributes.tour_image && edit_tour.attributes.tour_image.data ? edit_tour.attributes.tour_image.data : [],
         },
       };
+
+      console.log(payload)
 
       const response = await axios.post(
         `${config.serverUrlPrefix}/tours`,
