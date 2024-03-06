@@ -70,10 +70,10 @@ const Tour = ({ data, filterData }) => {
   const getStatusColor = (status) => {
     switch (status) {
       case true:
-        return `rgba(0, 255, 0)`;
+        return `rgba(0, 204, 0)`;
       case false:
         return `rgba(255, 0, 0)`;
-    }
+    } 
   };
 
   const getDate = (time) => {
@@ -423,7 +423,7 @@ const Tour = ({ data, filterData }) => {
                         okText="Yes"
                         cancelText="No"
                       >
-                        <Button danger>ลบ</Button>
+                        <Button style={{ backgroundColor: "red", color: "white"}}>ลบ</Button>
                       </Popconfirm>,
                       <Button
                         key="submit"
