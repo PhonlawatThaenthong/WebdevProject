@@ -266,8 +266,13 @@ const Confirm = ({ data, filterData }) => {
 
     const getData = async () => {
         try {
-            const res = await axios.get(`${config.serverUrlPrefix}/reserves?populate=*`);
-            setAllData(res.data.data);
+            if (statusFilters == "all") {
+                const res = await axios.get(`${config.serverUrlPrefix}/reserves?populate=*`);
+                setAllData(res.data.data);
+            } else {
+                const res = await axios.get(`${config.serverUrlPrefix}/reserves?filters[payment_status][$eq]=${statusFilters}&populate=*`);
+                setAllData(res.data.data);
+            }
         } catch (error) {
             console.error("error fetching tour data", error);
 
