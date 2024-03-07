@@ -467,7 +467,7 @@ const Confirm = ({ data, filterData }) => {
                     </Col>
 
                 </Header>
-                <span style={{ fontFamily: 'Kanit', textAlign: 'center', fontSize: "50px" }}>สถานะการจองของลูกค้า</span>
+                <span style={{ fontFamily: 'Kanit', textAlign: 'center', fontSize: "50px", marginTop: "20px" }}>สถานะการจอง</span>
                 <div style={{ textAlign: "center" }}>
                     <br />
                     <Cascader options={options} onChange={onChange} placeholder="Filters" defaultValue={"all"} />

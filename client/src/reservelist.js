@@ -262,7 +262,7 @@ const ReserveForm = () => {
 
 
                 </Header>
-                <span style={{ fontFamily: 'Kanit', textAlign: 'center', fontSize: "50px" }}>ประวัติการจองทัวร์ของคุณ</span>
+                <span style={{ fontFamily: 'Kanit', textAlign: 'center', fontSize: "50px", marginTop: "20px" }}>ประวัติการจอง</span>
                 <CardHistory />
             </Layout>
 
