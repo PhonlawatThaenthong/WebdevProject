@@ -716,7 +716,7 @@ const AdminForm = () => {
               </div>
             </h2>
           )}
-          โปรแกรมทั้งหมด
+          โปรแกรมทัวร์ทั้งหมด
         </h2>
         <Tour data={allData} filterData={filterData} />
         <FloatButton.Group

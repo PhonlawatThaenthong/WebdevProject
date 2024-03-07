@@ -294,8 +294,7 @@ const ProfileForm = () => {
                             navigate("/confirm");
                         }}
                         key="History"
-                        style={{ marginTop: "10px" }}
-                    >สถานะการจองของลูกค้</Menu.Item>
+                    >สถานะการจองของลูกค้า</Menu.Item>
                     <Menu.Item key="back" onClick={() => navigate("/admin")}>
                         กลับสู่หน้าหลัก
                     </Menu.Item>

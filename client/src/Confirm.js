@@ -456,7 +456,7 @@ const Confirm = ({ data, filterData }) => {
                                             fontSize: "50px",
                                             fontFamily: 'Kanit',
                                             marginBottom: "10px",
-                                            marginRight: "-70px"
+                                            marginRight: "50px"
                                         }}
                                         size={52}
                                         src={`${config2.serverUrlPrefix}${userimage.profile_image?.url}`}
