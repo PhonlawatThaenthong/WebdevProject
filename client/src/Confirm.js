@@ -167,7 +167,7 @@ const Confirm = ({ data, filterData }) => {
         try {
             const res = await axios.post(
                 `${config.serverUrlPrefix}/reserve/${reserveId}/method_cancel`);
-            message.success("Cancelled Reservation!");
+            message.success("ยกเลิกการจองสำเร็จ!");
             getData();
         } catch (error) {
             console.error("error updating status", error);
@@ -549,9 +549,10 @@ const Confirm = ({ data, filterData }) => {
                                                     marginTop: 10,
                                                     backgroundColor: 'green',
                                                     borderColor: 'green',
+                                                    marginRight: '10px'
                                                 }}
                                             >
-                                                Confirm Reservation
+                                                ยืนยันการจอง
                                             </Button>
                                         )}
                                         {attributes.payment_status === false && (
@@ -560,16 +561,16 @@ const Confirm = ({ data, filterData }) => {
                                                 onClick={() => show_modal_delete(id, attributes)}
                                                 style={{ fontFamily: 'Kanit', textAlign: 'center', marginTop: 10, }}
                                             >
-                                                Delete Reservation
+                                                ลบการจอง
                                             </Button>
                                         )}
                                         {attributes.payment_status === true && (
                                             <Button danger
                                                 type="primary"
                                                 onClick={() => show_modal_cancel(id)}
-                                                style={{ fontFamily: 'Kanit', textAlign: 'center', marginTop: 10 }}
+                                                style={{ fontFamily: 'Kanit', textAlign: 'center', marginTop: 10, marginRight: '10px' }}
                                             >
-                                                Cancel Reservation
+                                                ยกเลิกการจอง
                                             </Button>
                                         )}
                                         {attributes.payment_status === true && (
@@ -579,7 +580,7 @@ const Confirm = ({ data, filterData }) => {
                                                 onClick={() => show_modal_delete(id)}
                                                 style={{ fontFamily: 'Kanit', textAlign: 'center', marginTop: 10, }}
                                             >
-                                                Delete Reservation
+                                                ลบการจอง
                                             </Button>
                                         )}
                                         <br></br>
