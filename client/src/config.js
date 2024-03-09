@@ -7,5 +7,5 @@ export const config = {
 
 export const config2 = {
     isProd,
-    serverUrlPrefix: isProd ? 'https://wd07.cloud-workshop.online' : 'http://localhost:1337'
+    serverUrlPrefix: isProd ? 'https://wd07-admin.cloud-workshop.online' : 'http://localhost:1337'
 };
