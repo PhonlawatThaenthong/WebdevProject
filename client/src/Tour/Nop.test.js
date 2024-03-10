@@ -6,7 +6,7 @@ describe('Tour Component', () => {
   test('increments numberOfPeople when input changes', () => {
     const { getByLabelText } = render(<Tour data={/number/} filterData={[]} />);
     
-    const numberOfPeopleInput = getByLabelText('Number of People:');
+    const numberOfPeopleInput = getByLabelText('จำนวนคน');
     fireEvent.change(numberOfPeopleInput, { target: { value: '2' } });
 
     expect(numberOfPeopleInput.value).toBe('2');
