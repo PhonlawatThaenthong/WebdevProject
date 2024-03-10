@@ -1,10 +1,15 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import AdminForm from './Admin.js';
 
 describe('AdminForm component', () => {
   test('handleAddTour function adds a new tour correctly', async () => {
-    const { getByText, getByLabelText } = render(<AdminForm />);
+    const { getByText, getByLabelText } = render(
+      <MemoryRouter>
+        <AdminForm />
+      </MemoryRouter>
+    );
 
     fireEvent.change(getByLabelText('ชื่อทัวร์:'), { target: { value: 'Test Tour' } });
     fireEvent.change(getByLabelText('จำกัดจำนวน:'), { target: { value: '50' } });
